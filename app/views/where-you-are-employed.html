@@ -1,0 +1,58 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        Select where you are employed
+      </h1>
+
+      <form class="form" action="/path/of/next/page" method="post">
+
+        <div id="account-number-hint" class="govuk-hint">
+          Select your further education provider 
+        </div>
+
+          <div class="govuk-form-group">
+            <fieldset class="govuk-fieldset" aria-describedby="signIn-hint">
+              <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+              </legend>
+              <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="signIn-2" name="signIn" type="radio" value="govuk-one-login" aria-describedby="signIn-2-item-hint">
+                  <label class="govuk-label govuk-radios__label" for="signIn-2">
+                    <b>Bath College</b>
+                  </label>
+                  <div id="signIn-2-item-hint" class="govuk-hint govuk-radios__hint">
+                    Avon St, Bath BA1 1UP
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

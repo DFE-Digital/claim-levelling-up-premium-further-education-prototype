@@ -1,0 +1,135 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Start page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block header %}
+  <!-- Blank header with no service name for the start page -->
+  {{ govukHeader() }}
+{% endblock %}
+
+{% block beforeContent %}
+  <!--
+ {{ govukBreadcrumbs({
+    items: [
+      {
+        text: "Home",
+        href: "#"
+      },
+      {
+        text: "Section",
+        href: "#"
+      },
+      {
+        text: "Subsection"
+      }
+    ]
+  }) }}
+
+  -->
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl">
+        <!--{{ serviceName }}-->
+        Find out if you are eligible for a levelling up premium payment for early career further education teachers
+      </h1>
+
+      <p>Additional payments are to encourage early career further education (FE) teachers in eligible FE providers in England to continue teaching. Eligible subjects are:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>building and construction</li>
+        <li>chemistry</li>
+        <li>computing, including digital and ICT</li>
+        <li>early years</li>
+        <li>engineering and manufacturing, including transport engineering and electronics</li>
+        <li>maths</li>
+        <li>physics</li>
+      </ul>
+
+      <h2 class="govuk-heading-m">
+        Payment amount
+      </h2>
+
+      <p>FE teachers of <a href="#">eligible subjects</a> in <a href="#">eligible providers</a> can receive between £2,000 and £6,000. The amount you are eligible for depends on:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>the school you teach in</li>
+        <li>the hours you work</li>
+      </ul>
+
+      <p>The application will evaluate your responses based on these criteria and inform you how much you are eligible for.</p>
+
+      <h2 class="govuk-heading-m">
+        How to apply
+      </h2>
+
+      <p>The application checks your eligibility before you apply. Once you start the application you cannot save your progress.</p>
+
+      <p>If you’re employed on a variable-hours contract, you must have an ongoing commitment from your employer for future hours. We'll check this with your employer after you submit your application, so you should discuss your future hours with them before you apply.</p>
+
+      <p>Answering questions about eligibility takes 10 minutes and applying for the payment takes another 5 minutes.</p>
+
+
+      {{ govukButton({
+        text: "Start now",
+        href: "teaching-responsibilities",
+        isStartButton: true
+      }) }}
+
+      <h2 class="govuk-heading-m">
+        Further education
+      </h2>
+
+      <p>
+        You must apply between [TBC] 2024 and March 2025.
+      </p>
+
+      <p>
+        If you are eligible for an additional payment, we will [TBC].
+      </p>
+
+      <p>
+        Payments are given up to [TBC] weeks from applying. You will receive an approval email with further information on your application.
+      </p>
+
+      <p>Contact us via this email: [email address], if you need further support. You should hear back from us within [TBC] working days.</p>
+    </div>
+
+    <div class="govuk-grid-column-one-third">
+
+     <!--  <aside class="govuk-prototype-kit-common-templates-related-items" role="complementary">
+        <h2 class="govuk-heading-m" id="subsection-title">
+          Subsection
+        </h2>
+        <nav role="navigation" aria-labelledby="subsection-title">
+          <ul class="govuk-list govuk-!-font-size-16">
+            <li>
+              <a href="#">
+                Related link
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                Related link
+              </a>
+            </li>
+            <li>
+              <a href="#" class="govuk-!-font-weight-bold">
+                More <span class="govuk-visually-hidden">in Subsection</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside> -->
+
+    </div>
+  </div>
+
+{% endblock %}

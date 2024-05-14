@@ -1,0 +1,55 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        Are at least half of your teaching hours spent teaching 16 to 19-year-olds, including those up to age 25 with an Education, Health and Care Plan (EHCP)?
+      </h1>
+
+      <form class="form" action="/path/of/next/page" method="post">
+
+        <p>You must spend at least half of your teaching hours teaching 16 to 19 year olds, including people up to the age of 25 with an <a href="https://councilfordisabledchildren.org.uk/about-us-0/networks/information-advice-and-support-programme/useful-resources-publications/what-2#:~:text=An%20Education%2C%20Health%20and%20Care%20plan%20(EHC%20plan)%20is,they%20would%20like%20to%20achieve.">EHCP</a> to make a claim.</p>
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset">
+            <div class="govuk-radios" data-module="govuk-radios">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="halfTeachingHours" name="halfTeachingHours" type="radio" value="yes">
+                <label class="govuk-label govuk-radios__label" for="halfTeachingHours-yes">
+                  Yes
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="halfTeachingHours-2" name="halfTeachingHours" type="radio" value="No">
+                <label class="govuk-label govuk-radios__label" for="halfTeachingHours-no">
+                  No
+                </label>
+              </div>
+          </fieldset>
+        </div>
+
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        You must be employed as a member of staff in an  eligible further education (FE) provider in England
+      </h1>
+
+      <form class="form" action="/path/of/next/page" method="post">
+
+        <p>
+          Eligible FE providers include:
+        </p>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>college groups, such as NCG or the LTE Group</li>
+          <li>statutory FE providers, such as FE colleges, sixth-form colleges or designated institutions</li>
+          <li>16-to-19-only academies and free schools</li>
+        </ul>
+
+        <div class="govuk-form-group">
+          <h1 class="govuk-label-wrapper">
+            <label class="govuk-label govuk-label--m" for="event-name">
+              Which FE provider are you employed by?
+            </label>
+          </h1>
+          <div id="event-name-hint" class="govuk-hint">
+            Enter the name or postcode. If you work for a college or sixth-form group, you must enter the group’s name or head office postcode.
+          </div>
+          <div id="event-name-hint" class="govuk-hint">
+            Use at least three characters.
+          </div>
+          <input class="govuk-input" id="event-name" name="eventName" type="text" aria-describedby="event-name-hint">
+        </div>
+        
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

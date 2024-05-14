@@ -1,0 +1,64 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        What type of contract do you have with [name of FE provider selected in last step]?
+      </h1>
+
+      <form class="form" action="/path/of/next/page" method="post">
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset">
+            <div class="govuk-radios" data-module="govuk-radios">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="contractOfEmployment" name="contractOfEmployment" type="radio" value="full-time contract">
+                <label class="govuk-label govuk-radios__label" for="contractOfEmployment-full-time">
+                  Full-time contract
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="contractOfEmployment-2" name="contractOfEmployment" type="radio" value="part-time contract">
+                <label class="govuk-label govuk-radios__label" for="contractOfEmployment-2">
+                  Part-time contract
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="contractOfEmployment-3" name="contractOfEmployment" type="radio" value="fixed-term contract">
+                <label class="govuk-label govuk-radios__label" for="contractOfEmployment-3">
+                  Fixed-time contract
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="contractOfEmployment-3" name="contractOfEmployment" type="radio" value="varible hour contract">
+                <label class="govuk-label govuk-radios__label" for="contractOfEmployment-3">
+                  Vairable hours contract (including zero-hours contracts)
+                </label>
+              </div>
+          </fieldset>
+        </div> 
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

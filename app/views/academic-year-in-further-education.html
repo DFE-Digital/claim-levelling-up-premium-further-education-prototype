@@ -1,0 +1,79 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        Which academic year did you start teaching in further education?
+      </h1>
+
+      <!--academic-year-in-further-education-->
+      <form class="form" action="/path/of/next/page" method="post">
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset">
+            <div class="govuk-radios" data-module="govuk-radios">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="academicYearInFurtherEducation" name="academicYearInFurtherEducation" type="radio" value="before 2020 to 2021">
+                <label class="govuk-label govuk-radios__label" for="academicYearInFurtherEducation-before">
+                  Before 2020 to 2021
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="academicYearInFurtherEducation-2" name="academicYearInFurtherEducation" type="radio" value="2020">
+                <label class="govuk-label govuk-radios__label" for="academicYearInFurtherEducation-2020">
+                  2020 to 2021
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="academicYearInFurtherEducation-3" name="academicYearInFurtherEducation" type="radio" value="2021">
+                <label class="govuk-label govuk-radios__label" for="academicYearInFurtherEducation-2021">
+                  2021 to 2022
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="academicYearInFurtherEducation-4" name="academicYearInFurtherEducation" type="radio" value="2022">
+                <label class="govuk-label govuk-radios__label" for="academicYearInFurtherEducation-2022">
+                  2022 to 2023
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="academicYearInFurtherEducation-5" name="academicYearInFurtherEducation" type="radio" value="2023">
+                <label class="govuk-label govuk-radios__label" for="academicYearInFurtherEducation-2023">
+                  2023 to 2024
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="academicYearInFurtherEducation-6" name="academicYearInFurtherEducation" type="radio" value="2024">
+                <label class="govuk-label govuk-radios__label" for="academicYearInFurtherEducation-2024">
+                  2024 to 2025
+                </label>
+              </div>
+
+
+          </fieldset>
+         </div> 
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

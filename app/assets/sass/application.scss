@@ -1,0 +1,15 @@
+//
+// For guidance on how to add CSS and SCSS see:
+// https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
+// 
+
+// Add extra styles here
+.govuk-panel--informational {
+    background-color: #1d70b8;
+    color: #ffffff;
+    margin-bottom: 40px;
+}
+  
+.govuk-panel__title:last-child {
+    margin-bottom: 0;
+}

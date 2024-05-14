@@ -1,0 +1,81 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+
+      <form class="form" action="/path/of/next/page" method="post">
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" aria-describedby="countries-hint">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+              <h1 class="govuk-fieldset__heading">
+                Which early years courses do you teach?
+              </h1>
+            </legend>
+            <div id="countries-hint" class="govuk-hint">
+              Select all that apply
+            </div>
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="earlyYears" name="earlyYears" type="checkbox" value="level 2">
+                <label class="govuk-label govuk-checkboxes__label" for="earlyYears">
+                 Early years practioner (level 2) apprenticeships
+                </label>
+              </div>
+              <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                <div class="govuk-checkboxes__item">
+                  <input class="govuk-checkboxes__input" id="earlyYears-2" name="earlyYears" type="checkbox" value="level 3">
+                  <label class="govuk-label govuk-checkboxes__label" for="earlyYears-2">
+                   Early years educator (level 3) apprenticeships
+                  </label>
+                </div>
+                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                  <div class="govuk-checkboxes__item">
+                    <input class="govuk-checkboxes__input" id="earlyYears-3" name="earlyYears" type="checkbox" value="t level">
+                    <label class="govuk-label govuk-checkboxes__label" for="earlyYears-3">
+                      T Level in education and early years (early years educator)
+                    </label>
+                  </div>
+                  <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                    <div class="govuk-checkboxes__item">
+                      <input class="govuk-checkboxes__input" id="earlyYears-3" name="earlyYears" type="checkbox" value="t level">
+                      <label class="govuk-label govuk-checkboxes__label" for="earlyYears-3">
+                        A course that leads to an <a href="https://www.gov.uk/government/publications/early-years-qualifications-achieved-in-england">early years qualification</a> which enables providers to count the recipient in staff:child ratios
+                      </label>
+                    </div>
+              
+              <div class="govuk-checkboxes__divider">or</div>
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="chemistry-4" name="chemistry" type="checkbox" value="none" data-behaviour="exclusive">
+                <label class="govuk-label govuk-checkboxes__label" for="chemistry-4">
+                  I do not teach any of these courses
+                </label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
