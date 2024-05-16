@@ -16,7 +16,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form class="form" action="/path/of/next/page" method="post"></form>
+      <form class="form" action="/fe-provider" method="post"></form>
 
        <h1 class="govuk-heading-l">
         To apply for a levelling up premium payment, you must be employed as a member of staff with teaching responsibilities
@@ -48,6 +48,16 @@
                   Yes
                 </label>
               </div>
+
+              <script>
+                function handleRadioClick(value) {
+                  if (value === "yes") {
+                    // Redirect to the 'fe-provider' page
+                    window.location.href = 'fe-provider';
+                  }
+                }
+              </script>
+
               <div class="govuk-radios__item">
                 <input class="govuk-radios__input" id="memberOfstaff-2" name="memberOfstaff" type="radio" value="no">
                 <label class="govuk-label govuk-radios__label" for="memberOfstaff-2">

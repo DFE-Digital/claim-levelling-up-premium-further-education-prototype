@@ -6,4 +6,11 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 
-// Add your routes here
+router.post('/teaching-responsibilities', function (req, res){
+    var teachingresponsibilities = req.session.data['teachingresponsibilities'];
+    if (teachingresponsibilities == 'Yes') {
+      res.redirect('/fe-provider');
+    } else {
+      res.redirect('/you-are-not-eligible');
+    }
+  });
