@@ -6,8 +6,8 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 
-router.post('/teaching-responsibilities', function (req, res){
-    var teachingresponsibilities = req.session.data['teachingresponsibilities'];
+router.post('/fe-provider', function (req, res){
+    var teachingresponsibilities = req.session.data['memberOfstaff'];
     if (teachingresponsibilities == 'Yes') {
       res.redirect('/fe-provider');
     } else {
