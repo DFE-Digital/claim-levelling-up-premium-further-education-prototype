@@ -14,3 +14,13 @@ router.post('/fe-provider', function (req, res){
       res.redirect('/you-are-not-eligible');
     }
   });
+
+  router.post('/academic-year-in-further-education', function (req, res) {
+    var contractOfEmployment = req.session.data['contractOfEmployment'];
+    if (contractOfEmployment === 'Vairable hours contract (including zero-hours contracts)') {
+      res.redirect('/one-full-term');
+    } else {
+      res.redirect('/academic-year-in-further-education');
+    }
+  });
+  
