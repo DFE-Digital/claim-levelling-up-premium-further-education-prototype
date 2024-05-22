@@ -75,7 +75,7 @@ router.post('/fe-provider', function (req, res){
   router.post('/qualification', function (req, res) {
     var teachingCourses = req.session.data['courses'];
     if (teachingCourses == 'No') {
-      res.redirect('/not-eligible-16-19');
+      res.redirect('/you-are-not-eligible-courses');
     } else {
       res.redirect('/qualification');
     }
@@ -88,5 +88,5 @@ router.post('/fe-provider', function (req, res){
     } else {
       res.redirect('/performance');
     }
-  });
+  }); 
   
