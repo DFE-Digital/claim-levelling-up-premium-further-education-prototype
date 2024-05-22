@@ -72,13 +72,4 @@ router.post('/fe-provider', function (req, res){
 
 
 
-
-
-  router.post('/qualification', function (req, res) {
-    var teachingCourses = req.session.data['courses-2'];
-    if (teachingCourses == 'No') {
-      res.redirect('/not-eligible-teach-half-hours-courses');
-    } else {
-      res.redirect('/qualification');
-    }
-  });
+  
