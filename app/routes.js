@@ -72,4 +72,21 @@ router.post('/fe-provider', function (req, res){
 
 
 
+  router.post('/qualification', function (req, res) {
+    var teachingCourses = req.session.data['courses'];
+    if (teachingCourses == 'No') {
+      res.redirect('/not-eligible-16-19');
+    } else {
+      res.redirect('/qualification');
+    }
+  }); 
+
+  router.post('/performance', function (req, res) {
+    var qualification = req.session.data['qual'];
+    if (qualification == 'No, and I do not intend to start working towards one in the next 12 months') {
+      res.redirect('/not-eligible-qualification');
+    } else {
+      res.redirect('/performance');
+    }
+  });
   
