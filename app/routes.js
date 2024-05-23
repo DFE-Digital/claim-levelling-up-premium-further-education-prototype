@@ -83,7 +83,7 @@ router.post('/fe-provider', function (req, res){
 
   router.post('/performance', function (req, res) {
     var qualification = req.session.data['qual'];
-    if (qualification == 'No, and I do not intend to start working towards one in the next 12 months') {
+    if (qualification == 'No, and I do not plan to start working towards one in the next 12 months') {
       res.redirect('/not-eligible-qualification');
     } else {
       res.redirect('/performance');
