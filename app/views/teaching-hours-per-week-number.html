@@ -1,0 +1,65 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        The amount you are entitled to claim depends on the number of hours you teach
+      </h1>
+
+      <form class="form" action="/half-teaching-hours" method="post">
+
+        <p>This refers to the direct contact time spent teaching students in lessons.</p>
+
+        <p>If you teach:</p>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>more than 12 hours per week, you are eligible for between £4,000 and £6,000</li>
+          <li>between 2.5 hours and 12 hours per week, you are eligible for between £2,000 and £3,000</li>
+          <li>less than 2.5 hours per week, you will not be eligible for a levelling up premium payment</li>
+        </ul>
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+              <h1 class="govuk-fieldset__heading">
+                How many hours do you spend teaching per week?
+              </h1>
+            </legend>
+
+            <div class="govuk-form-group">
+              <div id="account-number-hint" class="govuk-hint">
+                Number of teaching hours per week
+              </div>
+              <div class="govuk-input__wrapper">
+                <input class="govuk-input govuk-input--width-5" id="hours" name="hours" type="text" spellcheck="false">
+                <div class="govuk-input__suffix" aria-hidden="true">hours</div>
+              </div>
+            </div>
+            
+        </div>
+
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
