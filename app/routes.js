@@ -36,7 +36,7 @@ router.post('/fe-provider', function (req, res){
 
   router.post('/teaching-hours-per-week', function (req, res){
     var academicYearInFurtherEducation = req.session.data['year'];
-    if (academicYearInFurtherEducation == 'Before 2020 to 2021') {
+    if (academicYearInFurtherEducation == 'Before September 2020') {
       res.redirect('/you-are-not-eligible-five-years');
     } else {
       res.redirect('/teaching-hours-per-week');
