@@ -1,0 +1,72 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+
+      <h1 class="govuk-heading-l">
+        How many hours per week do you spend teaching these eligible courses?
+      </h1>
+
+      <form class="form" action="/qualification" method="post">
+
+      
+
+        <div class="govuk-form-group">
+          
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="weight">
+              Course selection 1
+            </label>
+            <div class="govuk-input__wrapper">
+              <input class="govuk-input govuk-input--width-5" id="hours" name="hours" type="text" spellcheck="false">
+              <div class="govuk-input__suffix" aria-hidden="true">hours</div>
+            </div>
+          </div>
+
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="weight">
+              Course selection 2
+            </label>
+            <div class="govuk-input__wrapper">
+              <input class="govuk-input govuk-input--width-5" id="hours" name="hours" type="text" spellcheck="false">
+              <div class="govuk-input__suffix" aria-hidden="true">hours</div>
+            </div>
+          </div>
+          
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="weight">
+              Course selection 3
+            </label>
+            <div class="govuk-input__wrapper">
+              <input class="govuk-input govuk-input--width-5" id="hours" name="hours" type="text" spellcheck="false">
+              <div class="govuk-input__suffix" aria-hidden="true">hours</div>
+            </div>
+          </div>
+
+        </div>
+
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
