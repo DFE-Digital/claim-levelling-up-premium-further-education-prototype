@@ -27,34 +27,42 @@
       <dl class="govuk-summary-list">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            Name
+            Claim reference
           </dt>
           <dd class="govuk-summary-list__value">
-            Sarah Philips
+            xxx-xxxxxx
           </dd>
         </div>
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            Date of birth
+            Claimant name
           </dt>
           <dd class="govuk-summary-list__value">
-            5 January 1978
+            Cedric Diggory
           </dd>
         </div>
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            Address
+            Claimant date of birth
           </dt>
           <dd class="govuk-summary-list__value">
-            72 Guild Street<br>London<br>SE23 6FH
+            15 Mar 1998
           </dd>
         </div>
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            Contact details
+            Claimant teacher reference number (TRN)
           </dt>
           <dd class="govuk-summary-list__value">
-            <p class="govuk-body">07700 900457</p>
+            <p class="govuk-body">TRN</p>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Claim date
+          </dt>
+          <dd class="govuk-summary-list__value">
+            <p class="govuk-body">13 May 2024</p>
           </dd>
         </div>
       </dl>
@@ -118,45 +126,84 @@
       </div>
 
       <div class="govuk-form-group">
-        <fieldset class="govuk-fieldset" aria-describedby="countries-hint">
+        <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
           <div class="govuk-checkboxes" data-module="govuk-checkboxes">
             <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="countries" name="countries" type="checkbox" value="france">
-              <label class="govuk-label govuk-checkboxes__label" for="countries">
+              <input class="govuk-checkboxes__input" id="contact" name="contact" type="checkbox" value="email" data-aria-controls="conditional-contact">
+              <label class="govuk-label govuk-checkboxes__label" for="contact">
                 They are a member of staff with teaching responsibilities
               </label>
             </div>
+            <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-contact">
+              <div class="govuk-form-group">
+                <label class="govuk-label" for="contact-by-email">
+                  Why is this statement incorrect?
+                </label>
+                <div class="govuk-form-group">
+                  <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="5"></textarea>
+                </div>
+              </div>
+            </div>
             <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="countries-2" name="countries" type="checkbox" value="portugal">
-              <label class="govuk-label govuk-checkboxes__label" for="countries-2">
+              <input class="govuk-checkboxes__input" id="contact-2" name="contact" type="checkbox" value="phone" data-aria-controls="conditional-contact-2">
+              <label class="govuk-label govuk-checkboxes__label" for="contact-2">
                 They teach [course(s)] for at least half of their teaching hours
               </label>
             </div>
+            <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-contact-2">
+              <div class="govuk-form-group">
+                <label class="govuk-label" for="contact-by-phone">
+                  Why is this statement incorrect?
+                </label>
+                <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="5"></textarea>
+              </div>
+            </div>
             <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="countries-3" name="countries" type="checkbox" value="spain">
-              <label class="govuk-label govuk-checkboxes__label" for="countries-3">
+              <input class="govuk-checkboxes__input" id="contact-3" name="contact" type="checkbox" value="text message" data-aria-controls="conditional-contact-3">
+              <label class="govuk-label govuk-checkboxes__label" for="contact-3">
                 [IF PRIOR Q IS EARLY YEARS RELATED] [Name of early years course] leads to an early years qualification and meets the required staff:child ratios for a setting delivering the Early Years Foundation Stage Statutory Framework
               </label>
             </div>
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="countries-2" name="countries" type="checkbox" value="portugal">
-              <label class="govuk-label govuk-checkboxes__label" for="countries-2">
-                They teach 16 to 19-year-olds, including those up to age 25 with an Education, Health and Care Plan (EHCP), for at least half of their teaching hours
-              </label>
+            <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-contact-3">
+              <div class="govuk-form-group">
+                <label class="govuk-label" for="contact-by-text">
+                  Why is this statement incorrect?
+                </label>
+                <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="5"></textarea>
+              </div>
             </div>
             <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="countries-2" name="countries" type="checkbox" value="portugal">
-              <label class="govuk-label govuk-checkboxes__label" for="countries-2">
-                They have a [permanent/fixed term] contract of employment at [name of FE provider]
-              </label>
+              <input class="govuk-checkboxes__input" id="contact-3" name="contact" type="checkbox" value="text message" data-aria-controls="conditional-contact-3">
+              <label class="govuk-label govuk-checkboxes__label" for="contact-3">
+               They teach 16 to 19-year-olds, including those up to age 25 with an Education, Health and Care Plan (EHCP), for at least half of their teaching hours              </label>
+            </div>
+            <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-contact-3">
+              <div class="govuk-form-group">
+                <label class="govuk-label" for="contact-by-text">
+                  Why is this statement incorrect?
+                </label>
+                <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="5"></textarea>
+              </div>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="contact-3" name="contact" type="checkbox" value="text message" data-aria-controls="conditional-contact-3">
+              <label class="govuk-label govuk-checkboxes__label" for="contact-3">
+                They have a [permanent/fixed term] contract of employment at [name of FE provider]            </div>
+            <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-contact-3">
+              <div class="govuk-form-group">
+                <label class="govuk-label" for="contact-by-text">
+                  Why is this statement incorrect?
+                </label>
+                <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="5"></textarea>
+              </div>
             </div>
             <div class="govuk-checkboxes__divider">or</div>
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="countries-5" name="countries" type="checkbox" value="none" data-behaviour="exclusive">
-              <label class="govuk-label govuk-checkboxes__label" for="countries-5">
-                All these details are correct
-              </label>
-            </div>
+           <div class="govuk-checkboxes__item">
+           <input class="govuk-checkboxes__input" id="countries-5" name="countries" type="checkbox" value="none" checked data-behaviour="exclusive">
+           <label class="govuk-label govuk-checkboxes__label" for="countries-5">
+          No, I will not be travelling to any of these countries
+          </label>
+          </div>
           </div>
         </fieldset>
       </div>
