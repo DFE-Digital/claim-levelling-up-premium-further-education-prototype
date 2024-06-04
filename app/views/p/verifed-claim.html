@@ -33,10 +33,10 @@
         </div>
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            23 Jun 2024
+            Assessed date
           </dt>
           <dd class="govuk-summary-list__value">
-            5 January 1978
+            23 Jun 2024
           </dd>
         </div>
         <div class="govuk-summary-list__row">
@@ -50,7 +50,7 @@
 
 
       <h1 class="govuk-heading-m">
-        Claim details
+        Claimant details
       </h1>
 
       <dl class="govuk-summary-list">
@@ -83,7 +83,7 @@
             Claimant teacher reference number (TRN)
           </dt>
           <dd class="govuk-summary-list__value">
-            <p class="govuk-body">TRN</p>
+            <p class="govuk-body">TRN or Not provided</p>
           </dd>
         </div>
         <div class="govuk-summary-list__row">
@@ -100,163 +100,82 @@
         Confirmed details
       </h1>
 
-      <div class="govuk-form-group">
-        <fieldset class="govuk-fieldset" aria-describedby="signIn-hint">
-          <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-            <h1 class="govuk-fieldset__heading">
-              Is [claimant name] timetabled to teach an average of [number of hours] per week during the current term?
-            </h1>
-          </legend>
-          <div class="govuk-radios" data-module="govuk-radios">
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="signIn" name="signIn" type="radio" value="government-gateway" aria-describedby="signIn-item-hint">
-              <label class="govuk-label govuk-radios__label" for="signIn">
-                Yes
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="signIn-2" name="signIn" type="radio" value="govuk-one-login" aria-describedby="signIn-2-item-hint">
-            <label class="govuk-label govuk-radios__label" for="signIn-2">
-                No
-            </label>
-          </div>
-        </fieldset>
-      </div>
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Does Jake Smith have a permanent/fixed term contract of employment at Bath College?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            Yes
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Is Jake Smith timetabled to teach an average of number of hours per week during the current term?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            Yes
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+        </div>
+        <div class="govuk-summary-list__row">
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Is Jake Smith in the first 5 years of their teaching career in England?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            Yes
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+        </div>
+        <div class="govuk-summary-list__row">
+        </div>
+      </dl>
 
-      <div class="govuk-form-group">
-        <fieldset class="govuk-fieldset" aria-describedby="signIn-hint">
-          <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-            <h1 class="govuk-fieldset__heading">
-              Is [claimant name] in the first 5 years of their teaching career in England?
-            </h1>
-          </legend>
-          <div class="govuk-radios" data-module="govuk-radios">
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="signIn" name="signIn" type="radio" value="government-gateway" aria-describedby="signIn-item-hint">
-              <label class="govuk-label govuk-radios__label" for="signIn">
-                Yes
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="signIn-2" name="signIn" type="radio" value="govuk-one-login" aria-describedby="signIn-2-item-hint">
-            <label class="govuk-label govuk-radios__label" for="signIn-2">
-                No
-            </label>
-          </div>
-        </fieldset>
-      </div>
 
       <h1 class="govuk-heading-m">
         Checked details
       </h1>
 
-      <div id="account-number-hint" class="govuk-hint">
-        Select all options that are incorrect
-      </div>
-
-      <div class="govuk-form-group">
-        <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
-          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="contact" name="contact" type="checkbox" value="email" data-aria-controls="conditional-contact">
-              <label class="govuk-label govuk-checkboxes__label" for="contact">
-                They are a member of staff with teaching responsibilities
-              </label>
-            </div>
-
-            <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-contact">
-              <div class="govuk-form-group">
-                <label class="govuk-label" for="contact-by-email">
-                  Why is this statement incorrect?
-                </label>
-                <div class="govuk-form-group">
-                  <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="5"></textarea>
-                </div>
-              </div>
-            </div>
-
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="contact-2" name="contact" type="checkbox" value="phone" data-aria-controls="conditional-contact-2">
-              <label class="govuk-label govuk-checkboxes__label" for="contact-2">
-                They teach [course(s)] for at least half of their teaching hours
-              </label>
-            </div>
-
-            <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-contact-2">
-              <div class="govuk-form-group">
-                <label class="govuk-label" for="contact-by-phone">
-                  Why is this statement incorrect?
-                </label>
-                <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="5"></textarea>
-              </div>
-            </div>
-
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="contact-3" name="contact" type="checkbox" value="text message" data-aria-controls="conditional-contact-3">
-              <label class="govuk-label govuk-checkboxes__label" for="contact-3">
-                [IF PRIOR Q IS EARLY YEARS RELATED] [Name of early years course] leads to an early years qualification and meets the required staff:child ratios for a setting delivering the Early Years Foundation Stage Statutory Framework
-              </label>
-            </div>
-
-            <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-contact-3">
-              <div class="govuk-form-group">
-                <label class="govuk-label" for="contact-by-text">
-                  Why is this statement incorrect?
-                </label>
-                <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="5"></textarea>
-              </div>
-            </div>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>they are a member of staff with teaching responsibilities</li>
+        <li>they teach [course(s)] for at least half of their teaching hours</li>
+        <li>[IF EARLY YEARS RELATED] [Name of early years course] leads to an <a href="/path/of/page">early years qualification</a> and meets the required staff:child ratios for a setting delivering the Early Years Foundation Stage Statutory Framework</li>
+        <li>they teach 16 to 19-year-olds, including those up to age 25 with an Education, Health and Care Plan (EHCP), for at least half of their teaching hours</li>
+      </ul>
 
 
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="contact-4" name="contact" type="checkbox" value="text message" data-aria-controls="conditional-contact-4">
-              <label class="govuk-label govuk-checkboxes__label" for="contact-4">
-                They teach 16 to 19-year-olds, including those up to age 25 with an Education, Health and Care Plan (EHCP), for at least half of their teaching hours              </label>
-              </label>
-            </div>
 
-            <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-contact-4">
-              <div class="govuk-form-group">
-                <label class="govuk-label" for="contact-by-text">
-                  Why is this statement incorrect?
-                </label>
-                <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="5"></textarea>
-              </div>
-            </div>
-          
 
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="contact-5" name="contact" type="checkbox" value="text message" data-aria-controls="conditional-contact-5">
-              <label class="govuk-label govuk-checkboxes__label" for="contact-5">
-                They have a [permanent/fixed term] contract of employment at [name of FE provider] 
-              </label>
-            </div>
-
-            <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-contact-5">
-              <div class="govuk-form-group">
-                <label class="govuk-label" for="contact-by-text">
-                  Why is this statement incorrect?
-                </label>
-                <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="5"></textarea>
-              </div>
-            </div>
-             
-            <div class="govuk-checkboxes__divider">or</div>
-           <div class="govuk-checkboxes__item">
-           <input class="govuk-checkboxes__input" id="countries-5" name="countries" type="checkbox" value="none" checked data-behaviour="exclusive">
-           <label class="govuk-label govuk-checkboxes__label" for="countries-5">
-            All these details are correct
-          </label>
-          </div>
-          </div>
-        </fieldset>
-       </div>
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Incorrect details
+          </dt>
+          <dd class="govuk-summary-list__value">
+            They have a [full-time/part-time/fixed hours] contract of employment at [name of FE provider]
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Why is this statement incorrect?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            e.g. The person does not have a part-time contract of employment at FE provider
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+        </div>
+        <div class="govuk-summary-list__row">
+        </div>
+      </dl>
 
        <div class="govuk-button-group">
-        <button type="submit" class="govuk-button" data-module="govuk-button">
-          Submit
-        </button>
-       <!-- <a class="govuk-link" href="provider-confirmation.html">Cancel</a>--> 
+        
+       <a class="govuk-link" href="automated-email.html">Cancel</a>
        </div>
 
      </form> 
