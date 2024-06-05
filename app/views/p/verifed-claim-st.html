@@ -1,0 +1,186 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Content page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form class="form" action="provider-confirmation" method="post"> 
+
+      <h1 class="govuk-heading-l">
+        Verified financial incentive payment claim
+      </h1>
+
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Processed by
+          </dt>
+          <dd class="govuk-summary-list__value">
+            Fleur Delacour
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Assessed date
+          </dt>
+          <dd class="govuk-summary-list__value">
+            23 Jun 2024
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+        </div>
+        <div class="govuk-summary-list__row">
+        </div>
+      </dl>
+
+
+
+
+
+      <h1 class="govuk-heading-m">
+        Claimant details
+      </h1>
+
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Claim reference
+          </dt>
+          <dd class="govuk-summary-list__value">
+            xxx-xxxxxx
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Claimant name
+          </dt>
+          <dd class="govuk-summary-list__value">
+            Kehlani Ashley
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Claimant date of birth
+          </dt>
+          <dd class="govuk-summary-list__value">
+            15 Mar 1998
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Claimant teacher reference number (TRN)
+          </dt>
+          <dd class="govuk-summary-list__value">
+            <p class="govuk-body">TRN or Not provided</p>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Claim date
+          </dt>
+          <dd class="govuk-summary-list__value">
+            <p class="govuk-body">13 May 2024</p>
+          </dd>
+        </div>
+      </dl>
+
+      <h1 class="govuk-heading-m">
+        Confirmed details
+      </h1>
+
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Does Jake Smith have a permanent/fixed term contract of employment at Bath College?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            Yes
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Is Jake Smith timetabled to teach an average of number of hours per week during the current term?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            Yes
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+        </div>
+        <div class="govuk-summary-list__row">
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Is Jake Smith in the first 5 years of their teaching career in England?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            Yes
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+        </div>
+        <div class="govuk-summary-list__row">
+        </div>
+      </dl>
+
+
+      <h1 class="govuk-heading-m">
+        Checked details
+      </h1>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>they are a member of staff with teaching responsibilities</li>
+        <li>they teach [course(s)] for at least half of their teaching hours</li>
+        <li>[IF EARLY YEARS RELATED] [Name of early years course] leads to an <a href="/path/of/page">early years qualification</a> and meets the required staff:child ratios for a setting delivering the Early Years Foundation Stage Statutory Framework</li>
+        <li>they teach 16 to 19-year-olds, including those up to age 25 with an Education, Health and Care Plan (EHCP), for at least half of their teaching hours</li>
+      </ul>
+
+
+
+
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Incorrect details
+          </dt>
+          <dd class="govuk-summary-list__value">
+            They have a [full-time/part-time/fixed hours] contract of employment at [name of FE provider]
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Why is this statement incorrect?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            e.g. The person does not have a part-time contract of employment at FE provider
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+        </div>
+        <div class="govuk-summary-list__row">
+        </div>
+      </dl>
+
+       <div class="govuk-button-group">
+        
+       <a class="govuk-link" href="automated-email.html">Cancel</a>
+       </div>
+
+     </form> 
+
+      </div>
+     </div>
+
+{% endblock %}
