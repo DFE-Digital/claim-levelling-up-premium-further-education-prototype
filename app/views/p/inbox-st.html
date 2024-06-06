@@ -1,178 +1,344 @@
-{% extends "layouts/main.html" %}
+{% extends "govuk-prototype-kit/layouts/unbranded.html" %}
 
 {% block pageTitle %}
-  GOV.UK page template – {{ serviceName }} – GOV.UK Prototype Kit
+  Unbranded page template – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
 {% block content %}
 
+  <h1 class="govuk-heading-xl">
+    Inbox
+  </h1>
 
-<form class="form" action="email-check-st" method="post"> 
+  <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+    New email
+  </button>
 
-
-<div class="govuk-summary-card">
-  <div class="govuk-summary-card__title-wrapper">
-    <h2 class="govuk-summary-card__title">
-      Work inbox
-    </h2>
-  </div>
-  <div class="govuk-summary-card__content">
-
-    <div class="govuk-!-padding-bottom-5"></div>
+  <!-- <p class="govuk-body-l">
+    This page doesn't use New Transport or display the GOV.UK header and footer.
+  </p> -->
 
 
-    <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
-      Open new email
-    </button>
 
-    <div class="govuk-!-padding-bottom-5"></div>
-
+  <form class="form" action="email-check" method="post"> 
 
     
-
-    <div class="govuk-form-group">
-      <fieldset class="govuk-fieldset" aria-describedby="nationality-hint">
-        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="nationality" name="nationality" type="checkbox" value="british" aria-describedby="nationality-item-hint">
-            <label class="govuk-label govuk-checkboxes__label" for="nationality">
-              You have a new further education financial incentive payment verification request for [claimant name] - [ref no]
-            </label>
-          </div>
-          <div id="nationality-item-hint" class="govuk-hint govuk-checkboxes__hint">
-            Dear HR, Re: Claimant's name 
-          </div>
-        </div>
-      </fieldset>
-    </div>
-    <hr class="govuk-section-break govuk-section-break-- govuk-section-break--visible">
-
-    <div class="govuk-!-padding-bottom-5"></div>
-
-    <div class="govuk-form-group">
-      <fieldset class="govuk-fieldset" aria-describedby="nationality-hint">
-        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="nationality" name="nationality" type="checkbox" value="british" aria-describedby="nationality-item-hint">
-            <label class="govuk-label govuk-checkboxes__label" for="nationality">
-              GOV.UK Notify            </label>
-          </div>
-          <div id="nationality-item-hint" class="govuk-hint govuk-checkboxes__hint">
-            Dear Identified person, Sign in to GOV.UK Notify at:          </div>
-        </div>
-      </fieldset>
-    </div>
-    <hr class="govuk-section-break govuk-section-break-- govuk-section-break--visible">
-    <div class="govuk-!-padding-bottom-5"></div>
-    
-    <div class="govuk-form-group">
-      <fieldset class="govuk-fieldset" aria-describedby="nationality-hint">
-        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="nationality" name="nationality" type="checkbox" value="british" aria-describedby="nationality-item-hint">
-            <label class="govuk-label govuk-checkboxes__label" for="nationality">
-              Request for annual leave           </label>
-          </div>
-          <div id="nationality-item-hint" class="govuk-hint govuk-checkboxes__hint">
-            Dear HR, I am writing to you to confirm if my dates for my annual lea..           
-          </div>
-        </div>
-      </fieldset>
-    </div>
-    <hr class="govuk-section-break govuk-section-break-- govuk-section-break--visible">
-    <div class="govuk-!-padding-bottom-5"></div>
-
-    <div class="govuk-form-group">
-      <fieldset class="govuk-fieldset" aria-describedby="nationality-hint">
-        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="nationality" name="nationality" type="checkbox" value="british" aria-describedby="nationality-item-hint">
-            <label class="govuk-label govuk-checkboxes__label" for="nationality">
-              Google          </label>
-          </div>
-          <div id="nationality-item-hint" class="govuk-hint govuk-checkboxes__hint">
-            Dear Identified person, there was an unexpected sign in. Please con..           
-          </div>
-        </div>
-      </fieldset>
-    </div>
-    <hr class="govuk-section-break govuk-section-break-- govuk-section-break--visible">
-    <div class="govuk-!-padding-bottom-5"></div>
-
-    <div class="govuk-form-group">
-      <fieldset class="govuk-fieldset" aria-describedby="nationality-hint">
-        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="nationality" name="nationality" type="checkbox" value="british" aria-describedby="nationality-item-hint">
-            <label class="govuk-label govuk-checkboxes__label" for="nationality">
-              Erik / Sheila          </label>
-          </div>
-          <div id="nationality-item-hint" class="govuk-hint govuk-checkboxes__hint">
-            Erik / Sheila Join with Google Meet          
-          </div>
-        </div>
-      </fieldset>
-    </div>
-    <hr class="govuk-section-break govuk-section-break-- govuk-section-break--visible">
-    <div class="govuk-!-padding-bottom-5"></div>
-
-    <div class="govuk-form-group">
-      <fieldset class="govuk-fieldset" aria-describedby="nationality-hint">
-        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="nationality" name="nationality" type="checkbox" value="british" aria-describedby="nationality-item-hint">
-            <label class="govuk-label govuk-checkboxes__label" for="nationality">
-              Classroom          </label>
-          </div>
-          <div id="nationality-item-hint" class="govuk-hint govuk-checkboxes__hint">
-            Hey you! Have you tried out our latest software? Making it easier to...          </div>
-        </div>
-      </fieldset>
-    </div>
-    
-    <div class="govuk-!-padding-bottom-5"></div>
-
-    <nav class="govuk-pagination" aria-label="Pagination">
-      <div class="govuk-pagination__prev">
-        <a class="govuk-link govuk-pagination__link" href="#" rel="prev">
-          <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
-            <path d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"></path>
-          </svg>
-        </a>
-      </div>
-      <ul class="govuk-pagination__list">
-        <li class="govuk-pagination__item">
-          <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 1">
-            1
+    <div class="govuk-tabs" data-module="govuk-tabs">
+      <h2 class="govuk-tabs__title">
+        Contents
+      </h2>
+      <ul class="govuk-tabs__list">
+        <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+          <a class="govuk-tabs__tab" href="#past-day">
+            Focused
           </a>
         </li>
-        <li class="govuk-pagination__item govuk-pagination__item--current">
-          <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 2" aria-current="page">
-            2
+        <li class="govuk-tabs__list-item">
+          <a class="govuk-tabs__tab" href="#past-week">
+            Other
           </a>
         </li>
-        <li class="govuk-pagination__item">
-          <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 3">
-            3
-          </a>
-        </li>
+        
+        
       </ul>
-      <div class="govuk-pagination__next">
-        <a class="govuk-link govuk-pagination__link" href="#" rel="next">
-          <span class="govuk-pagination__link-title">
-            Next<span class="govuk-visually-hidden"> page</span>
-          </span>
-          <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
-            <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
-          </svg>
-        </a>
+      <div class="govuk-tabs__panel" id="past-day">
+        <h2 class="govuk-heading-l">Focused</h2>
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" aria-describedby="nationality-hint">
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="nationality" name="nationality" type="checkbox" value="british" aria-describedby="nationality-item-hint">
+                <label class="govuk-label govuk-checkboxes__label" for="nationality">
+                  <a href="email-check-st.html"> <strong>You have a new further education financial incentive payment verification request for [claimant name] - [ref no]</strong></a>
+                </label>
+              </div>
+              <div id="nationality-item-hint" class="govuk-hint govuk-checkboxes__hint">
+                Dear HR, Re: Claimant's name 
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <hr class="govuk-section-break govuk-section-break-- govuk-section-break--visible">
+    
+        <div class="govuk-!-padding-bottom-5"></div>
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" aria-describedby="nationality-hint">
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="nationality" name="nationality" type="checkbox" value="british" aria-describedby="nationality-item-hint">
+                <label class="govuk-label govuk-checkboxes__label" for="nationality">
+                  GOV.UK Notify            </label>
+              </div>
+              <div id="nationality-item-hint" class="govuk-hint govuk-checkboxes__hint">
+                Dear Identified person, Sign in to GOV.UK Notify at:          </div>
+            </div>
+          </fieldset>
+        </div>
+        <hr class="govuk-section-break govuk-section-break-- govuk-section-break--visible">
+        <div class="govuk-!-padding-bottom-5"></div>
+        
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" aria-describedby="nationality-hint">
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="nationality" name="nationality" type="checkbox" value="british" aria-describedby="nationality-item-hint">
+                <label class="govuk-label govuk-checkboxes__label" for="nationality">
+                  Request for annual leave           </label>
+              </div>
+              <div id="nationality-item-hint" class="govuk-hint govuk-checkboxes__hint">
+                Dear HR, I am writing to you to confirm if my dates for my annual lea..           
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <hr class="govuk-section-break govuk-section-break-- govuk-section-break--visible">
+        <div class="govuk-!-padding-bottom-5"></div>
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" aria-describedby="nationality-hint">
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="nationality" name="nationality" type="checkbox" value="british" aria-describedby="nationality-item-hint">
+                <label class="govuk-label govuk-checkboxes__label" for="nationality">
+                  Google          </label>
+              </div>
+              <div id="nationality-item-hint" class="govuk-hint govuk-checkboxes__hint">
+                Dear Identified person, there was an unexpected sign in. Please con..           
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <hr class="govuk-section-break govuk-section-break-- govuk-section-break--visible">
+        <div class="govuk-!-padding-bottom-5"></div>
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" aria-describedby="nationality-hint">
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="nationality" name="nationality" type="checkbox" value="british" aria-describedby="nationality-item-hint">
+                <label class="govuk-label govuk-checkboxes__label" for="nationality">
+                  Erik / Sheila          </label>
+              </div>
+              <div id="nationality-item-hint" class="govuk-hint govuk-checkboxes__hint">
+                Erik / Sheila Join with Google Meet          
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <hr class="govuk-section-break govuk-section-break-- govuk-section-break--visible">
+        <div class="govuk-!-padding-bottom-5"></div>
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" aria-describedby="nationality-hint">
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="nationality" name="nationality" type="checkbox" value="british" aria-describedby="nationality-item-hint">
+                <label class="govuk-label govuk-checkboxes__label" for="nationality">
+                  Classroom          </label>
+              </div>
+              <div id="nationality-item-hint" class="govuk-hint govuk-checkboxes__hint">
+                Hey you! Have you tried out our latest software? Making it easier to...          </div>
+            </div>
+          </fieldset>
+        </div>
+        
+        <div class="govuk-!-padding-bottom-5"></div>
+
+        <nav class="govuk-pagination" aria-label="Pagination">
+          <div class="govuk-pagination__prev">
+            <a class="govuk-link govuk-pagination__link" href="#" rel="prev">
+              <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+                <path d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"></path>
+              </svg>
+            </a>
+          </div>
+          <ul class="govuk-pagination__list">
+            <li class="govuk-pagination__item">
+              <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 1">
+                1
+              </a>
+            </li>
+            <li class="govuk-pagination__item govuk-pagination__item--current">
+              <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 2" aria-current="page">
+                2
+              </a>
+            </li>
+            <li class="govuk-pagination__item">
+              <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 3">
+                3
+              </a>
+            </li>
+          </ul>
+          <div class="govuk-pagination__next">
+            <a class="govuk-link govuk-pagination__link" href="#" rel="next">
+              <span class="govuk-pagination__link-title">
+                Next<span class="govuk-visually-hidden"> page</span>
+              </span>
+              <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+                <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+              </svg>
+            </a>
+          </div>
+        </nav>
+
+
+
+
+        
       </div>
-    </nav>
+      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="past-week">
+        <h2 class="govuk-heading-l">Other</h2>
 
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" aria-describedby="nationality-hint">
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="nationality" name="nationality" type="checkbox" value="british" aria-describedby="nationality-item-hint">
+                <label class="govuk-label govuk-checkboxes__label" for="nationality">
+                  You have a new further education financial incentive payment verification request for [claimant name] - [ref no]
+                </label>
+              </div>
+              <div id="nationality-item-hint" class="govuk-hint govuk-checkboxes__hint">
+                Dear HR, Re: Claimant's name 
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <hr class="govuk-section-break govuk-section-break-- govuk-section-break--visible">
+    
+        <div class="govuk-!-padding-bottom-5"></div>
 
-   </form>
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" aria-describedby="nationality-hint">
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="nationality" name="nationality" type="checkbox" value="british" aria-describedby="nationality-item-hint">
+                <label class="govuk-label govuk-checkboxes__label" for="nationality">
+                  GOV.UK Notify            </label>
+              </div>
+              <div id="nationality-item-hint" class="govuk-hint govuk-checkboxes__hint">
+                Dear Identified person, Sign in to GOV.UK Notify at:          </div>
+            </div>
+          </fieldset>
+        </div>
+        <hr class="govuk-section-break govuk-section-break-- govuk-section-break--visible">
+        <div class="govuk-!-padding-bottom-5"></div>
+        
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" aria-describedby="nationality-hint">
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="nationality" name="nationality" type="checkbox" value="british" aria-describedby="nationality-item-hint">
+                <label class="govuk-label govuk-checkboxes__label" for="nationality">
+                  Request for annual leave           </label>
+              </div>
+              <div id="nationality-item-hint" class="govuk-hint govuk-checkboxes__hint">
+                Dear HR, I am writing to you to confirm if my dates for my annual lea..           
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <hr class="govuk-section-break govuk-section-break-- govuk-section-break--visible">
+        <div class="govuk-!-padding-bottom-5"></div>
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" aria-describedby="nationality-hint">
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="nationality" name="nationality" type="checkbox" value="british" aria-describedby="nationality-item-hint">
+                <label class="govuk-label govuk-checkboxes__label" for="nationality">
+                  Google          </label>
+              </div>
+              <div id="nationality-item-hint" class="govuk-hint govuk-checkboxes__hint">
+                Dear Identified person, there was an unexpected sign in. Please con..           
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <hr class="govuk-section-break govuk-section-break-- govuk-section-break--visible">
+        <div class="govuk-!-padding-bottom-5"></div>
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" aria-describedby="nationality-hint">
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="nationality" name="nationality" type="checkbox" value="british" aria-describedby="nationality-item-hint">
+                <label class="govuk-label govuk-checkboxes__label" for="nationality">
+                  Erik / Sheila          </label>
+              </div>
+              <div id="nationality-item-hint" class="govuk-hint govuk-checkboxes__hint">
+                Erik / Sheila Join with Google Meet          
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <hr class="govuk-section-break govuk-section-break-- govuk-section-break--visible">
+        <div class="govuk-!-padding-bottom-5"></div>
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" aria-describedby="nationality-hint">
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="nationality" name="nationality" type="checkbox" value="british" aria-describedby="nationality-item-hint">
+                <label class="govuk-label govuk-checkboxes__label" for="nationality">
+                  Classroom          </label>
+              </div>
+              <div id="nationality-item-hint" class="govuk-hint govuk-checkboxes__hint">
+                Hey you! Have you tried out our latest software? Making it easier to...          </div>
+            </div>
+          </fieldset>
+        </div>
+        
+        <div class="govuk-!-padding-bottom-5"></div>
+
+        <nav class="govuk-pagination" aria-label="Pagination">
+          <div class="govuk-pagination__prev">
+            <a class="govuk-link govuk-pagination__link" href="#" rel="prev">
+              <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+                <path d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"></path>
+              </svg>
+            </a>
+          </div>
+          <ul class="govuk-pagination__list">
+            <li class="govuk-pagination__item">
+              <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 1">
+                1
+              </a>
+            </li>
+            <li class="govuk-pagination__item govuk-pagination__item--current">
+              <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 2" aria-current="page">
+                2
+              </a>
+            </li>
+            <li class="govuk-pagination__item">
+              <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 3">
+                3
+              </a>
+            </li>
+          </ul>
+          <div class="govuk-pagination__next">
+            <a class="govuk-link govuk-pagination__link" href="#" rel="next">
+              <span class="govuk-pagination__link-title">
+                Next<span class="govuk-visually-hidden"> page</span>
+              </span>
+              <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+                <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+              </svg>
+            </a>
+          </div>
+        </nav>
+
+        
+      </div>
+      
+      
+    </div>
 
   </div>
 </div>
+
+
 
 {% endblock %}
