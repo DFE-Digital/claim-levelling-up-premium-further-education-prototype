@@ -1,0 +1,70 @@
+.mock-email-wrapper {
+	display: flex;
+	align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+.mock-email {
+	padding:10px;
+	.mock-email--table {
+		border:1px solid grey;
+		border-collapse: collapse;
+		width: 100%;
+		max-width: 700px;
+		// margin:0 auto;
+		box-shadow:3px 3px grey;
+	}  
+	.mock-email--table__body {
+	}
+	.mock-email--table__row {
+		border:1px solid grey;
+	}
+  .mock-email--table__cell {
+  	border:1px solid grey;
+  	padding:12px 20px;
+		p {
+			font-family: sans-serif;
+			font-size:18px;
+			&:last-child {
+				margin-bottom:0;
+			}
+		}
+		&.mock-email--body{
+			padding-bottom:1.5em;
+		}
+		.mock-email--text-secondary {
+			color:grey;
+			min-width: 75px;
+			display: inline-block;
+		}
+		a {
+			font-family: sans-serif;
+			font-size:18px;
+			color:blue;
+			&:hover, &:visited:hover {
+				text-decoration-thickness:1px;
+				color:navy;
+			}
+			&:visited {
+				color:purple;
+			}
+			&:focus {
+				text-decoration-thickness:1px;
+				outline:none;
+				color:purple;
+				background-color:transparent;
+				box-shadow:none;
+				text-decoration: underline;
+			}
+		}
+		a.secert-link {
+			color:#0b0c0c !important;
+			text-decoration: none !important;
+			outline: none !important;
+			background-color: transparent !important;
+			box-shadow:none !important;
+			text-decoration-thickness:0px !important;
+		}
+	}
+}
