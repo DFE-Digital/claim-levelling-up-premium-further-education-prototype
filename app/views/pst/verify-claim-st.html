@@ -16,13 +16,13 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form class="form" action="/pst/provider-confirmation-st" method="post"> 
+      <form class="form" action="provider-confirmation" method="post"> 
 
-      <h1 class="govuk-heading-l">
+      <h1 class="govuk-heading-xl">
         Review a financial incentive payment claim
       </h1>
 
-      <h1 class="govuk-heading-m">
+      <h1 class="govuk-heading-l">
         Claim details
       </h1>
 
@@ -69,33 +69,9 @@
         </div>
       </dl>
 
-      <h1 class="govuk-heading-m">
+      <h1 class="govuk-heading-l">
         We need you to confirm some details
       </h1>
-
-      <div class="govuk-form-group">
-        <fieldset class="govuk-fieldset" aria-describedby="signIn-hint">
-          <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-            <h1 class="govuk-fieldset__heading">
-              Does [claimant name] have a [variable/fixed-term] contract of employment at [FE provider]?            </h1>
-          </legend>
-          <div class="govuk-radios" data-module="govuk-radios">
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="signIn" name="signIn" type="radio" value="government-gateway" aria-describedby="signIn-item-hint">
-              <label class="govuk-label govuk-radios__label" for="signIn">
-                Yes
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="signIn-2" name="signIn" type="radio" value="govuk-one-login" aria-describedby="signIn-2-item-hint">
-            <label class="govuk-label govuk-radios__label" for="signIn-2">
-                No
-            </label>
-          </div>
-        </fieldset>
-      </div>
-
-      
 
       <div class="govuk-form-group">
         <fieldset class="govuk-fieldset" aria-describedby="signIn-hint">
@@ -143,145 +119,117 @@
         </fieldset>
       </div>
 
-      <div class="govuk-form-group">
-        <fieldset class="govuk-fieldset" aria-describedby="signIn-hint">
-          <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-            <h1 class="govuk-fieldset__heading">
-              Will [claimant name] be timetabled to teach at least 2.5 hours per week next term?
-            </h1>
-          </legend>
-          <div class="govuk-radios" data-module="govuk-radios">
-            <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="signIn" name="signIn" type="radio" value="government-gateway" aria-describedby="signIn-item-hint">
-              <label class="govuk-label govuk-radios__label" for="signIn">
-                Yes
-              </label>
-            </div>
-            <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="signIn-2" name="signIn" type="radio" value="govuk-one-login" aria-describedby="signIn-2-item-hint">
-            <label class="govuk-label govuk-radios__label" for="signIn-2">
-                No
-            </label>
-          </div>
-        </fieldset>
-      </div>
-
-      
-
-      <h1 class="govuk-heading-m">
+      <h1 class="govuk-heading-l">
         We need you to check if any of these details are incorrect
       </h1>
 
-      <div id="account-number-hint" class="govuk-hint">
-        Select all options that are incorrect
-      </div>
-
-      <div class="govuk-form-group">
-        <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+     <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+          
+          <div id="contact-hint" class="govuk-hint">
+            Select all options that are incorrect
+          </div>
           <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="contact" name="contact" type="checkbox" value="email" data-aria-controls="conditional-contact">
-              <label class="govuk-label govuk-checkboxes__label" for="contact">
-                They are a member of staff with teaching responsibilities
-              </label>
-            </div>
+              <div class="govuk-checkboxes__item">
+                  <input class="govuk-checkboxes__input" id="contact" name="contact" type="checkbox" value="email" data-aria-controls="conditional-contact-8">
+                  <label class="govuk-label govuk-checkboxes__label" for="contact">
+                    They are a member of staff with teaching responsibilities
+                  </label>
+                </div>
+                <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-contact-8">
+                  <div class="govuk-form-group">
+                      <label class="govuk-label" for="contact-by-email">
+                        Why is this statement incorrect?
+                      </label>
+                      <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="5"></textarea>
+                  </div>
+                </div>
 
-            <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-contact">
-              <div class="govuk-form-group">
-                <label class="govuk-label" for="contact-by-email">
-                  Why is this statement incorrect?
-                </label>
+               <div class="govuk-checkboxes__item">
+                  <input class="govuk-checkboxes__input" id="contact-2" name="contact" type="checkbox" value="phone" data-aria-controls="conditional-contact-9">
+                  <label class="govuk-label govuk-checkboxes__label" for="contact-2">
+                    For at least half of their timetabled teaching hours, Jake Smith teaches ESFA-funded qualifications at level 3 and below in the engineering sector subject area
+                  </label>
+                </div>
+                <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-contact-9">
                 <div class="govuk-form-group">
-                  <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="5"></textarea>
+                    <label class="govuk-label" for="contact-by-email">
+                      Why is this statement incorrect?
+                    </label>
+                    <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="5"></textarea>
                 </div>
               </div>
-            </div>
 
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="contact-2" name="contact" type="checkbox" value="phone" data-aria-controls="conditional-contact-2">
-              <label class="govuk-label govuk-checkboxes__label" for="contact-2">
-                They teach [course(s)] for at least half of their teaching hours
-              </label>
-            </div>
+              <div class="govuk-checkboxes__item">
+                  <input class="govuk-checkboxes__input" id="contact-3" name="contact" type="checkbox" value="text message" data-aria-controls="conditional-contact-10">
+                  <label class="govuk-label govuk-checkboxes__label" for="contact-3">
+                    Name of early years course leads to an early years qualification and meets the required staff:child ratios for a setting delivering the Early Years Foundation Stage Statutory Framework
+                  </label>
+               </div>
+                <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-contact-10">
+                <div class="govuk-form-group">
+                    <label class="govuk-label" for="contact-by-email">
+                      Why is this statement incorrect?
+                    </label>
+                    <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="5"></textarea>
+                </div>
+               </div>
 
-            <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-contact-2">
+               <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="contact-3" name="contact" type="checkbox" value="text message" data-aria-controls="conditional-contact-11">
+                <label class="govuk-label govuk-checkboxes__label" for="contact-3">
+                  They teach 16 to 19-year-olds, including those up to age 25 with an Education, Health and Care Plan (EHCP), for at least half of their teaching hours                </label>
+             </div>
+              <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-contact-11">
               <div class="govuk-form-group">
-                <label class="govuk-label" for="contact-by-phone">
-                  Why is this statement incorrect?
-                </label>
-                <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="5"></textarea>
+                  <label class="govuk-label" for="contact-by-email">
+                    Why is this statement incorrect?
+                  </label>
+                  <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="5"></textarea>
               </div>
-            </div>
+             </div>
 
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="contact-3" name="contact" type="checkbox" value="text message" data-aria-controls="conditional-contact-3">
-              <label class="govuk-label govuk-checkboxes__label" for="contact-3">
-                [IF PRIOR Q IS EARLY YEARS RELATED] [Name of early years course] leads to an early years qualification and meets the required staff:child ratios for a setting delivering the Early Years Foundation Stage Statutory Framework
-              </label>
-            </div>
-
-            <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-contact-3">
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="contact-3" name="contact" type="checkbox" value="text message" data-aria-controls="conditional-contact-12">
+                <label class="govuk-label govuk-checkboxes__label" for="contact-3">
+                  They have a permanent/fixed term contract of employment at name of FE provider           </div>
+              <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-contact-12">
               <div class="govuk-form-group">
-                <label class="govuk-label" for="contact-by-text">
-                  Why is this statement incorrect?
-                </label>
-                <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="5"></textarea>
+                  <label class="govuk-label" for="contact-by-email">
+                    Why is this statement incorrect?
+                  </label>
+                  <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="5"></textarea>
               </div>
-            </div>
-
-
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="contact-4" name="contact" type="checkbox" value="text message" data-aria-controls="conditional-contact-4">
-              <label class="govuk-label govuk-checkboxes__label" for="contact-4">
-                They teach 16 to 19-year-olds, including those up to age 25 with an Education, Health and Care Plan (EHCP), for at least half of their teaching hours              </label>
-              </label>
-            </div>
-
-            <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-contact-4">
-              <div class="govuk-form-group">
-                <label class="govuk-label" for="contact-by-text">
-                  Why is this statement incorrect?
-                </label>
-                <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="5"></textarea>
               </div>
-            </div>
-          
 
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="contact-5" name="contact" type="checkbox" value="text message" data-aria-controls="conditional-contact-5">
-              <label class="govuk-label govuk-checkboxes__label" for="contact-5">
-                They have a [permanent/fixed term] contract of employment at [name of FE provider] 
-              </label>
-            </div>
 
-            <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-contact-5">
-              <div class="govuk-form-group">
-                <label class="govuk-label" for="contact-by-text">
-                  Why is this statement incorrect?
-                </label>
-                <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="5"></textarea>
+              <div class="govuk-checkboxes__divider">or</div>
+              <div class="govuk-checkboxes__item">
+                  <input class="govuk-checkboxes__input" id="contact-4" name="contact" type="checkbox" value="none" data-behaviour="exclusive">
+                  <label class="govuk-label govuk-checkboxes__label" for="contact-4">
+                      All of these details are correct
+                  </label>
               </div>
-            </div>
-             
-            <div class="govuk-checkboxes__divider">or</div>
-           <div class="govuk-checkboxes__item">
-           <input class="govuk-checkboxes__input" id="countries-5" name="countries" type="checkbox" value="none" checked data-behaviour="exclusive">
-           <label class="govuk-label govuk-checkboxes__label" for="countries-5">
-            All these details are correct
-          </label>
-          </div>
-          </div>
-        </fieldset>
-       </div>
+                    </div>
+                </fieldset>
+              </div>
 
-       <div class="govuk-button-group">
-        <button type="submit" class="govuk-button" data-module="govuk-button">
-          Submit
-        </button>
-       <!-- <a class="govuk-link" href="provider-confirmation.html">Cancel</a>--> 
-       </div>
+              <div class="govuk-button-group">
+              <button type="submit" class="govuk-button" data-module="govuk-button">
+                Submit
+              </button>
+            <!-- <a class="govuk-link" href="provider-confirmation.html">Cancel</a>--> 
+            </div>
 
      </form> 
+
+
+    </main>
+    </div>
+
+
+
+
 
       </div>
      </div>
