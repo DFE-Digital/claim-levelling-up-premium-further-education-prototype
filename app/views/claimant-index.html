@@ -1,0 +1,147 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName="Home" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {% include "govuk-prototype-kit/includes/homepage-top.njk" %}
+  
+  </div>
+</div>
+
+<h1 class="govuk-heading-xl">
+  {{ serviceName }} v3 prototype
+</h1>
+
+<h1 class="govuk-heading-m">
+  Eligibility journey screens
+ </h1>
+
+ <ol class="govuk-list govuk-list--number"></ul>
+  
+    <h1 class="govuk-heading-s">
+      Who can apply
+     </h1>
+     <div class="govuk-!-padding-bottom-1"></div>
+     
+  
+  <li><strong class="govuk-tag govuk-tag--green">Updated</strong><a href="start">Start now page</a></li>
+
+  <div class="govuk-!-padding-bottom-5"></div>
+
+    <h1 class="govuk-heading-s">
+      Elgible provider
+     </h1>
+
+     <li><a href="teaching-responsibilities.html">Teaching responsibilities</a></li>
+     <li><strong class="govuk-tag govuk-tag--green">Updated</strong><a href="fe-provider.html">Further education provider</a></li>
+     <li><a href="where-you-are-employed.html">Where are you employed</a></li>
+     <li><a href="where-you-are-employed.html">Select where you are employed</a></li>
+     <li><a href="contract-of-employment.html">Contract of employment</a></li>
+     <li><a href="one-full-term.html">One full term</a></li>
+ 
+   <div class="govuk-!-padding-bottom-5"></div>
+
+    <h1 class="govuk-heading-s">
+      Teaching in FE
+     </h1>
+
+     <li><strong class="govuk-tag govuk-tag--green">Updated</strong><a href="academic-year-in-further-education.html">Academic year in further education</a></li>
+
+   <div class="govuk-!-padding-bottom-5"></div>
+
+   <h1 class="govuk-heading-s">
+    Teaching hours
+   </h1>
+
+
+    <li><strong class="govuk-tag govuk-tag--green">Updated</strong><a href="teaching-hours-per-week">Teaching hours per week</a></li>
+    <li><strong class="govuk-tag govuk-tag--green">Updated</strong><a href="teaching-hours-per-week-variable">Teaching hours per week variable</a></li>
+    <li><strong class="govuk-tag govuk-tag--green">Updated</strong><a href='teaching-hours-per-week-number'>Teaching hours per week number option</a></li>
+    <li><strong class="govuk-tag govuk-tag--green">Updated</strong><a href="half-teaching-hours">Half teaching hours 16-19 year olds </a></li>
+    <li><strong class="govuk-tag govuk-tag--green">Updated</strong><a href="half-teaching-hours-number">Half teaching hours 16-19 year olds number option</a></li>
+
+
+   <div class="govuk-!-padding-bottom-5"></div>
+
+   <h1 class="govuk-heading-s">
+    Subjects
+   </h1>
+
+   <li><a href="subject-areas">Subject areas</a></li>
+   <li><a href="building-course">Building course</a></li>
+   <li><a href="chemistry-course.html">Chemistry course</a></li>
+   <li><a href="computing-course.html">Computing course</a></li>
+   <li><a href="early-years-course.html">Early years course</a></li>
+   <li><a href="engineering-course.html">Engineering course</a></li>
+   <li><a href="maths-course.html">Maths course</a></li>
+   <li><a href="physics-course.html">Physics course</a></li>
+
+   <div class="govuk-!-padding-bottom-5"></div>
+
+   <h1 class="govuk-heading-s">
+    Half of teaching hours
+   </h1>
+
+   <li><strong class="govuk-tag govuk-tag--green">Updated</strong><a href="teaching-courses.html"> Teaching courses </a></li>
+   <li><strong class="govuk-tag govuk-tag--green">Updated</strong><a href="how-many-hours per-week-number.html">How many hours per week? Number option</a></li>
+
+   
+
+   <div class="govuk-!-padding-bottom-5"></div>
+
+   <h1 class="govuk-heading-s">
+    Teaching qualification
+   </h1>
+
+   <li> <a href="qualification.html">Teaching qualification</a></li>
+   
+
+   <div class="govuk-!-padding-bottom-5"></div>
+
+   <h1 class="govuk-heading-s">
+    Performance and disiplinary
+   </h1>
+
+   <li><a href="performance.html">Performance and disiplinary</a></li>
+
+   <div class="govuk-!-padding-bottom-5"></div>
+
+   <h1 class="govuk-heading-s">
+    TRN
+   </h1>
+
+   <li><a href="trn.html">Teacher reference number TRN</a></li>
+
+   <div class="govuk-!-padding-bottom-5"></div>
+
+   <h1 class="govuk-heading-s">
+    Check answers and submit claim
+   </h1>
+
+   <li><a href="check-answers.html">Check answers</a></li>
+   <li><a href="you-are-eligible.html">Eligible for an additional payment</a></li>
+   </ol>
+
+   <h1 class="govuk-heading-s">
+    Not eligible screens
+   </h1>
+   <ol class="govuk-list govuk-list--number">
+    <li><strong class="govuk-tag govuk-tag--green">Updated</strong><a href="fe-provider-not-eligible">FE provider not eligible</a></li>
+    <li><a href="you-are-not-eligible.html">You are not eligible default</a></li>
+    <li><a href="you-are-not-eligible-yet">You are not eligible YET</a></li>
+    <li><a href="you-are-not-eligible-five-years">You are not eligible five years</a></li>
+    <li><a href="not-eligible-hours-spent-teaching.html">You are not eligible hours spent teaching</a></li>
+    <li><a href="not-eligible-16-19.html">You are not eligible 16-to-19 year olds</a></li>
+    <li><a href="you-are-not-eligible-subjects.html">You are not eligible subjects</a></li>
+    <li><a href="you-are-not-eligible-courses.html">You are not eligible courses</a></li>
+    <li><a href="not-eligible-teach-half-hours-courses.html">You are not eligible teach half hours courses</a></li>
+    <li><a href="not-eligible-qualification.html">You are not eligible qualification</a></li>
+    <li><a href="not-eligible-PA-DA.html">You are not eligible PA and DA</a></li>
+   </ol>
+
+
+{% endblock %}
