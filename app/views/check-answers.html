@@ -26,7 +26,7 @@
               text: "Are you a member of staff with teaching responsibilities?"
             },
             value: {
-              text: "Answer 1"
+              text: "Yes"
             },
             actions: {
               items: [
@@ -44,7 +44,7 @@
               text: "Which FE provider are you employed by?"
             },
             value: {
-              text: "Answer 2"
+              text: "Westminster City Collage"
             },
             actions: {
               items: [
@@ -59,10 +59,10 @@
           ,
           {
             key: {
-              text: "What type of contract do you have with [name of FE provider in last step]?"
+              text: "What type of contract do you have with [name of FE provider]?"
             },
             value: {
-              text: "Answer 2"
+              text: "Permanent contract (including full-time and part-time contracts)"
             },
             actions: {
               items: [
@@ -77,10 +77,10 @@
           ,
           {
             key: {
-              text: "Which academic year did you start teaching in further education?"
+              text: "On average, how many hours per week are you timetabled to teach at [name of FE provider] during the current term?"
             },
             value: {
-              text: "Answer 2"
+              text: "More than 12 hours per week"
             },
             actions: {
               items: [
@@ -95,46 +95,10 @@
           ,
           {
             key: {
-              text: "How many hours do you spend teaching per week?"
+              text: "Which academic year did you start teaching in further education (FE) in England?"
             },
             value: {
-              text: "Answer 2"
-            },
-            actions: {
-              items: [
-                {
-                  href: "#",
-                  text: "Change",
-                  visuallyHiddenText: "Question 2"
-                }
-              ]
-            }
-          }
-          ,
-          {
-            key: {
-              text: "Are at least half of your teaching hours spent teaching 16 to 19-year-olds, including those up to age 25 with an Education, Health and Care Plan (EHCP)?"
-            },
-            value: {
-              text: "Answer 2"
-            },
-            actions: {
-              items: [
-                {
-                  href: "#",
-                  text: "Change",
-                  visuallyHiddenText: "Question 2"
-                }
-              ]
-            }
-          }
-          ,
-          {
-            key: {
-              text: "How many hours do you spend teaching per week?"
-            },
-            value: {
-              text: "Answer 2"
+              text: "September 2023 to August 2024"
             },
             actions: {
               items: [
@@ -152,7 +116,25 @@
               text: "What subjects do you teach?"
             },
             value: {
-              text: "Answer 2"
+              text: "Mathematics and Engineering and manufacturing, including transport engineering"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "Question 2"
+                }
+              ]
+            }
+          }
+          ,
+          {
+            key: {
+              text: "Subjects courses"
+            },
+            value: {
+              text: "ESFA funded qualifications at level 3 and below in the Mathematics and statistics sector subject area "
             },
             actions: {
               items: [
@@ -170,7 +152,7 @@
               text: "Subject courses"
             },
             value: {
-              text: "Answer 2"
+              text: "ESFA funded qualifications at level 3 and below in: o Engineering sector subject area o Manufacturing technologies sector subject area o Transportation operations and maintenance sector subject area"
             },
             actions: {
               items: [
@@ -185,10 +167,10 @@
           ,
           {
             key: {
-              text: "Do you spend at least half your teaching hours teaching these courses?"
+              text: "Do you spend at least half of your timetabled teaching hours teaching these eligible courses?"
             },
             value: {
-              text: "Answer 2"
+              text: "Yes"
             },
             actions: {
               items: [
@@ -203,10 +185,10 @@
           ,
           {
             key: {
-              text: "Do you have a teaching qualification?"
+              text: "Are at least half of your teaching hours spent teaching 16 to 19-year-olds, including those up to age 25 with an Education, Health and Care Plan (EHCP)?"
             },
             value: {
-              text: "Answer 2"
+              text: "Yes"
             },
             actions: {
               items: [
@@ -220,10 +202,10 @@
           }
           ,{
             key: {
-              text: "Have any performance measures been started against you?"
+              text: "Do you have a teaching qualification?"
             },
             value: {
-              text: "Answer 2"
+              text: "Yes"
             },
             actions: {
               items: [
@@ -241,7 +223,7 @@
               text: "Are you currently subject to disciplinary action?"
             },
             value: {
-              text: "Answer 2"
+              text: "No"
             },
             actions: {
               items: [
@@ -256,10 +238,10 @@
           ,
           {
             key: {
-              text: "What is your TRN? (optional)"
+              text: "Have any performance measures been started against you?"
             },
             value: {
-              text: "Answer 3"
+              text: "No"
             },
             actions: {
               items: [
@@ -274,18 +256,12 @@
         ]
       }) }}
 
-      <h2 class="govuk-heading-m">
-        Now send your application
-      </h2>
-
-      <p>
-        By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
-      </p>
+      
 
       <form action="/you-are-eligible" method="post" novalidate>
 
         {{ govukButton({
-          text: "Accept and send"
+          text: "Continue"
         }) }}
 
       </form>
