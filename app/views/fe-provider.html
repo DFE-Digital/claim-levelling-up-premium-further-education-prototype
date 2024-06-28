@@ -17,8 +17,7 @@
     <div class="govuk-grid-column-two-thirds">
 
       <h1 class="govuk-heading-l">
-        You must be employed as a member of staff in an  eligible further education (FE) provider in England
-      </h1>
+        An eligible further education (FE) provider in England must employ you as a teacher      </h1>
 
       <form class="form" action="/where-you-are-employed" method="post">
 
@@ -27,9 +26,9 @@
         </p>
 
         <ul class="govuk-list govuk-list--bullet">
+          <li>statutory FE providers, such as FE colleges, sixth-form colleges or designated institutions </li>
+          <li>16- to 19-only academies and free schools</li>
           <li>college or sixth-form groups </li>
-          <li>statutory FE providers, such as FE colleges, sixth-form colleges or designated institutions</li>
-          <li>16-to-19-only academies and free schools</li>
         </ul>
 
         <P>
@@ -41,15 +40,18 @@
         <div class="govuk-form-group">
           <h1 class="govuk-label-wrapper">
             <label class="govuk-label govuk-label--m" for="event-name">
-              Which further education (FE) provider are you employed by?
+              Which FE provider are you employed by?            
             </label>
           </h1>
           <div id="event-name-hint" class="govuk-hint">
-            Enter the name of your employer. Use at least three characters.
+            Enter the name of your employer. If you work for a college or sixth-form group, you must enter the group’s name.
+
+            <br>
+            <br>
+
+            Use at least three characters.          
           </div>
-          <div id="event-name-hint" class="govuk-hint">
-            If you work for a college or sixth-form group, you must enter the group’s name. 
-          </div>
+          
           <input class="govuk-input" id="event-name" name="eventName" type="text" aria-describedby="event-name-hint">
         </div>
         

@@ -17,59 +17,64 @@
     <div class="govuk-grid-column-two-thirds">
 
       <h1 class="govuk-heading-l">
-        Which academic year did you start teaching in further education?
+        Which academic year did you start teaching in further education (FE) in England?      
       </h1>
-
-      <div id="account-number-hint" class="govuk-hint">
-        To apply, you must have started your first teaching role at an FE provider in England within the last 5 academic years.
-      </div>
 
       <!--academic-year-in-further-education-->
       <form class="form" action="/teaching-hours-per-week" method="post">
 
         <div class="govuk-form-group">
           <fieldset class="govuk-fieldset">
+            
             <div class="govuk-radios" data-module="govuk-radios">
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="year" name="year" type="radio" value="Before September 2020">
-                <label class="govuk-label govuk-radios__label" for="year-before">
-                  Before 2020 to 2021
-                </label>
-              </div>
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="year-2" name="year" type="radio" value="September 2020 to August 2021">
-                <label class="govuk-label govuk-radios__label" for="year-2020">
+                <input class="govuk-radios__input" id="academicYearInFurtherEducation" name="academicYearInFurtherEducation" type="radio" value="September 2020 to August 2021">
+                <label class="govuk-label govuk-radios__label" for="academicYearInFurtherEducation">
                   September 2020 to August 2021
                 </label>
               </div>
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="year-3" name="academicYearInFurtherEducation" type="radio" value="September 2021 to August 2022">
-                <label class="govuk-label govuk-radios__label" for="year-2021">
+                <input class="govuk-radios__input" id="academicYearInFurtherEducation-2" name="academicYearInFurtherEducation" type="radio" value="September 2021 to August 2022">
+                <label class="govuk-label govuk-radios__label" for="academicYearInFurtherEducation-2">
                   September 2021 to August 2022
                 </label>
               </div>
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="year-4" name="year" type="radio" value="September 2022 to August 2023">
-                <label class="govuk-label govuk-radios__label" for="year-2022">
+                <input class="govuk-radios__input" id="academicYearInFurtherEducation-3" name="academicYearInFurtherEducation" type="radio" value="September 2022 to August 2023">
+                <label class="govuk-label govuk-radios__label" for="academicYearInFurtherEducation-3">
                   September 2022 to August 2023
                 </label>
               </div>
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="year-5" name="year" type="radio" value="September 2023 to August 2024">
-                <label class="govuk-label govuk-radios__label" for="year-2023">
+                <input class="govuk-radios__input" id="academicYearInFurtherEducation-4" name="academicYearInFurtherEducation" type="radio" value="September 2023 to August 2024">
+                <label class="govuk-label govuk-radios__label" for="academicYearInFurtherEducation-4">
                   September 2023 to August 2024
                 </label>
               </div>
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="year-6" name="year" type="radio" value="September 2024 to August 2025">
-                <label class="govuk-label govuk-radios__label" for="year-2024">
+                <input class="govuk-radios__input" id="academicYearInFurtherEducation-5" name="academicYearInFurtherEducation" type="radio" value="September 2024 to August 2025">
+                <label class="govuk-label govuk-radios__label" for="academicYearInFurtherEducation-5">
                   September 2024 to August 2025
                 </label>
               </div>
-
-
+              <div class="govuk-radios__divider">or</div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="academicYearInFurtherEducation-6" name="academicYearInFurtherEducation" type="radio" value="I started before September 2020">
+                <label class="govuk-label govuk-radios__label" for="academicYearInFurtherEducation-6">
+                  I started before September 2020
+                </label>
+              </div>
+            </div>
           </fieldset>
-         </div> 
+        </div>
+
+
+               
+        </div>
+
+
+        </fieldset>
+        </div> 
 
         {{ govukButton({
           text: "Continue"
