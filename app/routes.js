@@ -15,34 +15,23 @@ router.post('/fe-provider', function (req, res){
     }
   });
 
-  router.post('/academic-year-in-further-education', function (req, res) {
-    var contractOfEmployment = req.session.data['contractOfEmployment'];
-    if (contractOfEmployment === 'Vairable hours contract (including zero-hours contracts)') {
-      res.redirect('/one-full-term');
-    } else {
-      res.redirect('/academic-year-in-further-education');
-    }
-  });
-
-  
-  router.post('/academic-year-in-further-education', function (req, res){
-    var oneFullTerm = req.session.data['term'];
-    if (oneFullTerm === 'No, I have not worked one full term before applying') {
-      res.redirect('/you-are-not-eligible-yet');
-    } else {
-      res.redirect('/academic-year-in-further-education');
-    }
-  });
-
-  
   router.post('/teaching-hours-per-week', function (req, res){
-    var academicYearInFurtherEducation = req.session.data['year'];
-    if (academicYearInFurtherEducation == 'I started before September 2020') {
-      res.redirect('/you-are-not-eligible-five-years');
-    } else {
+    var contractofemployment = req.session.data['contractOfEmployment'];
+    if (contractofemployment == 'Permanent contract (including full-time and part-time contracts)')
+    {
       res.redirect('/teaching-hours-per-week');
     }
-  });
+    else if (contractofemployment == 'Fixed-term contract')
+    {
+      res.redirect('/fixed-term-contract');
+    }
+    else if (contractofemployment == 'Variable hours contract (including zero hours contract and hourly paid)')
+    {
+      res.redirect('/one-full-term');
+    } 
+   });
+
+ 
   
   router.post('/half-teaching-hours', function (req, res) {
     var teachingHoursPerWeek = req.session.data['week'];
