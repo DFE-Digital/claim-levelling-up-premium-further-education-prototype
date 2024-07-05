@@ -81,16 +81,25 @@ router.post('/fe-provider', function (req, res){
     }
   }); 
 
+  router.post('/subject-areas', function (req, res) {
+    var academicTearInFurtherEducation = req.session.data['academicYearInFurtherEducation'];
+    if (academicTearInFurtherEducation == 'I started before September 2020') {
+      res.redirect('/you-are-not-eligible-five-years');
+    } else {
+      res.redirect('/subject-areas');
+    }
+  });
+
 
 
  
 
-  router.post('/subject-areas', function (req, res) {
+  router.post('/subject-areas-variable', function (req, res) {
     var academicYearInFeVariable = req.session.data['academicYearInFurtherEducation'];
     if (academicYearInFeVariable == 'I started before September 2020') {
       res.redirect('/you-are-not-eligible-five-years');
     } else {
-      res.redirect('/subject-areas');
+      res.redirect('/subject-areas-variable');
     }
   });
 

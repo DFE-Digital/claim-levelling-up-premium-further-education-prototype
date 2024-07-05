@@ -1,0 +1,102 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form class="form" action="/path/of/next/page" method="post">
+      
+       <!-- 
+        <h1 class="govuk-heading-m">
+          Skip to <a href="teaching-courses">teaching courses page.</a>
+        </h1> 
+        --> 
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" aria-describedby="countries-hint">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+              <h1 class="govuk-fieldset__heading">
+                Which subject areas do you teach?
+              </h1>
+            </legend>
+            <div id="countries-hint" class="govuk-hint">
+              Select all that apply
+            </div>
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="subjects" name="subjects" type="checkbox" value="building">
+                <label class="govuk-label govuk-checkboxes__label" for="subjects">
+                  Building and construction
+                </label>
+              </div>
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="subjects-2" name="subjects" type="checkbox" value="chemistry">
+                <label class="govuk-label govuk-checkboxes__label" for="subjects-2">
+                  Chemistry
+                </label>
+              </div>
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="subjects-3" name="subjects" type="checkbox" value="computing">
+                <label class="govuk-label govuk-checkboxes__label" for="subjects-3">
+                  Computing, including digital and ICT
+                </label>
+              </div>
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="subjects-4" name="subjects" type="checkbox" value="early years">
+                <label class="govuk-label govuk-checkboxes__label" for="subjects-4">
+                  Early years
+                </label>
+              </div>
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="subjects-5" name="subjects" type="checkbox" value="engineering">
+                <label class="govuk-label govuk-checkboxes__label" for="subjects-5">
+                  Engineering and manufacturing, including transport engineering and electronics
+                </label>
+              </div>
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="subjects-6" name="subjects" type="checkbox" value="Maths">
+                <label class="govuk-label govuk-checkboxes__label" for="subjects-6">
+                  Maths
+                </label>
+              </div>
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="subjects-7" name="subjects" type="checkbox" value="Physics">
+                <label class="govuk-label govuk-checkboxes__label" for="subjects-7">
+                  Physics
+                </label>
+              </div>
+              <div class="govuk-checkboxes__divider">or</div>
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="subjects-8" name="subjects" type="checkbox" value="none" data-behaviour="exclusive">
+                <label class="govuk-label govuk-checkboxes__label" for="subjects-8">
+                  I do not teach any of these subjects
+                </label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
