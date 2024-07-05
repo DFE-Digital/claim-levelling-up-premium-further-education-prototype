@@ -91,9 +91,6 @@ router.post('/fe-provider', function (req, res){
   });
 
 
-
- 
-
   router.post('/subject-areas-variable', function (req, res) {
     var academicYearInFeVariable = req.session.data['academicYearInFurtherEducation'];
     if (academicYearInFeVariable == 'I started before September 2020') {
@@ -103,6 +100,23 @@ router.post('/fe-provider', function (req, res){
     }
   });
 
+  router.post('/half-teaching-hours', function (req, res) {
+    var teachingCourses = req.session.data['teachingcourses'];
+    if (teachingCourses == 'No') {
+      res.redirect('/you-are-not-eligible-courses');
+    } else {
+      res.redirect('/half-teaching-hours');
+    }
+  });
+
+  router.post('/qualification', function (req, res) {
+    var halfTeachingHours = req.session.data['halfteachinghours'];
+    if (halfTeachingHours == 'No') {
+      res.redirect('/not-eligible-16-19');
+    } else {
+      res.redirect('/qualification');
+    }
+  });
 
 
   router.post('/qualification', function (req, res) {
@@ -115,8 +129,8 @@ router.post('/fe-provider', function (req, res){
   }); 
 
   router.post('/performance', function (req, res) {
-    var qualification = req.session.data['qual'];
-    if (qualification == 'No, and I do not plan to start working towards one in the next 12 months') {
+    var qualification = req.session.data['qualification'];
+    if (qualification == 'No, and I do not plan to enrol on one in the next 12 months') {
       res.redirect('/not-eligible-qualification');
     } else {
       res.redirect('/performance');
