@@ -31,6 +31,28 @@ router.post('/fe-provider', function (req, res){
     } 
    });
 
+   router.post('/teaching-hours-per-week-variable', function (req, res){
+      var fixedtermcontract = req.session.data['fixedTermContract'];
+      if (fixedtermcontract == 'Yes, it covers the full 2024 to 2025 academic year') {
+        res.redirect('/teaching-hours-per-week-variable');
+      } else {
+        res.redirect('/one-full-term');
+      }
+    });
+
+
+    router.post('/teaching-hours-per-week-variable', function (req, res){
+      var oneFullTerm = req.session.data['oneFullTerm'];
+      if (oneFullTerm == 'Yes, I have taught at [FE provider] for at least one academic term') {
+        res.redirect('/teaching-hours-per-week-variable');
+      } else {
+        res.redirect('/you-are-not-eligible-yet');
+      }
+    });
+
+
+    
+
  
   
   router.post('/half-teaching-hours', function (req, res) {
