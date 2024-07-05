@@ -17,13 +17,14 @@
     <div class="govuk-grid-column-two-thirds">
 
       <h1 class="govuk-heading-l">
-        Are you timetabled to teach at least 2.5 hours per week at [name of FE provider] next term?      </h1>
+        On average, how many hours per week are you timetabled to teach at [name of FE provider] during the current term?      </h1>
 
-      <form class="form" action="/path/of/next/page" method="post">
+      <form class="form" action="/half-teaching-hours" method="post">
 
-        <div id="account-number-hint" class="govuk-hint">
-          ‘Teaching’ refers to the direct contact time you spend in lessons with students of all ages.         
-        </div>
+        
+          <div id="account-number-hint" class="govuk-hint">
+            ‘Teaching’ refers to the direct contact time you spend in lessons with students of all ages.         
+          </div>
 
 
         <div class="govuk-!-padding-bottom-5"></div>
@@ -32,19 +33,23 @@
           <fieldset class="govuk-fieldset">
             <div class="govuk-radios" data-module="govuk-radios">
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="teachingHoursPerWeekVariable" name="teachingHoursPerWeekVariable" type="radio" value="Yes, I am timetabled to teach at least 2.5 hours at [FE provider] next term
-                ">
-                <label class="govuk-label govuk-radios__label" for="teachingHoursPerWeekVariable">
-                  Yes, I am timetabled to teach at least 2.5 hours at [FE provider] next term
+                <input class="govuk-radios__input" id="week" name="week" type="radio" value="More than 12 hours per week">
+                <label class="govuk-label govuk-radios__label" for="week-more">
+                  More than 12 hours per week
                 </label>
               </div>
               <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="teachingHoursPerWeekVariable-2" name="teachingHoursPerWeekVariable" type="radio" value="No, I’m not timetabled to teach at least 2.5 hours at [FE provider] next term">
-                <label class="govuk-label govuk-radios__label" for="teachingHoursPerWeekVariable-2">
-                  No, I’m not timetabled to teach at least 2.5 hours at [FE provider] next term
+                <input class="govuk-radios__input" id="week-2" name="week" type="radio" value="Between 2.5 and 12 hours per week">
+                <label class="govuk-label govuk-radios__label" for="week-between">
+                  Between 2.5 and 12 hours per week
                 </label>
               </div>
-              
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="week-3" name="week" type="radio" value="Less than 2.5 hours per week">
+                <label class="govuk-label govuk-radios__label" for="week-less">
+                  Less than 2.5 hours per week
+                </label>
+              </div>
           </fieldset>
         </div>
 
