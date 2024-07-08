@@ -1,0 +1,38 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Content page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        You are not eligible
+      </h1>
+
+      <p>
+        In order to claim an incentive payment, you must have an ongoing commitment to teach at least 2.5 hours per week next term.
+      </p>
+
+      <p>
+        For more information, check the eligibility criteria for <a href="https://www.gov.uk/guidance/levelling-up-premium-payments-for-fe-teachers">levelling up premium payments for early career further education teachers (opens in a new tab)</a>.
+      </p>
+
+      <p>
+        The information entered is not stored. If you are unsure your information is correct, <a href="/path-of-next-page">start again.</a>
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}

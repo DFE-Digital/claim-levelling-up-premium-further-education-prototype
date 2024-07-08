@@ -60,7 +60,7 @@ router.post('/fe-provider', function (req, res){
   router.post('/academic-year-in-further-education', function (req, res) {
     var teachingHoursPerWeek = req.session.data['week'];
     if (teachingHoursPerWeek == 'Less than 2.5 hours per week') {
-      res.redirect('/not-eligible-hours-spent-teaching');
+      res.redirect('/not-eligible-term');
     } else {
       res.redirect('/academic-year-in-further-education');
     }
@@ -71,7 +71,7 @@ router.post('/fe-provider', function (req, res){
   router.post('/timetabled-to-teach', function (req, res) {
     var teachingHoursPerWeekVariable = req.session.data['week'];
     if (teachingHoursPerWeekVariable == 'Less than 2.5 hours per week') {
-      res.redirect('/not-eligible-hours-spent-teaching');
+      res.redirect('/not-eligible-term');
     } else {
       res.redirect('/timetabled-to-teach');
     }
@@ -80,7 +80,7 @@ router.post('/fe-provider', function (req, res){
   router.post('/academic-year-in-fe-variable', function (req, res) {
     var timetabledToTeach = req.session.data['timetabledToTeach'];
     if (timetabledToTeach == 'No, I’m not timetabled to teach at least 2.5 hours at [FE provider] next term') {
-      res.redirect('/not-eligible-hours-spent-teaching');
+      res.redirect('/not-eligible-ongoing');
     } else {
       res.redirect('/academic-year-in-fe-variable');
     }

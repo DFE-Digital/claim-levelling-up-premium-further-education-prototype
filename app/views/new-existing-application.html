@@ -9,7 +9,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <!--had to add CSS code into app / sass / application.scss for the blue panel-->
+      <!--had to add CSS code into app / sass / application.scss for the blue panel
       <div class="govuk-panel govuk-panel--informational">
 
         <h2 class="govuk-panel--interruption-m">
@@ -25,11 +25,6 @@
           You will lose your progress if you start a new eligibility check before you send it.  
         </h6>
 
-
-
-
-
-
         <div class="govuk-panel--interruption-form-group">
         <fieldset class="govuk-fieldset">
    
@@ -39,30 +34,69 @@
         <label class="govuk-label govuk-radios__label" for="whereDoYouLive">
           Yes, start a new check and lose progress on my first check
         </label>
-      </div>
-      <div class="govuk-radios__item">
+        </div>
+        <div class="govuk-radios__item">
         <input class="govuk-radios__input" id="whereDoYouLive-2" name="whereDoYouLive" type="radio" value="scotland">
         <label class="govuk-label govuk-radios__label" for="whereDoYouLive-2">
           No, finish the check I have in progress
         </label>
-      </div>
+        </div>
 
-      <br>
-      <br>
+        <br>
+        <br>
 
-      <button type="submit" class="govuk-button govuk-button--inverse" data-module="govuk-button">
-        Submit
-      </button>
+        <button type="submit" class="govuk-button govuk-button--inverse" data-module="govuk-button">
+          Submit
+        </button>
     
-      </div>
-      </div>
-      </fieldset>
-      </div>
-
-      </div>
+        </div>
 
       <div class="govuk-!-padding-bottom-5"></div>
-     
+
+      -->
+
+      <h1 class="govuk-heading-l">
+        You have already started an eligibility check    
+      </h1>
+
+      <p>
+        You can only have one check in progress at a time.
+      </p>
+
+      <p>
+        Choose what you want to do
+      </p>
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <div class="govuk-radios" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="newexistingapplication" name="wnewexistingapplicationek" type="radio" value="Continue with the eligibility check that you have already started">
+              <label class="govuk-label govuk-radios__label" for="week-more">
+                Continue with the eligibility check that you have already started
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="newexistingapplication-2" name="newexistingapplication" type="radio" value="Start a new eligibility check">
+              <label class="govuk-label govuk-radios__label" for="newexistingapplication-2">
+                Start a new eligibility check
+                <div id="account-number-hint" class="govuk-hint">
+                  This will delete the eligibility check that you have already started
+                </div>
+              </label>
+            </div>
+        </fieldset>
+      </div>
+
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+      
+
+
+    
 
     </div>
   </div>
