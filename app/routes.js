@@ -6,6 +6,8 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 
+
+// Eligible provider
 router.post('/fe-provider', function (req, res){
     var teachingresponsibilities = req.session.data['memberOfstaff'];
     if (teachingresponsibilities == 'Yes') {
@@ -15,6 +17,8 @@ router.post('/fe-provider', function (req, res){
     }
   });
 
+  
+// Contract of employment
   router.post('/teaching-hours-per-week', function (req, res){
     var contractofemployment = req.session.data['contractOfEmployment'];
     if (contractofemployment == 'Permanent contract (including full-time and part-time contracts)')
@@ -31,6 +35,7 @@ router.post('/fe-provider', function (req, res){
     } 
    });
 
+   // fixed term contract
    router.post('/teaching-hours-per-week-fixed', function (req, res){
       var fixedtermcontract = req.session.data['fixedTermContract'];
       if (fixedtermcontract == 'Yes, it covers the full 2024 to 2025 academic year') {
@@ -40,7 +45,7 @@ router.post('/fe-provider', function (req, res){
       }
     });
 
-
+    // variable
     router.post('/teaching-hours-per-week-variable', function (req, res){
       var oneFullTerm = req.session.data['oneFullTerm'];
       if (oneFullTerm == 'Yes, I have taught at [FE provider] for at least one academic term') {
@@ -51,7 +56,7 @@ router.post('/fe-provider', function (req, res){
     });
 
    
-
+    // Teaching hours
   router.post('/academic-year-in-further-education', function (req, res) {
     var teachingHoursPerWeek = req.session.data['week'];
     if (teachingHoursPerWeek == 'Less than 2.5 hours per week') {
@@ -81,6 +86,8 @@ router.post('/fe-provider', function (req, res){
     }
   }); 
 
+  // five years in teaching
+
   router.post('/subject-areas', function (req, res) {
     var academicTearInFurtherEducation = req.session.data['academicYearInFurtherEducation'];
     if (academicTearInFurtherEducation == 'I started before September 2020') {
@@ -100,6 +107,11 @@ router.post('/fe-provider', function (req, res){
     }
   });
 
+  // subjects
+
+
+
+  // teaching courses
   router.post('/half-teaching-hours', function (req, res) {
     var teachingCourses = req.session.data['teachingcourses'];
     if (teachingCourses == 'No') {
@@ -127,6 +139,8 @@ router.post('/fe-provider', function (req, res){
       res.redirect('/qualification');
     }
   }); 
+
+  // qualification 
 
   router.post('/performance', function (req, res) {
     var qualification = req.session.data['qualification'];
