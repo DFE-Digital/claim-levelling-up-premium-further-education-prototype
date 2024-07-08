@@ -49,23 +49,49 @@
       
 
       <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
-        <div class="govuk-accordion__section">
-          <div class="govuk-accordion__section-header">
-            <h2 class="govuk-accordion__section-heading">
-              <span class="govuk-accordion__section-button" id="accordion-default-heading-1">
-                Claimant prototype
-              </span>
-            </h2>
-          </div>
-          <div id="accordion-default-content-1" class="govuk-accordion__section-content">
-
-            <div id="account-number-hint" class="govuk-hint">
-              Last updated 5th July           
+          <div class="govuk-accordion__section">
+            <div class="govuk-accordion__section-header">
+              <h2 class="govuk-accordion__section-heading">
+                <span class="govuk-accordion__section-button" id="accordion-default-heading-1">
+                  Claimant prototype
+                </span>
+              </h2>
             </div>
+            <div id="accordion-default-content-1" class="govuk-accordion__section-content">
 
-            <h1 class="govuk-heading-l">
-             Claim a further education incentive payment v4
-            </h1>
+              <div id="account-number-hint" class="govuk-hint">
+                Last updated 5th July           
+              </div>
+
+              <h1 class="govuk-heading-l">
+              Claim a further education incentive payment v4
+              </h1>
+
+              <h1 class="govuk-heading-s">
+                What are we testing?
+              </h1>
+
+              <p>
+                Text
+              </p>
+
+              <h1 class="govuk-heading-s">
+                What do these journeys cover?
+              </h1>
+
+              <p>
+                Text
+              </p>
+
+              {% from "govuk/components/button/macro.njk" import govukButton %}
+
+              {{ govukButton({
+                text: "View prototype",
+                href: "start.html",
+                isStartButton: true
+              }) }}
+
+              
 
              <ol class="govuk-list govuk-list--number"></ul>
               
