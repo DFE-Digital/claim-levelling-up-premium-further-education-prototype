@@ -109,8 +109,8 @@ router.post('/fe-provider', function (req, res){
 
 
    // subjects
-   router.post('/subject-areas', function (req, res) {
-    var subjectAreas = request.session.data['subjects']
+   router.post('/subject-areas-route', function (req, res) {
+    var subjectAreas = req.session.data['subjects']
     // Check if "I do not teach any of these subjects" is selected
     if (subjectAreas.includes('I do not teach any of these subjects')) {
       // Redirect to a specific page if this option is selected
@@ -120,6 +120,44 @@ router.post('/fe-provider', function (req, res){
       if (subjectAreas.includes('Building and construction')) {
         res.redirect('/building-course');
       } else if (subjectAreas.includes('Chemistry')) {
+        res.redirect('/chemistry-course');
+      } else if (subjectAreas.includes('Computing, including digital and ICT')) {
+        res.redirect('/computing-course');
+      } else if (subjectAreas.includes('Early years')) {
+        res.redirect('/early-years-course');
+      } else if (subjectAreas.includes('Engineering and manufacturing, including transport engineering and electronics')) {
+        res.redirect('/engineering-course');
+      } else if (subjectAreas.includes('Maths')) {
+        res.redirect('/maths-course');
+      } else if (subjectAreas.includes('Physics')) {
+        res.redirect('/physics-course');
+      } 
+      // Add new conditions
+      else if (subjectAreas.length === 1) { // Send user to course summary page (summary)
+        res.redirect('/course-summary');
+      } else if (subjectAreas.length === courseListTracker) { // Send user to course summary page
+        res.redirect('/course-summary');
+      } 
+      // Add more conditions for other subject areas as needed
+      else {
+        // If none of the conditions match, redirect to a default page
+        res.redirect('/subject-areas');
+      }
+    }
+  });
+  
+  
+
+  // course building 
+  router.post('/course-building-route', function (req, res) {
+    var subjectAreas = req.session.data['subjects']
+    // Check if "I do not teach any of these subjects" is selected
+    if (subjectAreas.includes('I do not teach any of these subjects')) {
+      // Redirect to a specific page if this option is selected
+      res.redirect('/you-are-not-eligible-subjects');
+    } else {
+      // Redirect to a different page based on the selected subjects
+      if (subjectAreas.includes('Chemistry')) {
         res.redirect('/chemistry-course');
       } else if (subjectAreas.includes('Computing, including digital and ICT')) {
         res.redirect('/computing-course');
@@ -141,6 +179,13 @@ router.post('/fe-provider', function (req, res){
       }
     }
   });
+
+
+   
+
+
+
+  
 
  // subjects variable
   
