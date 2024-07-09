@@ -107,35 +107,31 @@ router.post('/fe-provider', function (req, res){
     }
   });
 
- 
-
-
-
 
    // subjects
    router.post('/subject-areas', function (req, res) {
-    const subjectAreas = req.body.subjects;
+    var subjectAreas = request.session.data['subjects']
     // Check if "I do not teach any of these subjects" is selected
-    if (subjectAreas && subjectAreas.includes('I do not teach any of these subjects')) {
+    if (subjectAreas.includes('I do not teach any of these subjects')) {
       // Redirect to a specific page if this option is selected
       res.redirect('/you-are-not-eligible-subjects');
     } else {
       // Redirect to a different page based on the selected subjects
-      if (subjectAreas && subjectAreas.includes('Building and construction')) {
+      if (subjectAreas.includes('Building and construction')) {
         res.redirect('/building-course');
-      } else if (subjectAreas && subjectAreas.includes('Chemistry')) {
+      } else if (subjectAreas.includes('Chemistry')) {
         res.redirect('/chemistry-course');
-      } else if (subjectAreas && subjectAreas.includes('Computing, including digital and ICT')) {
+      } else if (subjectAreas.includes('Computing, including digital and ICT')) {
         res.redirect('/computing-course');
-      } else if (subjectAreas && subjectAreas.includes('Early years')) {
+      } else if (subjectAreas.includes('Early years')) {
         res.redirect('/early-years-course');
-      } else if (subjectAreas && subjectAreas.includes('Engineering and manufacturing, including transport engineering and electronics')) {
+      } else if (subjectAreas.includes('Engineering and manufacturing, including transport engineering and electronics')) {
         res.redirect('/engineering-course');
-      } else if (subjectAreas && subjectAreas.includes('Maths')) {
+      } else if (subjectAreas.includes('Maths')) {
         res.redirect('/maths-course');
-      } else if (subjectAreas && subjectAreas.includes('Physics')) {
+      } else if (subjectAreas.includes('Physics')) {
         res.redirect('/physics-course');
-      } else if (subjectAreas && subjectAreas.includes('I do not teach any of these subjects')) {
+      } else if (subjectAreas.includes('I do not teach any of these subjects')) {
         res.redirect('/you-are-not-eligible-subjects');
       }
       // Add more conditions for other subject areas as needed
@@ -147,40 +143,7 @@ router.post('/fe-provider', function (req, res){
   });
 
  // subjects variable
-  router.post('/subject-areas-variable', function (req, res) {
-    const selectedSubjects = req.body.subjects;
-    // Check if "I do not teach any of these subjects" is selected
-    if (selectedSubjects && selectedSubjects.includes('I do not teach any of these subjects')) {
-      // Redirect to a specific page if this option is selected
-      res.redirect('/you-are-not-eligible-subjects');
-    } else {
-      // Redirect to a different page based on the selected subjects
-      if (selectedSubjects && selectedSubjects.includes('Building and construction')) {
-        res.redirect('/building-course-variable');
-      } else if (selectedSubjects && selectedSubjects.includes('Chemistry')) {
-        res.redirect('/chemistry-course-variable');
-      } else if (selectedSubjects && selectedSubjects.includes('Computing, including digital and ICT')) {
-        res.redirect('/computing-course-variable');
-      } else if (selectedSubjects && selectedSubjects.includes('Early years')) {
-        res.redirect('/early-years-course-variable');
-      } else if (selectedSubjects && selectedSubjects.includes('Engineering and manufacturing, including transport engineering and electronics')) {
-        res.redirect('/engineering-course-variable');
-      } else if (selectedSubjects && selectedSubjects.includes('Maths')) {
-        res.redirect('/maths-course-variable');
-      } else if (selectedSubjects && selectedSubjects.includes('Physics')) {
-        res.redirect('/physics-course-variable');
-      } else if (selectedSubjects && selectedSubjects.includes('I do not teach any of these subjects')) {
-        res.redirect('/you-are-not-eligible-subjects');
-      }
-      // Add more conditions for other subject areas as needed
-      else {
-        // If none of the conditions match, redirect to a default page
-        res.redirect('/subject-areas-variable');
-      }
-    }
-  });
   
-
 
 
   // teaching courses
