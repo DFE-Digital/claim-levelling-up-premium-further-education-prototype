@@ -112,7 +112,7 @@ router.post('/fe-provider', function (req, res){
 
 var subjectAreas = ['Building and construction','Chemistry','Computing, including digital and ICT','Early years','Engineering and manufacturing, including transport engineering and electronics','Maths','Physics'];
 
-// subjects end
+// subjects start
 router.post('/subject-areas-route', function (req, res) {
   var subjectAreas = req.session.data['subjects'];
 
@@ -121,6 +121,7 @@ router.post('/subject-areas-route', function (req, res) {
   } else {
     for (var i = 0; i < subjectAreas.length; i++) {
       var subjectValue = subjectAreas[i];
+      subjectAreas = subjectAreas - subjectAreas[i]
       if (subjectValue === 'Building and construction') {
         res.redirect(['/building-course']);
       } else if (subjectValue === 'Chemistry') {
@@ -139,6 +140,8 @@ router.post('/subject-areas-route', function (req, res) {
     }
   }
 });
+
+// subjects end
 
 router.get('/set-next-subject-page', function (req, res) {
   var currentSubjectIndex = subjectAreas.indexOf(req.body.previousCoursePage);
