@@ -145,9 +145,9 @@ router.post('/fe-provider', function (req, res){
       }
     }
   });
-  
-  
+  // subjects end 
 
+ 
   // course building 
   router.post('/course-building-route', function (req, res) {
     var subjectAreas = req.session.data['subjects']
@@ -179,7 +179,12 @@ router.post('/fe-provider', function (req, res){
       }
     }
   });
+  
+  
+  
+  
 
+   
 
    
 
