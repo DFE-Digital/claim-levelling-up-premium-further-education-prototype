@@ -108,77 +108,85 @@ router.post('/fe-provider', function (req, res){
   });
 
 
-   // subjects
-   router.post('/subject-areas-route', function (req, res) {
-    var subjectAreas = req.session.data['subjects']
-    // Check if "I do not teach any of these subjects" is selected
-    if (subjectAreas.includes('I do not teach any of these subjects')) {
-      // Redirect to a specific page if this option is selected
-      res.redirect('/you-are-not-eligible-subjects');
-    } else {
-      // Redirect to a different page based on the selected subjects
-      if (subjectAreas.includes('Building and construction')) {
-        res.redirect('/building-course');
-      } else if (subjectAreas.includes('Chemistry')) {
+  
+
+var subjectAreas = ['Building and construction','Chemistry','Computing, including digital and ICT','Early years','Engineering and manufacturing, including transport engineering and electronics','Maths','Physics'];
+
+// subjects end
+router.post('/subject-areas-route', function (req, res) {
+  var subjectAreas = req.session.data['subjects'];
+
+  if (subjectAreas.includes('I do not teach any of these subjects')) {
+    res.redirect('/you-are-not-eligible-subjects');
+  } else {
+    for (var i = 0; i < subjectAreas.length; i++) {
+      var subjectValue = subjectAreas[i];
+      if (subjectValue === 'Building and construction') {
+        res.redirect(['/building-course']);
+      } else if (subjectValue === 'Chemistry') {
         res.redirect('/chemistry-course');
-      } else if (subjectAreas.includes('Computing, including digital and ICT')) {
+      } else if (subjectValue === 'Computing, including digital and ICT') {
         res.redirect('/computing-course');
-      } else if (subjectAreas.includes('Early years')) {
+      }else if (subjectValue === 'Early years') {
         res.redirect('/early-years-course');
-      } else if (subjectAreas.includes('Engineering and manufacturing, including transport engineering and electronics')) {
+      }else if (subjectValue === 'Engineering and manufacturing, including transport engineering and electronics') {
         res.redirect('/engineering-course');
-      } else if (subjectAreas.includes('Maths')) {
+      }else if (subjectValue === 'Maths') {
         res.redirect('/maths-course');
-      } else if (subjectAreas.includes('Physics')) {
+      }else if (subjectValue === 'Physics') {
         res.redirect('/physics-course');
-      } 
-      // Add new conditions
-      else if (subjectAreas.length === 1) { // Send user to course summary page (summary)
-        res.redirect('/course-summary');
-      } else if (subjectAreas.length === courseListTracker) { // Send user to course summary page
-        res.redirect('/course-summary');
-      } 
-      // Add more conditions for other subject areas as needed
-      else {
-        // If none of the conditions match, redirect to a default page
-        res.redirect('/subject-areas');
       }
     }
-  });
-  // subjects end 
+  }
+});
+
+router.get('/set-next-subject-page', function (req, res) {
+  var currentSubjectIndex = subjectAreas.indexOf(req.body.previousCoursePage);
+
+  for (var i = currentSubjectIndex + 1; i < subjectAreas.length; i++) {
+    var nextSubjectPage = subjectAreas[i];
+    if (nextSubjectPage === 'Building and construction') {
+      res.redirect('/building-course');
+    } else if (nextSubjectPage === 'Chemistry') {
+      res.redirect('/chemistry-course');
+    } else if (nextSubjectPage === 'Computing, including digital and ICT') {
+      res.redirect('/computing-course');
+    } else if (nextSubjectPage === 'Early years') {
+      res.redirect('/early-years-course');
+    } else if (nextSubjectPage === 'Engineering and manufacturing, including transport engineering and electronics') {
+      res.redirect('/engineering-course');
+    } else if (nextSubjectPage === 'Maths') {
+      res.redirect('/maths-course');
+    } else if (nextSubjectPage === 'Physics') {
+      res.redirect('/physics-course');
+    } 
+    else {
+      res.redirect('/error-subject-area');
+    }
+  }
+});
+
+
+
+
+    
+
+
+
+     
+
+
+
+
+     
+
+     
+
+
+
 
  
-  // course building 
-  router.post('/course-building-route', function (req, res) {
-    var subjectAreas = req.session.data['subjects']
-    // Check if "I do not teach any of these subjects" is selected
-    if (subjectAreas.includes('I do not teach any of these subjects')) {
-      // Redirect to a specific page if this option is selected
-      res.redirect('/you-are-not-eligible-subjects');
-    } else {
-      // Redirect to a different page based on the selected subjects
-      if (subjectAreas.includes('Chemistry')) {
-        res.redirect('/chemistry-course');
-      } else if (subjectAreas.includes('Computing, including digital and ICT')) {
-        res.redirect('/computing-course');
-      } else if (subjectAreas.includes('Early years')) {
-        res.redirect('/early-years-course');
-      } else if (subjectAreas.includes('Engineering and manufacturing, including transport engineering and electronics')) {
-        res.redirect('/engineering-course');
-      } else if (subjectAreas.includes('Maths')) {
-        res.redirect('/maths-course');
-      } else if (subjectAreas.includes('Physics')) {
-        res.redirect('/physics-course');
-      } else if (subjectAreas.includes('I do not teach any of these subjects')) {
-        res.redirect('/you-are-not-eligible-subjects');
-      }
-      // Add more conditions for other subject areas as needed
-      else {
-        // If none of the conditions match, redirect to a default page
-        res.redirect('/subject-areas');
-      }
-    }
-  });
+  
   
   
   
