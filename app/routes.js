@@ -110,7 +110,6 @@ router.post('/fe-provider', function (req, res){
 
   
 
-//var subjectAreas = ['Building and construction','Chemistry','Computing, including digital and ICT','Early years','Engineering and manufacturing, including transport engineering and electronics','Maths','Physics'];
 var subjectAreas = null;
 
 // subjects start
@@ -120,8 +119,7 @@ router.post('/subject-areas-route', function (req, res) {
   if (subjectAreas.includes('I do not teach any of these subjects')) {
     res.redirect('/you-are-not-eligible-subjects');
   } else {
-    for (var i = 0; i < subjectAreas.length; i++) {
-      var subjectValue = subjectAreas[i];
+      var subjectValue = subjectAreas[0];
       subjectAreas.splice(0, 1)
       if (subjectValue === 'Building and construction') {
         res.redirect(['/building-course']);
@@ -138,7 +136,6 @@ router.post('/subject-areas-route', function (req, res) {
       }else if (subjectValue === 'Physics') {
         res.redirect('/physics-course');
       }
-    }
   }
 });
 
