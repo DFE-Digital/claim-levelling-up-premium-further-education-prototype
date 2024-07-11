@@ -204,6 +204,25 @@ router.post('/next-subject-page', function (req, res) {
     }
   });
 
+    //performance and disiplinary
+  router.post('/check-answers', function (req, res){
+    var performance = req.session.data['performance-measure'];
+    var disciplinaryAction = req.session.data['disciplinary-action'];
+
+    if (performance === 'Yes' && disciplinaryAction === 'Yes') {
+      res.redirect('/check-answers');
+    } else if (performance === 'No' && disciplinaryAction === 'No') {
+      res.redirect('/not-eligible-PA-DA');
+    } else if (performance === 'Yes' && disciplinaryAction === 'No') {
+      res.redirect('/not-eligible-PA-DA');
+    } else if (performance === 'No' && disciplinaryAction === 'Yes') {
+      res.redirect('/not-eligible-PA-DA');
+    }
+  });
+
+
+
+
  
 
 
