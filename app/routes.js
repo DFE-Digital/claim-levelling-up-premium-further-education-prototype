@@ -165,42 +165,11 @@ router.post('/next-subject-page', function (req, res) {
   }
 });
 
-
-
-
-    
-
-
-
-     
-
-
-
-
-     
-
-     
-
-
-
-
- 
-  
-  
-  
-  
-  
-
-   
-
-   
-
-
-
   
 
  // subjects variable
-  
+
+
 
 
   // teaching courses
@@ -213,6 +182,8 @@ router.post('/next-subject-page', function (req, res) {
     }
   });
 
+  // 16-19
+
   router.post('/qualification', function (req, res) {
     var halfTeachingHours = req.session.data['halfteachinghours'];
     if (halfTeachingHours == 'No') {
@@ -223,23 +194,17 @@ router.post('/next-subject-page', function (req, res) {
   });
 
 
-  router.post('/qualification', function (req, res) {
-    var teachingCourses = req.session.data['courses'];
-    if (teachingCourses == 'No') {
-      res.redirect('/you-are-not-eligible-courses');
-    } else {
-      res.redirect('/qualification');
-    }
-  }); 
-
   // qualification 
-
-  router.post('/performance', function (req, res) {
+  router.post('/performance', function (req, res){
     var qualification = req.session.data['qualification'];
     if (qualification == 'No, and I do not plan to enrol on one in the next 12 months') {
       res.redirect('/not-eligible-qualification');
     } else {
       res.redirect('/performance');
     }
-  }); 
+  });
+
+ 
+
+
   
