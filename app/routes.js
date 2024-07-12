@@ -214,7 +214,7 @@ router.post('/next-subject-page', function (req, res) {
     } else if (performance === 'No' && disciplinaryAction === 'No') {
       res.redirect('/check-answers');
     } else if (performance === 'Yes' && disciplinaryAction === 'No') {
-      res.redirect('/check-answers');
+      res.redirect('/not-eligible-PA-DA');
     } else if (performance === 'No' && disciplinaryAction === 'Yes') {
       res.redirect('/not-eligible-PA-DA');
     }
