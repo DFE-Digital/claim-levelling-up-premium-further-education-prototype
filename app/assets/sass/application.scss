@@ -19,6 +19,19 @@
     color:#ffffff !important;
 }
 
+#paragraph-white {
+    color: #ffffff
+}
+
+#radio-white .govuk-radios__input[type="radio"] {
+    color: #ffffff;
+  }
+  
+  #radio-white .govuk-radios__input[type="radio"]:checked {
+    color: #ffffff !important;
+  }
+
+
 .govuk-grid-column-two-thirds.modified,
 .govuk-grid-column-one-third.modified{
     float: right;
@@ -35,15 +48,3 @@
     color: #ffffff;
 }
 
-.blue-banner {
-    color: FFFFF;
-    font-family: "GDS Transport", arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-weight: 700;
-    font-size: 1.125rem;
-    line-height: 1.1111111111;
-    display: block;
-    margin-top: 0;
-    margin-bottom: 15px;
-}
