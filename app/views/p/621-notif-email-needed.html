@@ -1,0 +1,40 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Content page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+  
+      <form class="form" action="verify-claim" method="post"> 
+
+
+      <h1 class="govuk-heading-xl">
+        You cannot access this service from DfE Sign-in
+      </h1>
+
+      <p>
+        When a claimant applies for a retention payment, an access link will be sent to your organisation's nominated email address.
+      </p>
+
+      <p>
+        If you have any questions or need support, email: <a href="">FE-Levellingup.PremiumPayments@education.gov.uk</a>
+      </p>
+
+    </form> 
+
+
+    </div>
+  </div>
+
+{% endblock %}
