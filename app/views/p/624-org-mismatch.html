@@ -1,0 +1,43 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Content page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+  
+      <form class="form" action="verify-claim" method="post"> 
+
+
+      <h1 class="govuk-heading-xl">
+        You cannot verify this claim
+      </h1>
+
+      <p>
+        The organisation you have used to log in to DfE Sign-in does not match the organisation in the claim.
+        <br>
+        <br>
+        If your DfE Sign-in account is linked to multiple organisations, check that you have logged in using the correct one.
+      </p>
+
+      <p>
+        Email <a href="">FE-Levellingup.PremiumPayments@education.gov.uk</a>  you have logged in with the correct organisation and need support.
+      </p>
+
+    </form> 
+
+
+    </div>
+  </div>
+
+{% endblock %}
