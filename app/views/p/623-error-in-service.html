@@ -1,0 +1,43 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Content page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+  
+      <form class="form" action="verify-claim" method="post"> 
+
+
+      <h1 class="govuk-heading-xl">
+        Sorry, there is a problem with the service
+      </h1>
+
+      <p>
+        Try again later.
+        <br>
+        <br>
+        Close this page and return to the verification request email. Select ‘access DfE Sign-in’ again to verify the claim.
+      </p>
+
+      <p>
+        If the problem continues and you need support, email: <a href="">FE-Levellingup.PremiumPayments@education.gov.uk</a>
+      </p>
+
+    </form> 
+
+
+    </div>
+  </div>
+
+{% endblock %}
