@@ -1,0 +1,105 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Content page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form class="form" action="/p/625-dfe-sign-in" method="post"> 
+
+
+      <h1 class="govuk-heading-xl">
+        DfE Sign-in
+      </h1>
+
+      <p>
+        DfE Sign-in is how schools and other education organisations access DfE online services.
+      </p>
+
+      <p>
+        To access your DfE online services, you'll either need:
+      </p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li><strong>an existing DfE Sign-in account.</strong> This will be the email address and password you created when you first accessed DfE Sign-in.</li>
+        <li><strong>to create a DfE Sign-in account.</strong> If you haven't used DfE Sign-in before you'll need to <a href="#">create a DfE Sign-in account.</a> </li>
+      </ul>
+
+      <div class="govuk-inset-text">
+        By signing in you accept <strong><a href="https://interactions.signin.education.gov.uk/terms">DfE Sign-in terms and conditions.</a></strong>
+      </div>
+
+      <div class="govuk-button-group">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Sign in
+        </button>
+        <a href="#"class="govuk-button govuk-button--secondary" data-module="govuk-button">
+          Create account
+        </a>
+      </div>
+
+      <details class="govuk-details">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">
+            Services accessed using DfE Sign-in
+          </span>
+        </summary>
+        <div class="govuk-details__text">
+          <p>These DfE services are now accessed using your DfE Sign-in account.</p>
+          <ul class="govuk-list govuk-list--bullet">
+            <li>Academy Budget Forecast Return</li>
+            <li>Accounts Return</li>
+            <li>Analyse school performance</li>
+            <li>Apply To Become An Academy</li>
+            <li>Apply for funding to study abroad (Turing Scheme)</li>
+            <li>Apprenticeship service admin</li>
+            <li>Apprenticeship service bulk stop utility</li>
+            <li>Apprenticeship service employer support tool</li>
+            <li>Apprenticeship service for training providers</li>
+            <li>Apprenticeship service identify data locks</li>
+            <li>Apprenticeship service vacancy QA</li>
+            <li>Assessment Service</li>
+            <li>Assessment service: develop an assessment</li>
+            <li>Assessment service: manage your school’s assessments</li>
+            <li>Assessment service: start an assessment</li>
+            <li>Check a teacher's record</li>
+            <li>Check the Children’s barred list</li>
+            <li>Child Safeguarding Incident Notification System</li>
+            <li>Claim additional payments for teaching</li>
+            <li>Claim funding for mentor training</li>
+            <li>Collect</li>
+            <li>College Financial Data (CFD) service</li>
+            <li>Customer help portal</li>
+            <li>DfE Connect</li>
+            <li>Document exchange</li>
+            <li>ESFA Digital Forms Service</li>
+            <li>Get Information About Schools</li>
+            <li>Get help buying for schools</li>
+            <li>Get information about pupils</li>
+            <li>Get my Ofsted Inspection Data Summary Report</li>
+            <li>Hiring Supply Teachers and Agency Workers</li>
+            <li>Issue Education Record</li>
+          </ul>
+        </div>
+      </details>
+
+      <p>If you are inactive for 20 minutes, your session will timeout.</p>
+
+    </form> 
+
+
+    </div>
+  </div>
+
+{% endblock %}
