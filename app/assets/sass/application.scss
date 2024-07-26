@@ -23,12 +23,16 @@
     color: #ffffff
 }
 
-#radio-white .govuk-radios__input[type="radio"] {
-    color: #ffffff;
-  }
+//#radio-white .govuk-radios__input[type="radio"] {
+   //color: #ffffff;
+  //}
   
-  #radio-white .govuk-radios__input[type="radio"]:checked {
-    color: #ffffff !important;
+  //#radio-white .govuk-radios__input[type="radio"]:checked {
+    //color: #ffffff !important;
+  //}
+
+  #radio-white .govuk-label {
+    color: #ffffff;
   }
 
 
