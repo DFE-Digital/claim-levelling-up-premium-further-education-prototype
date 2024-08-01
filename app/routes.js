@@ -36,12 +36,12 @@ router.post('/fe-provider', function (req, res){
    });
 
    // fixed term contract
-   router.post('/teaching-hours-per-week-fixed', function (req, res){
-      var fixedtermcontract = req.session.data['fixedTermContract'];
-      if (fixedtermcontract == 'Yes, it covers the full 2024 to 2025 academic year') {
-        res.redirect('/teaching-hours-per-week-fixed');
+    router.post('/timetabled-to-teach-fixed', function (req, res){
+      var week = req.session.data['week'];
+      if (week == 'Less than 2.5 hours per week') {
+        res.redirect('/not-eligible-term');
       } else {
-        res.redirect('/one-full-term');
+        res.redirect('/timetabled-to-teach-fixed');
       }
     });
 
