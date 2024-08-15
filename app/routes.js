@@ -35,7 +35,7 @@ router.post('/fe-provider', function (req, res){
     } 
    });
 
-   // fixed term contract
+   // fixed term contract not working
     router.post('/one-full-term-fixed', function (req, res){
       var fixedTermContract = req.session.data['fixedTermContract'];
       if (fixedTermContract == 'No, it does not cover the full 2024 to 2025 academic year') {
@@ -178,7 +178,7 @@ router.post('/next-subject-page', function (req, res) {
   router.post('/half-teaching-hours', function (req, res) {
     var teachingCourses = req.session.data['teachingcourses'];
     if (teachingCourses == 'No') {
-      res.redirect('/you-are-not-eligible-courses');
+      res.redirect('/not-eligible-teach-half-hours-courses');
     } else {
       res.redirect('/half-teaching-hours');
     }
