@@ -35,13 +35,13 @@ router.post('/fe-provider', function (req, res){
     } 
    });
 
-   // fixed term contract not working
-    router.post('/one-full-term-fixed', function (req, res){
+   // fixed term contract
+    router.post('/teaching-hours-per-week-fixed', function (req, res){
       var fixedTermContract = req.session.data['fixedTermContract'];
-      if (fixedTermContract == 'No, it does not cover the full 2024 to 2025 academic year') {
-        res.redirect('/one-full-term-fixed');
+      if (fixedTermContract == 'Yes, it covers the full 2024 to 2025 academic year') {
+        res.redirect('/teaching-hours-per-week-fixed');
       } else {
-        res.redirect('/timetabled-to-teach-fixed');
+        res.redirect('/one-full-term-fixed');
       }
     });
 
@@ -112,9 +112,11 @@ router.post('/fe-provider', function (req, res){
 
   
 
-var subjectAreas = null;
+
 
 // subjects start
+
+
 router.post('/subject-areas-route', function (req, res) {
   subjectAreas = req.session.data['subjects'];
 
@@ -143,6 +145,9 @@ router.post('/subject-areas-route', function (req, res) {
 
 
 //next sub pag
+
+var subjectAreas = null;
+
 router.post('/next-subject-page', function (req, res) {
   //var currentSubjectIndex = subjectAreas.indexOf(req.body.previousCoursePage);
   if (subjectAreas.length > 0){
