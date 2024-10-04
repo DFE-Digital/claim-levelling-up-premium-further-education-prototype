@@ -35,7 +35,7 @@ router.post('/fe-provider', function (req, res){
     } 
    });
 
-   // fixed term contract
+   // fixed term contract original
     router.post('/teaching-hours-per-week-fixed', function (req, res){
       var fixedTermContract = req.session.data['fixedTermContract'];
       if (fixedTermContract == 'Yes, it covers the full 2024 to 2025 academic year') {
@@ -44,6 +44,9 @@ router.post('/fe-provider', function (req, res){
         res.redirect('/one-full-term-fixed');
       }
     });
+
+    
+
 
    
 
@@ -58,7 +61,7 @@ router.post('/fe-provider', function (req, res){
     });
 
    
-    // Teaching hours
+    // Teaching hours per week original
   router.post('/academic-year-in-further-education', function (req, res) {
     var teachingHoursPerWeek = req.session.data['week'];
     if (teachingHoursPerWeek == 'Less than 2.5 hours per week') {
@@ -68,8 +71,18 @@ router.post('/fe-provider', function (req, res){
     }
   }); 
 
-  
+  // Teaching hours per week fixed term
+  router.post('/academic-year-fe-fixed', function (req, res) {
+    var teachingHoursPerWeekFixed = req.session.data['week'];
+    if (teachingHoursPerWeekFixed == 'Less than 2.5 hours per week') {
+      res.redirect('/not-eligible-term');
+    } else {
+      res.redirect('/academic-year-fe-fixed');
+    }
+  }); 
 
+  
+// Teaching hours per week varible
   router.post('/timetabled-to-teach', function (req, res) {
     var teachingHoursPerWeekVariable = req.session.data['week'];
     if (teachingHoursPerWeekVariable == 'Less than 2.5 hours per week') {
