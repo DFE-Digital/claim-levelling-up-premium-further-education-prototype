@@ -1,6 +1,13 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = claim.claimantName %}
+{% set pageName = 'Review a financial incentive payment claim' %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
 
 {% block content %}
 
@@ -9,7 +16,7 @@
 {{ data.user | log }}
 {{ data.claims | log }}
 
-
+{% include "_includes/claim/details.njk" %}   
 
 
 {% endblock %}
