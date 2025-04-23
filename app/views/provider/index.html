@@ -10,4 +10,41 @@
 
 <h1 class="govuk-heading-l">Provider Dashboard</h1>
 
+<table class="govuk-table" data-module="moj-sortable-table">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header" aria-sort="ascending">Name</th>
+      <th scope="col" class="govuk-table__header" aria-sort="none">Email</th>
+      <th scope="col" class="govuk-table__header" aria-sort="none">Requested on</th>
+      <th scope="col" class="govuk-table__header" aria-sort="none">Source</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    {% for req in data.trnreq %}
+     {% if req.sourceOfMatch === "AfQTS" or req.sourceOfMatch === "Register" %}
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell"><a href="/support-tasks/create-record/from-trn-request/match-create-record/show/{{req.id}}" class="govuk-link">{{req.firstName}} {{req.lastName}}</a></td>
+        <td class="govuk-table__cell">{{req.email}}</td>
+        <td class="govuk-table__cell" data-sort-value="{{req.dateOfTrnRequest}}">
+          {{req.dateOfTrnRequest}}
+        </td>
+        <td class="govuk-table__cell">
+          <strong class="govuk-tag 
+            {% if req.sourceOfMatch == 'Register' %}
+              govuk-tag--blue
+            {% elif req.sourceOfMatch == 'AfQTS' %}
+              govuk-tag--yellow
+            {% else %}
+              govuk-tag--green
+            {% endif %}
+          ">
+            {{req.sourceOfMatch}}
+          </strong>
+        </td>
+      </tr>
+      {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
+
 {% endblock %}
