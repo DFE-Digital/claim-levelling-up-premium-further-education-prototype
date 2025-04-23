@@ -10,13 +10,21 @@
 {% endblock %}
 
 {% block content %}
+<div class="govuk-grid-row">
+  {# <div class="govuk-grid-column-full"> #}
+    <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-l">{{pageName}}</h1>
 
-<h1 class="govuk-heading-l">{{pageName}}</h1>
+    {{ data.user | log }}
+    {{ data.claims | log }}
 
-{{ data.user | log }}
-{{ data.claims | log }}
+    {% include "_includes/claim/details.njk" %}
 
-{% include "_includes/claim/details.njk" %}   
+    {% include "_includes/claim/review/are-these-details-incorrect.njk" %}
 
+    {% include "_includes/claim/review/confirm-details.njk" %}
+
+  </div>
+</div>
 
 {% endblock %}

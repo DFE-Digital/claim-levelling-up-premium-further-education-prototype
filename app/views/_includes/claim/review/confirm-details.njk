@@ -1,0 +1,68 @@
+     <h2 class="govuk-heading-m govuk-!-margin-top-7">We need you to check if any of these details are incorrect</h2>
+
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Select all options that are incorrect</legend>
+        <div class="govuk-checkboxes govuk-checkboxes--small">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="incorrect-1" name="incorrect" type="checkbox" value="teaching-responsibilities">
+            <label class="govuk-label govuk-checkboxes__label" for="incorrect-1">
+              They are a member of staff with teaching responsibilities
+            </label>
+          </div>
+
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="incorrect-2" name="incorrect" type="checkbox" value="course">
+            <label class="govuk-label govuk-checkboxes__label" for="incorrect-2">
+              They teach [course(s)] for at least half of their teaching hours
+            </label>
+          </div>
+
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="incorrect-3" name="incorrect" type="checkbox" value="early-years">
+            <label class="govuk-label govuk-checkboxes__label" for="incorrect-3">
+              [IF PRIOR Q IS EARLY YEARS RELATED] [Name of early years course] leads to an early years qualification and meets the required staff-child ratios for a setting delivering the Early Years Foundation Stage Statutory Framework
+            </label>
+          </div>
+
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="incorrect-4" name="incorrect" type="checkbox" value="ehcp">
+            <label class="govuk-label govuk-checkboxes__label" for="incorrect-4">
+              They teach 16 to 19-year-olds, including those up to age 25 with an Education, Health and Care Plan (EHCP), for at least half of their teaching hours
+            </label>
+          </div>
+
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="incorrect-5" name="incorrect" type="checkbox" value="contract" checked>
+            <label class="govuk-label govuk-checkboxes__label" for="incorrect-5">
+              They have a [permanent/fixed term] contract of employment at [name of FE provider]
+            </label>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="why-incorrect">
+          Why is this statement incorrect?
+        </label>
+        <textarea class="govuk-textarea" id="why-incorrect" name="why-incorrect" rows="4" aria-describedby="why-incorrect-hint"></textarea>
+      </div>
+
+      <div class="govuk-checkboxes">
+        <div class="govuk-checkboxes__item">
+          <input class="govuk-checkboxes__input" id="details-correct" name="details-correct" type="checkbox" value="all-correct">
+          <label class="govuk-label govuk-checkboxes__label" for="details-correct">
+            All these details are correct
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="govuk-button-group">
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+      <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+        Save as draft
+      </button>
+    </div>

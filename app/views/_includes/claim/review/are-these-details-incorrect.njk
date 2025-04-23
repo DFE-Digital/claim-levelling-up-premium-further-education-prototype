@@ -1,0 +1,40 @@
+ <h2 class="govuk-heading-m govuk-!-margin-top-7">We need you to confirm some details</h2>
+
+
+    {{ govukRadios({
+        name: "teachingHoursPerWeek",
+        fieldset: {
+          legend: {
+            html: "Is " + claim.claimantName + " timetabled to teach an average of [number of hours] per week during the current term?"
+          }
+        },
+        items: [
+          {
+            value: "Yes",
+            text: "Yes"
+          },
+          {
+            value: "No",
+            text: "No"
+          }
+        ]
+      }) }}
+
+      {{ govukRadios({
+        name: "firstFiveYears",
+        fieldset: {
+          legend: {
+            html: "Is " + claim.claimantName + " in the first 5 years of their teaching career in England?"
+          }
+        },
+        items: [
+          {
+            value: "Yes",
+            text: "Yes"
+          },
+          {
+            value: "No",
+            text: "No"
+          }
+        ]
+      }) }}
