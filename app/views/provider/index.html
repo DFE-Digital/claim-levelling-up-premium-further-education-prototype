@@ -1,53 +1,51 @@
 {% extends "layouts/main.html" %}
 
-{% block pageTitle %}
-  Content page template – {{ serviceName }} – GOV.UK Prototype Kit
-{% endblock %}
-
-
 
 {% block content %}
 
-
-
-
-<h1 class="govuk-heading-l">Provider Dashboard</h1>
+<h1 class="govuk-heading-l">All claims</h1>
 
 {{ data.user | log }}
+{{ data.claims | log }}
 
 <table class="govuk-table" data-module="moj-sortable-table">
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
-      <th scope="col" class="govuk-table__header" aria-sort="ascending">Name</th>
-      <th scope="col" class="govuk-table__header" aria-sort="none">Email</th>
-      <th scope="col" class="govuk-table__header" aria-sort="none">Requested on</th>
-      <th scope="col" class="govuk-table__header" aria-sort="none">Source</th>
+      <th scope="col" class="govuk-table__header" aria-sort="ascending">Claim reference</th>
+      <th scope="col" class="govuk-table__header" aria-sort="none">Claimant name</th>
+      <th scope="col" class="govuk-table__header" aria-sort="none">Date submitted</th>
+      <th scope="col" class="govuk-table__header" aria-sort="none">Due date</th>
+      <th scope="col" class="govuk-table__header" aria-sort="none">Processed by</th>
+      <th scope="col" class="govuk-table__header" aria-sort="none">Status</th>
     </tr>
   </thead>
   <tbody class="govuk-table__body">
-    {% for req in data.trnreq %}
-     {% if req.sourceOfMatch === "AfQTS" or req.sourceOfMatch === "Register" %}
+    {% for claim in data.claims %}
+     
       <tr class="govuk-table__row">
-        <td class="govuk-table__cell"><a href="/support-tasks/create-record/from-trn-request/match-create-record/show/{{req.id}}" class="govuk-link">{{req.firstName}} {{req.lastName}}</a></td>
-        <td class="govuk-table__cell">{{req.email}}</td>
-        <td class="govuk-table__cell" data-sort-value="{{req.dateOfTrnRequest}}">
-          {{req.dateOfTrnRequest}}
+        <td class="govuk-table__cell"><a href="/provider/show/{{claim.id}}" class="govuk-link">{{claim.claimReference}}</a></td>
+        <td class="govuk-table__cell">{{claim.claimantName}}</td>
+        <td class="govuk-table__cell" data-sort-value="{{claim.dateSubmitted}}">
+          {{claim.dateSubmitted}}
         </td>
+        <td class="govuk-table__cell" data-sort-value="{{claim.dueDate}}">
+          {{claim.dueDate}}
+        </td>
+        <td class="govuk-table__cell">{{claim.processedBy}}</td>
         <td class="govuk-table__cell">
           <strong class="govuk-tag 
-            {% if req.sourceOfMatch == 'Register' %}
+            {% if claim.status == 'In progress' %}
               govuk-tag--blue
-            {% elif req.sourceOfMatch == 'AfQTS' %}
+            {% elif claim.status == 'Not started' %}
               govuk-tag--yellow
             {% else %}
               govuk-tag--green
             {% endif %}
           ">
-            {{req.sourceOfMatch}}
+            {{claim.status}}
           </strong>
         </td>
       </tr>
-      {% endif %}
     {% endfor %}
   </tbody>
 </table>
