@@ -10,6 +10,11 @@ module.exports = router => {
       res.redirect('/account/dfe-sign-in');
     }
   })
+
+  router.get('/account/sign-out', (req, res) => {
+    req.session.data.user = null
+    res.redirect('/account/dfe-sign-in')
+  })
   
 
 }
