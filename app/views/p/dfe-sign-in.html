@@ -1,8 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% block pageTitle %}
-  Content page template – {{ serviceName }} – GOV.UK Prototype Kit
-{% endblock %}
+{% set pageName = "Sign in" %}
 
 {% block beforeContent %}
   {{ govukBackLink({
@@ -35,7 +33,7 @@
             Email address
           </label>
         </h1>
-        <input class="govuk-input govuk-input--width-20" id="width-20" name="dfeSignInEmail" type="text">
+        <input class="govuk-input govuk-input--width-20" id="width-20" name="dfeSignInEmail" type="email">
       </div>
 
       <div class="govuk-form-group">

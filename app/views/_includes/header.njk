@@ -1,0 +1,30 @@
+{% if data.user %} 
+  {% set serviceUrl = '/provider' %}
+{% else %}
+  {% set serviceUrl = '/account/dfe-sign-in' %}
+{% endif%}         
+
+
+{{ govukHeader({
+  classes: "govuk-header--full-width-border"
+}) }}
+{{ govukServiceNavigation({
+  navigation: [
+    {
+      href: "/provider",
+      text: "All claims",
+      current: (serviceNavId == "allClaims"),
+      active: true
+    },
+    {
+      href: "#",
+      text: "Verified claims",
+      current: (serviceNavId == "verifiedClaims")
+      
+    },
+    {
+      href: "#",
+      text: "Sign out"
+    }
+  ] if data.user
+}) }}
