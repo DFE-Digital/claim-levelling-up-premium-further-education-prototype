@@ -23,15 +23,15 @@
     {% for claim in data.claims %}
      
       <tr class="govuk-table__row">
-        <td class="govuk-table__cell"><a href="/provider/show/{{claim.id}}" class="govuk-link">{{claim.claimReference}}</a></td>
+        <td class="govuk-table__cell"><a href="/provider/{{ claim.id }}" class="govuk-link">{{claim.claimReference}}</a></td>
         <td class="govuk-table__cell">{{claim.claimantName}}</td>
-        <td class="govuk-table__cell" data-sort-value="{{claim.dateSubmitted}}">
+        <td class="govuk-table__cell" data-sort-value="{{ claim.dateSubmitted }}">
           {{claim.dateSubmitted}}
         </td>
-        <td class="govuk-table__cell" data-sort-value="{{claim.dueDate}}">
+        <td class="govuk-table__cell" data-sort-value="{{ claim.dueDate }}">
           {{claim.dueDate}}
         </td>
-        <td class="govuk-table__cell">{{claim.processedBy}}</td>
+        <td class="govuk-table__cell">{{ claim.processedBy }}</td>
         <td class="govuk-table__cell">
           <strong class="govuk-tag 
             {% if claim.status == 'In progress' %}
@@ -42,12 +42,15 @@
               govuk-tag--green
             {% endif %}
           ">
-            {{claim.status}}
+            {{ claim.status }}
           </strong>
         </td>
       </tr>
     {% endfor %}
   </tbody>
 </table>
+
+{% include "_includes/pagination.njk" %}
+
 
 {% endblock %}

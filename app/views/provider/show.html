@@ -1,0 +1,15 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = claim.claimantName %}
+
+{% block content %}
+
+<h1 class="govuk-heading-l">{{pageName}}</h1>
+
+{{ data.user | log }}
+{{ data.claims | log }}
+
+
+
+
+{% endblock %}

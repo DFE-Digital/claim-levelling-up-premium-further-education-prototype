@@ -243,8 +243,8 @@ router.post('/next-subject-page', function (req, res) {
 
 
   ///// Call in other routes
-
   require('./routes/account')(router)
+  require('./routes/claims')(router)
 
 
  
