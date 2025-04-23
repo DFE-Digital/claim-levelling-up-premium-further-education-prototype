@@ -1,4 +1,16 @@
-<h2 class="govuk-heading-m">Claim details</h2>
+<h2 class="govuk-heading-m">Claim details 
+  <strong class="govuk-tag govuk-!-font-size-21 
+    {% if claim.status == 'In progress' %}
+      govuk-tag--blue
+    {% elif claim.status == 'Not started' %}
+      govuk-tag--yellow
+    {% else %}
+      govuk-tag--green
+    {% endif %}
+  ">
+    {{ claim.status }}
+  </strong>
+</h2>
 
 {{ govukSummaryList({
   rows: [
