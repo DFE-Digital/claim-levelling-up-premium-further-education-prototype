@@ -13,6 +13,14 @@ module.exports = router => {
 
 
   router.post('/provider/check/:claimId', (req, res) => {
+    const selectedIssues = req.body.incorrect
+
+    // Save checkboxes on show.html to session
+    req.session.data.incorrect = Array.isArray(selectedIssues)
+      ? selectedIssues
+      : selectedIssues
+      ? [selectedIssues]
+      : []
     res.redirect(`/provider/check/${req.params.claimId}`)
   })
   
