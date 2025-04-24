@@ -57,7 +57,7 @@
               actions: {
                 items: [
                   {
-                    href: "#",
+                    href: "/provider/"+claim.id,
                     text: "Change",
                     visuallyHiddenText: "name"
                   }
@@ -74,7 +74,7 @@
               actions: {
                 items: [
                   {
-                    href: "#",
+                    href: "/provider/"+claim.id,
                     text: "Change",
                     visuallyHiddenText: "date of birth"
                   }
@@ -98,13 +98,30 @@
               actions: {
                 items: [
                   {
-                    href: "/provider/show/" + claim.id,
+                    href: "/provider/"+claim.id,
                     text: "Change",
                     visuallyHiddenText: "incorrect details"
                   }
                 ]
               }
-            }
+            },
+            {
+              key: {
+                text: "More details"
+              },
+              value: {
+                html: data.moreIncorrectChoicesDetails
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/provider/"+claim.id,
+                    text: "Change",
+                    visuallyHiddenText: "incorrect details"
+                  }
+                ]
+              }
+            } if data.moreIncorrectChoicesDetails
           ]
         }) }}
         

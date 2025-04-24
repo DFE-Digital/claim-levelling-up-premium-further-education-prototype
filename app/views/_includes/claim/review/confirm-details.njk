@@ -1,9 +1,21 @@
-     <h2 class="govuk-heading-m govuk-!-margin-top-7">We need you to check if any of these details are incorrect</h2>
+     <h2 class="govuk-heading-m govuk-!-margin-top-7">Check the details below and tell us if any are incorrect</h2>
 
     <div class="govuk-form-group">
+
+      {% set whyIncorrectDetails %}
+         {{ govukTextarea({
+          name: "moreIncorrectChoicesDetails",
+          id: "why-incorrect",
+          label: {
+            text: "Why is this statement incorrect?"
+          },
+          rows: 4
+        }) }}
+      {% endset %}
+
       <fieldset class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-          Select all options that are incorrect
+         Select all that apply
         </legend>
 
         {{ govukCheckboxes({
@@ -30,31 +42,16 @@
             {
               value: "contract",
               text: "They have a [permanent/fixed term] contract of employment at [name of FE provider]",
-              checked: true
+              conditional: {
+                html: whyIncorrectDetails
+              }
             }
           ]
         }) }}
       </fieldset>
 
-      {{ govukTextarea({
-        name: "why-incorrect",
-        id: "why-incorrect",
-        label: {
-          text: "Why is this statement incorrect?"
-        },
-        rows: 4
-      }) }}
 
-      {{ govukCheckboxes({
-        idPrefix: "details-correct",
-        name: "details-correct",
-        items: [
-          {
-            value: "all-correct",
-            text: "All these details are correct"
-          }
-        ]
-      }) }}
+      
     </div>
 
     

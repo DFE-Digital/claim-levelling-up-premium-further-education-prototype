@@ -17,10 +17,11 @@ module.exports = router => {
 
     // Save checkboxes on show.html to session
     req.session.data.incorrect = Array.isArray(selectedIssues)
-      ? selectedIssues
-      : selectedIssues
-      ? [selectedIssues]
-      : []
+    ? selectedIssues             // Already an array, leave it as is
+    : selectedIssues
+    ? [selectedIssues]           // Single string — wrap it in an array
+    : []                         // Nothing selected — fallback to an empty array
+
     res.redirect(`/provider/check/${req.params.claimId}`)
   })
   
