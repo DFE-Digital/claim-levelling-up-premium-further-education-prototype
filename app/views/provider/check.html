@@ -1,0 +1,36 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = 'CYA' %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  {# <div class="govuk-grid-column-full"> #}
+    <div class="govuk-grid-column-three-quarters">
+        <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+        {{ data.user | log }}
+        {{ data.claims | log }}
+
+        {% include "_includes/claim/details.njk" %}
+
+        {% extends "layouts/main.html" %}
+
+  
+        <h1 class="govuk-heading-xl">{{ pageName }}</h1>
+
+        <p><strong>Claimant:</strong> {{ claim.claimantName }}</p>
+        <p><strong>Reference:</strong> {{ claim.claimReference }}</p>
+
+        <!-- whatever else you want to show -->
+
+  </div>
+</div>
+
+{% endblock %}
