@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = 'Review a financial incentive payment claim' %}
+{% set pageName = 'Review a targeted retention incentive payment claim' %}
 
 {% block beforeContent %}
   {{ govukBackLink({
@@ -21,10 +21,11 @@
     {% include "_includes/claim/details.njk" %}
 
     <form method="post" action="/provider/check/{{ claim.id }}">
-      
-    {% include "_includes/claim/review/are-these-details-incorrect.njk" %}
 
-    {% include "_includes/claim/review/confirm-details.njk" %}
+    {# {% include "_includes/claim/review/are-these-details-incorrect.njk" %} #}
+    {# {% include "_includes/claim/review/confirm-details.njk" %} #}
+
+    {% include "_includes/claim/review/verify-details-radios.njk" %}
   
       <div class="govuk-button-group">
         <button type="submit" class="govuk-button" data-module="govuk-button">

@@ -1,0 +1,103 @@
+{% set issueLabels = {
+  "teaching-responsibilities": "They are a member of staff with teaching responsibilities",
+  "course": "They teach [course(s)] for at least half of their teaching hours",
+  "early-years": "[IF PRIOR Q IS EARLY YEARS RELATED] [Name of early years course] leads to an early years qualification and meets the required staff-child ratios for a setting delivering the Early Years Foundation Stage Statutory Framework",
+  "ehcp": "They teach 16 to 19-year-olds, including those up to age 25 with an Education, Health and Care Plan (EHCP), for at least half of their teaching hours",
+  "contract": "They have a [permanent/fixed term] contract of employment at [name of FE provider]"
+} %}
+
+{% set incorrectHtml %}
+
+  {% if data.incorrect %}
+    {% for val in data.incorrect %}
+      {{ issueLabels[val] }}<br><br>
+    {% endfor %}
+  {% else %}
+    None selected
+  {% endif %}
+
+{% endset %}
+
+
+
+<h2 class="govuk-heading-m govuk-!-margin-top-7">We need you to confirm some details</h2>
+        <!-- whatever else you want to show -->
+        {{ govukSummaryList({
+          rows: [
+            {
+              key: {
+                html: "Is " + claim.claimantName + " timetabled to teach an average of [number of hours] per week during the current term?"
+              },
+              value: {
+                html: data['teachingHoursPerWeek']
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/provider/"+claim.id,
+                    text: "Change",
+                    visuallyHiddenText: "name"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+               html: "Is " + claim.claimantName + " in the first 5 years of their teaching career in England?"
+              },
+              value: {
+                html: data.firstFiveYears
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/provider/"+claim.id,
+                    text: "Change",
+                    visuallyHiddenText: "date of birth"
+                  }
+                ]
+              }
+            }
+          ]
+        }) }}
+
+        <h2 class="govuk-heading-m govuk-!-margin-top-7">We need you to check if any of these details are incorrect</h2>
+
+        {{ govukSummaryList({
+          rows: [
+            {
+              key: {
+                text: "Incorrect details"
+              },
+              value: {
+                html: incorrectHtml
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/provider/"+claim.id,
+                    text: "Change",
+                    visuallyHiddenText: "incorrect details"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Why is this statement incorrect"
+              },
+              value: {
+                html: data.moreIncorrectChoicesDetails
+              },
+              actions: {
+                items: [
+                  {
+                    href: "/provider/"+claim.id,
+                    text: "Change",
+                    visuallyHiddenText: "incorrect details"
+                  }
+                ]
+              }
+            } if data.moreIncorrectChoicesDetails
+          ]
+        }) }}

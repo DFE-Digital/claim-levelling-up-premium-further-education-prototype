@@ -1,0 +1,84 @@
+{{ govukSummaryList({
+  card: {
+    title: {
+      text: "Verify the details of the claim",
+      classes: "govuk-heading-m"
+    },
+    actions: {
+      items: [
+        {
+          href: "/provider/" + claim.id,
+          text: "Change",
+          visuallyHiddenText: "of University of Gloucestershire"
+        }
+       
+      ]
+    }
+  },
+  rows: [
+    {
+      key: {
+        text: "Permanent contract"
+      },
+      value: {
+        text: data["claim-1"] or "Not answered"
+      }
+    },
+    {
+      key: {
+        text: "Teaching responsibilities"
+      },
+      value: {
+        text: data["claim-2"] or "Not answered"
+      }
+    },
+    {
+      key: {
+        text: "In first 5 years of FE teaching"
+      },
+      value: {
+        text: data["claim-3"] or "Not answered"
+      }
+    },
+    {
+      key: {
+        text: "Teaches 12+ hours per week"
+      },
+      value: {
+        text: data["claim-4"] or "Not answered"
+      }
+    },
+    {
+      key: {
+        text: "Teaches 16–19 year olds or with EHCP"
+      },
+      value: {
+        text: data["claim-5"] or "Not answered"
+      }
+    },
+    {
+      key: {
+        text: "Teaches approved qualifications in engineering"
+      },
+      value: {
+        text: data["claim-6"] or "Not answered"
+      }
+    },
+    {
+      key: {
+        text: "Not subject to performance measures"
+      },
+      value: {
+        text: data["claim-7"] or "Not answered"
+      }
+    },
+    {
+      key: {
+        text: "Not subject to disciplinary action"
+      },
+      value: {
+        text: data["claim-8"] or "Not answered"
+      }
+    }
+  ]
+}) }}
