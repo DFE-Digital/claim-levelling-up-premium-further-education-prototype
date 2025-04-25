@@ -33,17 +33,10 @@
         </td>
         <td class="govuk-table__cell">{{ claim.processedBy }}</td>
         <td class="govuk-table__cell">
-          <strong class="govuk-tag govuk-!-font-size-16 
-            {% if claim.status == 'In progress' %}
-              govuk-tag--yellow
-            {% elif claim.status == 'Not started' %}
-              govuk-tag--red
-            {% else %}
-              govuk-tag--blue
-            {% endif %}
-          ">
-            {{ claim.status }}
-          </strong>
+          {{ govukTag({
+            text: claim.status,
+            classes: claim.status | statusColour
+          }) }}
         </td>
       </tr>
     {% endfor %}
