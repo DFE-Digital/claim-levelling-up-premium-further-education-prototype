@@ -15,12 +15,23 @@
     <div class="govuk-grid-column-three-quarters">
     <h1 class="govuk-heading-l">{{pageName}}</h1>
 
+
     {{ data.user | log }}
     {{ data.claims | log }}
 
     {% include "_includes/claim/details.njk" %}
 
     <form method="post" action="/provider/check/{{ claim.id }}">
+
+      {% if claim.status == "Not started" %}
+
+      {{ govukButton({
+        text: "Assign to me",
+        classes: "govuk-button--primary",
+        href: "/provider/" + claim.id + "/assigned"
+      }) }}
+    
+    {% endif %} 
 
     {# {% include "_includes/claim/review/are-these-details-incorrect.njk" %} #}
     {# {% include "_includes/claim/review/confirm-details.njk" %} #}
