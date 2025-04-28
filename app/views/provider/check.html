@@ -20,13 +20,15 @@
         {{ data.user | log }}
         {{ data.claims | log }}
 
+
+
         {% include "_includes/claim/details.njk" %}
 
         {% include "_includes/claim/review/check-verify-answers.njk" %}
 
-        <form method="post">
+        <form method="post" action="/provider/check/{{ claim.id }}">
           <h2 class="govuk-heading-m">Declaration</h2>
-
+        
           {{ govukCheckboxes({
             name: "Declaration",
             items: [
@@ -38,14 +40,16 @@
           }) }}
           
           <div class="govuk-button-group">
-            <button type="submit" class="govuk-button" data-module="govuk-button">
-              Continue
-            </button>
-            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            {{ govukButton({
+              text: "Verify and complete claim",
+              classes: "govuk-button--primary"
+            }) }}
+            <a href="/provider" class="govuk-button govuk-button--secondary" role="button">
               Cancel
-            </button>
+            </a>
           </div>
         </form>
+        
         
   </div>
 </div>

@@ -14,6 +14,8 @@
   {# <div class="govuk-grid-column-full"> #}
     <div class="govuk-grid-column-three-quarters">
     <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+    {# Trigger Assign flow #}
     {% if claim.status == "Not started" %}
       {{ govukButton({
         text: "Assign claim",
@@ -23,10 +25,9 @@
     {% endif %} 
 
     {% if claim.status == 'In progress' %}
-    {# <p class="govuk-body">Claim asssigned by {{ claim.assignedTo }} on {{ claim.assignedDate | govukDate }} {{ claim.assignedDate | govukTime }}</p> #}
-    <div class="govuk-inset-text">
-      Claim asssigned by {{ claim.assignedTo }} on {{ claim.assignedDate | govukDate }} {{ claim.assignedDate | govukTime }}
-    </div>
+      <div class="govuk-inset-text">
+        Claim asssigned to {{ claim.processedBy }} on {{ claim.dateSubmitted }}
+      </div>
     {% endif %}
 
 
@@ -36,23 +37,18 @@
     {% include "_includes/claim/details.njk" %}
 
     <form method="post" action="/provider/check/{{ claim.id }}">
-
+      {% include "_includes/claim/review/verify-details-radios.njk" %}
       
-
-    {# {% include "_includes/claim/review/are-these-details-incorrect.njk" %} #}
-    {# {% include "_includes/claim/review/confirm-details.njk" %} #}
-
-    {% include "_includes/claim/review/verify-details-radios.njk" %}
-  
       <div class="govuk-button-group">
         <button type="submit" class="govuk-button" data-module="govuk-button">
           Continue
         </button>
-        <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+        <a href="/provider" class="govuk-button govuk-button--secondary" role="button">
           Cancel
-        </button>
+        </a>
       </div>
     </form>
+    
 
   </div>
 </div>
