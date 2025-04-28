@@ -8,6 +8,7 @@
     "@govuk-prototype-kit/common-templates": "2.0.1",
     "@govuk-prototype-kit/task-list": "2.0.0",
     "@ministryofjustice/frontend": "^5.1.2",
+    "@x-govuk/govuk-prototype-filters": "^2.0.0",
     "express": "^4.19.2",
     "fs-extra": "^11.2.0",
     "govuk-frontend": "5.9.0",

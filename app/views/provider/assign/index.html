@@ -1,0 +1,43 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = 'Confirm that you want to assign this claim' %}
+
+
+{% set claimUrl = "/provider/" + claim.id %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: claimUrl
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  {{ data.user | log }}
+  {{ data.claims | log }}
+  <div class="govuk-grid-column-three-quarters">
+    <span class="govuk-caption-l">
+        {{claim.claimantName}}
+      </span>
+  <h1 class="govuk-heading-l">{{pageName}}</h1>
+  
+  <form method="post">
+    <div class="govuk-button-group">
+      {{ govukButton({
+        text: "Assign claim"
+      }) }}
+    
+      {{ govukButton({
+        text: "Cancel",
+        classes: "govuk-button--secondary",
+        href: claimUrl
+      }) }}
+    </div>
+  </form>
+
+  </div>
+</div>
+
+
+{% endblock %}

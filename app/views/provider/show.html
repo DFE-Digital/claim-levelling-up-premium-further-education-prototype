@@ -14,6 +14,20 @@
   {# <div class="govuk-grid-column-full"> #}
     <div class="govuk-grid-column-three-quarters">
     <h1 class="govuk-heading-l">{{pageName}}</h1>
+    {% if claim.status == "Not started" %}
+      {{ govukButton({
+        text: "Assign claim",
+        classes: "govuk-button--primary",
+        href: "/provider/" + claim.id + "/assign"
+      }) }}
+    {% endif %} 
+
+    {% if claim.status == 'In progress' %}
+    {# <p class="govuk-body">Claim asssigned by {{ claim.assignedTo }} on {{ claim.assignedDate | govukDate }} {{ claim.assignedDate | govukTime }}</p> #}
+    <div class="govuk-inset-text">
+      Claim asssigned by {{ claim.assignedTo }} on {{ claim.assignedDate | govukDate }} {{ claim.assignedDate | govukTime }}
+    </div>
+    {% endif %}
 
 
     {{ data.user | log }}
@@ -23,15 +37,7 @@
 
     <form method="post" action="/provider/check/{{ claim.id }}">
 
-      {% if claim.status == "Not started" %}
-
-      {{ govukButton({
-        text: "Assign to me",
-        classes: "govuk-button--primary",
-        href: "/provider/" + claim.id + "/assigned"
-      }) }}
-    
-    {% endif %} 
+      
 
     {# {% include "_includes/claim/review/are-these-details-incorrect.njk" %} #}
     {# {% include "_includes/claim/review/confirm-details.njk" %} #}
