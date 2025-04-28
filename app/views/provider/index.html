@@ -23,7 +23,7 @@
     {% for claim in claims %}
      
       <tr class="govuk-table__row">
-        <td class="govuk-table__cell"><a href="/provider/show/{{ claim.id }}" class="govuk-link">{{claim.claimReference}}</a></td>
+        <td class="govuk-table__cell"><a href="/provider/{{ claim.id }}" class="govuk-link">{{claim.claimReference}}</a></td>
         <td class="govuk-table__cell">{{claim.claimantName}}</td>
         <td class="govuk-table__cell" data-sort-value="{{ claim.dateSubmitted }}">
           {{claim.dateSubmitted}}

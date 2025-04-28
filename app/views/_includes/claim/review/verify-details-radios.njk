@@ -1,6 +1,5 @@
 {{ govukRadios({
-  name: data["permanentContract"],
-  classes: "govuk-radios--inline",
+  name: "claim-1",
   fieldset: {
     legend: {
       text: "Does " + claim.claimantName + " have a permanent contract of employment at [FE provider]?",
@@ -20,8 +19,7 @@
 }) }}
 
 {{ govukRadios({
-  name: "teachingResponsibilities",
-  classes: "govuk-radios--inline",
+  name: "claim-2",
   fieldset: {
     legend: {
       text: "Is " + claim.claimantName + " a member of staff with teaching responsibilities?",
@@ -41,8 +39,7 @@
 }) }}
 
 {{ govukRadios({
-  name: "firstFiveYears",
-  classes: "govuk-radios--inline",
+  name: "claim-3",
   fieldset: {
     legend: {
       text: "Is " + claim.claimantName + " in the first 5 years of their further education (FE) teaching career in England?",
@@ -62,8 +59,7 @@
 }) }}
 
 {{ govukRadios({
-  name: "twelveHoursTeaching",
-  classes: "govuk-radios--inline",
+  name: "claim-4",
   fieldset: {
     legend: {
       text: "Is " + claim.claimantName + " timetabled to teach an average of 12 hours per week during the current term?",
@@ -83,8 +79,7 @@
 }) }}
 
 {{ govukRadios({
-  name: "sixteenToNineteenOrEHCP",
-  classes: "govuk-radios--inline",
+  name: "claim-5",
   fieldset: {
     legend: {
       text: "For at least half of their timetabled teaching hours, does " + claim.claimantName + " teach 16- to 19-year-olds, including those up to age 25 with an Education, Health and Care Plan (EHCP)?",
@@ -104,8 +99,7 @@
 }) }}
 
 {{ govukRadios({
-  name: "approvedFundingLevel3",
-  classes: "govuk-radios--inline",
+  name: "claim-6",
   fieldset: {
     legend: {
       html: "For at least half of their timetabled teaching hours, does " + claim.claimantName + " teach:<ul class='govuk-list govuk-list--bullet'><li>qualifications approved for funding at level 3 and below in the <a href='https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=13&PageSize=10&Sort=Status' target='_blank'>engineering (opens in a new tab)</a> sector subject area?</li></ul>",
@@ -125,8 +119,7 @@
 }) }}
 
 {{ govukRadios({
-  name: "performanceMeasures",
-  classes: "govuk-radios--inline",
+  name: "claim-7",
   fieldset: {
     legend: {
       text: "Can you confirm that " + claim.claimantName + " is not currently subject to any performance measures?",
@@ -146,8 +139,7 @@
 }) }}
 
 {{ govukRadios({
-  name: "disciplinaryAction",
-  classes: "govuk-radios--inline",
+  name: "claim-8",
   fieldset: {
     legend: {
       text: "Can you confirm that " + claim.claimantName + " is not currently subject to disciplinary action?",
