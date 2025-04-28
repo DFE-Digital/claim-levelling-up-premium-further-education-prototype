@@ -20,7 +20,7 @@
     </tr>
   </thead>
   <tbody class="govuk-table__body govuk-!-font-size-16">
-    {% for claim in data.claims %}
+    {% for claim in claims %}
      
       <tr class="govuk-table__row">
         <td class="govuk-table__cell"><a href="/provider/{{ claim.id }}" class="govuk-link">{{claim.claimReference}}</a></td>

@@ -1,4 +1,23 @@
+const Pagination = require('../helpers/pagination')
+
 module.exports = router => {
+
+  //Handles pagination
+  router.get('/provider', (req, res) => {
+    let claims = req.session.data.claims || []
+    
+    
+    let pageSize = 10
+    let pagination = new Pagination(claims, req.query.page, pageSize)
+    claims = pagination.getData()
+
+    res.render('provider/index', { 
+      claims,
+      pagination
+    })
+  })
+
+
 
   router.get('/provider/:claimId', (req, res) => {
     let claims = req.session.data.claims || []
