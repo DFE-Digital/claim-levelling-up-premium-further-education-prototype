@@ -24,7 +24,7 @@
 
         {% include "_includes/claim/review/check-verify-answers.njk" %}
 
-        <form method="post">
+        <form method="post" action="/provider/index/{{ claim.id }}">
           <h2 class="govuk-heading-m">Declaration</h2>
 
           {{ govukCheckboxes({

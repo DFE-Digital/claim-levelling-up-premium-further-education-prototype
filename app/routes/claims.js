@@ -57,7 +57,19 @@ module.exports = router => {
     res.render('provider/check', { claim })
   })
   
+  //Post back to index and change status to Complete
+  router.post('/provider/index/:claimId', (req, res) => {
+    const claims = req.session.data.claims || []
+    const claim = claims.find(c => String(c.id) === req.params.claimId)
+    
+    claim.status = 'Complete'
+    claim.assignedTo = 'Tom Brown'
+    claim.assignedDate = new Date().toISOString()
 
+    res.redirect('/provider')
+    // res.redirect(`/provider/${claim.id}`)
+    
+  })
  
   
   
