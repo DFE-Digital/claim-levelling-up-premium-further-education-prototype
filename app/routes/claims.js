@@ -80,7 +80,7 @@ module.exports = router => {
     claim.assignedDate = new Date().toISOString()
   
     // Set a flash message with HTML (text + link)
-    req.flash('success', `Claim completed <a class="govuk-link" href="/provider/completed/${claim.id}"><br>View completed claim</a>`)
+    req.flash('success', `Claim completed <a class="govuk-link" href="/provider/completed/show/${claim.id}"><br>View completed claim</a>`)
   
     res.redirect('/provider')
   })
