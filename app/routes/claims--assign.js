@@ -16,7 +16,7 @@ module.exports = router => {
     claim.assignedTo = 'Tom Brown'
     claim.assignedDate = new Date().toISOString()
 
-    res.redirect(`/provider/${claim.id}`)
+    res.redirect(`/provider/show/${claim.id}`)
     
   })
 

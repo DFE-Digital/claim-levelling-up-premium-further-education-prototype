@@ -9,18 +9,18 @@
   productName: serviceName,
   classes: "govuk-header--full-width-border"
 }) }}
+
 {{ govukServiceNavigation({
   navigation: [
     {
       href: "/provider",
       text: "All claims",
-      current: (serviceNavId == "allClaims"),
-      active: true
+      current: serviceNavId == "allClaims"
     },
     {
-      href: "#",
-      text: "Verified claims",
-      current: (serviceNavId == "verifiedClaims")
+      href: "/provider/completed",
+      text: "Completed claims",
+      current: serviceNavId == "completedClaims"
       
     },
     {
