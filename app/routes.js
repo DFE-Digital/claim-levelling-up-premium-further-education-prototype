@@ -253,6 +253,7 @@ router.post('/next-subject-page', function (req, res) {
   require('./routes/account')(router)
   require('./routes/claims')(router)
   require('./routes/claims--assign')(router)
+  require('./routes/claims--complete')(router)
 
 
  

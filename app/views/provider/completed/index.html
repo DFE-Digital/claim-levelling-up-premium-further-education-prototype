@@ -4,10 +4,9 @@
 
 {% block content %}
 
-<h1 class="govuk-heading-l">Completed claims</h1>
-
-{{ data.user | log }}
 {{ data.claims | log }}
+
+<h1 class="govuk-heading-l">Completed claims</h1>
 
 <table class="govuk-table" data-module="moj-sortable-table">
   <thead class="govuk-table__head">
@@ -22,10 +21,9 @@
   </thead>
   <tbody class="govuk-table__body govuk-!-font-size-16">
     {% for claim in claims %}
-      {% if claim.status == "Complete" %}
       <tr class="govuk-table__row">
-        <td class="govuk-table__cell">    
-            <a href="/completed/show/{{ claim.id }}" class="govuk-link">{{ claim.claimReference }}</a>
+        <td class="govuk-table__cell">
+          <a href="/completed/show/{{ claim.id }}" class="govuk-link">{{ claim.claimReference }}</a>
         </td>
         <td class="govuk-table__cell">{{ claim.claimantName }}</td>
         <td class="govuk-table__cell" data-sort-value="{{ claim.dateSubmitted }}">
@@ -42,13 +40,10 @@
           }) }}
         </td>
       </tr>
-      {% endif %}
     {% endfor %}
   </tbody>
-  
 </table>
 
 {% include "_includes/pagination.njk" %}
-
 
 {% endblock %}
