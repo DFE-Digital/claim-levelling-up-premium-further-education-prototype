@@ -6,6 +6,15 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 
+//Flash messages
+const flash = require('connect-flash')
+router.use(flash())
+
+router.all('*', (req, res, next) => {
+  res.locals.flash = req.flash('success')
+  next()
+})
+
 
 // Eligible provider
 router.post('/fe-provider', function (req, res){

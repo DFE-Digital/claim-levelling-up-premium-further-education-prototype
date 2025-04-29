@@ -4,6 +4,13 @@
 
 {% block content %}
 
+
+
+{{ govukNotificationBanner({
+  type: "success",
+  html: '<h2 class="govuk-heading-m"> '+flash+' </h2>'
+}) if flash.length }}
+
 <h1 class="govuk-heading-l">All claims</h1>
 
 {{ data.user | log }}
