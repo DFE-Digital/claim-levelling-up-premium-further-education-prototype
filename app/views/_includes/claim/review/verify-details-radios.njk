@@ -1,26 +1,28 @@
 {{ govukRadios({
   name: "permanentContract",
- classes: "govuk-radios--inline",
-  fieldset: {
-    legend: {
-      text: "Does " + claim.claimantName + " have a permanent contract of employment at [FE provider]?",
-      classes: "govuk-fieldset__legend--s"
-    }
-  },
-  items: [
-    {
-      value: "yes",
-      text: "Yes"
+  value: claim.permanentContract,
+  classes: "govuk-radios--inline",
+    fieldset: {
+      legend: {
+        text: "Does " + claim.claimantName + " have a permanent contract of employment at [FE provider]?",
+        classes: "govuk-fieldset__legend--s"
+      }
     },
-    {
-      value: "no",
-      text: "No"
-    }
-  ]
-}) }}
+    items: [
+      {
+        value: "yes",
+        text: "Yes"
+      },
+      {
+        value: "no",
+        text: "No"
+      }
+    ]
+  }) }}
 
 {{ govukRadios({
   name: "teachingResponsibilities",
+  value: claim.teachingResponsibilities,
   classes: "govuk-radios--inline",
   fieldset: {
     legend: {
@@ -42,6 +44,7 @@
 
 {{ govukRadios({
   name: "first5Years",
+  value: claim.first5Years,
   classes: "govuk-radios--inline",
   fieldset: {
     legend: {
@@ -63,6 +66,7 @@
 
 {{ govukRadios({
   name: "twelveHoursPerWeek",
+  value: claim.twelveHoursPerWeek,
   classes: "govuk-radios--inline",
   fieldset: {
     legend: {
@@ -84,6 +88,7 @@
 
 {{ govukRadios({
   name: "sixteenToNineteen",
+  value: claim.sixteenToNineteen,
   classes: "govuk-radios--inline",
   fieldset: {
     legend: {
@@ -105,6 +110,7 @@
 
 {{ govukRadios({
   name: "fundingAtLevelThreeAndBelow",
+  value: claim.fundingAtLevelThreeAndBelow,
   classes: "govuk-radios--inline",
   fieldset: {
     legend: {
@@ -126,6 +132,7 @@
 
 {{ govukRadios({
   name: "performanceMeasures",
+  value: claim.performanceMeasures,
   classes: "govuk-radios--inline",
   fieldset: {
     legend: {
@@ -147,6 +154,7 @@
 
 {{ govukRadios({
   name: "subjectToDisciplinaryAction",
+  value: claim.subjectToDisciplinaryAction,
   classes: "govuk-radios--inline",
   fieldset: {
     legend: {

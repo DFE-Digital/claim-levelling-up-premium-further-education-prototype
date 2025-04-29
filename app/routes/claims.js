@@ -41,16 +41,34 @@ module.exports = router => {
     res.render('provider/verified', { claim })
   })
 
-  //Handles the checkboxes on show.html
+  //Handles the radios on show.html
   router.post('/provider/check/:claimId', (req, res) => {
-    const selectedIssues = req.body.incorrect
+    const claims = req.session.data.claims || []
+    const claim = claims.find(c => String(c.id) === req.params.claimId)
+  
+    if (!claim) {
+      return res.status(404).send('Claim not found')
+    }
+    
+    // OLD / REDUNDANT Save checkboxes on show.html to session
 
-    // Save checkboxes on show.html to session
-    req.session.data.incorrect = Array.isArray(selectedIssues)
-    ? selectedIssues             // Already an array, leave it as is
-    : selectedIssues
-    ? [selectedIssues]           // Single string — wrap it in an array
-    : []                         // Nothing selected — fallback to an empty array
+    //const selectedIssues = req.body.incorrect
+    //req.session.data.incorrect = Array.isArray(selectedIssues)
+    //? selectedIssues             // Already an array, leave it as is
+    //: selectedIssues
+    //? [selectedIssues]           // Single string — wrap it in an array
+   // : []                         // Nothing selected — fallback to an empty array
+
+
+    //  Save radio answers into the claim
+    claim.permanentContract = req.body.permanentContract
+    claim.teachingResponsibilities = req.body.teachingResponsibilities
+    claim.first5Years = req.body.first5Years
+    claim.twelveHoursPerWeek = req.body.twelveHoursPerWeek
+    claim.sixteenToNineteen = req.body.sixteenToNineteen
+    claim.fundingAtLevelThreeAndBelow = req.body.fundingAtLevelThreeAndBelow
+    claim.performanceMeasures = req.body.performanceMeasures
+    claim.subjectToDisciplinaryAction = req.body.subjectToDisciplinaryAction
 
     res.redirect(`/provider/check/${req.params.claimId}`)
   })

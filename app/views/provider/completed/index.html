@@ -34,7 +34,11 @@
         </td>
         <td class="govuk-table__cell">{{ claim.processedBy }}</td>
         <td class="govuk-table__cell">
-          No
+          {% if claim.verified %}
+            Yes
+          {% else %}
+            No
+          {% endif %}
         </td>
       </tr>
     {% endfor %}
