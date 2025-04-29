@@ -19,7 +19,7 @@
 <table class="govuk-table" data-module="moj-sortable-table">
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
-      <th scope="col" class="govuk-table__header" aria-sort="ascending">Claim reference</th>
+      {# <th scope="col" class="govuk-table__header" aria-sort="ascending">Claim reference</th> #}
       <th scope="col" class="govuk-table__header" aria-sort="none">Claimant name</th>
       <th scope="col" class="govuk-table__header" aria-sort="none">Date submitted</th>
       <th scope="col" class="govuk-table__header" aria-sort="none">Due date</th>
@@ -30,14 +30,16 @@
   <tbody class="govuk-table__body govuk-!-font-size-16">
     {% for claim in claims %}
       <tr class="govuk-table__row">
+        {# <td class="govuk-table__cell">
+          {{ claim.claimReference }}
+        </td> #}
         <td class="govuk-table__cell">
           {% if claim.status == "Complete" %}
-            <a href="/provider/verified/{{ claim.id }}" class="govuk-link">{{ claim.claimReference }}</a>
+            <a href="/provider/verified/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
           {% else %}
-            <a href="/provider/show/{{ claim.id }}" class="govuk-link">{{ claim.claimReference }}</a>
+            <a href="/provider/show/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
           {% endif %}
         </td>
-        <td class="govuk-table__cell">{{ claim.claimantName }}</td>
         <td class="govuk-table__cell" data-sort-value="{{ claim.dateSubmitted }}">
           {{ claim.dateSubmitted }}
         </td>
