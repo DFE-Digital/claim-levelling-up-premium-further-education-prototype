@@ -1,0 +1,74 @@
+{{ govukSummaryList({
+  card: {
+    title: {
+      text: "Verify the details of the claim",
+      classes: "govuk-heading-m"
+    }
+  },
+  rows: [
+    {
+      key: {
+        text: "Permanent contract"
+      },
+      value: {
+        text: data["permanentContract"] or "Not answered"
+      }
+    },
+    {
+      key: {
+        text: "Teaching responsibilities"
+      },
+      value: {
+        text: data["teachingResponsibilities"] or "Not answered"
+      }
+    },
+    {
+      key: {
+        text: "In first 5 years of FE teaching"
+      },
+      value: {
+        text: data["first5Years"] or "Not answered"
+      }
+    },
+    {
+      key: {
+        text: "Teaches 12+ hours per week"
+      },
+      value: {
+        text: data["twelveHoursPerWeek"] or "Not answered"
+      }
+    },
+    {
+      key: {
+        text: "Teaches 16–19 year olds or with EHCP"
+      },
+      value: {
+        text: data["sixteenToNineteen"] or "Not answered"
+      }
+    },
+    {
+      key: {
+        text: "Teaches approved qualifications in engineering"
+      },
+      value: {
+        text: data["fundingAtLevelThreeAndBelow"] or "Not answered"
+      }
+    },
+    {
+      key: {
+        text: "Not subject to performance measures"
+      },
+      value: {
+        text: data["performanceMeasures"] or "Not answered"
+      }
+    },
+    {
+      key: {
+        text: "Not subject to disciplinary action"
+      },
+      value: {
+        text: data["subjectToDisciplinaryAction"] or "Not answered"
+      }
+    }
+  ]
+}) }}

@@ -21,7 +21,7 @@
       {% if claim.status == 'Complete' %}
       {# <p class="govuk-body">Claim asssigned by {{ claim.assignedTo }} on {{ claim.assignedDate | govukDate }} {{ claim.assignedDate | govukTime }}</p> #}
       <div class="govuk-inset-text">
-        Claim processed by {{ claim.assignedTo }} on {{ claim.assignedDate | govukDate }} {{ claim.assignedDate | govukTime }}
+        Claim verified by {{ claim.assignedTo }} on {{ claim.assignedDate | govukDate }} {{ claim.assignedDate | govukTime }}
       </div>
       {% endif %}
 
@@ -32,10 +32,7 @@
       {% include "_includes/claim/details.njk" %}
 
 
-        
-
-      {# {% include "_includes/claim/review/are-these-details-incorrect.njk" %} #}
-      {# {% include "_includes/claim/review/confirm-details.njk" %} #}
+      {% include "_includes/claim/verified/verify-read-only-answers.njk" %}
 
   
     
