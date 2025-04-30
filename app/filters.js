@@ -10,7 +10,7 @@ const addFilter = govukPrototypeKit.views.addFilter
 addFilter('statusColour', status => {
   switch(status) {
     case 'In progress':
-      return 'govuk-tag--purple'
+      return 'govuk-tag--yellow'
     case 'Not started':
       return 'govuk-tag--red'
     case 'Complete':

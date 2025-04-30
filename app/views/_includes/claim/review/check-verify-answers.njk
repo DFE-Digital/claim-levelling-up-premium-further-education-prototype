@@ -1,19 +1,20 @@
+{% set cardActions = {
+  items: [
+    {
+      href: "/provider/show/" + claim.id,
+      text: "Change",
+      visuallyHiddenText: "change verification details"
+    }
+  ]
+} if not claim.verified %}
+
 {{ govukSummaryList({
   card: {
     title: {
       text: "Verify the details of the claim",
       classes: "govuk-heading-m"
     },
-    actions: {
-      items: [
-        {
-          href: "/provider/" + claim.id,
-          text: "Change",
-          visuallyHiddenText: "of University of Gloucestershire"
-        }
-       
-      ]
-    }
+    actions: cardActions
   },
   rows: [
     {
