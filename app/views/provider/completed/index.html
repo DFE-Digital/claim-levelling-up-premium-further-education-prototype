@@ -35,9 +35,15 @@
         <td class="govuk-table__cell">{{ claim.processedBy }}</td>
         <td class="govuk-table__cell">
           {% if claim.verified %}
-            Yes
+            {{ govukTag({
+              text: "Verified",
+              classes: "govuk-tag--green"
+            }) }}
           {% else %}
-            No
+            {{ govukTag({
+              text: "Not verified",
+              classes: "govuk-tag--grey"
+            }) }}
           {% endif %}
         </td>
       </tr>
