@@ -6,6 +6,11 @@
 
 {{ data.claims | log }}
 
+{{ govukNotificationBanner({
+  type: "success",
+  html: '<h2 class="govuk-heading-m"> '+flash+' </h2>'
+}) if flash.length }}
+
 <h1 class="govuk-heading-l">Completed claims</h1>
 
 <table class="govuk-table" data-module="moj-sortable-table">
