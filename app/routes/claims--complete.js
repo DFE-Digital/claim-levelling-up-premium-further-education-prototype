@@ -2,6 +2,19 @@ const Pagination = require('../helpers/pagination')
 
 module.exports = router => {
 
+  router.get('/provider/completed/check/:claimId', (req, res) => {
+    const claims = req.session.data.claims || []
+    const claim = claims.find(c => String(c.id) === req.params.claimId)
+  
+    if (!claim) {
+      return res.status(404).send('Claim not found')
+    }
+  
+    res.render('provider/completed/check', { claim })
+  })
+
+  /////////////////////////////////////////////////////////////////////////
+
   router.get('/provider/completed/show/:claimId', (req, res) => {
     const claims = req.session.data.claims || []
     const claim = claims.find(c => String(c.id) === req.params.claimId)
@@ -10,10 +23,26 @@ module.exports = router => {
       return res.status(404).send('Claim not found')
     }
   
+    // You can reuse your existing review template if appropriate, or create a new one
     res.render('provider/completed/show', { claim })
   })
 
   /////////////////////////////////////////////////////////////////////////
+
+  router.post('/provider/completed/:claimId', (req, res) => {
+    const claims = req.session.data.claims || []
+    const claim = claims.find(c => String(c.id) === req.params.claimId)
+  
+    if (!claim) {
+      return res.status(404).send('Claim not found')
+    }
+  
+   // Set a flash message with HTML (text + link)
+   req.flash('success', `Claim Verified <a class="govuk-link" href="/provider/completed/check/${claim.id}"><br>View Verified claim</a>`)
+  
+    res.redirect('/provider/completed')
+  })
+
 
 
   router.get('/provider/completed', (req, res) => {

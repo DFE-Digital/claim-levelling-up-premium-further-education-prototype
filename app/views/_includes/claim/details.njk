@@ -1,10 +1,22 @@
-<h3 class="govuk-heading-m">Claim details
-  {{ govukTag({
-    text: claim.status,
-    classes: claim.status | statusColour
-  }) }}
+<h3 class="govuk-heading-m">
+  Claim details
+  {% if claim.verified === true %}
+    {{ govukTag({
+      text: "Verified",
+      classes: "govuk-tag--blue"
+    }) }}
+  {% elseif claim.verified === false %}
+    {{ govukTag({
+      text: "Not verified",
+      classes: "govuk-tag--grey"
+    }) }}
+  {% else %}
+    {{ govukTag({
+      text: claim.status,
+      classes: claim.status | statusColour
+    }) }}
+  {% endif %}
 </h3>
-
 {{ govukSummaryList({
   rows: [
     {

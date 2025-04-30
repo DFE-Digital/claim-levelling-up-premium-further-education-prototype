@@ -15,6 +15,8 @@ addFilter('statusColour', status => {
       return 'govuk-tag--red'
     case 'Complete':
       return 'govuk-tag--green'
+      case 'Verified':
+      return 'govuk-tag--blue'
   }
 })
 
