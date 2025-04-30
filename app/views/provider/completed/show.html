@@ -37,15 +37,21 @@
       {% include "_includes/claim/verified/verify-read-only-answers.njk" %}
 
   
-    
+      {% if claim.verified %}
         <div class="govuk-button-group">
           <button type="submit" class="govuk-button" data-module="govuk-button">
-            Close claim
+            Verify claim
           </button>
           <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
-            Something else
+            Close
           </button>
         </div>
+      {% else %}
+        <div class="govuk-button-group">
+          <button type="submit" class="govuk-button" data-module="govuk-button">
+            Close
+          </button>s
+      {% endif %}
 
   </div>
 </div>

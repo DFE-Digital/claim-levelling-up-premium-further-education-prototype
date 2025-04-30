@@ -22,7 +22,7 @@
     {% for claim in claims %}
       <tr class="govuk-table__row">        
         <td class="govuk-table__cell">
-            <a href="/provider/verified/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
+            <a href="/provider/completed/show/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
         </td>
         <td class="govuk-table__cell">
           {{ claim.claimReference }}
