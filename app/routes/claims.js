@@ -50,14 +50,6 @@ module.exports = router => {
       return res.status(404).send('Claim not found')
     }
     
-    // OLD / REDUNDANT Save checkboxes on show.html to session
-
-    //const selectedIssues = req.body.incorrect
-    //req.session.data.incorrect = Array.isArray(selectedIssues)
-    //? selectedIssues             // Already an array, leave it as is
-    //: selectedIssues
-    //? [selectedIssues]           // Single string — wrap it in an array
-   // : []                         // Nothing selected — fallback to an empty array
 
 
     //  Save radio answers into the claim

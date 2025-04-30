@@ -52,7 +52,7 @@ module.exports = router => {
         subjectToDisciplinaryAction: claim.subjectToDisciplinaryAction
       })
 
-      // Check if all required fields are 'yes'
+      // Check if all required fields are 'yes' NEED TO CHANGE LAST TWO TO NO for NIGELS NEW IDEA
       claim.verified = (
         claim.permanentContract === 'yes' &&
         claim.teachingResponsibilities === 'yes' &&
@@ -60,8 +60,8 @@ module.exports = router => {
         claim.twelveHoursPerWeek === 'yes' &&
         claim.sixteenToNineteen === 'yes' &&
         claim.fundingAtLevelThreeAndBelow === 'yes' &&
-        claim.performanceMeasures === 'yes' &&
-        claim.subjectToDisciplinaryAction === 'yes'
+        claim.performanceMeasures === 'no' &&
+        claim.subjectToDisciplinaryAction === 'no'
       )
     })
 
