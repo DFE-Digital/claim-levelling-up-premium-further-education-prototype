@@ -1,3 +1,5 @@
+<h3 class="govuk-heading-m">Role and experience</h3>
+
 {{ govukRadios({
   name: "permanentContract",
   value: claim.permanentContract,
@@ -64,6 +66,10 @@
   ]
 }) }}
 
+
+
+<h3 class="govuk-heading-m">Contracted hours</h3>
+
 {{ govukRadios({
   name: "twelveHoursPerWeek",
   value: claim.twelveHoursPerWeek,
@@ -129,6 +135,9 @@
     }
   ]
 }) }}
+
+
+<h3 class="govuk-heading-m">Performance and discipline</h3>
 
 {{ govukRadios({
   name: "performanceMeasures",

@@ -46,7 +46,7 @@
         <td class="govuk-table__cell" data-sort-value="{{ claim.dueDate }}">
           {{ claim.dueDate }}
         </td>
-        <td class="govuk-table__cell">{{ claim.processedBy }}</td>
+        <td class="govuk-table__cell">{{ claim.assignedTo }}</td>
         <td class="govuk-table__cell">
           {{ govukTag({
             text: claim.status,
