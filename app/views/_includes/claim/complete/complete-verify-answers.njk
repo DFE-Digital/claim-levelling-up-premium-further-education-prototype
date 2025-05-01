@@ -1,4 +1,4 @@
-{% set cardActions = {
+{# {% set cardActions = {
   items: [
     {
       href: "/provider/completed/show/" + claim.id,
@@ -6,15 +6,14 @@
       visuallyHiddenText: "change verification details"
     }
   ]
-} if not claim.verified %}
+} if not claim.verified %} #}
 
 {{ govukSummaryList({
   card: {
     title: {
       text: "Verify the details of the claim",
       classes: "govuk-heading-m"
-    },
-    actions: cardActions
+    }
   },
   rows: [
     {

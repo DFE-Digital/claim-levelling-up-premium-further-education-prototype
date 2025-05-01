@@ -27,7 +27,8 @@
         {% include "_includes/claim/complete/complete-verify-answers.njk" %}
 
         <form method="post" action="/provider/completed/{{ claim.id }}">
-          <h2 class="govuk-heading-m">Declaration</h2>
+          
+          {# <h2 class="govuk-heading-m">Declaration</h2>
 
           {{ govukCheckboxes({
             name: "Declaration",
@@ -37,7 +38,7 @@
                 text: "To the best of my knowledge, I confirm that the information provided in this form is correct."
               }
             ]
-          }) }}
+          }) }} #}
           
           <div class="govuk-button-group">
             <button type="submit" class="govuk-button" data-module="govuk-button">
