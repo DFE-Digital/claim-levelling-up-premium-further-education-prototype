@@ -255,6 +255,8 @@ router.post('/next-subject-page', function (req, res) {
   require('./routes/claims--assign')(router)
   require('./routes/claims--complete')(router)
 
+  require('./routes/returning-claimant')(router)
+
 
  
 
