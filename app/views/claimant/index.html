@@ -1,0 +1,73 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Start page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block header %}
+  <!-- Blank header with no service name for the start page -->
+  {{ govukHeader() }}
+{% endblock %}
+
+{% block beforeContent %}
+
+  {{ govukBreadcrumbs({
+    items: [
+      {
+        text: "Home",
+        href: "#"
+      },
+      {
+        text: "Education, training and skills",
+        href: "#"
+      },
+      {
+        text: "Further and higher education, skills and vocational training ",
+        href: "#"
+      },
+
+      {
+        text: "TBC"
+      }
+    ]
+  }) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl">
+        Check your eligibility and apply for a Targeted Retention Incentive payment for Further Education
+      </h1>
+
+      <p>Use this service to check your eligibility and apply for a targeted retention incentive payment.</p>
+
+      <p>Before starting the eligibility check, it may be useful to have the following information to hand:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>your contract or written statement of employment</li>
+        <li>your teaching timetable</li>
+      </ul>
+
+      <p>Answering questions about eligibility takes [X] minutes and applying for the payment takes another [X] minutes.</p>
+
+      <div class="govuk-inset-text">
+        You will need a GOV.UK One Login account to apply for a targeted retention incentive payment. If you don’t have an account yet, we will help you create one. You will also need to have a form of photo ID to hand to <a href="https://www.gov.uk/using-your-gov-uk-one-login/proving-your-identity">prove your identity</a>.
+      </div>
+
+      {{ govukButton({
+        text: "Start now",
+        href: "teaching-responsibilities",
+        isStartButton: true
+      }) }}
+
+     </div>
+     </div>
+
+      
+  
+
+{% endblock %}
