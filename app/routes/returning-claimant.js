@@ -12,11 +12,18 @@ module.exports = router => {
 
   router.post('/claimant/do-you-have-a-one-login-account', (req, res) => {
     let data = req.session.data
-    let hasOneLoginAccount = data.hasOneLoginAccounts
+    let hasOneLoginAccount = data.hasOneLoginAccount
     if (hasOneLoginAccount === 'Yes') {
       res.redirect('/claimant/one-login-start')
-    } else{
+    } else {
       res.redirect('/start')
     }
+  })
+
+  router.post('/claimant/one-login-email', (req, res) => {
+    let data = req.session.data
+    
+    res.redirect('/claimant/one-login-password')
+    
   })
 }
