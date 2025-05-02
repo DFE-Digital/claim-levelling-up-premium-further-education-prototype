@@ -10,29 +10,12 @@
 {% endblock %}
 
 {% block beforeContent %}
-
-  {{ govukBreadcrumbs({
-    items: [
-      {
-        text: "Home",
-        href: "#"
-      },
-      {
-        text: "Education, training and skills",
-        href: "#"
-      },
-      {
-        text: "Further and higher education, skills and vocational training ",
-        href: "#"
-      },
-
-      {
-        text: "TBC"
-      }
-    ]
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
   }) }}
-
 {% endblock %}
+
 
 {% block content %}
 

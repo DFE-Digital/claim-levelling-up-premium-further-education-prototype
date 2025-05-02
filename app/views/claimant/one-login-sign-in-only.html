@@ -1,0 +1,56 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Start page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block header %}
+  <!-- Blank header with no service name for the start page -->
+  {{ govukHeader() }}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      
+      <h1 class="govuk-heading-xl">Sign in with GOV.UK One Login</h1>
+
+        <p class="govuk-body">
+          You will need to sign in to your GOV.UK One Login account to apply. If you don’t have an account yet, we will help you create one.
+        </p>
+
+        <p class="govuk-body">To create a GOV.UK One Login account, you will need:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>an email address</li>
+          <li>a way to get security codes - this can be a mobile phone number or an authenticator app</li>
+        </ul>
+
+        <p class="govuk-body">
+          When you have signed in to GOV.UK One Login, you will return to this service to complete your application.
+        </p>
+
+        <p class="govuk-body">
+          You must prove your identity using the GOV.UK One Login service in order to submit a claim for an incentive payment.
+        </p>
+
+        <form method="post">
+          <button class="govuk-button" data-module="govuk-button">Continue</button>
+        </form>
+      
+
+    </div>
+  </div>
+
+      
+  
+
+{% endblock %}

@@ -4,35 +4,18 @@
   Start page template – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
 {% block header %}
   <!-- Blank header with no service name for the start page -->
   {{ govukHeader() }}
 {% endblock %}
 
-{% block beforeContent %}
-
-  {{ govukBreadcrumbs({
-    items: [
-      {
-        text: "Home",
-        href: "#"
-      },
-      {
-        text: "Education, training and skills",
-        href: "#"
-      },
-      {
-        text: "Further and higher education, skills and vocational training ",
-        href: "#"
-      },
-
-      {
-        text: "TBC"
-      }
-    ]
-  }) }}
-
-{% endblock %}
 
 {% block content %}
 
