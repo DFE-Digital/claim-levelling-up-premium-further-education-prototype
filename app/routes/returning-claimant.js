@@ -13,7 +13,7 @@ module.exports = router => {
   router.post('/claimant/do-you-have-a-one-login-account', (req, res) => {
     let data = req.session.data
     let hasOneLoginAccount = data.hasOneLoginAccount
-    if (hasOneLoginAccount === 'Yes') {
+    if (hasOneLoginAccount === 'Yes' ||  hasOneLoginAccount === "I don't know") {
       res.redirect('/claimant/one-login-sign-in-only')
     } else {
       res.redirect('/start')
