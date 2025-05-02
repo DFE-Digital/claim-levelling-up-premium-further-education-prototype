@@ -46,4 +46,11 @@ module.exports = router => {
     res.redirect('/claimant/one-login-signed-in')
     
   })
+
+  router.post('/claimant/one-login-signed-in', (req, res) => {
+    let data = req.session.data
+    
+    res.redirect('/start')
+    
+  })
 }
