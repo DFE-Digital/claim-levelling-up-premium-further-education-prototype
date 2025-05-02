@@ -1,0 +1,666 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Mainstream guide example
+{% endblock %}
+
+{% block header %}
+  <!-- Blank header with no service name for this page -->
+  {{ govukHeader() }}
+{% endblock %}
+
+{% block beforeContent %}
+
+  {{ govukBreadcrumbs({
+    items: [
+      {
+        text: "Home",
+        href: "#"
+      },
+      {
+        text: "Education, training and skills",
+        href: "#"
+      },
+      {
+        text: "Further and higher education, skills and vocational training"
+      }
+    ]
+  }) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <span class="govuk-caption-xl">Guidance</span>
+
+      <h1 class="govuk-heading-xl">
+        Targeted retention incentive payments for FE teachers 
+      </h1>
+      <p class="govuk-body-l">Eligible further education (FE) teachers can apply for the second round of the targeted retention incentive payments from autumn 2025.</p>
+
+      <div class="govuk-inset-text">
+        Applies to England.
+      </div>
+
+      <aside class="govuk-prototype-kit-common-templates-mainstream-guide-contents-list" role="complementary">
+        <nav class="govuk-prototype-kit-common-templates-contents-list" aria-label="Pages in this guide" role="navigation">
+          <h2 class="govuk-prototype-kit-common-templates-contents-list__title">
+            Contents
+          </h2>
+          <ol class="govuk-prototype-kit-common-templates-contents-list__list">
+            <li class="govuk-prototype-kit-common-templates-contents-list__list-item govuk-prototype-kit-common-templates-contents-list__list-item--dashed govuk-prototype-kit-common-templates-contents-list__list-item--active">
+              <a href="#">
+                What you can claim
+              </a>
+            </li>
+            <li aria-current="true" class="govuk-prototype-kit-common-templates-contents-list__list-item govuk-prototype-kit-common-templates-contents-list__list-item--dashed">
+              When to apply
+            </li>
+            <li class="govuk-prototype-kit-common-templates-contents-list__list-item govuk-prototype-kit-common-templates-contents-list__list-item--dashed">
+              <a href="#">
+                What you'll get
+              </a>
+            </li>
+            <li class="govuk-prototype-kit-common-templates-contents-list__list-item govuk-prototype-kit-common-templates-contents-list__list-item--dashed">
+              <a href="#">
+                Who is eligible
+              </a>
+            </li><li class="govuk-prototype-kit-common-templates-contents-list__list-item govuk-prototype-kit-common-templates-contents-list__list-item--dashed">
+              <a href="#">
+                Eligible FE courses
+              </a>
+            </li><li class="govuk-prototype-kit-common-templates-contents-list__list-item govuk-prototype-kit-common-templates-contents-list__list-item--dashed">
+              <a href="#">
+                Payments
+              </a>
+            </li><li class="govuk-prototype-kit-common-templates-contents-list__list-item govuk-prototype-kit-common-templates-contents-list__list-item--dashed">
+              <a href="#">
+                Contact
+              </a>
+          </ol>
+        </nav>
+      </aside>
+
+    </div>
+
+  </div>
+
+  <div class="govuk-inset-text">
+    For the 2025 to 2026 academic year, applications will open from autumn 2025.
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds govuk-prototype-kit-common-templates-mainstream-guide-body">
+      
+      <h2 class="govuk-heading-m">
+        What you can claim
+      </h2>
+      
+      <p>Eligible further education (FE) teachers can claim a targeted retention incentive payment for teaching specific courses in:</p>
+
+<ul class="govuk-list govuk-list--bullet">
+  <li>building and construction</li>
+  <li>chemistry</li>
+  <li>computing, including digital and ICT </li>
+  <li>early years</li>
+  <li>engineering and manufacturing, including transport engineering and electronics</li>
+  <li>maths</li>
+  <li>physics</li>
+</ul>
+<p>Check the full list of <a href="#" class="govuk-link">eligible FE courses</a> to see if you can claim a payment.</p>
+
+<h2 class="govuk-heading-m">
+  When to apply
+</h2>
+<p>You can apply from autumn in the 2025 to 2026 academic year.</p>
+
+<p>You must be in the first 5 years of your FE teaching career to claim. This means it must be 5 years or less since you started your first role with teaching responsibilities at a post-16 only education provider in England.</p>
+
+<p>Use the table to find out when you can apply for a targeted retention incentive payment.</p>
+
+<table class="govuk-table">
+  <caption class="govuk-table__caption govuk-table__caption--m"></caption>
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">Year you first taught in FE</th>
+      <th scope="col" class="govuk-table__header">Academic year in which to apply</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">2021 to 2022</th>
+      <td class="govuk-table__cell">2025</td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">2022 to 2023</th>
+      <td class="govuk-table__cell">2025</td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">2023 to 2024</th>
+      <td class="govuk-table__cell">2025</td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">2024 to 2025</th>
+      <td class="govuk-table__cell">2025</td>
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header">2025 to 2026</th>
+        <td class="govuk-table__cell">2025</td>
+      </tr>
+    </tr>
+  </tbody>
+</table>
+
+<p>The academic year runs from 1 September to 31 August and applications open in the autumn of the year shown.</p>
+
+<p>You cannot make a claim for a specific year once the application window for that year has closed.</p>
+
+<h2 class="govuk-heading-m">
+  What you'll get
+</h2>
+
+<p>For the 2025 to 2026 academic year, the payment range is from £2,000 to £6,000, depending on: </p>
+
+<ul class="govuk-list govuk-list--bullet">
+  <li>the provider you're employed by</li>
+  <li>the number of hours you're timetabled to teach</li>
+</ul>
+
+<p>If you teach at an FE provider that has higher levels of disadvantage, you’ll receive a higher payment. This is based on the proportion of 16 to 19 students who attract disadvantage funding.</p>
+
+<p>A List of eligible further education providers and payment values (MS Excel Spreadsheet, 34.8 KB) is available.</p>
+
+<h2 class="govuk-heading-m">
+  Who is eligible
+</h2>
+
+<p>You can apply for a payment if you:</p>
+
+<ul class="govuk-list govuk-list--bullet">
+  <li>are employed as an FE teacher in England</li>
+  <li>are employed by an eligible FE provider</li>
+  <li>started your first FE teaching role in England during or after the 2021 to 2022 academic year</li>
+  <li>spend at least half of your timetabled hours, on average, teaching eligible FE courses at level 3 or below</li>
+  <li>are timetabled to teach more than 2 and a half hours a week</li>
+  <li>spend at least half of your timetabled hours teaching 16 to 19 study programmes, T levels or apprenticeships</li>
+  <li>are not currently subject to any formal performance measures as a result of continuous poor teaching standards</li>
+  <li>are not currently subject to any disciplinary action</li>
+</ul>
+
+<p>You must also meet one of the following criteria:</p>
+
+<ul class="govuk-list govuk-list--bullet">
+  <li>have a teaching qualification</li>
+  <li>are currently enrolled on and working towards a teaching qualification</li>
+  <li>and for teachers claiming for the first time, intend to enrol on a teaching qualification within the next 12 months</li>
+</ul>
+
+<p>We also expect you to have developed, enhanced and maintained your teaching competences and practices, or have plans to do so.</p>
+
+<h2 class="govuk-heading-m">
+  Eligible FE providers
+</h2>
+
+<p>An eligible FE provider in England must directly employ you as a teacher. Eligible providers are:</p>
+
+<ul class="govuk-list govuk-list--bullet">
+  <li>statutory FE providers such as FE colleges, sixth-form collages and designated institutions</li>
+  <lI>16 to 19-only academies and schools</li>
+</ul>
+
+<h3 class="govuk-heading-s">
+  Eligible roles
+</h3>
+<p>You must be employed directly by an eligible provider as a member of staff with teaching responsibilities</p>
+
+<h3 class="govuk-heading-s">
+  Breaks in teaching
+</h3>
+<p>You’re still eligible if you have some breaks in your normal employment such as:</p>
+
+<ul class="govuk-list govuk-list--bullet">
+  <li>sickness</li>
+  <li>maternity or paternity leave</li>
+  <li>parental or adoption leave</li>
+</ul>
+
+<h3 class="govuk-heading-s">
+  When you are not eligible
+</h3>
+
+<p>You are not eligible to claim if you:</p>
+
+<ul class="govuk-list govuk-list--bullet">
+  <li>are unable to demonstrate ongoing commitment to teach at an FE provider in the next academic term</li>
+  <li>are employed as support staff or a non-teaching leader</li>
+  <li>are employed by a private supply-teaching agency or a non-statutory FE provider, even if an eligible provider has subcontracted them to deliver teaching</li>
+  <li>were employed as an FE teacher in England in or before the 202019 to 20210 academic year</li>
+  <li>have already claimed a targeted retention incentive payment, early career payment or teacher student loan reimbursement payment for the 2025 to 2026 academic year</li>
+  <li>are receiving an FE initial teacher education bursary for 2025 to 2026</li>
+</ul>
+
+<h2 class="govuk-heading-m">
+  Eligible FE courses
+</h2>
+
+<p>We have included subjects that are:</p>
+
+<ul class="govuk-list govuk-list--bullet">
+  <li>the same as those eligible for the targeted retention incentive for secondary school teachers</li>
+  <li>linked to critical skills priorities and currently have the highest unfilled teaching vacancy rates in the statutory FE sector</li>
+</ul>
+
+<p>Only selected early years courses are eligible. We have listed these separately.</p>
+
+<p>You must spend at least half of your hours, on average, teaching eligible FE courses.</p>
+
+<p>Speak to your employer if you’re unsure if your teaching fits one of these categories.</p>
+
+<table class="govuk-table">
+  <caption class="govuk-table__caption govuk-table__caption--m"></caption>
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">Subject</th>
+      <th scope="col" class="govuk-table__header">Course</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Building and construction</th>
+      <td class="govuk-table__cell">Recognised qualifications approved for funding at level 3 and below in the building and construction sector subject area</td>
+      </tr>
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">T Level in building services engineering for construction</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">T Level in on-site construction</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">T Level in design, surveying and planning for construction</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">level 2 or level 3 apprenticeships in the construction and the built environment occupational route</td>
+    </tr>
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Chemistry</th>
+      <td class="govuk-table__cell">A or AS level in chemistry</td>
+    </tr>
+    <tr>
+      <th scope="row" class="govuk-table__header"></th>
+    <td class="govuk-table__cell">GCSE chemistry</td>
+    </tr>
+    <tr>
+      <th scope="row" class="govuk-table__header"></th>
+    <td class="govuk-table__cell">IBO level 3 SL and HL chemistry, taught as part of a diploma or career related programme or as a standalone certificate</td>
+    </tr>
+    <tr>
+      <th scope="row" class="govuk-table__header"></th>
+    <td class="govuk-table__cell">IBO level 1 / level 2 MYP chemistry</td>
+    </tr>
+    <tr>
+      <th scope="row" class="govuk-table__header">Computing</th>
+    <td class="govuk-table__cell">Recognised qualifications approved for funding at level 3 and below in the Digital technology (practitioners) sector subject area</td>
+    </tr>
+    <tr>
+      <th scope="row" class="govuk-table__header"></th>
+    <td class="govuk-table__cell">Recognised qualifications approved for funding at level 3 and below in the Digital technology for users sector subject area</td>
+    </tr>
+    <tr>
+      <th scope="row" class="govuk-table__header"></th>
+    <td class="govuk-table__cell">Recognised digital functional skills qualifications and essential digital skills qualifications</td>
+    </tr>
+    <tr>
+      <th scope="row" class="govuk-table__header"></th>
+    <td class="govuk-table__cell">T Level in digital support services </td>
+    </tr>
+    <tr>
+      <th scope="row" class="govuk-table__header"></th>
+    <td class="govuk-table__cell">T Level in digital business services </td>
+    </tr>
+    <tr>
+      <th scope="row" class="govuk-table__header"></th>
+    <td class="govuk-table__cell">T Level in digital production, design and development </td>
+    </tr>
+    <tr>
+      <th scope="row" class="govuk-table__header"></th>
+    <td class="govuk-table__cell">IBO level 3 SL and HL computer science, taught as part of a diploma or career related programme or as a standalone certificate </td>
+    </tr>
+    <tr>
+      <th scope="row" class="govuk-table__header"></th>
+    <td class="govuk-table__cell">level 2 or level 3 apprenticeships in the digital occupational route</td>
+    <tr>
+      <th scope="row" class="govuk-table__header">Engineering and manufacturing</th>
+    <td class="govuk-table__cell">Recognised qualifications approved for funding at level 3 and below in the engineering sector subject area</td>
+    </tr>
+    <tr>
+      <th scope="row" class="govuk-table__header"></th>
+    <td class="govuk-table__cell">Recognised qualifications approved for funding at level 3 and below in the manufacturing technologies sector subject area</td>
+    </tr>
+    <tr>
+      <th scope="row" class="govuk-table__header"></th>
+    <td class="govuk-table__cell">Recognised qualifications approved for funding at level 3 and below in the transportation operations and maintenance sector subject area</td>
+    </tr>
+    <tr>
+      <th scope="row" class="govuk-table__header"></th>
+    <td class="govuk-table__cell">T Level in design and development for engineering and manufacturing </td>
+    </tr>
+    <tr>
+      <th scope="row" class="govuk-table__header"></th>
+    <td class="govuk-table__cell">T Level in maintenance, installation and repair for engineering and manufacturing</td>
+    </tr>
+    <tr>
+      <th scope="row" class="govuk-table__header"></th>
+    <td class="govuk-table__cell">T Level in engineering, manufacturing, processing and control</td>
+    </tr>
+    <tr>
+      <th scope="row" class="govuk-table__header"></th>
+    <td class="govuk-table__cell">level 2 or level 3 apprenticeships in the engineering and manufacturing occupational route</td>
+    </tr>
+    <tr>
+      <th scope="row" class="govuk-table__header">Maths</th>
+    <td class="govuk-table__cell">Recognised qQualifications approved for funding at level 3 and below in the mathematics and statistics sector subject area </td>
+    </tr>
+    <tr>
+      <th scope="row" class="govuk-table__header"></th>
+    <td class="govuk-table__cell">GCSE in maths, functional skills qualifications and other maths qualifications for teaching to 16- to 19-year-olds who meet the condition of funding </td>
+    </tr>
+    <tr>
+      <th scope="row" class="govuk-table__header">Physics</th>
+    <td class="govuk-table__cell">A or AS level in physics </td>
+    </tr>
+    <tr>
+      <th scope="row" class="govuk-table__header"></th>
+    <td class="govuk-table__cell">GCSE in physics </td>
+    </tr>
+    <tr>
+      <th scope="row" class="govuk-table__header"></th>
+    <td class="govuk-table__cell">IBO level 1 / level 2 MYP physics </td>
+    </tr>
+    <tr>
+      <th scope="row" class="govuk-table__header"></th>
+    <td class="govuk-table__cell">IBO level 3 in SL and HL physics, taught as part of a diploma or career related programme or as a standalone certificate </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 class="govuk-heading-m">
+  Eligible early years courses
+</h2>
+
+<p>The following early years apprenticeships and T Levels are eligible.</p>
+
+
+<table class="govuk-table">
+  <caption class="govuk-table__caption govuk-table__caption--m"></caption>
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">Course type</th>
+      <th scope="col" class="govuk-table__header">Course</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Apprenticeship</th>
+      <td class="govuk-table__cell">early years practitioner (level 2) apprenticeship</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">early years educator (level 3) apprenticeship</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header">T Level</th>
+      <td class="govuk-table__cell">T Level in education and early years (specialism - early years educator) – this is only eligible when assessed in the early year foundation stage, and in an early years setting in England</td>
+      </tr>
+  </tbody>
+</table>
+
+<p>The following early years qualifications are also eligible.</p>
+
+<p>We have only included those early years qualifications:</p>
+
+<ul class="govuk-list govuk-list--bullet">
+  <li>approved for funding at level 3 and below</li>
+  <li>where providers can count the recipient in staff:child ratios – we have taken all entries from the early years qualifications list on 14 October 2024</li>
+</ul>
+
+<p>Knowledge only pathways for any of the early years qualifications listed are not eligible.</p>
+
+<table class="govuk-table">
+  <caption class="govuk-table__caption govuk-table__caption--m"></caption>
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">Awarding organisation</th>
+      <th scope="col" class="govuk-table__header">Course</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">BIIBA</th>
+      <td class="govuk-table__cell">level 2 diploma for the early years practitioner</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header">City and Guilds</th>
+      <td class="govuk-table__cell">level 2 diploma for the early years practitioner (England)</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">level 3 advanced technical extended diploma for the early years practitioner (early years educator)</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">level 3 diploma for the early years practitioner (early years educator)</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header">City and Guilds</th>
+      <td class="govuk-table__cell">level 2 diploma for the early years practitioner (England)</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header">Crossfields Institute</th>
+      <td class="govuk-table__cell">level 3 diploma in holistic baby and child care (early years educator)</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header">FutureQuals</th>
+      <td class="govuk-table__cell">level 3 diploma in early years education and childcare (early years educator) </td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header">Focus Awards</th>
+      <td class="govuk-table__cell">level 3 diploma for the children’s workforce (early years educator) (RQF)</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header">Innovative Awarding</th>
+      <td class="govuk-table__cell">level 2 diploma for the early years practitioner</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">level 3 diploma in early learning and childcare (early years educator) </td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header">iCan Qualifications</th>
+      <td class="govuk-table__cell">level 2 diploma for the early years practitioner</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">level 3 diploma in early learning and childcare (early years educator)</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">level 3 diploma in children’s learning and development (early years educator)</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header">NCFE CACHE</th>
+      <td class="govuk-table__cell">level 2 diploma for the early years practitioner</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">level 3 diploma for the early years workforce (early years educator)</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">level 3 diploma for working in the early years sector (early years educator) </td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">level 3 diploma in childcare and education (early years educator) </td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">level 3 diploma in early years education and care (early years educator) </td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">level 3 diploma in early years Montessori pedagogy - birth to 7 (early years educator)</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">level 3 diploma in holistic baby and child care (early years educator)</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">level 3 diploma in Montessori pedagogy – birth to 7 (early years educator)</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">level 3 technical occupational entry in Montessori pedagogy - birth to seven (early years educator) (diploma)</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">level 3 technical occupational entry for the early years workforce (early years educator) (diploma)</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">technical level 3 diploma in childcare and education (early years educator)</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">technical level 3 diploma in early years education and care (early years educator)</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header">Pearson</th>
+      <td class="govuk-table__cell">BTEC level 2 diploma for early years practitioners</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell"> BTEC level 2 technical occupational entry for early years practitioners (diploma) </td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">BTEC level 3 technical occupational entry for early years educator (diploma) </td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">level 2 technical diploma in children’s play, learning and development (early years practitioner) </td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">level 3 national diploma in children’s play, learning and development (early years educator)</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">level 3 national extended diploma in children’s play, learning and development (early years educator)</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">Edexcel level 3 diploma in children’s learning and development (early years educator)</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header">Training Qualifications UK</th>
+      <td class="govuk-table__cell">level 2 diploma for the early years practitioner (RQF)</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">level 3 diploma for the children’s workforce (early years educator)</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header">VTCT Skills</th>
+      <td class="govuk-table__cell">VTCT Skills level 2 diploma for the early years practitioner (RQF)</td>
+      </tr>
+      <tr>
+        <th scope="row" class="govuk-table__header"></th>
+      <td class="govuk-table__cell">VTCT level 3 diploma for the children and young people’s workforce (early years educator)</td>
+      </tr>
+  </tbody>
+</table>
+
+<h2 class="govuk-heading-m">
+  Payments
+</h2>
+
+<p>We make the payment in one lump sum each year.</p>
+
+<p>If you’re employed on a permanent contract, or a fixed term contract covering the 2025 to 2026 academic year, and you are timetabled to teach:</p>
+
+<ul class="govuk-list govuk-list--bullet">
+  <li>12 hours or more a week, you’re eligible for £4,000 to £6,000</li>
+  <li>fewer than 12 hours but more than 2 and a half hours a week, you’re eligible for £2,000 to £3,000</li>
+</ul>
+
+<h2 class="govuk-heading-s">
+  Teachers on variable-hours contracts 
+</h2>
+
+<p>If you’re employed on a variable-hours or a short-term fixed contract, you must:</p>
+
+<ul class="govuk-list govuk-list--bullet">
+  <li>have worked for one term before applying </li>
+  <li>be timetabled to teach in the next term </li>
+</ul>
+
+<p>If your teaching hours over the current term are:</p>
+
+<ul class="govuk-list govuk-list--bullet">
+  <li>12 hours or more a week, you’re eligible for £4,000 to £6,000</li>
+  <li>fewer than 12 hours but more than 2 and a half hours a week, you’re eligible for £2,000 to £3,000</li>
+</ul>
+
+<p>These hours refer to teaching hours and not total working hours. If you’re unsure about the hours you teach, check with your employer.</p>
+
+<h2 class="govuk-heading-s">
+  Taxable income and national insurance 
+</h2>
+
+<p>We’ll pay National Insurance and basic rate Income Tax for the payment on your behalf. If you are or become a higher-rate taxpayer, you’ll need to pay any Income Tax at the higher rate through PAYE.</p>
+
+<p>The payment is not part of your salary from your employer. You, your employer or the government will not make a contribution to your pension as part of this payment.</p>
+
+<p>Your payment, along with the Income Tax and National Insurance contributions paid on your behalf, will all count towards your income. You should consider how this will affect any other benefits or tax credits.</p>
+
+<h2 class="govuk-heading-s">
+  Student loan deductions
+</h2>
+
+<p>If you have a student loan you’re currently paying off, a deduction will go towards repaying it. This is automatically taken from your payment.</p>
+
+<h2 class="govuk-heading-m">
+  Contact
+</h2>
+
+<p>For queries about targeted retention incentive payments:</p>
+<p>email: FE-targeted.retention-incentive@education.gov.uk</p>
+
+      <p>
+        <a href="#">
+          View a printable version of the whole guide
+        </a>
+      </p>
+
+    </div>
+
+    
+
+  </main>
+</div>
+
+
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
