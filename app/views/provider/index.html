@@ -35,7 +35,7 @@
         </td> #}
         <td class="govuk-table__cell">
           {% if claim.status == "Complete" %}
-            <a href="/provider/verified/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
+            <a href="/provider/completed/check/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
           {% else %}
             <a href="/provider/show/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
           {% endif %}
