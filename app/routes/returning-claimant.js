@@ -26,4 +26,17 @@ module.exports = router => {
     res.redirect('/claimant/one-login-password')
     
   })
+
+  router.post('/claimant/one-login-password', (req, res) => {
+    let data = req.session.data
+    
+    res.redirect('/claimant/one-login-one-time-passcode')
+    
+  })
+  router.post('/claimant/one-login-one-time-passcode', (req, res) => {
+    let data = req.session.data
+    
+    res.redirect('/claimant/onward-journey')
+    
+  })
 }
