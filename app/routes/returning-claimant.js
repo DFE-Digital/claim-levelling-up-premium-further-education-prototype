@@ -4,7 +4,8 @@ module.exports = router => {
     let data = req.session.data
     let receivedRetentionIncentive = data.receivedRetentionIncentive
     if (receivedRetentionIncentive === 'Yes') {
-      res.redirect('/claimant/one-login-sign-in-only')
+      ///this was previously /claimant/one-login-sign-in-only
+      res.redirect('/claimant/do-you-have-a-one-login-account')
     } else{
       res.redirect('/claimant/do-you-have-a-one-login-account')
     }
