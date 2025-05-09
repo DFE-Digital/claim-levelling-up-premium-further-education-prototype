@@ -1,0 +1,593 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Mainstream guide example
+{% endblock %}
+
+{% block header %}
+  <!-- Blank header with no service name for this page -->
+  {{ govukHeader() }}
+{% endblock %}
+
+{% block beforeContent %}
+
+  {{ govukBreadcrumbs({
+    items: [
+      {
+        text: "Home",
+        href: "#"
+      },
+      {
+        text: "Education, training, skills",
+        href: "#"
+      },
+      {
+        text: "Further and higher education, skills and vocational training"
+      }
+    ]
+  }) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <span class="govuk-caption-xl">Guidance</span>
+
+      <h1 class="govuk-heading-xl">
+        Targeted retention incentive payments for FE teachers 
+      </h1>
+
+      <p class="govuk-body-l">Eligible further education (FE) teachers can apply for the second round of the targeted retention incentive payments from autumn 2025.</p>
+
+      <div class="govuk-inset-text">
+        Applies to England.
+      </div>
+
+      <aside class="govuk-prototype-kit-common-templates-mainstream-guide-contents-list" role="complementary">
+        <nav class="govuk-prototype-kit-common-templates-contents-list" aria-label="Pages in this guide" role="navigation">
+          <h2 class="govuk-prototype-kit-common-templates-contents-list__title">
+            Contents
+          </h2>
+          <ol class="govuk-prototype-kit-common-templates-contents-list__list">
+            <li class="govuk-prototype-kit-common-templates-contents-list__list-item govuk-prototype-kit-common-templates-contents-list__list-item--dashed govuk-prototype-kit-common-templates-contents-list__list-item--active">
+              <a href="#">
+                Eligibility
+              </a>
+            </li>
+            <li aria-current="true" class="govuk-prototype-kit-common-templates-contents-list__list-item govuk-prototype-kit-common-templates-contents-list__list-item--dashed">
+              What you could get
+            </li>
+            <li class="govuk-prototype-kit-common-templates-contents-list__list-item govuk-prototype-kit-common-templates-contents-list__list-item--dashed">
+              <a href="#">
+                Eligible FE providers
+              </a>
+            </li>
+            <li class="govuk-prototype-kit-common-templates-contents-list__list-item govuk-prototype-kit-common-templates-contents-list__list-item--dashed">
+              <a href="#">
+                Eligible FE courses
+              </a>
+            </li>
+            <li class="govuk-prototype-kit-common-templates-contents-list__list-item govuk-prototype-kit-common-templates-contents-list__list-item--dashed">
+              <a href="#">
+                Payments
+              </a>
+            </li>
+            <li class="govuk-prototype-kit-common-templates-contents-list__list-item govuk-prototype-kit-common-templates-contents-list__list-item--dashed">
+              <a href="#">
+                Contact
+              </a>
+            </li>
+          </ol>
+        </nav>
+      </aside>
+
+    </div>
+
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds govuk-prototype-kit-common-templates-mainstream-guide-body">
+
+      
+      <h2 class="govuk-heading-m">
+        Eligibility
+      </h2>
+
+      <h3 class="govuk-heading-s">
+        Who is eligible
+      </h3>
+
+      <p>You can apply for a payment if you:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>are employed as member of staff teaching FE students in England</li>
+        <li>are employed by an eligible FE provider</li>
+        <li>started your first FE teaching role in England in or after September 2021</li>
+        <li>spend at least half of your timetabled hours, on average, teaching eligible FE courses at level 3 or below</li>
+        <li>are timetabled to teach more than 2 and a half hours a week</li>
+        <li>spend at least half of your timetabled hours teaching 16- to- 19 -year-olds (study programmes, T levels or apprenticeships)</li>
+        <li>are not currently subject to any formal performance measures as a result of continuous poor teaching standards</li>
+        <li>are not currently subject to any disciplinary action</li>
+      </ul>
+
+      <h3 class="govuk-heading-s">
+        Breaks in teaching
+      </h3>
+
+      <p class="govuk-body">You're still eligible if you have some breaks in your normal employment such as:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>sickness</li>
+        <li>maternity or paternity leave</li>
+        <li>parental or adoption leave</li>
+      </ul>
+
+      <p class="govuk-body">If you submit a claim during breaks in teaching, answer the eligibility questions based on your usual working pattern during normal employment.</p>
+      <p class="govuk-body">You should apply for payments as usual during any breaks in teaching, before the claim window closes each year. </p>
+
+      <h3 class="govuk-heading-s">
+        Teaching qualification requirement
+      </h3>
+     
+      <p class="govuk-body">You must also have either:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>a teaching qualification</li>
+        <li>enrolled on and be working towards a teaching qualification</li>
+        <li>an intention to enrol on a teaching qualification within the next 12 months (first-time claimants only)</li>
+      </ul>
+
+      <p class="govuk-body">If your highest teaching qwualification is an assessor qualification, you will be eligible if you:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>are enrolled on a teaching qualification</li>
+        <li>intend to enrol on a teaching qualification in the next 12 months (first-time claimants only)</li>
+      </ul>
+
+      <p class="govuk-body">You should also have developed, enhanced and maintained your teaching competences and practices, or have plans to do so.</p>
+      
+      <h3 class="govuk-heading-s">
+        Who is not eligible
+      </h3>
+
+      <p class="govuk-body">You are not eligible to claim if you:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>are unable to demonstrate ongoing commitment to teach at an FE provider in the next academic term</li>
+        <li>are employed as support staff or a non-teaching leader</li>
+        <li>are employed by a private supply-teaching agency or a non-statutory FE provider, even if an eligible provider has subcontracted them to deliver teaching on their behalf</li>
+        <li>were employed as an FE teacher in England in or before the 2020 to 2021 academic year</li>
+        <li>have already claimed a targeted retention incentive payment, early career payment or teacher student loan reimbursement payment for the 2025 to 2026 academic year</li>
+        <li>are receiving an FE initial teacher education bursary for 2025 to 2026</li>
+      </ul>
+
+      <div class="govuk-warning-text">
+        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+        <strong class="govuk-warning-text__text">
+          <span class="govuk-visually-hidden">Warning</span>
+          You cannot backdate a claim. You can only claim for the current academic year.
+        </strong>
+      </div>
+
+      <h2 class="govuk-heading-m">
+        What you could get
+      </h2>
+
+      <p class="govuk-body">For the 2025 to 2026 academic year, the further education targeted retention incentive payment ranges from £2,000 to £6,000, depending on:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>the provider that employs you</li>
+        <li>the number of hours you are timetabled to teach</li>
+      </ul>
+
+      <p class="govuk-body">If you teach at an FE provider that has higher levels of disadvantage, you’ll receive a higher payment. This is based on the proportion of 16 to 19 students who attract disadvantage funding.</p>
+      <p class="govuk-body">A List of eligible further education providers and payment values (MS Excel Spreadsheet, 34.8 KB) is available.</p>
+
+      <h3 class="govuk-heading-s">
+        Applicants on permanent contracts
+      </h3>
+
+      <p class="govuk-body"></p>
+      
+      <table class="govuk-table">
+        <caption class="govuk-table__caption govuk-table__caption--s"></caption>
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Timetabled teaching hours</th>
+            <th scope="col" class="govuk-table__header">Payment</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">12 hours or more per week</th>
+            <td class="govuk-table__cell">£4,000 to £6,000</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">2.5 hours to 12 hours per week</th>
+            <td class="govuk-table__cell">£2,000 to £3,000</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="govuk-heading-s">
+        Applicants on variable-hours contracts
+      </h3>
+
+      <p class="govuk-body">If you’re employed on a variable-hours or a short-term fixed contract, you must:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>have worked for one term before applying</li>
+        <li>be timetabled to teach in the next term</li>
+      </ul>
+
+      <table class="govuk-table">
+        <caption class="govuk-table__caption govuk-table__caption--s"></caption>
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Timetabled teaching hours</th>
+            <th scope="col" class="govuk-table__header">Payment</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">12 hours or more per week</th>
+            <td class="govuk-table__cell">£4,000 to £6,000</td>
+          </tr>
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">2.5 hours to 12 hours per week</th>
+            <td class="govuk-table__cell">£2,000 to £3,000</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <h2 class="govuk-heading-m">
+        Eligible FE providers
+      </h2>
+
+      <p class="govuk-body">Eligible FE proiders in England are:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>further education providers</li>
+        <li>sith-form collages</li>
+        <li>designated institutions</li>
+        <li>16 to 19-only academies and schools</li>
+      </ul>
+      
+      <h2 class="govuk-heading-m">
+        Eligible FE courses
+      </h2>
+      
+      <p class="govuk-body">Recognised qualifications approved for funding at level 3 and below.</p>
+
+      <p class="govuk-body">Courses are linked to critical skills priorities and currently have the highest unfilled teaching vacancy rates in the statutory FE sector.</p>
+
+      <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+        <div class="govuk-accordion__section">
+          <div class="govuk-accordion__section-header">
+            <h2 class="govuk-accordion__section-heading">
+              <span class="govuk-accordion__section-button" id="accordion-default-heading-1">
+                Building and construction
+              </span>
+            </h2>
+          </div>
+          <div id="accordion-default-content-1" class="govuk-accordion__section-content">
+            <p class="govuk-body">T Level in building services engineering for construction.</p>
+            <p class="govuk-body">T Level in design, surveying and planning for construction.</p>
+            <p class="govuk-body">Level 2 or level 3 apprenticeships in the construction and the built environment occupational route.</p>
+          </div>
+        </div>
+        <div class="govuk-accordion__section">
+          <div class="govuk-accordion__section-header">
+            <h2 class="govuk-accordion__section-heading">
+              <span class="govuk-accordion__section-button" id="accordion-default-heading-2">
+                Chemistry
+              </span>
+            </h2>
+          </div>
+          <div id="accordion-default-content-2" class="govuk-accordion__section-content">
+            <p class="govuk-body">A or AS level in chemistry.</p>
+            <p class="govuk-body">GCSE in chemistry.</p>
+            <p class="govuk-body">IBO level 3 SL and HL chemistry, taught as part of a diploma or career related programme or as a standalone certificate.</p>
+            <p class="govuk-body">IBO level 1 / level 2 MYP chemistry.</p>
+          </div>
+        </div>
+        <div class="govuk-accordion__section">
+          <div class="govuk-accordion__section-header">
+            <h2 class="govuk-accordion__section-heading">
+              <span class="govuk-accordion__section-button" id="accordion-default-heading-3">
+                Computing
+              </span>
+            </h2>
+          </div>
+          <div id="accordion-default-content-3" class="govuk-accordion__section-content">
+            <p class="govuk-body">T Level in digital support services</p>
+            <p class="govuk-body">T Level in digital business services</p>
+            <p class="govuk-body">T Level in digital production, design and development</p>
+            <p class="govuk-body">IBO level 3 SL and HL computer science, taught as part of a diploma or career related programme or as a standalone certificate</p>
+            <p class="govuk-body">Level 2 or level 3 apprenticeships in the digital occupational route</p>
+          </div>
+        </div>
+        <div class="govuk-accordion__section">
+          <div class="govuk-accordion__section-header">
+            <h2 class="govuk-accordion__section-heading">
+              <span class="govuk-accordion__section-button" id="accordion-default-heading-4">
+                Engineering and manufacturing
+              </span>
+            </h2>
+          </div>
+          <div id="accordion-default-content-4" class="govuk-accordion__section-content">
+            <p class="govuk-body">T Level in design and development for engineering and manufacturing.</p>
+            <p class="govuk-body">T Level in maintenance, installation and repair for engineering and manufacturing.</p>
+            <p class="govuk-body">T Level in engineering, manufacturing, processing and control.</p>
+            <p class="govuk-body">Level 2 or level 3 apprenticeships in the engineering and manufacturing occupational route.</p>
+          </div>
+          <div class="govuk-accordion__section">
+            <div class="govuk-accordion__section-header">
+              <h2 class="govuk-accordion__section-heading">
+                <span class="govuk-accordion__section-button" id="accordion-default-heading-2">
+                  Maths
+                </span>
+              </h2>
+            </div>
+            <div id="accordion-default-content-2" class="govuk-accordion__section-content">
+              <p class="govuk-body">GCSE in maths, functional skills qualifications and other maths qualifications for teaching to 16- to 19-year-olds who meet the condition of funding.</p>
+            </div>
+          </div>
+          <div class="govuk-accordion__section">
+            <div class="govuk-accordion__section-header">
+              <h2 class="govuk-accordion__section-heading">
+                <span class="govuk-accordion__section-button" id="accordion-default-heading-2">
+                  Physics
+                </span>
+              </h2>
+            </div>
+            <div id="accordion-default-content-2" class="govuk-accordion__section-content">
+              <p class="govuk-body">A or AS level in physics.</p>
+              <p class="govuk-body">GCSE in physics.</p>
+              <p class="govuk-body">IBO level 1 / level 2 MYP physics.</p>
+              <p class="govuk-body">IBO level 3 in SL and HL physics, taught as part of a diploma or career related programme or as a standalone certificate.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="govuk-heading-m">
+        Early years 
+      </h2>
+
+      <p class="govuk-body">The early years qualifications included are:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>approved for funding at level 3 and below</li>
+        <li>where providers can count the recipient in staff to child ratios – we have taken all entries from the early years qualifications list on 14 October 2024</li>
+      </ul>
+
+        <h2 class="govuk-heading-m">
+          Eligible early years courses and awarding organisations
+        </h2>
+        <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+          <div class="govuk-accordion__section">
+            <div class="govuk-accordion__section-header">
+              <h2 class="govuk-accordion__section-heading">
+                <span class="govuk-accordion__section-button" id="accordion-default-heading-1">
+                  Apprenticeship
+                </span>
+              </h2>
+            </div>
+            <div id="accordion-default-content-1" class="govuk-accordion__section-content">
+              <p class="govuk-body">Early years practitioner (level 2) apprenticeship.</p>
+              <p class="govuk-body">Early years practitioner (level 3) apprenticeship.</p>
+            </div>
+          </div>
+          <div class="govuk-accordion__section">
+            <div class="govuk-accordion__section-header">
+              <h2 class="govuk-accordion__section-heading">
+                <span class="govuk-accordion__section-button" id="accordion-default-heading-2">
+                  T Level
+                </span>
+              </h2>
+            </div>
+            <div id="accordion-default-content-2" class="govuk-accordion__section-content">
+              <p class="govuk-body">T Level in education and early years (specialism - early years educator) – this is only eligible when assessed in the early year foundation stage, and in an early years setting in England.</p>
+            </div>
+          </div>
+          <div class="govuk-accordion__section">
+            <div class="govuk-accordion__section-header">
+              <h2 class="govuk-accordion__section-heading">
+                <span class="govuk-accordion__section-button" id="accordion-default-heading-2">
+                  BIIAB
+                </span>
+              </h2>
+            </div>
+            <div id="accordion-default-content-2" class="govuk-accordion__section-content">
+              <p class="govuk-body">This is the content for Writing well for specialists.</p>
+            </div>
+          </div>
+          <div class="govuk-accordion__section">
+            <div class="govuk-accordion__section-header">
+              <h2 class="govuk-accordion__section-heading">
+                <span class="govuk-accordion__section-button" id="accordion-default-heading-2">
+                  City and Guilds
+                </span>
+              </h2>
+            </div>
+            <div id="accordion-default-content-2" class="govuk-accordion__section-content">
+              <p class="govuk-body">This is the content for Writing well for specialists.</p>
+            </div>
+          </div>
+          <div class="govuk-accordion__section">
+            <div class="govuk-accordion__section-header">
+              <h2 class="govuk-accordion__section-heading">
+                <span class="govuk-accordion__section-button" id="accordion-default-heading-3">
+                  Crossfields Institute
+                </span>
+              </h2>
+            </div>
+            <div id="accordion-default-content-3" class="govuk-accordion__section-content">
+              <p class="govuk-body">This is the content for Know your audience.</p>
+            </div>
+          </div>
+          <div class="govuk-accordion__section">
+            <div class="govuk-accordion__section-header">
+              <h2 class="govuk-accordion__section-heading">
+                <span class="govuk-accordion__section-button" id="accordion-default-heading-4">
+                  FutureQuals
+                </span>
+              </h2>
+            </div>
+            <div id="accordion-default-content-4" class="govuk-accordion__section-content">
+              <p class="govuk-body">This is the content for How people read.</p>
+            </div>
+          </div>
+          <div class="govuk-accordion__section">
+            <div class="govuk-accordion__section-header">
+              <h2 class="govuk-accordion__section-heading">
+                <span class="govuk-accordion__section-button" id="accordion-default-heading-3">
+                  Crossfields Institute
+                </span>
+              </h2>
+            </div>
+            <div id="accordion-default-content-3" class="govuk-accordion__section-content">
+              <p class="govuk-body">This is the content for Know your audience.</p>
+            </div>
+          </div>
+          <div class="govuk-accordion__section">
+            <div class="govuk-accordion__section-header">
+              <h2 class="govuk-accordion__section-heading">
+                <span class="govuk-accordion__section-button" id="accordion-default-heading-3">
+                  FutureQuals
+                </span>
+              </h2>
+            </div>
+            <div id="accordion-default-content-3" class="govuk-accordion__section-content">
+              <p class="govuk-body">This is the content for Know your audience.</p>
+            </div>
+          </div>
+          <div class="govuk-accordion__section">
+            <div class="govuk-accordion__section-header">
+              <h2 class="govuk-accordion__section-heading">
+                <span class="govuk-accordion__section-button" id="accordion-default-heading-3">
+                  Innovative Awarding
+                </span>
+              </h2>
+            </div>
+            <div id="accordion-default-content-3" class="govuk-accordion__section-content">
+              <p class="govuk-body">This is the content for Know your audience.</p>
+            </div>
+            <div class="govuk-accordion__section">
+              <div class="govuk-accordion__section-header">
+                <h2 class="govuk-accordion__section-heading">
+                  <span class="govuk-accordion__section-button" id="accordion-default-heading-3">
+                    iCan Qualifications
+                  </span>
+                </h2>
+              </div>
+              <div id="accordion-default-content-3" class="govuk-accordion__section-content">
+                <p class="govuk-body">This is the content for Know your audience.</p>
+              </div>
+            </div>
+            <div class="govuk-accordion__section">
+              <div class="govuk-accordion__section-header">
+                <h2 class="govuk-accordion__section-heading">
+                  <span class="govuk-accordion__section-button" id="accordion-default-heading-3">
+                    NCFE CACHE
+                  </span>
+                </h2>
+              </div>
+              <div id="accordion-default-content-3" class="govuk-accordion__section-content">
+                <p class="govuk-body">This is the content for Know your audience.</p>
+              </div>
+            </div>
+            <div class="govuk-accordion__section">
+              <div class="govuk-accordion__section-header">
+                <h2 class="govuk-accordion__section-heading">
+                  <span class="govuk-accordion__section-button" id="accordion-default-heading-3">
+                    Pearson
+                  </span>
+                </h2>
+              </div>
+              <div id="accordion-default-content-3" class="govuk-accordion__section-content">
+                <p class="govuk-body">This is the content for Know your audience.</p>
+              </div>
+            </div>
+            <div class="govuk-accordion__section">
+              <div class="govuk-accordion__section-header">
+                <h2 class="govuk-accordion__section-heading">
+                  <span class="govuk-accordion__section-button" id="accordion-default-heading-3">
+                    Training Qualifications UK
+                  </span>
+                </h2>
+              </div>
+              <div id="accordion-default-content-3" class="govuk-accordion__section-content">
+                <p class="govuk-body">This is the content for Know your audience.</p>
+              </div>
+            </div>
+            <div class="govuk-accordion__section">
+              <div class="govuk-accordion__section-header">
+                <h2 class="govuk-accordion__section-heading">
+                  <span class="govuk-accordion__section-button" id="accordion-default-heading-3">
+                    VTCT
+                  </span>
+                </h2>
+              </div>
+              <div id="accordion-default-content-3" class="govuk-accordion__section-content">
+                <p class="govuk-body">This is the content for Know your audience.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="govuk-heading-m">
+          Payments 
+        </h2>
+
+        <p class="govuk-body">Payment is in one lump sum each year.</p>
+
+        <h2 class="govuk-heading-m">
+          Tax and national insurance 
+        </h2>
+
+        <p class="govuk-body">National Insurance and basic rate Income Tax for the payment is paid on your behalf before you recieve the money.</p>
+          
+          <p class="govuk-body">If you are or become a higher-rate taxpayer, you’ll need to pay any Income Tax at the higher rate through PAYE.</p>
+
+        <p class="govuk-body">The payment is not part of your salary from your employer. </p>
+        <p class="govuk-body">There will be no contribution to your pension as part of this payment.</p>
+
+        <p class="govuk-body">Your payment, along with the Income Tax and National Insurance contributions paid on your behalf, will all count towards your income. You should consider how this will affect any other benefits or tax credits.</p>
+
+        <h3 class="govuk-heading-s">
+          Student loan deductions 
+        </h3>
+
+        <p class="govuk-body">If you have a student loan you’re currently paying off, a deduction will go towards repaying it. This is automatically taken from your payment.</p>
+
+
+        
+
+        
+
+      <p>
+        <a href="#">
+          View a printable version of the whole guide
+        </a>
+      </p>
+
+    </div>
+
+    <div class="govuk-grid-column-one-third">
+
+     
+
+    </div>
+
+  </main>
+</div>
+
+
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
