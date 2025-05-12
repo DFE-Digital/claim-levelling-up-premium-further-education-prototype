@@ -14,7 +14,7 @@ module.exports = router => {
     
     claim.status = 'In progress'
     claim.assignedTo = '[Name of person processing claim]'
-    claim.assignedDate = '[Date assign button is clicked]'
+    claim.dateSubmitted = '[Date assign button is clicked]'
 
     res.redirect(`/provider/show/${claim.id}`)
     
