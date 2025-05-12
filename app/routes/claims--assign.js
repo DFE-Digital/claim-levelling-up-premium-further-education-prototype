@@ -13,7 +13,7 @@ module.exports = router => {
     const claim = claims.find(c => String(c.id) === req.params.claimId)
     
     claim.status = 'In progress'
-    claim.assignedTo = 'Tom Brown'
+    claim.assignedTo = '[Name of person processing claim]'
     claim.assignedDate = new Date().toISOString()
 
     res.redirect(`/provider/show/${claim.id}`)
