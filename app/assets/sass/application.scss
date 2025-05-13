@@ -4,6 +4,11 @@
 // 
 
 // Add extra styles here
+
+@import "components/status-grid.scss";
+@import "components/status-card.scss";
+
+
 .govuk-panel--informational {
     background-color: #1d70b8;
     color: #ffffff;
