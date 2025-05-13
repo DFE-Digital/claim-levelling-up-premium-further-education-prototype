@@ -1,0 +1,218 @@
+<h3 class="govuk-heading-m">Role and experience</h3>
+
+{{ govukRadios({
+  name: "permanentContract",
+  value: claim.permanentContract,
+  classes: "govuk-!-margin-bottom-6",
+    fieldset: {
+      legend: {
+        text: "Does " + claim.claimantName + " have a teaching qualification?",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    items: [
+      {
+        value: "Yes",
+        text: "Yes"
+      },
+      {
+        value: "Not yet, but I am enrolled on one",
+        text: "Not yet, but I am enrolled on one"
+      },
+      {
+        value: "No, but I plan to enrol on one",
+        text: "No, but I plan to enrol on one"
+      },
+      {
+        value: "No, I do not plan to enrol in next 12 months",
+        text: "No, I do not plan to enrol in next 12 months"
+      }
+    ]
+  }) }}
+
+{{ govukRadios({
+  name: "permanentContract",
+  value: claim.permanentContract,
+  classes: "govuk-!-margin-bottom-6",
+    fieldset: {
+      legend: {
+        text: "Does " + claim.claimantName + " have a permanent contract of employment at [FE provider]?",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    items: [
+      {
+        value: "yes",
+        text: "Yes"
+      },
+      {
+        value: "no",
+        text: "No"
+      }
+    ]
+  }) }}
+
+{{ govukRadios({
+  name: "teachingResponsibilities",
+  value: claim.teachingResponsibilities,
+  classes: "govuk-!-margin-bottom-6",
+  fieldset: {
+    legend: {
+      text: "Is " + claim.claimantName + " a member of staff with teaching responsibilities?",
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  items: [
+    {
+      value: "yes",
+      text: "Yes"
+    },
+    {
+      value: "no",
+      text: "No"
+    }
+  ]
+}) }}
+
+{{ govukRadios({
+  name: "first5Years",
+  value: claim.first5Years,
+  classes: "govuk-!-margin-bottom-6",
+  fieldset: {
+    legend: {
+      text: "Is " + claim.claimantName + " in the first 5 years of their further education (FE) teaching career in England?",
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  items: [
+    {
+      value: "yes",
+      text: "Yes"
+    },
+    {
+      value: "no",
+      text: "No"
+    }
+  ]
+}) }}
+
+
+
+<h3 class="govuk-heading-m">Contracted hours</h3>
+
+{{ govukRadios({
+  name: "twelveHoursPerWeek",
+  value: claim.twelveHoursPerWeek,
+  classes: "govuk-!-margin-bottom-6",
+  fieldset: {
+    legend: {
+      text: "On average, how many hours per week is " + claim.claimantName + " timetabled to teach during the current term?",
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  items: [
+    {
+      value: "12 hours or more per week",
+      text: "12 hours or more per week"
+    },
+    {
+      value: "2.5 hours or more but less that 12 hours per week",
+      text: "2.5 hours or more but less that 12 hours per week"
+    },
+    {
+      value: "Less than 2.5 hours per week",
+      text: "Less than 2.5 hours per week"
+    }
+  ]
+}) }}
+
+{{ govukRadios({
+  name: "sixteenToNineteen",
+  value: claim.sixteenToNineteen,
+  classes: "govuk-!-margin-bottom-6",
+  fieldset: {
+    legend: {
+      text: "For at least half of their timetabled teaching hours, does " + claim.claimantName + " teach 16- to 19-year-olds, including those up to age 25 with an Education, Health and Care Plan (EHCP)?",
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  items: [
+    {
+      value: "yes",
+      text: "Yes"
+    },
+    {
+      value: "no",
+      text: "No"
+    }
+  ]
+}) }}
+
+{{ govukRadios({
+  name: "fundingAtLevelThreeAndBelow",
+  value: claim.fundingAtLevelThreeAndBelow,
+  classes: "govuk-!-margin-bottom-6",
+  fieldset: {
+    legend: {
+      html: "For at least half of their timetabled teaching hours, does " + claim.claimantName + " teach qualifications approved for funding at level 3 and below in the <a href='https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=13&PageSize=10&Sort=Status' target='_blank'>engineering (opens in a new tab)</a> sector subject area?",
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  items: [
+    {
+      value: "yes",
+      text: "Yes"
+    },
+    {
+      value: "no",
+      text: "No"
+    }
+  ]
+}) }}
+
+
+<h3 class="govuk-heading-m">Performance and discipline</h3>
+
+{{ govukRadios({
+  name: "performanceMeasures",
+  value: claim.performanceMeasures,
+  classes: "govuk-!-margin-bottom-6",
+  fieldset: {
+    legend: {
+      text: "Is " + claim.claimantName + " currently subject to any performance measures?",
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  items: [
+    {
+      value: "yes",
+      text: "Yes"
+    },
+    {
+      value: "no",
+      text: "No"
+    }
+  ]
+}) }}
+
+{{ govukRadios({
+  name: "subjectToDisciplinaryAction",
+  value: claim.subjectToDisciplinaryAction,
+  classes: "govuk-!-margin-bottom-6",
+  fieldset: {
+    legend: {
+      text: "Is " + claim.claimantName + " currently subject to any disciplinary action?",
+      classes: "govuk-fieldset__legend--s"
+    }
+  },
+  items: [
+    {
+      value: "yes",
+      text: "Yes"
+    },
+    {
+      value: "no",
+      text: "No"
+    }
+  ]
+}) }}
