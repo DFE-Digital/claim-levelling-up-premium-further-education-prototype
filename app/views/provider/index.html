@@ -14,7 +14,7 @@
   html: '<h2 class="govuk-heading-m"> '+flash+' </h2>'
 }) if flash.length }}
 
-<h1 class="govuk-heading-l">All claims ( {{ allClaimsCount }} )</h1>
+<h1 class="govuk-heading-l">Unverified claims ( {{ allClaimsCount }} )</h1>
 
 {{ data.user | log }}
 {{ data.claims | log }}
@@ -26,36 +26,32 @@
     <tr class="govuk-table__row">
       {# <th scope="col" class="govuk-table__header" aria-sort="ascending">Claim reference</th> #}
       <th scope="col" class="govuk-table__header" aria-sort="none">Claimant name</th>
-      <th scope="col" class="govuk-table__header" aria-sort="none">Date submitted</th>
-      <th scope="col" class="govuk-table__header" aria-sort="none">Due date</th>
+      <th scope="col" class="govuk-table__header" aria-sort="ascending">Date submitted</th>
+      <th scope="col" class="govuk-table__header" aria-sort="ascending">Due date</th>
       <th scope="col" class="govuk-table__header" aria-sort="none">Processed by</th>
       <th scope="col" class="govuk-table__header" aria-sort="none">Status</th>
     </tr>
   </thead>
   <tbody class="govuk-table__body govuk-!-font-size-16">
     {% for claim in claims %}
-      <tr class="govuk-table__row">
-        <td class="govuk-table__cell">
-          {% if claim.status == "Complete" %}
-            <a href="/provider/completed/check/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
-          {% else %}
-            <a href="/provider/show/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
-          {% endif %}
-        </td>
-        <td class="govuk-table__cell" data-sort-value="{{ claim.dateSubmitted }}">
-          {{ claim.dateSubmitted }}
-        </td>
-        <td class="govuk-table__cell" data-sort-value="{{ claim.dueDate }}">
-          {{ claim.dueDate }}
-        </td>
-        <td class="govuk-table__cell">{{ claim.assignedTo }}</td>
-        <td class="govuk-table__cell">
-          {{ govukTag({
-            text: claim.status,
-            classes: claim.status | statusColour
-          }) }}
-        </td>
-      </tr>
+    <tr class="govuk-table__row">
+      <td class="govuk-table__cell" data-sort-value="{{ claim.claimantName }}">
+        {% if claim.status == "Complete" %}
+          <a href="/provider/completed/check/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
+        {% else %}
+          <a href="/provider/show/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
+        {% endif %}
+      </td>
+      <td class="govuk-table__cell" data-sort-value="{{ claim.dateSubmitted }}">{{ claim.dateSubmitted }}</td>
+      <td class="govuk-table__cell" data-sort-value="{{ claim.dueDate }}">{{ claim.dueDate }}</td>
+      <td class="govuk-table__cell" data-sort-value="{{ claim.assignedTo }}">{{ claim.assignedTo }}</td>
+      <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">
+        {{ govukTag({
+          text: claim.status,
+          classes: claim.status | statusColour
+        }) }}
+      </td>
+    </tr>
     {% endfor %}
   </tbody>
   
