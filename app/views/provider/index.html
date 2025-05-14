@@ -2,16 +2,19 @@
 
 {% set serviceNavId = "allClaims" %}
 
+{% set allClaimsCount = 0 %}
+{% for claim in data.claims %}
+    {% set allClaimsCount = allClaimsCount + 1 %}  
+{% endfor %}
+
 {% block content %}
-
-
 
 {{ govukNotificationBanner({
   type: "success",
   html: '<h2 class="govuk-heading-m"> '+flash+' </h2>'
 }) if flash.length }}
 
-<h1 class="govuk-heading-l">All claims</h1>
+<h1 class="govuk-heading-l">All claims ( {{ allClaimsCount }} )</h1>
 
 {{ data.user | log }}
 {{ data.claims | log }}
