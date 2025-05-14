@@ -2,15 +2,20 @@ const Pagination = require('../helpers/pagination')
 
 module.exports = router => {
 
-  //Handles pagination
   router.get('/provider', (req, res) => {
     let claims = req.session.data.claims || []
-    
-    
+  
+    // Sort all claims so 'Not started' appears first
+    claims = claims.slice().sort((a, b) => {
+      if (a.status === 'Not started' && b.status !== 'Not started') return -1
+      if (a.status !== 'Not started' && b.status === 'Not started') return 1
+      return 0
+    })
+  
     let pageSize = 10
     let pagination = new Pagination(claims, req.query.page, pageSize)
     claims = pagination.getData()
-
+  
     res.render('provider/index', { 
       claims,
       pagination

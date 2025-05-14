@@ -35,9 +35,6 @@
   <tbody class="govuk-table__body govuk-!-font-size-16">
     {% for claim in claims %}
       <tr class="govuk-table__row">
-        {# <td class="govuk-table__cell">
-          {{ claim.claimReference }}
-        </td> #}
         <td class="govuk-table__cell">
           {% if claim.status == "Complete" %}
             <a href="/provider/completed/check/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
@@ -61,6 +58,7 @@
       </tr>
     {% endfor %}
   </tbody>
+  
   
 </table>
 
