@@ -12,6 +12,13 @@
   {% endif %}
 {% endfor %}
 
+{% set verifiedCount = 0 %}
+{% for claim in data.claims %}
+  {% if claim.status == "Verified" %}
+    {% set verifiedCount = verifiedCount + 1 %}
+  {% endif %}
+{% endfor %}
+
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
@@ -31,9 +38,9 @@
         <span class="govuk-visually-hidden">View these records.</span>
       </a>
 
-      {# Connect GOV.UK One Login requests #} 
+      {# VERIFIED #} 
       <a href="/provider/completed" class="status-card status-card--pending-trn">
-        <span class="status-card__count">14</span>
+        <span class="status-card__count">{{ verifiedCount }}</span>
         <span class="status-card__status">Verified</span>
         <span class="govuk-visually-hidden">View these records.</span>
       </a>

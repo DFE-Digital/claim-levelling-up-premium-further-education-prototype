@@ -3,25 +3,23 @@ const Pagination = require('../helpers/pagination')
 module.exports = router => {
 
   router.get('/provider', (req, res) => {
-    let claims = req.session.data.claims || []
+    let allClaims = req.session.data.claims || []
   
-    // Sort all claims so 'Not started' appears first
-    claims = claims.slice().sort((a, b) => {
-      if (a.status === 'Not started' && b.status !== 'Not started') return -1
-      if (a.status !== 'Not started' && b.status === 'Not started') return 1
-      return 0
-    })
+    // Filter to only "Not started" and "In progress" claims
+    let activeClaims = allClaims.filter(claim =>
+      claim.status === 'Not started' || claim.status === 'In progress'
+    )
   
     let pageSize = 10
-    let pagination = new Pagination(claims, req.query.page, pageSize)
-    claims = pagination.getData()
+    let pagination = new Pagination(activeClaims, req.query.page, pageSize)
+    let claims = pagination.getData()
   
     res.render('provider/index', { 
       claims,
       pagination
     })
   })
-
+  
   //Handles the link to show.html
   router.get('/provider/show/:claimId', (req, res) => {
     let claims = req.session.data.claims || []

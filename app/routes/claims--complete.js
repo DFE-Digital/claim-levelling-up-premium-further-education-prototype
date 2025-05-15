@@ -2,6 +2,23 @@ const Pagination = require('../helpers/pagination')
 
 module.exports = router => {
 
+  router.get('/provider/completed', (req, res) => {
+    let allClaims = req.session.data.claims || []
+  
+    // Only get Verified claims
+    let verifiedClaims = allClaims.filter(claim => claim.status === 'Verified')
+  
+    // Apply pagination to the filtered list
+    let pageSize = 10
+    let pagination = new Pagination(verifiedClaims, req.query.page, pageSize)
+    let claims = pagination.getData()
+  
+    res.render('provider/completed/index', { 
+      claims,
+      pagination
+    })
+  })
+
   router.get('/provider/completed/check/:claimId', (req, res) => {
     const claims = req.session.data.claims || []
     const claim = claims.find(c => String(c.id) === req.params.claimId)
