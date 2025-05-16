@@ -1,0 +1,55 @@
+<h3 class="govuk-heading-m">
+  Claim details
+  {% if claim.verified === true %}
+    {{ govukTag({
+      text: "Verified",
+      classes: "govuk-tag--blue"
+    }) }}
+  {% elseif claim.verified === false %}
+    {{ govukTag({
+      text: "Not verified",
+      classes: "govuk-tag--grey"
+    }) }}
+  {% else %}
+    {{ govukTag({
+      text: claim.status,
+      classes: claim.status | statusColour
+    }) }}
+  {% endif %}
+</h3>
+{{ govukSummaryList({
+  rows: [
+    {
+      key: {
+        text: "Claim reference"
+      },
+      value: {
+        text: claim.claimReference
+      }
+    },
+    {
+      key: {
+        text: "Claimant name"
+      },
+      value: {
+        text: claim.claimantName
+      }
+    },
+    {
+      key: {
+        text: "TRN"
+      },
+      value: {
+        html: claim.trn
+      }
+    },
+    {
+      key: {
+        text: "Date submitted"
+      },
+      value: {
+        html: claim.dateSubmitted
+      }
+    }
+  ]
+}) }}
