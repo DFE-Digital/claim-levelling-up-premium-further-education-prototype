@@ -2,13 +2,24 @@
 
 {% set serviceNavId = "allClaims" %}
 
-{# Claims counter #}
+{# UNVERIFIED Claims counter #}
 {% set unverifiedStatuses = ["Not started", "In progress"] %}
 {% set unverifiedCount = 0 %}
 
 {% for claim in data.claims %}
   {% if claim.status in unverifiedStatuses %}
     {% set unverifiedCount = unverifiedCount + 1 %}
+  {% endif %}
+{% endfor %}
+
+
+{# VERIFIED Claims counter #}
+{% set verifiedStatuses = ["Verified"] %}
+{% set verifiedCount = 0 %}
+
+{% for claim in data.claims %}
+  {% if claim.status in verifiedStatuses %}
+    {% set verifiedCount = verifiedCount + 1 %}
   {% endif %}
 {% endfor %}
 
@@ -20,7 +31,7 @@
   html: '<h2 class="govuk-heading-m"> '+flash+' </h2>'
 }) if flash.length }}
 
-<h1 class="govuk-heading-l">Unverified claims ( {{ unverifiedCount }} )</h1>
+<h1 class="govuk-heading-l">Claims ( {{ unverifiedCount + verifiedCount }} )</h1>
 
 {{ data.user | log }}
 {{ data.claims | log }}

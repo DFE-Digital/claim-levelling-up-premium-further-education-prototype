@@ -661,7 +661,9 @@
     "dateOfBirth": "08 April 2000",
     "dateSubmittedIso": "2024-09-01",
     "dueDateIso": "2024-09-15",
-    "dfeApproved": "no"
+    "dfeApproved": "No",
+    "dateVerified": "07 September 2024",
+    "dateVerifiedIso": "2024-09-07"
   },
   {
     "id": "2F4OUQ",
@@ -675,7 +677,9 @@
     "dateOfBirth": "01 December 1998",
     "dateSubmittedIso": "2024-09-02",
     "dueDateIso": "2024-09-16",
-    "dfeApproved": "yes"
+    "dfeApproved": "Yes",
+    "dateVerified": "13 September 2024",
+    "dateVerifiedIso": "2024-09-13"
   },
   {
     "id": "36H4E0",
@@ -689,7 +693,9 @@
     "dateOfBirth": "27 April 2002",
     "dateSubmittedIso": "2024-09-03",
     "dueDateIso": "2024-09-17",
-    "dfeApproved": "yes"
+    "dfeApproved": "Yes",
+    "dateVerified": "16 September 2024",
+    "dateVerifiedIso": "2024-09-16"
   },
   {
     "id": "4IL2BX",
@@ -703,7 +709,9 @@
     "dateOfBirth": "04 May 1999",
     "dateSubmittedIso": "2024-09-04",
     "dueDateIso": "2024-09-18",
-    "dfeApproved": "no"
+    "dfeApproved": "No",
+    "dateVerified": "14 September 2024",
+    "dateVerifiedIso": "2024-09-14"
   },
   {
     "id": "6VEOJM",
@@ -717,7 +725,9 @@
     "dateOfBirth": "17 November 2002",
     "dateSubmittedIso": "2024-09-05",
     "dueDateIso": "2024-09-19",
-    "dfeApproved": "yes"
+    "dfeApproved": "Yes",
+    "dateVerified": "14 September 2024",
+    "dateVerifiedIso": "2024-09-14"
   },
   {
     "id": "BON2JU",
@@ -731,7 +741,9 @@
     "dateOfBirth": "03 October 1998",
     "dateSubmittedIso": "2024-09-06",
     "dueDateIso": "2024-09-20",
-    "dfeApproved": "no"
+    "dfeApproved": "No",
+    "dateVerified": "16 September 2024",
+    "dateVerifiedIso": "2024-09-16"
   },
   {
     "id": "CKWON7",
@@ -745,7 +757,9 @@
     "dateOfBirth": "28 April 2001",
     "dateSubmittedIso": "2024-09-07",
     "dueDateIso": "2024-09-21",
-    "dfeApproved": "no"
+    "dfeApproved": "No",
+    "dateVerified": "12 September 2024",
+    "dateVerifiedIso": "2024-09-12"
   },
   {
     "id": "D4K3UR",
@@ -759,7 +773,9 @@
     "dateOfBirth": "13 December 1998",
     "dateSubmittedIso": "2024-09-08",
     "dueDateIso": "2024-09-22",
-    "dfeApproved": "no"
+    "dfeApproved": "No",
+    "dateVerified": "15 September 2024",
+    "dateVerifiedIso": "2024-09-15"
   },
   {
     "id": "FL0T26",
@@ -773,7 +789,9 @@
     "dateOfBirth": "02 November 2001",
     "dateSubmittedIso": "2024-09-09",
     "dueDateIso": "2024-09-23",
-    "dfeApproved": "no"
+    "dfeApproved": "No",
+    "dateVerified": "13 September 2024",
+    "dateVerifiedIso": "2024-09-13"
   },
   {
     "id": "GCKFT4",
@@ -787,7 +805,9 @@
     "dateOfBirth": "22 November 2000",
     "dateSubmittedIso": "2024-09-10",
     "dueDateIso": "2024-09-24",
-    "dfeApproved": "yes"
+    "dfeApproved": "Yes",
+    "dateVerified": "13 September 2024",
+    "dateVerifiedIso": "2024-09-13"
   },
   {
     "id": "N00P1G",
@@ -801,7 +821,9 @@
     "dateOfBirth": "14 October 2001",
     "dateSubmittedIso": "2024-09-11",
     "dueDateIso": "2024-09-25",
-    "dfeApproved": "no"
+    "dfeApproved": "No",
+    "dateVerified": "11 September 2024",
+    "dateVerifiedIso": "2024-09-11"
   },
   {
     "id": "RJT84K",
@@ -815,7 +837,9 @@
     "dateOfBirth": "10 June 1999",
     "dateSubmittedIso": "2024-09-12",
     "dueDateIso": "2024-09-26",
-    "dfeApproved": "yes"
+    "dfeApproved": "Yes",
+    "dateVerified": "12 September 2024",
+    "dateVerifiedIso": "2024-09-12"
   },
   {
     "id": "XPHS25",
@@ -829,7 +853,9 @@
     "dateOfBirth": "30 April 2000",
     "dateSubmittedIso": "2024-09-13",
     "dueDateIso": "2024-09-27",
-    "dfeApproved": "yes"
+    "dfeApproved": "Yes",
+    "dateVerified": "16 September 2024",
+    "dateVerifiedIso": "2024-09-16"
   },
   {
     "id": "XQE5VA",
@@ -843,7 +869,9 @@
     "dateOfBirth": "05 August 2000",
     "dateSubmittedIso": "2024-09-14",
     "dueDateIso": "2024-09-28",
-    "dfeApproved": "no"
+    "dfeApproved": "No",
+    "dateVerified": "23 September 2024",
+    "dateVerifiedIso": "2024-09-23"
   },
   {
     "id": "XZMPOK",
@@ -857,6 +885,8 @@
     "dateOfBirth": "23 July 2002",
     "dateSubmittedIso": "2024-09-15",
     "dueDateIso": "2024-09-29",
-    "dfeApproved": "yes"
+    "dfeApproved": "Yes",
+    "dateVerified": "19 September 2024",
+    "dateVerifiedIso": "2024-09-19"
   }
 ]

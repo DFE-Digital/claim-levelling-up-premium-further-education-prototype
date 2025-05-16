@@ -2,8 +2,18 @@
 
 {% set serviceNavId = "completedClaims" %}
 
-{# Claims counter #}
+{# UNVERIFIED Claims counter #}
 {% set unverifiedStatuses = ["Not started", "In progress"] %}
+{% set unverifiedCount = 0 %}
+
+{% for claim in data.claims %}
+  {% if claim.status in unverifiedStatuses %}
+    {% set unverifiedCount = unverifiedCount + 1 %}
+  {% endif %}
+{% endfor %}
+
+
+{# VERIFIED Claims counter #}
 {% set verifiedStatuses = ["Verified"] %}
 {% set verifiedCount = 0 %}
 
@@ -12,6 +22,7 @@
     {% set verifiedCount = verifiedCount + 1 %}
   {% endif %}
 {% endfor %}
+
 
 
 {% block content %}
@@ -26,7 +37,7 @@
 {{ data.user | log }}
 {{ data.claims | log }}
 
-{% include "_includes/claim/dashboard/cards-single-row.njk" %}
+{% include "_includes/claim/dashboard/completed-cards-single-row.njk" %}
 
 <table class="govuk-table" data-module="moj-sortable-table">
   <thead class="govuk-table__head">
