@@ -20,7 +20,7 @@ module.exports = router => {
     })
   })
 
-  //Handles the link to show.html
+  //Handles the link to who-will-verify.html
   router.get('/provider/who-will-verify/:claimId', (req, res) => {
     let claims = req.session.data.claims || []
     let claim = claims.find(claim => String(claim.id) === req.params.claimId)
@@ -30,6 +30,18 @@ module.exports = router => {
     }
   
     res.render('provider/who-will-verify', { claim })
+  })
+
+  //Handles the link to finish-verify.html
+  router.get('/provider/finish-verifying/:claimId', (req, res) => {
+    let claims = req.session.data.claims || []
+    let claim = claims.find(claim => String(claim.id) === req.params.claimId)
+  
+    if (!claim) {
+      return res.status(404).send('Claim not found')
+    }
+  
+    res.render('provider/finish-verifying', { claim })
   })
   
   //Handles the link to show.html

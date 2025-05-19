@@ -51,13 +51,12 @@
   </thead>
   <tbody class="govuk-table__body govuk-!-font-size-16">
     {% for claim in claims %}
-      {% if claim.status == "Not started" or claim.status == "In progress" %}
         <tr class="govuk-table__row">
           <td class="govuk-table__cell" data-sort-value="{{ claim.claimantName }}">
-            {% if claim.status == "Verified" %}
-              <a href="/provider/completed/check/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
-            {% else %}
+            {% if claim.status == "Not started" %}
               <a href="/provider/who-will-verify/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
+            {% else %}
+            <a href="/provider/completed/finish-verifying/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
             {% endif %}
           </td>
   
@@ -71,7 +70,6 @@
             }) }}
           </td>
         </tr>
-      {% endif %}
     {% endfor %}
   </tbody>
   

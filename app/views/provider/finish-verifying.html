@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = 'Who will verify this claim?' %}
+{% set pageName = 'Do you want to finish verifying this claim?' %}
 
 {% set serviceNavId = "allClaims" %}
 
@@ -37,7 +37,7 @@
       <input type="hidden" name="claimantEmail" value="{{ claim.claimantEmail }}">
 
       {{ govukRadios({
-        name: "whoWillVerify",
+        name: "contact",
         fieldset: {
           legend: {
             text: "Who will verify this claim?",
@@ -45,24 +45,16 @@
           }
         },
         hint: {
-          text: "Select the person who will verify this claim"
+          text: "Select one option"
         },
         items: [
           {
-            value: "Me",
-            text: "Me"
+            value: "Yes",
+            text: "Yes"
           },
           {
-            value: "Assignee 1",
-            text: "Assignee 1"
-          },
-          {
-            value: "Assignee 2",
-            text: "Assignee 2"
-          },
-          {
-            value: "Assignee 3",
-            text: "Assignee 3"
+            value: "No",
+            text: "No"
           }
         ]
       }) }}
