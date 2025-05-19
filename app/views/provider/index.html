@@ -58,7 +58,7 @@
             {% elseif claim.status == "Not started" %}
               <a href="/provider/who-will-verify/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
             {% else %}
-              <a href="/provider/completed/finish-verifying/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
+              <a href="/provider/finish-verifying/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
             {% endif %}
           </td>
   

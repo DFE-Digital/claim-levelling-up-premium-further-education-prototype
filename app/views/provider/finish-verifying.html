@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = 'Do you want to finish verifying this claim?' %}
+{% set pageName = 'Do you want to continue verification of this claim?' %}
 
 {% set serviceNavId = "allClaims" %}
 
@@ -21,6 +21,10 @@
     <div class="govuk-grid-column-three-quarters">
     <h1 class="govuk-heading-l">{{pageName}}</h1>
 
+    {{ govukInsetText({
+      html: "This claim was started by " + claim.assignedTo + ". Selecting 'Yes' will assign it to you."
+    }) }}
+
    
 
 
@@ -30,11 +34,7 @@
   
 
 
-    <form action="/provider/who-will-verify" method="POST">
-      <input type="hidden" name="claimId" value="{{ claim.id }}">
-      <input type="hidden" name="claimantName" value="{{ claim.claimantName }}">
-      <input type="hidden" name="claimantId" value="{{ claim.claimantId }}">
-      <input type="hidden" name="claimantEmail" value="{{ claim.claimantEmail }}">
+    <form method="POST" action="/provider/confirm-verifier/{{ claim.id }}">
 
       {{ govukRadios({
         name: "contact",
@@ -43,9 +43,6 @@
             text: "Who will verify this claim?",
             classes: "govuk-fieldset__legend--l govuk-visually-hidden"
           }
-        },
-        hint: {
-          text: "Select one option"
         },
         items: [
           {
@@ -58,14 +55,13 @@
           }
         ]
       }) }}
+      
   
       <div class="govuk-button-group">
         <button type="submit" class="govuk-button" data-module="govuk-button">
           Continue
         </button>
-        <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
-          Cancel
-        </button>
+        <a href="/provider" class="govuk-link">Cancel</a>
       </div>
     </form>
 

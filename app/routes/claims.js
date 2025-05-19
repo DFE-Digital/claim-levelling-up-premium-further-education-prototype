@@ -1,116 +1,131 @@
+const { govukDate } = require('@x-govuk/govuk-prototype-filters')
 const Pagination = require('../helpers/pagination')
 
 module.exports = router => {
 
+  // ================================
+  // PROVIDER DASHBOARD
+  // ================================
+
+  // GET: Active claims (Not started / In progress)
   router.get('/provider', (req, res) => {
     let allClaims = req.session.data.claims || []
-  
-    // Filter to only "Not started" and "In progress" claims
+
     let activeClaims = allClaims.filter(claim =>
       claim.status === 'Not started' || claim.status === 'In progress'
     )
-  
+
     let pageSize = 10
     let pagination = new Pagination(activeClaims, req.query.page, pageSize)
     let claims = pagination.getData()
-  
-    res.render('provider/index', { 
+
+    console.log('All claims:', allClaims)
+    console.log('Active claims:', activeClaims)
+
+    res.render('provider/index', {
       claims,
       pagination
     })
   })
 
-  //GET --> WHO-WILL-VERIFY
-  router.get('/provider/who-will-verify/:claimId', (req, res) => {
-    let claims = req.session.data.claims || []
-    let claim = claims.find(claim => String(claim.id) === req.params.claimId)
-  
+  // POST: Mark claim as Verified (from check screen)
+  router.post('/provider/index/:claimId', (req, res) => {
+    const claims = req.session.data.claims || []
+    const claim = claims.find(c => String(c.id) === req.params.claimId)
+
     if (!claim) {
       return res.status(404).send('Claim not found')
     }
-  
+
+    claim.status = 'Verified'
+    claim.assignedTo = '[Name_of_verifier]'
+    claim.assignedDate = new Date().toISOString()
+
+    req.flash('success', `Claim verified <a class="govuk-link" href="/provider/completed/check/${claim.id}"><br>View verified claim</a>`)
+    res.redirect('/provider')
+  })
+
+
+  // ================================
+  // WHO WILL VERIFY
+  // ================================
+
+  // GET: Who will verify selection screen
+  router.get('/provider/who-will-verify/:claimId', (req, res) => {
+    let claims = req.session.data.claims || []
+    let claim = claims.find(claim => String(claim.id) === req.params.claimId)
+
+    if (!claim) {
+      return res.status(404).send('Claim not found')
+    }
+
     res.render('provider/who-will-verify', { claim })
   })
 
-  ////////// POST WHO-WILL-VERIFY (ASSIGNED TO)
+  // POST: Save who will verify and redirect accordingly
   router.post('/provider/who-will-verify/:claimId', (req, res) => {
     const claimId = req.params.claimId
     const whoWillVerify = req.body.whoWillVerify
     const claims = req.session.data.claims || []
-  
+
     const claim = claims.find(claim => String(claim.id) === claimId)
     if (!claim) {
       return res.status(404).send('Claim not found')
     }
-  
-    // Persist data
+
     claim.verifier = whoWillVerify
     claim.status = 'Not started'
     claim.assignedTo = whoWillVerify === 'Me' ? 'You' : whoWillVerify
     claim.assignedDate = new Date().toISOString()
-  
-    // Set flash message
-    req.flash('success', `Claim assigned to <strong>${claim.assignedTo}</strong> on <span class="govuk-!-font-weight-bold">${new Date(claim.assignedDate).toLocaleDateString()}</span>`)
-  
-    // Redirect based on who will verify
+
+    req.flash('success', `Claim assigned to <strong>${claim.assignedTo}</strong> on <span class="govuk-!-font-weight-bold">${new Date(claim.assignedDate) | govukDate}</span>`)
+
     if (whoWillVerify === 'Me') {
       return res.redirect(`/provider/show/${claimId}`)
     } else {
       return res.redirect('/provider')
     }
   })
-  
-
-  //Handles the link to finish-verify.html
-  router.get('/provider/finish-verifying/:claimId', (req, res) => {
-    let claims = req.session.data.claims || []
-    let claim = claims.find(claim => String(claim.id) === req.params.claimId)
-  
-    if (!claim) {
-      return res.status(404).send('Claim not found')
-    }
-  
-    res.render('provider/finish-verifying', { claim })
-  })
-  
 
 
-  //Handles the link to show.html
+  // ================================
+  // SHOW CLAIM (Review and verification steps)
+  // ================================
+
+  // GET: Show claim and verification questions
   router.get('/provider/show/:claimId', (req, res) => {
     let claims = req.session.data.claims || []
     let claim = claims.find(claim => String(claim.id) === req.params.claimId)
-  
+
     if (!claim) {
       return res.status(404).send('Claim not found')
     }
-  
+
     res.render('provider/show', { claim })
   })
 
-   //Handles the link to verified.html
-   router.get('/provider/verified/:claimId', (req, res) => {
-    let claims = req.session.data.claims || []
-    let claim = claims.find(claim => String(claim.id) === req.params.claimId)
-  
+  // GET: Claim review screen
+  router.get('/provider/check/:claimId', (req, res) => {
+    const claims = req.session.data.claims || []
+    const claim = claims.find(c => String(c.id) === req.params.claimId)
+
     if (!claim) {
       return res.status(404).send('Claim not found')
     }
-  
-    res.render('provider/verified', { claim })
+
+    res.render('provider/check', { claim })
   })
 
-  //Handles the radios on show.html
+  // POST: Save radio responses (Continue or Save and come back)
   router.post('/provider/check/:claimId', (req, res) => {
     const claims = req.session.data.claims || []
     const claim = claims.find(c => String(c.id) === req.params.claimId)
-  
+
     if (!claim) {
       return res.status(404).send('Claim not found')
     }
-    
 
-
-    //  Save radio answers into the claim
+    // Save values
     claim.permanentContract = req.body.permanentContract
     claim.teachingResponsibilities = req.body.teachingResponsibilities
     claim.first5Years = req.body.first5Years
@@ -120,39 +135,91 @@ module.exports = router => {
     claim.performanceMeasures = req.body.performanceMeasures
     claim.subjectToDisciplinaryAction = req.body.subjectToDisciplinaryAction
 
+    const isSaveAndComeBack = req.body.action === 'save'
+
+    if (isSaveAndComeBack) {
+      claim.status = 'In progress'
+      claim.assignedTo = '[claims_team_verifyer]'
+      req.flash('success', 'Your answers have been saved. You can come back and complete them later.')
+      return res.redirect(`/provider/save/${req.params.claimId}`)
+    }
+
+    const allAnswered = [
+      claim.permanentContract,
+      claim.teachingResponsibilities,
+      claim.first5Years,
+      claim.twelveHoursPerWeek,
+      claim.sixteenToNineteen,
+      claim.fundingAtLevelThreeAndBelow,
+      claim.performanceMeasures,
+      claim.subjectToDisciplinaryAction
+    ].every(answer => answer === 'yes' || answer === 'no')
+
+    if (!allAnswered) {
+      req.flash('error', 'You must answer all questions to continue')
+      return res.redirect(`/provider/check/${req.params.claimId}`)
+    }
+
     res.redirect(`/provider/check/${req.params.claimId}`)
   })
 
 
+  // ================================
+  // INTERSTITIAL / INFO PAGES
+  // ================================
 
-  router.get('/provider/check/:claimId', (req, res) => {
+  // GET: Save and come back confirmation page
+  router.get('/provider/save/:claimId', (req, res) => {
     const claims = req.session.data.claims || []
     const claim = claims.find(c => String(c.id) === req.params.claimId)
+
+    if (!claim) {
+      return res.status(404).send('Claim not found')
+    }
+
+    res.render('provider/save', { claim })
+  })
+
+  // GET: Final verification confirmation screen
+  router.get('/provider/finish-verifying/:claimId', (req, res) => {
+    let claims = req.session.data.claims || []
+    let claim = claims.find(claim => String(claim.id) === req.params.claimId)
+
+    if (!claim) {
+      return res.status(404).send('Claim not found')
+    }
+
+    res.render('provider/finish-verifying', { claim })
+  })
+
+  router.post('/provider/confirm-verifier/:claimId', (req, res) => {
+    const claims = req.session.data.claims || []
+    const claim = claims.find(claim => String(claim.id) === req.params.claimId)
   
     if (!claim) {
       return res.status(404).send('Claim not found')
     }
   
-    res.render('provider/check', { claim })
+    const userChoice = req.body.contact
+  
+    if (userChoice === 'Yes') {
+      return res.redirect(`/provider/show/${claim.id}`)
+    }
+  
+    // You can redirect somewhere else if 'No' is selected, or stay on the page
+    return res.redirect('/provider')
   })
-  
-  //Post back to index and change status to Complete
-  router.post('/provider/index/:claimId', (req, res) => {
-    const claims = req.session.data.claims || []
-    const claim = claims.find(c => String(c.id) === req.params.claimId)
-  
+
+  // GET: Verified claim summary screen
+  router.get('/provider/verified/:claimId', (req, res) => {
+    let claims = req.session.data.claims || []
+    let claim = claims.find(claim => String(claim.id) === req.params.claimId)
+
     if (!claim) {
       return res.status(404).send('Claim not found')
     }
-  
-    claim.status = 'Verified'
-    claim.assignedTo = '[Name_of_verifier]'
-    claim.assignedDate = new Date().toISOString()
-  
-    // Set a flash message with HTML (text + link)
-    req.flash('success', `Claim verified <a class="govuk-link" href="/provider/completed/check/${claim.id}"><br>View verified claim</a>`)
-    res.redirect('/provider')
-  })
 
+    res.render('provider/verified', { claim })
+  })
 
 }
