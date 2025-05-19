@@ -20,7 +20,7 @@ module.exports = router => {
     })
   })
 
-  //Handles the link from index to who-will-verify.html
+  //GET --> WHO-WILL-VERIFY
   router.get('/provider/who-will-verify/:claimId', (req, res) => {
     let claims = req.session.data.claims || []
     let claim = claims.find(claim => String(claim.id) === req.params.claimId)
@@ -32,29 +32,34 @@ module.exports = router => {
     res.render('provider/who-will-verify', { claim })
   })
 
-  //POST back to who-will-verify.html
+  ////////// POST WHO-WILL-VERIFY (ASSIGNED TO)
   router.post('/provider/who-will-verify/:claimId', (req, res) => {
     const claimId = req.params.claimId
     const whoWillVerify = req.body.whoWillVerify
     const claims = req.session.data.claims || []
   
-    // Find the claim by ID
     const claim = claims.find(claim => String(claim.id) === claimId)
-  
     if (!claim) {
       return res.status(404).send('Claim not found')
     }
   
-    // Persist the selection
+    // Persist data
     claim.verifier = whoWillVerify
+    claim.status = 'Not started'
+    claim.assignedTo = whoWillVerify === 'Me' ? 'You' : whoWillVerify
+    claim.assignedDate = new Date().toISOString()
   
-    // Redirect based on selection
+    // Set flash message
+    req.flash('success', `Claim assigned to <strong>${claim.assignedTo}</strong> on <span class="govuk-!-font-weight-bold">${new Date(claim.assignedDate).toLocaleDateString()}</span>`)
+  
+    // Redirect based on who will verify
     if (whoWillVerify === 'Me') {
-      res.redirect(`/provider/show/${claimId}`)
+      return res.redirect(`/provider/show/${claimId}`)
     } else {
-      res.redirect(`/provider/${claimId}`)
+      return res.redirect('/provider')
     }
   })
+  
 
   //Handles the link to finish-verify.html
   router.get('/provider/finish-verifying/:claimId', (req, res) => {
@@ -149,16 +154,5 @@ module.exports = router => {
     res.redirect('/provider')
   })
 
-  //GET back to index.html
-  router.get('/provider/:claimId', (req, res) => {
-    let claims = req.session.data.claims || []
-    let claim = claims.find(claim => String(claim.id) === req.params.claimId)
-  
-    if (!claim) {
-      return res.status(404).send('Claim not found')
-    }
-  
-    res.render('provider/index', { claim })
-  })
 
 }

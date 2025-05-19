@@ -31,11 +31,6 @@
 
 
     <form method="post" action="/provider/who-will-verify/{{ claim.id }}">
-      
-      <input type="hidden" name="claimId" value="{{ claim.id }}">
-      <input type="hidden" name="claimantName" value="{{ claim.claimantName }}">
-      <input type="hidden" name="claimantId" value="{{ claim.claimantId }}">
-      <input type="hidden" name="claimantEmail" value="{{ claim.claimantEmail }}">
 
       {{ govukRadios({
         name: "whoWillVerify",
@@ -72,7 +67,7 @@
         <button type="submit" class="govuk-button" data-module="govuk-button">
           Continue
         </button>
-        <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+        <button type="button" class="govuk-button govuk-button--secondary" data-module="govuk-button">
           Cancel
         </button>
       </div>
