@@ -54,10 +54,10 @@
       {% if claim.status == "Not started" or claim.status == "In progress" %}
         <tr class="govuk-table__row">
           <td class="govuk-table__cell" data-sort-value="{{ claim.claimantName }}">
-            {% if claim.status == "Complete" %}
+            {% if claim.status == "Verified" %}
               <a href="/provider/completed/check/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
             {% else %}
-              <a href="/provider/show/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
+              <a href="/provider/who-will-verify/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
             {% endif %}
           </td>
   

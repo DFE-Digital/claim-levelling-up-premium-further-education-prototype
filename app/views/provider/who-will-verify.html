@@ -1,0 +1,90 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = 'Who will verify this claim?' %}
+
+{% set serviceNavId = "allClaims" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+
+
+{% block content %}
+
+{% set assigneeHtml %}
+{{ govukInput({
+  id: "assign-claim-to",
+  name: "assignClaimTo",
+  type: "text",
+  classes: "govuk-!-width-one-third",
+  label: {
+    text: "Name of verifyer"
+  }
+}) }}
+{% endset %}
+
+
+<div class="govuk-grid-row">
+  {# <div class="govuk-grid-column-full"> #}
+    <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+   
+
+
+    {{ data.user | log }}
+    {{ data.claims | log }}
+
+  
+
+
+    <form action="/provider/who-will-verify" method="POST">
+      <input type="hidden" name="claimId" value="{{ claim.id }}">
+      <input type="hidden" name="claimantName" value="{{ claim.claimantName }}">
+      <input type="hidden" name="claimantId" value="{{ claim.claimantId }}">
+      <input type="hidden" name="claimantEmail" value="{{ claim.claimantEmail }}">
+
+      {{ govukRadios({
+        name: "contact",
+        fieldset: {
+          legend: {
+            text: "Who will verify this claim?",
+            classes: "govuk-fieldset__legend--l govuk-visually-hidden"
+          }
+        },
+        hint: {
+          text: "Select one option"
+        },
+        items: [
+          {
+            value: "Me",
+            text: "Me"
+          },
+          {
+            value: "Someone else",
+            text: "Someone else",
+            conditional: {
+              html: assigneeHtml
+            }
+          }
+        ]
+      }) }}
+  
+      <div class="govuk-button-group">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Continue
+        </button>
+        <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+          Cancel
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
