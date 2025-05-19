@@ -16,13 +16,6 @@
   {# <div class="govuk-grid-column-full"> #}
     <div class="govuk-grid-column-three-quarters">
     <h1 class="govuk-heading-l">{{pageName}}</h1>
-    {% if claim.status == "Not started" %}
-      {{ govukButton({
-        text: "Assign claim",
-        classes: "govuk-button--primary",
-        href: "/provider/" + claim.id + "/assign"
-      }) }}
-    {% endif %} 
 
     {% if claim.status == 'In progress' %}
       <div class="govuk-inset-text">
