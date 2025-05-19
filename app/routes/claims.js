@@ -20,7 +20,7 @@ module.exports = router => {
     })
   })
 
-  //Handles the link to who-will-verify.html
+  //Handles the link from index to who-will-verify.html
   router.get('/provider/who-will-verify/:claimId', (req, res) => {
     let claims = req.session.data.claims || []
     let claim = claims.find(claim => String(claim.id) === req.params.claimId)
@@ -30,6 +30,30 @@ module.exports = router => {
     }
   
     res.render('provider/who-will-verify', { claim })
+  })
+
+  //POST back to who-will-verify.html
+  router.post('/provider/who-will-verify/:claimId', (req, res) => {
+    const claimId = req.params.claimId
+    const whoWillVerify = req.body.whoWillVerify
+    const claims = req.session.data.claims || []
+  
+    // Find the claim by ID
+    const claim = claims.find(claim => String(claim.id) === claimId)
+  
+    if (!claim) {
+      return res.status(404).send('Claim not found')
+    }
+  
+    // Persist the selection
+    claim.verifier = whoWillVerify
+  
+    // Redirect based on selection
+    if (whoWillVerify === 'Me') {
+      res.redirect(`/provider/show/${claimId}`)
+    } else {
+      res.redirect(`/provider/${claimId}`)
+    }
   })
 
   //Handles the link to finish-verify.html
@@ -44,17 +68,19 @@ module.exports = router => {
     res.render('provider/finish-verifying', { claim })
   })
   
+
+
   //Handles the link to show.html
-  // router.get('/provider/show/:claimId', (req, res) => {
-  //   let claims = req.session.data.claims || []
-  //   let claim = claims.find(claim => String(claim.id) === req.params.claimId)
+  router.get('/provider/show/:claimId', (req, res) => {
+    let claims = req.session.data.claims || []
+    let claim = claims.find(claim => String(claim.id) === req.params.claimId)
   
-  //   if (!claim) {
-  //     return res.status(404).send('Claim not found')
-  //   }
+    if (!claim) {
+      return res.status(404).send('Claim not found')
+    }
   
-  //   res.render('provider/show', { claim })
-  // })
+    res.render('provider/show', { claim })
+  })
 
    //Handles the link to verified.html
    router.get('/provider/verified/:claimId', (req, res) => {
@@ -92,6 +118,8 @@ module.exports = router => {
     res.redirect(`/provider/check/${req.params.claimId}`)
   })
 
+
+
   router.get('/provider/check/:claimId', (req, res) => {
     const claims = req.session.data.claims || []
     const claim = claims.find(c => String(c.id) === req.params.claimId)
@@ -118,13 +146,19 @@ module.exports = router => {
   
     // Set a flash message with HTML (text + link)
     req.flash('success', `Claim verified <a class="govuk-link" href="/provider/completed/check/${claim.id}"><br>View verified claim</a>`)
-  
     res.redirect('/provider')
   })
-  
- 
-  
-  
 
+  //GET back to index.html
+  router.get('/provider/:claimId', (req, res) => {
+    let claims = req.session.data.claims || []
+    let claim = claims.find(claim => String(claim.id) === req.params.claimId)
+  
+    if (!claim) {
+      return res.status(404).send('Claim not found')
+    }
+  
+    res.render('provider/index', { claim })
+  })
 
 }

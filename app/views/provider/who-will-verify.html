@@ -30,7 +30,8 @@
   
 
 
-    <form action="/provider/who-will-verify" method="POST">
+    <form method="post" action="/provider/who-will-verify/{{ claim.id }}">
+      
       <input type="hidden" name="claimId" value="{{ claim.id }}">
       <input type="hidden" name="claimantName" value="{{ claim.claimantName }}">
       <input type="hidden" name="claimantId" value="{{ claim.claimantId }}">
