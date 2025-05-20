@@ -201,7 +201,7 @@ module.exports = router => {
       return res.status(404).send('Claim not found')
     }
   
-    const userChoice = req.body.contact
+    const userChoice = req.body.continueVerification
   
     if (userChoice === 'Yes') {
       return res.redirect(`/provider/show/${claim.id}`)

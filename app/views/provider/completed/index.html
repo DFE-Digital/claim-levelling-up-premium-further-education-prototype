@@ -2,6 +2,10 @@
 
 {% set serviceNavId = "completedClaims" %}
 
+{# set verified dates #}
+{% set verifiedIso = claim.assignedDate | date("YYYY-MM-DD") %}
+{% set verifiedDisplay = claim.assignedDate | date("D MMMM YYYY") %}
+
 {# UNVERIFIED Claims counter #}
 {% set unverifiedStatuses = ["Not started", "In progress"] %}
 {% set unverifiedCount = 0 %}
@@ -61,7 +65,8 @@
             {% endif %}
           </td>
   
-          <td class="govuk-table__cell" data-sort-value="{{ claim.dateVerifiedIso }}">{{ claim.dateVerified }}</td>
+          <td class="govuk-table__cell" data-sort-value="{{ verifiedIso }}">{{ verifiedDisplay }}</td>
+          
           <td class="govuk-table__cell" data-sort-value="{{ claim.assignedTo }}">{{ claim.assignedTo }}</td>
           <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">
             {{ govukTag({
