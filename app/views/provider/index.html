@@ -52,15 +52,16 @@
   <tbody class="govuk-table__body govuk-!-font-size-16">
     {% for claim in claims %}
         <tr class="govuk-table__row">
+
           <td class="govuk-table__cell" data-sort-value="{{ claim.claimantName }}">
-            {% if claim.status === "Not started" and claim.assignedTo !== "Unassigned" %}
-              <a href="/provider/show/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
+            {% if claim.status == "Not started" and claim.assignedTo != "Unassigned" %}
+              <a href="/provider/finish-verifying/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
             {% elseif claim.status == "Not started" %}
               <a href="/provider/who-will-verify/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
             {% else %}
-              <a href="/provider/finish-verifying/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
+              <a href="/provider/show/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
             {% endif %}
-          </td>
+          </td>        
   
           <td class="govuk-table__cell" data-sort-value="{{ claim.dateSubmittedIso }}">{{ claim.dateSubmitted }}</td>
           <td class="govuk-table__cell" data-sort-value="{{ claim.dueDateIso }}">{{ claim.dueDate }}</td>

@@ -192,6 +192,7 @@ module.exports = router => {
     res.render('provider/finish-verifying', { claim })
   })
 
+  // POST: if Yes go to SHOW.HTML
   router.post('/provider/confirm-verifier/:claimId', (req, res) => {
     const claims = req.session.data.claims || []
     const claim = claims.find(claim => String(claim.id) === req.params.claimId)
