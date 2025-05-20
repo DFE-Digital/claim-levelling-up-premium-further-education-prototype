@@ -56,13 +56,8 @@
       {% if claim.status == "Verified" %}
         <tr class="govuk-table__row">
           <td class="govuk-table__cell" data-sort-value="{{ claim.claimantName }}">
-            {% if claim.status == "Complete" %}
-              <a href="/provider/completed/check/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
-            {% else %}
-              <a href="/provider/show/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
-            {% endif %}
+              <a href="/provider/completed/show/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
           </td>
-  
           <td class="govuk-table__cell" data-sort-value="{{ claim.dateVerifiedIso }}">{{ claim.dateVerified }}</td>
           
           <td class="govuk-table__cell" data-sort-value="{{ claim.assignedTo }}">{{ claim.assignedTo }}</td>

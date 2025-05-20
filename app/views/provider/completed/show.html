@@ -1,8 +1,8 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = 'Review a targeted retention incentive payment claim' %}
-
 {% set serviceNavId = "completedClaims" %}
+
+{% set pageName = 'Claim ref: ' + claim.claimReference %}
 
 {% block beforeContent %}
   {{ govukBackLink({
@@ -13,43 +13,36 @@
 
 {% block content %}
 <div class="govuk-grid-row">
-  {# <div class="govuk-grid-column-full"> #}
-    <div class="govuk-grid-column-three-quarters">
-    <h1 class="govuk-heading-l">{{pageName}}</h1>
-    {% if claim.status == "Not started" %}
-      {{ govukButton({
-        text: "Assign claim",
-        classes: "govuk-button--primary",
-        href: "/provider/" + claim.id + "/assign"
-      }) }}
-    {% endif %} 
-
-    {% if claim.status == 'In progress' %}
-      <div class="govuk-inset-text">
-        Claim asssigned to {{ claim.processedBy }} on {{ claim.dateSubmitted }}
-      </div>
-    {% endif %}
-
-
-    {{ data.user | log }}
-    {{ data.claims | log }}
-
-    {% include "_includes/claim/details.njk" %}
-
-    <form method="post" action="/provider/check/{{ claim.id }}">
-
-
-    {% include "_includes/claim/review/verify-details-radios.njk" %}
   
-      <div class="govuk-button-group">
-        <button type="submit" class="govuk-button" data-module="govuk-button">
-          Continue
-        </button>
-        <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
-          Cancel
-        </button>
+    <div class="govuk-grid-column-three-quarters">
+
+      <span class="govuk-caption-l">{{claim.claimantName}}</span>
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+      
+
+      {% if claim.status == 'Complete' %}
+      <div class="govuk-inset-text">
+        Claim verified by {{ claim.assignedTo }} on {{ claim.assignedDate | govukDate }} {{ claim.assignedDate | govukTime }}
       </div>
-    </form>
+      {% endif %}
+
+
+      {{ data.user | log }}
+      {{ data.claims | log }}
+
+      {% include "_includes/claim/details.njk" %}
+
+
+      {% include "_includes/claim/verified/verify-read-only-answers.njk" %}
+
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Close claim",
+          href: "/provider/completed"
+        }) }}
+      </div>
+     
+    
 
   </div>
 </div>

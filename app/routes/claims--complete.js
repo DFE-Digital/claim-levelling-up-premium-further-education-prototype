@@ -19,28 +19,20 @@ module.exports = router => {
     })
   })
 
-  router.get('/provider/completed/check/:claimId', (req, res) => {
-    const claims = req.session.data.claims || []
-    const claim = claims.find(c => String(c.id) === req.params.claimId)
-  
-    if (!claim) {
-      return res.status(404).send('Claim not found')
-    }
-  
-    res.render('provider/completed/check', { claim })
-  })
 
-  /////////////////////////////////////////////////////////////////////////
-
+  // GET: Update a verified claim
   router.get('/provider/completed/show/:claimId', (req, res) => {
     const claims = req.session.data.claims || []
     const claim = claims.find(c => String(c.id) === req.params.claimId)
-  
+
     if (!claim) {
       return res.status(404).send('Claim not found')
     }
-  
-    // You can reuse your existing review template if appropriate, or create a new one
+
+    if (claim.status !== 'Verified') {
+      return res.status(400).send('Only verified claims can be updated from this page.')
+    }
+
     res.render('provider/completed/show', { claim })
   })
 
