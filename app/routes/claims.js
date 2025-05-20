@@ -1,4 +1,5 @@
 const { govukDate } = require('@x-govuk/govuk-prototype-filters')
+
 const Pagination = require('../helpers/pagination')
 
 module.exports = router => {
@@ -37,9 +38,18 @@ module.exports = router => {
       return res.status(404).send('Claim not found')
     }
 
+    const now = new Date()
+
     claim.status = 'Verified'
     claim.assignedTo = '[Name_of_verifier]'
-    claim.assignedDate = new Date().toISOString()
+    claim.assignedDate = now.toISOString()
+    claim.dateVerified = now.toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    })
+    claim.dateVerifiedIso = now.toISOString().split('T')[0]
+
 
     req.flash('success', `Claim verified <a class="govuk-link" href="/provider/completed/check/${claim.id}"><br>View verified claim</a>`)
     res.redirect('/provider')
@@ -78,7 +88,9 @@ module.exports = router => {
     claim.assignedTo = whoWillVerify === 'Me' ? 'You' : whoWillVerify
     claim.assignedDate = new Date().toISOString()
 
-    req.flash('success', `Claim assigned to <strong>${claim.assignedTo}</strong> on <span class="govuk-!-font-weight-bold">${new Date(claim.assignedDate) | govukDate}</span>`)
+    ////FLASH MSG
+    req.flash('success', 'Claim assigned to <strong>' + claim.assignedTo + '</strong> on <span class="govuk-!-font-weight-bold">' + govukDate(claim.assignedDate) + '</span>')
+
 
     if (whoWillVerify === 'Me') {
       return res.redirect(`/provider/show/${claimId}`)
