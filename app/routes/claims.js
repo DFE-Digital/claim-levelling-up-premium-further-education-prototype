@@ -51,7 +51,7 @@ module.exports = router => {
     claim.dateVerifiedIso = now.toISOString().split('T')[0]
 
 
-    req.flash('success', `Claim verified <a class="govuk-link" href="/provider/completed/check/${claim.id}"><br>View verified claim</a>`)
+    req.flash('success', `Claim verified <a class="govuk-link" href="/provider/completed/show/${claim.id}"><br>View verified claim</a>`)
     res.redirect('/provider')
   })
 

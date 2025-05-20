@@ -1,0 +1,51 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = 'Alternative verification examples' %}
+
+{% block header %}
+  {{ govukHeader({
+    productName: serviceName,
+    classes: "govuk-header--full-width-border"
+  }) }}
+{% endblock %}
+
+
+{% block content %}
+<h1 class="govuk-heading-xl">{{pageName}}</h1>
+
+<section>
+  <h2 class="govuk-heading-m">Bank details</h2>
+  <p class="govuk-body">
+    <a class="govuk-link" href="/alt-verification/bank-details.html">
+      Go to bank detail confirmation
+    </a>
+  </p>
+</section>
+
+<section>
+  <h2 class="govuk-heading-m">Work email</h2>
+  <p class="govuk-body">
+    <a class="govuk-link" href="/alt-verification/work-email.html">
+      Go to work email entry
+    </a>
+  </p>
+</section>
+
+<section>
+  <h2 class="govuk-heading-m">Verification code</h2>
+  <p class="govuk-body">
+    <a class="govuk-link" href="/alt-verification/verification-code.html">
+      Go to verification code screen
+    </a>
+  </p>
+</section>
+
+<div class="govuk-button-group">
+  {{ govukButton({
+    text: "Go back to prototype start page",
+    href: "/"
+  }) }}
+</div>
+
+
+{% endblock %}
