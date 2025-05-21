@@ -157,6 +157,7 @@ module.exports = router => {
     }
 
     const allAnswered = [
+      claim.status = 'In progress',
       claim.permanentContract,
       claim.teachingResponsibilities,
       claim.first5Years,
