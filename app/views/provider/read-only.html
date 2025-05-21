@@ -1,0 +1,96 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = 'Read only claim' %}
+
+{% set serviceNavId = "allClaims" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+
+    {{ govukNotificationBanner({
+      type: "success",
+      html: '<h2 class="govuk-heading-m"> '+flash+' </h2>' | safe
+    }) if flash.length }}
+
+    <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+    {{ govukInsetText({
+      html: "This claim was started by " + claim.assignedTo
+    }) }}
+
+   
+
+
+    {{ data.user | log }}
+    {{ data.claims | log }}
+
+  
+
+
+    <form method="POST" action="#">
+
+      {{ govukTable({
+        caption: "Claim form (would show any PV radios selected so far)",
+        captionClasses: "govuk-table__caption--m",
+        firstCellIsHeader: true,
+        head: [
+          {
+            text: "Date"
+          },
+          {
+            text: "Amount"
+          }
+        ],
+        rows: [
+          [
+            {
+              text: "First 6 weeks"
+            },
+            {
+              text: "£109.80 per week"
+            }
+          ],
+          [
+            {
+              text: "Next 33 weeks"
+            },
+            {
+              text: "£109.80 per week"
+            }
+          ],
+          [
+            {
+              text: "Total estimated pay"
+            },
+            {
+              text: "£4,282.20"
+            }
+          ]
+        ]
+      }) }}
+      
+  
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Close",
+          href: "/provider"
+        }) }}
+      </div>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

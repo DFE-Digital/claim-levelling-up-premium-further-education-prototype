@@ -220,9 +220,33 @@ module.exports = router => {
       return res.redirect(`/provider/show/${claim.id}`)
     }
   
-    // You can redirect somewhere else if 'No' is selected, or stay on the page
+    // User selected "No"
+    if (claim.status === 'In progress') {
+      req.flash('success', 'Claim: read only mode')
+      return res.redirect(`/provider/read-only/${claim.id}`)
+    }
+  
+    if (claim.status === 'Not started') {
+      req.flash('success', 'This claim has not been started yet')
+      return res.redirect(`/provider/finish-verifying/${claim.id}`)
+    }
+  
+    // Fallback
     return res.redirect('/provider')
   })
+
+  // GET: Read-only view of a claim
+  router.get('/provider/read-only/:claimId', (req, res) => {
+    const claims = req.session.data.claims || []
+    const claim = claims.find(claim => String(claim.id) === req.params.claimId)
+
+    if (!claim) {
+      return res.status(404).send('Claim not found')
+    }
+
+    res.render('provider/read-only', { claim })
+  })
+  
 
   // GET: Verified claim summary screen
   router.get('/provider/verified/:claimId', (req, res) => {

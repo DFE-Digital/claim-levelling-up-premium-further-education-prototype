@@ -16,8 +16,15 @@
 {% block content %}
 
 
+
+
 <div class="govuk-grid-row">
-  {# <div class="govuk-grid-column-full"> #}
+    
+    {{ govukNotificationBanner({
+      type: "success",
+      html: '<h2 class="govuk-heading-m"> '+flash+' </h2>' | safe
+    }) if flash.length }}
+    
     <div class="govuk-grid-column-three-quarters">
     <h1 class="govuk-heading-l">{{pageName}}</h1>
 
@@ -25,13 +32,8 @@
       html: "This claim was started by " + claim.assignedTo + ". Selecting 'Yes' will assign it to you."
     }) }}
 
-   
-
-
     {{ data.user | log }}
     {{ data.claims | log }}
-
-  
 
 
     <form method="POST" action="/provider/confirm-verifier/{{ claim.id }}">
