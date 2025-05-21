@@ -7,7 +7,7 @@
 {% block beforeContent %}
   {{ govukBackLink({
     text: "Back",
-    href: "javascript:window.history.back()"
+    href: "/provider/completed"
   }) }}
 {% endblock %}
 
@@ -17,7 +17,24 @@
     <div class="govuk-grid-column-three-quarters">
 
       <span class="govuk-caption-l">{{claim.claimantName}}</span>
-      <h1 class="govuk-heading-l">{{pageName}}</h1>
+      <h1 class="govuk-heading-l">{{pageName}}
+          {% if claim.verified === true %}
+          {{ govukTag({
+            text: "Verified",
+            classes: "govuk-tag--blue"
+          }) }}
+          {% elseif claim.verified === false %}
+            {{ govukTag({
+              text: "Not verified",
+              classes: "govuk-tag--grey"
+            }) }}
+          {% else %}
+            {{ govukTag({
+              text: claim.status,
+              classes: claim.status | statusColour
+            }) }}
+        {% endif %}
+      </h1>
       
 
       {% if claim.status == 'Complete' %}
@@ -30,7 +47,7 @@
       {{ data.user | log }}
       {{ data.claims | log }}
 
-      {% include "_includes/claim/details.njk" %}
+      {% include "_includes/claim/read-only-details.njk" %}
 
 
       {% include "_includes/claim/verified/verify-read-only-answers.njk" %}

@@ -1,0 +1,39 @@
+<h3 class="govuk-heading-m">
+  Claim details
+</h3>
+{{ govukSummaryList({
+  rows: [
+    {
+      key: {
+        text: "Claim reference"
+      },
+      value: {
+        text: claim.claimReference
+      }
+    },
+    {
+      key: {
+        text: "Claimant name"
+      },
+      value: {
+        text: claim.claimantName
+      }
+    },
+    {
+      key: {
+        text: "TRN"
+      },
+      value: {
+        html: claim.trn
+      }
+    },
+    {
+      key: {
+        text: "Date submitted"
+      },
+      value: {
+        html: claim.dateSubmitted
+      }
+    }
+  ]
+}) }}
