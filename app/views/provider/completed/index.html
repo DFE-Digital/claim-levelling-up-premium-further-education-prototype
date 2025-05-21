@@ -46,6 +46,7 @@
     <tr class="govuk-table__row">
       {# <th scope="col" class="govuk-table__header" aria-sort="ascending">Claim reference</th> #}
       <th scope="col" class="govuk-table__header" aria-sort="none">Claimant name</th>
+      <th scope="col" class="govuk-table__header" aria-sort="none">Claim reference</th>
       <th scope="col" class="govuk-table__header" aria-sort="ascending">Date verified</th>
       <th scope="col" class="govuk-table__header" aria-sort="none">Processed by</th>
       <th scope="col" class="govuk-table__header" aria-sort="none">Status</th>
@@ -58,6 +59,7 @@
           <td class="govuk-table__cell" data-sort-value="{{ claim.claimantName }}">
               <a href="/provider/completed/show/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
           </td>
+          <td class="govuk-table__cell" data-sort-value="{{ claim.reference }}">{{ claim.reference }}</td>
           <td class="govuk-table__cell" data-sort-value="{{ claim.dateVerifiedIso }}">{{ claim.dateVerified }}</td>
           
           <td class="govuk-table__cell" data-sort-value="{{ claim.assignedTo }}">{{ claim.assignedTo }}</td>
