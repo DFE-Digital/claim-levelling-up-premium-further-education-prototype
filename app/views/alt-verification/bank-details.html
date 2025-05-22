@@ -20,9 +20,9 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <h1 class="govuk-heading-l">Check claimant's bank details</h1>
+    <h1 class="govuk-heading-l">Check bank details</h1>
 
-    <p class="govuk-body">These are the bank details we have for the claimant.</p>
+    <p class="govuk-body">These are the bank details we have for John Smith.</p>
 
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
@@ -35,14 +35,14 @@
       </div>
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">Account number ending</dt>
-        <dd class="govuk-summary-list__value">9876</dd>
+        <dd class="govuk-summary-list__value">****9876</dd>
       </div>
     </dl>
 
     <form method="post" action="#">
       <fieldset class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-          Do these bank details match the details you hold for the claimant?
+          Do these bank details match the details you hold for John Smith?
         </legend>
 
         {{ govukRadios({
