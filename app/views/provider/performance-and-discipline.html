@@ -1,0 +1,93 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = 'Review a targeted retention incentive payment claim' %}
+
+{% set serviceNavId = "allClaims" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  {# <div class="govuk-grid-column-full"> #}
+    <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+    {% if claim.status == 'In progress' %}
+      <div class="govuk-inset-text">
+        Claim asssigned to {{ claim.assignedTo }} on {{ claim.dateSubmitted }}
+      </div>
+    {% endif %}
+
+
+    {{ data.user | log }}
+    {{ data.claims | log }}
+
+    {% include "_includes/claim/details.njk" %}
+
+    <form method="post" action="/provider/check/{{ claim.id }}">
+    
+      <h3 class="govuk-heading-m">Performance and discipline</h3>
+
+        {{ govukRadios({
+          name: "performanceMeasures",
+          value: claim.performanceMeasures,
+          fieldset: {
+            legend: {
+              text: "Is " + claim.claimantName + " currently subject to any performance measures?",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes"
+            },
+            {
+              value: "no",
+              text: "No"
+            }
+          ]
+        }) }}
+
+        {{ govukRadios({
+          name: "subjectToDisciplinaryAction",
+          value: claim.subjectToDisciplinaryAction,
+          fieldset: {
+            legend: {
+              text: "Is " + claim.claimantName + " currently subject to any disciplinary action?",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes"
+            },
+            {
+              value: "no",
+              text: "No"
+            }
+          ]
+        }) }}
+
+    
+        <div class="govuk-button-group">
+          <button type="submit" class="govuk-button" data-module="govuk-button">
+            Continue
+          </button>
+          <button type="submit" name="action" value="save" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            Save
+          </button>
+          <a href="javascript:window.history.back()" class="govuk-link">Cancel</a>
+        </div>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
