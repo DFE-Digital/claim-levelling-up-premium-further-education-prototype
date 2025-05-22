@@ -29,7 +29,7 @@
 
     {% include "_includes/claim/details.njk" %}
 
-    <form method="post" action="/provider/check/{{ claim.id }}">
+    <form method="post" action="/provider/contracted-hours/{{ claim.id }}">
 
       <h3 class="govuk-heading-m">Contracted hours</h3>
 
@@ -62,7 +62,6 @@
         {{ govukRadios({
           name: "sixteenToNineteen",
           value: claim.sixteenToNineteen,
-          classes: "govuk-radios--inline",
           fieldset: {
             legend: {
               text: "For at least half of their timetabled teaching hours, does " + claim.claimantName + " teach 16- to 19-year-olds, including those up to age 25 with an Education, Health and Care Plan (EHCP)?",
@@ -84,7 +83,6 @@
         {{ govukRadios({
           name: "fundingAtLevelThreeAndBelow",
           value: claim.fundingAtLevelThreeAndBelow,
-          classes: "govuk-radios--inline",
           fieldset: {
             legend: {
               html: "For at least half of their timetabled teaching hours, does " + claim.claimantName + " teach:<ul class='govuk-list govuk-list--bullet'><li>qualifications approved for funding at level 3 and below in the <a href='https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=13&PageSize=10&Sort=Status' target='_blank'>engineering (opens in a new tab)</a> sector subject area?</li></ul>",

@@ -128,49 +128,44 @@ module.exports = (router) => {
   router.post('/provider/check/:claimId', (req, res) => {
     const claims = req.session.data.claims || []
     const claim = claims.find(c => String(c.id) === req.params.claimId)
-
+  
     if (!claim) {
       return res.status(404).send('Claim not found')
     }
-
-    // Save values
-    claim.permanentContract = req.body.permanentContract
+  
+    // Save all radio values
     claim.teachingResponsibilities = req.body.teachingResponsibilities
     claim.first5Years = req.body.first5Years
-    claim.twelveHoursPerWeek = req.body.twelveHoursPerWeek
-    claim.sixteenToNineteen = req.body.sixteenToNineteen
-    claim.fundingAtLevelThreeAndBelow = req.body.fundingAtLevelThreeAndBelow
-    claim.performanceMeasures = req.body.performanceMeasures
-    claim.subjectToDisciplinaryAction = req.body.subjectToDisciplinaryAction
-
-    const isSaveAndComeBack = req.body.action === 'save'
-
-    if (isSaveAndComeBack) {
+    claim.hasTeachingQualification = req.body.hasTeachingQualification
+    claim.contractType = req.body.contractType
+  
+    // If "Save and come back later"
+    if (req.body.action === 'save') {
       claim.status = 'In progress'
-      claim.assignedTo = '[claims_team_verifyer]'
       req.flash('success', 'Your answers have been saved. You can come back and complete them later.')
-      return res.redirect(`/provider/save/${req.params.claimId}`)
+      return res.redirect(`/provider/save/${claim.id}`)
     }
-
-    const allAnswered = [
-      claim.status = 'In progress',
-      claim.permanentContract,
-      claim.teachingResponsibilities,
-      claim.first5Years,
-      claim.twelveHoursPerWeek,
-      claim.sixteenToNineteen,
-      claim.fundingAtLevelThreeAndBelow,
-      claim.performanceMeasures,
-      claim.subjectToDisciplinaryAction
-    ].every(answer => answer === 'yes' || answer === 'no')
-
-    if (!allAnswered) {
-      req.flash('error', 'You must answer all questions to continue')
-      return res.redirect(`/provider/check/${req.params.claimId}`)
+  
+    // Branch based on contract type
+    const contractType = claim.contractType
+  
+    if (contractType === 'Permanent') {
+      return res.redirect(`/provider/performance-and-discipline/${claim.id}`)
     }
-
-    res.redirect(`/provider/check/${req.params.claimId}`)
+  
+    if (contractType === 'Fixed-term') {
+      return res.redirect(`/provider/contract-academic-year/${claim.id}`)
+    }
+  
+    if (contractType === 'Variable hours') {
+      return res.redirect(`/provider/hours-academic-year/${claim.id}`)
+    }
+  
+    // Fallback (missing or invalid selection)
+    req.flash('error', 'Select a contract type to continue')
+    return res.redirect(`/provider/check/${claim.id}`)
   })
+  
 
 
   // ================================
