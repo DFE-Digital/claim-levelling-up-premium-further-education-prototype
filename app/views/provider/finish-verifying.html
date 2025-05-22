@@ -29,7 +29,7 @@
     <h1 class="govuk-heading-l">{{pageName}}</h1>
 
     {{ govukInsetText({
-      html: "This claim was started by " + claim.assignedTo + ". Selecting 'Yes' will assign it to you."
+      html: "This claim was assigned to " + claim.assignedTo + ". Selecting 'Yes' will assign it to you."
     }) }}
 
     {{ data.user | log }}
