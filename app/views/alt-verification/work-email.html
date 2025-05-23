@@ -21,14 +21,18 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-three-quarters">
     <span class="govuk-caption-xl">Personal details</span>
-    <h1 class="govuk-heading-xl govuk-!-margin-top-0">Email address</h1>
+    <h1 class="govuk-heading-xl govuk-!-margin-top-0">Email</h1>
 
     <p class="govuk-body">
-      You must enter a work email address.
+      You must now enter your work email address for your further education employer.
     </p>
 
     <p class="govuk-body">
-      To verify your email address we will send you an email with a 6-digit passcode. You can enter the passcode on the next screen.
+      We will then send an email with a 6-digit passcode. 
+    </p>
+
+    <p class="govuk-body">
+      You'll be asked to enter the code on the next screen.
     </p>
 
     <form action="/your-next-step" method="post" novalidate>
@@ -40,8 +44,8 @@
       </div>
 
       {{ govukDetails({
-        summaryText: "Why do we ask for your work email address?",
-        text: "We require you to enter a work email address so that we can confirm that you are employed at the Further Education provider."
+        summaryText: "Why we need a work email address?",
+        text: "We need your work email address at your further education employer so we can confirm you work there."
       }) }}
       
 
