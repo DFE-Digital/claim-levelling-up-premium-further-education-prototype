@@ -1,7 +1,6 @@
 {% extends "layouts/main.html" %}
 
 {% set pageName = 'Check your answers' %}
-
 {% set serviceNavId = "allClaims" %}
 
 {% block beforeContent %}
@@ -11,45 +10,141 @@
   }) }}
 {% endblock %}
 
-
-
 {% block content %}
 <div class="govuk-grid-row">
-  {# <div class="govuk-grid-column-full"> #}
-    <div class="govuk-grid-column-three-quarters">
-        <h1 class="govuk-heading-l">{{pageName}}</h1>
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-        {{ data.user | log }}
-        {{ data.claims | log }}
+    {# Role and experience summary card #}
+    {{ govukSummaryList({
+      card: {
+        title: {
+          text: "Role and experience",
+          classes: "govuk-heading-m"
+        },
+        actions: {
+          items: [
+            {
+              href: "/provider/role-and-experience/" + claim.id + "?returnUrl=/provider/check/" + claim.id,
+              text: "Change",
+              visuallyHiddenText: "role and experience"
+            }
+          ]
+        }
+      },
+      rows: [
+        {
+          key: { text: "Teaching responsibilities" },
+          value: { text: claim.teachingResponsibilities or "Not answered" }
+        },
+        {
+          key: { text: "In first 5 years of FE teaching" },
+          value: { text: claim.first5Years or "Not answered" }
+        },
+        {
+          key: { text: "Teaching qualification" },
+          value: { text: claim.hasTeachingQualification or "Not answered" }
+        },
+        {
+          key: { text: "Type of contract" },
+          value: { text: claim.contractType or "Not answered" }
+        },
+        {
+          key: { text: "Contract covers full academic year" },
+          value: { text: claim.contractAcademicYear or "Not answered" }
+        } if claim.contractAcademicYear,
+        {
+          key: { text: "Variable hours in academic year" },
+          value: { text: claim.hoursAcademicYear or "Not answered" }
+        } if claim.hoursAcademicYear
+      ]
+    }) }}
 
-        {% include "_includes/claim/details.njk" %}
+    {# Performance and discipline summary card #}
+    {{ govukSummaryList({
+      card: {
+        title: {
+          text: "Performance and discipline",
+          classes: "govuk-heading-m"
+        },
+        actions: {
+          items: [
+            {
+              href: "/provider/performance-and-discipline/" + claim.id + "?returnUrl=/provider/check/" + claim.id,
+              text: "Change",
+              visuallyHiddenText: "performance and discipline"
+            }
+          ]
+        }
+      },
+      rows: [
+        {
+          key: { text: "Subject to performance measures" },
+          value: { text: claim.performanceMeasures or "Not answered" }
+        },
+        {
+          key: { text: "Subject to disciplinary action" },
+          value: { text: claim.subjectToDisciplinaryAction or "Not answered" }
+        }
+      ]
+    }) }}
 
-        {% include "_includes/claim/review/check-verify-answers.njk" %}
+{# Contracted hours summary card #}
+{{ govukSummaryList({
+  card: {
+    title: {
+      text: "Contracted hours",
+      classes: "govuk-heading-m"
+    },
+    actions: {
+      items: [
+        {
+          href: "/provider/contracted-hours/" + claim.id + "?returnUrl=/provider/check/" + claim.id,
+          text: "Change",
+          visuallyHiddenText: "contracted hours"
+        }
+      ]
+    }
+  },
+  rows: [
+    {
+      key: { text: "Timetabled hours per week" },
+      value: { text: claim.contractedHours or "Not answered" }
+    },
+    {
+      key: { text: "Teaches 16-19-year-olds or those with EHCP" },
+      value: { text: claim.sixteenToNineteen | default("Not answered") }
+    },
+    {
+      key: { text: "Teaches approved qualifications in engineering" },
+      value: { text: claim.fundingAtLevelThreeAndBelow | default("Not answered") }
+    }    
+  ]
+}) }}
 
-        <form method="post" action="/provider/index/{{ claim.id }}">
-          <h2 class="govuk-heading-m">Declaration</h2>
 
-          {{ govukCheckboxes({
-            name: "Declaration",
-            items: [
-              {
-                value: "To the best of my knowledge, I confirm that the information provided in this form is correct.",
-                text: "To the best of my knowledge, I confirm that the information provided in this form is correct."
-              }
-            ]
-          }) }}
-          
-          <div class="govuk-button-group">
-            <button type="submit" class="govuk-button" data-module="govuk-button">
-              Continue
-            </button>
-            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
-              Cancel
-            </button>
-          </div>
-        </form>
-        
+    <form method="post" action="/provider/index/{{ claim.id }}">
+      <h2 class="govuk-heading-m">Declaration</h2>
+
+      {{ govukCheckboxes({
+        name: "Declaration",
+        items: [
+          {
+            value: "To the best of my knowledge, I confirm that the information provided in this form is correct.",
+            text: "To the best of my knowledge, I confirm that the information provided in this form is correct."
+          }
+        ]
+      }) }}
+
+      <div class="govuk-button-group">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Continue
+        </button>
+        <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+          Cancel
+        </button>
+      </div>
+    </form>
   </div>
 </div>
-
 {% endblock %}

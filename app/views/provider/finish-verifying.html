@@ -1,0 +1,73 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = 'Do you want to continue verification of this claim?' %}
+
+{% set serviceNavId = "allClaims" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+
+<div class="govuk-grid-row">
+    
+    {{ govukNotificationBanner({
+      type: "success",
+      html: '<h2 class="govuk-heading-m"> '+flash+' </h2>' | safe
+    }) if flash.length }}
+    
+    <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+    {{ govukInsetText({
+      html: "This claim was assigned to " + claim.assignedTo + ". Selecting 'Yes' will assign it to you."
+    }) }}
+
+    {{ data.user | log }}
+    {{ data.claims | log }}
+
+
+    <form method="POST" action="/provider/confirm-finish-verifier/{{ claim.id }}">
+
+      {{ govukRadios({
+        name: "continueVerification",
+        fieldset: {
+          legend: {
+            text: "Are you going to verify this claim?",
+            classes: "govuk-fieldset__legend--l govuk-visually-hidden"
+          }
+        },
+        items: [
+          {
+            value: "Yes",
+            text: "Yes"
+          },
+          {
+            value: "No",
+            text: "No, I just want to see the claim"
+          }
+        ]
+      }) }}
+      
+  
+      <div class="govuk-button-group">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Continue
+        </button>
+        <a href="/provider" class="govuk-link">Cancel</a>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

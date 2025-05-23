@@ -1,0 +1,40 @@
+{% extends "layouts/main.html" %}
+
+
+{% block header %}
+  {{ govukHeader({
+    productName: serviceName,
+    classes: "govuk-header--full-width-border"
+  }) }}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">Your verification code</h1>
+
+    <p class="govuk-body">Give this code to your FE employer.</p>
+    <p class="govuk-body">This code expires on 12 June 2025 at 11:59pm.</p>
+
+    <div class="govuk-panel govuk-panel--confirmation">
+      <h2 class="govuk-panel__title">
+        492&nbsp;573
+      </h2>
+    </div>
+
+    {{ govukButton({
+      text: "Close",
+      href: "/alt-verification"
+    }) }}
+  </div>
+</div>
+{% endblock %}
+

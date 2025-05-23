@@ -1,0 +1,79 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = 'Who will verify this claim?' %}
+
+{% set serviceNavId = "allClaims" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+  {# <div class="govuk-grid-column-full"> #}
+    <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+   
+
+
+    {{ data.user | log }}
+    {{ data.claims | log }}
+
+  
+
+
+    <form method="post" action="/provider/who-will-verify/{{ claim.id }}">
+
+      {{ govukRadios({
+        name: "whoWillVerify",
+        fieldset: {
+          legend: {
+            text: "Who will verify this claim?",
+            classes: "govuk-fieldset__legend--l govuk-visually-hidden"
+          }
+        },
+        hint: {
+          text: "Select the person who will verify this claim"
+        },
+        items: [
+          {
+            value: "Me",
+            text: "Me"
+          },
+          {
+            value: "	Sarah West",
+            text: "	Sarah West"
+          },
+          {
+            value: "James Templeton",
+            text: "James Templeton"
+          },
+          {
+            value: "Olivia Smith",
+            text: "Olivia Smith"
+          }
+        ]
+      }) }}
+  
+      <div class="govuk-button-group">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Continue
+        </button>
+        <button type="button" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+          Cancel
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

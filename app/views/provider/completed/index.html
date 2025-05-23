@@ -2,58 +2,83 @@
 
 {% set serviceNavId = "completedClaims" %}
 
-{% block content %}
 
-{{ data.claims | log }}
+
+{# UNVERIFIED Claims counter #}
+{% set unverifiedStatuses = ["Not started", "In progress"] %}
+{% set unverifiedCount = 0 %}
+
+{% for claim in data.claims %}
+  {% if claim.status in unverifiedStatuses %}
+    {% set unverifiedCount = unverifiedCount + 1 %}
+  {% endif %}
+{% endfor %}
+
+
+{# VERIFIED Claims counter #}
+{% set verifiedStatuses = ["Verified"] %}
+{% set verifiedCount = 0 %}
+
+{% for claim in data.claims %}
+  {% if claim.status in verifiedStatuses %}
+    {% set verifiedCount = verifiedCount + 1 %}
+  {% endif %}
+{% endfor %}
+
+
+
+{% block content %}
 
 {{ govukNotificationBanner({
   type: "success",
   html: '<h2 class="govuk-heading-m"> '+flash+' </h2>'
 }) if flash.length }}
 
-<h1 class="govuk-heading-l">Completed claims</h1>
+<h1 class="govuk-heading-l">Verified claims ( {{ verifiedCount }} )</h1>
+
+{{ data.user | log }}
+{{ data.claims | log }}
+
+{% include "_includes/claim/dashboard/completed-cards-single-row.njk" %}
 
 <table class="govuk-table" data-module="moj-sortable-table">
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
+      {# <th scope="col" class="govuk-table__header" aria-sort="ascending">Claim reference</th> #}
       <th scope="col" class="govuk-table__header" aria-sort="none">Claimant name</th>
-      <th scope="col" class="govuk-table__header" aria-sort="ascending">Claim reference</th>
-      <th scope="col" class="govuk-table__header" aria-sort="none">Date submitted</th>
-      <th scope="col" class="govuk-table__header" aria-sort="none">Assigned to</th>
-      <th scope="col" class="govuk-table__header" aria-sort="none">Verified</th>
+      <th scope="col" class="govuk-table__header" aria-sort="none">Claim reference</th>
+      <th scope="col" class="govuk-table__header" aria-sort="ascending">Date verified</th>
+      <th scope="col" class="govuk-table__header" aria-sort="none">Processed by</th>
+      <th scope="col" class="govuk-table__header" aria-sort="none">Status</th>
     </tr>
   </thead>
   <tbody class="govuk-table__body govuk-!-font-size-16">
     {% for claim in claims %}
-      <tr class="govuk-table__row">        
-        <td class="govuk-table__cell">
-            <a href="/provider/completed/check/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
-        </td>
-        <td class="govuk-table__cell">
-          {{ claim.claimReference }}
-        </td>
-        <td class="govuk-table__cell" data-sort-value="{{ claim.dateSubmitted }}">
-          {{ claim.dateSubmitted }}
-        </td>
-        <td class="govuk-table__cell">{{ claim.assignedTo }}</td>
-        <td class="govuk-table__cell">
-          {% if claim.verified or claim.status == "Complete" %}
+      {% if claim.status == "Verified" %}
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell" data-sort-value="{{ claim.claimantName }}">
+              <a href="/provider/completed/show/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
+          </td>
+          <td class="govuk-table__cell" data-sort-value="{{ claim.claimReference }}">{{ claim.claimReference }}</td>
+          <td class="govuk-table__cell" data-sort-value="{{ claim.dateVerifiedIso }}">{{ claim.dateVerified }}</td>
+          
+          <td class="govuk-table__cell" data-sort-value="{{ claim.assignedTo }}">{{ claim.assignedTo }}</td>
+          <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">
             {{ govukTag({
-              text: "Verified",
-              classes: "govuk-tag--blue"
+              text: claim.status,
+              classes: claim.status | statusColour
             }) }}
-          {% else %}
-            {{ govukTag({
-              text: "Not verified",
-              classes: "govuk-tag--grey"
-            }) }}
-          {% endif %}
-        </td>
-      </tr>
+          </td>
+        </tr>
+      {% endif %}
     {% endfor %}
   </tbody>
+  
+  
+  
 </table>
 
 {% include "_includes/pagination.njk" %}
+
 
 {% endblock %}

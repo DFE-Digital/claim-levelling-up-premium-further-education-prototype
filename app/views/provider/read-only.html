@@ -1,55 +1,41 @@
 {% extends "layouts/main.html" %}
 
-{% set serviceNavId = "completedClaims" %}
+{% set pageName = claim.claimReference %}
 
-{% set pageName = 'Claim ref: ' + claim.claimReference %}
+{% set serviceNavId = "allClaims" %}
 
 {% block beforeContent %}
   {{ govukBackLink({
     text: "Back",
-    href: "/provider/completed"
+    href: "/provider"
   }) }}
 {% endblock %}
 
+
+
 {% block content %}
+
+
 <div class="govuk-grid-row">
-  
+
+    {{ govukNotificationBanner({
+      type: "success",
+      html: '<h2 class="govuk-heading-m"> '+flash+' </h2>' | safe
+    }) if flash.length }}
+
     <div class="govuk-grid-column-three-quarters">
 
-      <span class="govuk-caption-l">{{claim.claimantName}}</span>
-      <h1 class="govuk-heading-l">{{pageName}}
-          {% if claim.verified === true %}
-          {{ govukTag({
-            text: "Verified",
-            classes: "govuk-tag--blue"
-          }) }}
-          {% elseif claim.verified === false %}
-            {{ govukTag({
-              text: "Not verified",
-              classes: "govuk-tag--grey"
-            }) }}
-          {% else %}
-            {{ govukTag({
-              text: claim.status,
-              classes: claim.status | statusColour
-            }) }}
+      <span class="govuk-caption-xl">{{claim.claimantName}}</span>
+      <h1 class="govuk-heading-l">{{ pageName }}
+        {% if claim.verified %}
+          {{ govukTag({ text: "Verified", classes: "govuk-tag--blue" }) }}
+        {% elseif claim.status == "In progress" %}
+          {{ govukTag({ text: "In progress", classes: "govuk-tag--yellow" }) }}
+        {% elseif claim.status == "Not started" %}
+          {{ govukTag({ text: "Not started", classes: "govuk-tag--red" }) }}
         {% endif %}
       </h1>
-      
-
-      {% if claim.status == 'Complete' %}
-      <div class="govuk-inset-text">
-        Claim verified by {{ claim.assignedTo }} on {{ claim.assignedDate | govukDate }} {{ claim.assignedDate | govukTime }}
-      </div>
-      {% endif %}
-
-
-      {{ data.user | log }}
-      {{ data.claims | log }}
-
-      {% include "_includes/claim/read-only-details.njk" %}
-
-
+  
       {{ govukInsetText({
         html: "This claim was started by <strong>" + claim.assignedTo + "</strong>."
       }) }}
@@ -124,17 +110,12 @@
         }    
       ]
       }) }}
-
+  
       <div class="govuk-button-group">
-        {{ govukButton({
-          text: "Close claim",
-          href: "/provider/completed"
-        }) }}
+        <a href="/provider" class="govuk-button govuk-button--secondary">Close</a>
       </div>
-     
-    
-
-  </div>
+  
+    </div>
 </div>
 
 {% endblock %}

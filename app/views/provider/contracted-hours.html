@@ -1,0 +1,136 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = 'Review a targeted retention incentive payment claim' %}
+
+{% set serviceNavId = "allClaims" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+    {% if claim.status == 'In progress' %}
+      <div class="govuk-inset-text">
+        Claim asssigned to {{ claim.assignedTo }} on {{ claim.dateSubmitted }}
+      </div>
+    {% endif %}
+
+
+    {{ data.user | log }}
+    {{ data.claims | log }}
+
+    {% include "_includes/claim/details.njk" %}
+
+    <form method="post" action="/provider/contracted-hours/{{ claim.id }}{% if returnUrl %}?returnUrl={{ returnUrl }}{% endif %}">
+
+
+      <h3 class="govuk-heading-m">Contracted hours</h3>
+
+        {{ govukRadios({
+          name: "contractedHours",
+          value: claim.contractedHours,
+          classes: "govuk-radios--inline",
+          fieldset: {
+            legend: {
+              text: "On average, how many hours per week is " + claim.claimantName + " timetabled to teach during the current term?",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "12 hours or more per week",
+              text: "12 hours or more per week"
+            },
+            {
+              value: "2.5 hours or more but less than 12 hours per week",
+              text: "2.5 hours or more but less than 12 hours per week"
+            },
+            {
+              value: "Less than 2.5 hours per week",
+              text: "Less than 2.5 hours per week"
+            }
+          ]
+        }) }}
+
+        {{ govukRadios({
+          name: "sixteenToNineteen",
+          value: claim.sixteenToNineteen,
+          fieldset: {
+            legend: {
+              text: "For at least half of their timetabled teaching hours, does " + claim.claimantName + " teach 16- to 19-year-olds, including those up to age 25 with an Education, Health and Care Plan (EHCP)?",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes"
+            },
+            {
+              value: "no",
+              text: "No"
+            }
+          ]
+        }) }}
+
+        {{ govukRadios({
+          name: "fundingAtLevelThreeAndBelow",
+          value: claim.fundingAtLevelThreeAndBelow,
+          fieldset: {
+            legend: {
+              html: "For at least half of their timetabled teaching hours, does " + claim.claimantName + " teach:<ul class='govuk-list govuk-list--bullet'><li>qualifications approved for funding at level 3 and below in the <a href='https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=13&PageSize=10&Sort=Status' target='_blank'>engineering (opens in a new tab)</a> sector subject area?</li></ul>",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes"
+            },
+            {
+              value: "no",
+              text: "No"
+            }
+          ]
+        }) }}
+
+        {{ govukRadios({
+          name: "completedSection",
+          fieldset: {
+            legend: {
+              text: "Have you completed this section?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "Yes",
+              text: "Yes"
+            },
+            {
+              value: "No",
+              text: "No, I want to come back to it later"
+            }
+          ]
+        }) }}
+        
+
+    
+        <div class="govuk-button-group">
+          <button type="submit" class="govuk-button" name="action" value="continue">
+            Save and continue
+          </button>       
+        </div>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

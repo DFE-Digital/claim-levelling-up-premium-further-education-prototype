@@ -1,20 +1,9 @@
-{% set cardActions = {
-  items: [
-    {
-      href: "/provider/show/" + claim.id,
-      text: "Change",
-      visuallyHiddenText: "change verification details"
-    }
-  ]
-} if not claim.verified %}
-
 {{ govukSummaryList({
   card: {
     title: {
       text: "Verify the details of the claim",
       classes: "govuk-heading-m"
-    },
-    actions: cardActions
+    }
   },
   rows: [
     {
@@ -22,7 +11,7 @@
         text: "Permanent contract"
       },
       value: {
-        text: data["permanentContract"] or "Not answered"
+        text: data["permanentContract"] or "Yes"
       }
     },
     {
@@ -30,7 +19,7 @@
         text: "Teaching responsibilities"
       },
       value: {
-        text: data["teachingResponsibilities"] or "Not answered"
+        text: data["teachingResponsibilities"] or "Yes"
       }
     },
     {
@@ -38,7 +27,7 @@
         text: "In first 5 years of FE teaching"
       },
       value: {
-        text: data["first5Years"] or "Not answered"
+        text: data["first5Years"] or "Yes"
       }
     },
     {
@@ -46,7 +35,7 @@
         text: "Teaches 12+ hours per week"
       },
       value: {
-        text: data["twelveHoursPerWeek"] or "Not answered"
+        text: data["twelveHoursPerWeek"] or "Yes"
       }
     },
     {
@@ -54,7 +43,7 @@
         text: "Teaches 16–19 year olds or with EHCP"
       },
       value: {
-        text: data["sixteenToNineteen"] or "Not answered"
+        text: data["sixteenToNineteen"] or "Yes"
       }
     },
     {
@@ -62,23 +51,23 @@
         text: "Teaches approved qualifications in engineering"
       },
       value: {
-        text: data["fundingAtLevelThreeAndBelow"] or "Not answered"
+        text: data["fundingAtLevelThreeAndBelow"] or "Yes"
       }
     },
     {
       key: {
-        text: "Not subject to performance measures"
+        text: "Currently subject to any performance measures"
       },
       value: {
-        text: data["performanceMeasures"] or "Not answered"
+        text: data["performanceMeasures"] or "No"
       }
     },
     {
       key: {
-        text: "Not subject to disciplinary action"
+        text: "Currently subject to any disciplinary action"
       },
       value: {
-        text: data["subjectToDisciplinaryAction"] or "Not answered"
+        text: data["subjectToDisciplinaryAction"] or "No"
       }
     }
   ]

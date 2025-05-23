@@ -1,0 +1,53 @@
+{% set claimsVerifiedCount = 0 %}
+{% for claim in data.claims %}
+  {% if claim.status == "Not started" %}
+    {% set claimsVerifiedCount = claimsVerifiedCount + 1 %}
+  {% endif %}
+{% endfor %}
+
+{% set dfeApprovedCount = 0 %}
+{% for claim in data.claims %}
+  {% if claim.dfeApproved == "Yes" %}
+    {% set dfeApprovedCount = dfeApprovedCount + 1 %}
+  {% endif %}
+{% endfor %}
+
+{% set verifiedCount = 0 %}
+{% for claim in data.claims %}
+  {% if claim.status == "Verified" %}
+    {% set verifiedCount = verifiedCount + 1 %}
+  {% endif %}
+{% endfor %}
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <div class="app-home-statuses app-home-statuses--3-up govuk-!-margin-bottom-4">
+      {# <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible"> #}
+
+      {# VERIFIED #} 
+      <a href="#" class="status-card status-card--problem">
+        <span class="status-card__count">9</span>
+        <span class="status-card__status govuk-link--no-underline">Not approved by DfE</span>
+        <span class="govuk-visually-hidden">View these records.</span>
+      </a>
+
+      {# DFE APPROVED #}
+      <a href="#" class="status-card status-card--trn-received">
+        <span class="status-card__count">{{ dfeApprovedCount }}</span>
+        <span class="status-card__status govuk-link--no-underline">Approved by DfE</span>
+        <span class="govuk-visually-hidden">View these records.</span>
+      </a>
+
+      {# STILL DO DO #}
+      <a href="/provider" class="status-card status-card--draft">
+        <span class="status-card__count">{{ unverifiedCount }}</span>
+        <span class="status-card__status">Claims still to verify</span>
+        <span class="govuk-visually-hidden">View these records.</span>
+      </a>
+
+      
+    </div>
+    {# <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible"> #}
+  </div>
+</div>
