@@ -28,7 +28,8 @@
 
     {% include "_includes/claim/details.njk" %}
 
-    <form method="post" action="/provider/contracted-hours/{{ claim.id }}">
+    <form method="post" action="/provider/contracted-hours/{{ claim.id }}{% if returnUrl %}?returnUrl={{ returnUrl }}{% endif %}">
+
 
       <h3 class="govuk-heading-m">Contracted hours</h3>
 

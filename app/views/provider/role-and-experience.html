@@ -4,12 +4,7 @@
 
 {% set serviceNavId = "allClaims" %}
 
-{% block beforeContent %}
-  {{ govukBackLink({
-    text: "Back",
-    href: "javascript:window.history.back()"
-  }) }}
-{% endblock %}
+
 
 {% block content %}
 <div class="govuk-grid-row">
@@ -29,7 +24,8 @@
 
     {% include "_includes/claim/details.njk" %}
 
-    <form method="post" action="/provider/check/{{ claim.id }}">
+    <form method="post" action="/provider/role-and-experience/{{ claim.id }}">
+
 
       <h2 class="govuk-heading-m">Role and experience</h2>
 

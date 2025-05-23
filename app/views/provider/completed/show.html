@@ -50,7 +50,80 @@
       {% include "_includes/claim/read-only-details.njk" %}
 
 
-      {% include "_includes/claim/verified/verify-read-only-answers.njk" %}
+      {{ govukInsetText({
+        html: "This claim was started by <strong>" + claim.assignedTo + "</strong>."
+      }) }}
+  
+      {# Role and experience card #}
+      {{ govukSummaryList({
+        card: {
+          title: { text: "Role and experience", classes: "govuk-heading-m" }
+        },
+        rows: [
+        {
+          key: { text: "Teaching responsibilities" },
+          value: { text: claim.teachingResponsibilities or "Not answered" }
+        },
+        {
+          key: { text: "In first 5 years of FE teaching" },
+          value: { text: claim.first5Years or "Not answered" }
+        },
+        {
+          key: { text: "Teaching qualification" },
+          value: { text: claim.hasTeachingQualification or "Not answered" }
+        },
+        {
+          key: { text: "Type of contract" },
+          value: { text: claim.contractType or "Not answered" }
+        },
+        {
+          key: { text: "Contract covers full academic year" },
+          value: { text: claim.contractAcademicYear or "Not answered" }
+        } if claim.contractAcademicYear,
+        {
+          key: { text: "Variable hours in academic year" },
+          value: { text: claim.hoursAcademicYear or "Not answered" }
+        } if claim.hoursAcademicYear
+      ]
+      }) }}
+  
+      {# Performance and discipline card #}
+      {{ govukSummaryList({
+        card: {
+          title: { text: "Performance and discipline", classes: "govuk-heading-m" }
+        },
+          rows: [
+          {
+            key: { text: "Subject to performance measures" },
+            value: { text: claim.performanceMeasures or "Not answered" }
+          },
+          {
+            key: { text: "Subject to disciplinary action" },
+            value: { text: claim.subjectToDisciplinaryAction or "Not answered" }
+          }
+        ]
+      }) }}
+  
+      {# Contracted hours card #}
+      {{ govukSummaryList({
+        card: {
+          title: { text: "Contracted hours", classes: "govuk-heading-m" }
+        },
+        rows: [
+        {
+          key: { text: "Timetabled hours per week" },
+          value: { text: claim.contractedHours or "Not answered" }
+        },
+        {
+          key: { text: "Teaches 16-19-year-olds or those with EHCP" },
+          value: { text: claim.sixteenToNineteen | default("Not answered") }
+        },
+        {
+          key: { text: "Teaches approved qualifications in engineering" },
+          value: { text: claim.fundingAtLevelThreeAndBelow | default("Not answered") }
+        }    
+      ]
+      }) }}
 
       <div class="govuk-button-group">
         {{ govukButton({
