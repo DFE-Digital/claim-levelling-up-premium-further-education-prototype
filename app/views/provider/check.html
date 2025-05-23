@@ -25,7 +25,7 @@
         actions: {
           items: [
             {
-              href: "/provider/role-and-experience/"+ claim.id ,
+              href: "/provider/role-and-experience?returnUrl=/provider/check/" + claim.id,
               text: "Change",
               visuallyHiddenText: "role and experience"
             }
@@ -70,7 +70,7 @@
         actions: {
           items: [
             {
-              href: "/provider/performance-and-discipline/" + claim.id ,
+              href: "/provider/performance-and-discipline?returnUrl=/provider/check/" + claim.id,
               text: "Change",
               visuallyHiddenText: "performance and discipline"
             }
@@ -99,7 +99,7 @@
     actions: {
       items: [
         {
-          href: "/provider/contracted-hours/" +claim.id,
+          href: "/provider/contracted-hours?returnUrl=/provider/check/" + claim.id,
           text: "Change",
           visuallyHiddenText: "contracted hours"
         }
@@ -113,12 +113,12 @@
     },
     {
       key: { text: "Teaches 16-19-year-olds or those with EHCP" },
-      value: { text: claim.sixteenToNineteen or "Not answered" }
+      value: { text: claim.sixteenToNineteen | default("Not answered") }
     },
     {
       key: { text: "Teaches approved qualifications in engineering" },
-      value: { text: claim.fundingAtLevelThreeAndBelow or "Not answered" }
-    }
+      value: { text: claim.fundingAtLevelThreeAndBelow | default("Not answered") }
+    }    
   ]
 }) }}
 
