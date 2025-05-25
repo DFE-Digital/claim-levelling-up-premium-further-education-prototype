@@ -3,7 +3,28 @@ const { govukDate } = require('@x-govuk/govuk-prototype-filters')
 const Pagination = require('../helpers/pagination')
 
 
-// Combined claims.js with multi-step verification flow
+// Helper function: Save and redirect based on current step or returnUrl
+  const saveAndRedirect = (claim, req, res, nextRoute) => {
+  const completed = req.body.completedSection
+  const returnUrl = req.query.returnUrl
+
+  claim.status = 'In progress'
+
+  // ✅ Ensure route name only is stored
+  claim.lastVisitedStep = nextRoute
+
+  if (completed === 'No') {
+    return res.redirect(`/provider/save/${claim.id}`)
+  }
+
+  if (returnUrl) {
+    return res.redirect(returnUrl)
+  }
+
+  return res.redirect(`/provider/${nextRoute}/${claim.id}`)
+}
+
+
 module.exports = (router) => {
   const getClaim = (req, res) => {
     const claims = req.session.data.claims || []
@@ -78,32 +99,38 @@ module.exports = (router) => {
     res.render('provider/who-will-verify', { claim })
   })
 
-  // POST: Save who will verify and redirect accordingly
-  router.post('/provider/who-will-verify/:claimId', (req, res) => {
-    const claimId = req.params.claimId
-    const whoWillVerify = req.body.whoWillVerify
-    const claims = req.session.data.claims || []
 
-    const claim = claims.find(claim => String(claim.id) === claimId)
-    if (!claim) {
-      return res.status(404).send('Claim not found')
-    }
+// POST: Save who will verify and redirect accordingly
+router.post('/provider/who-will-verify/:claimId', (req, res) => {
+  const claimId = req.params.claimId
+  const whoWillVerify = req.body.whoWillVerify
+  const claims = req.session.data.claims || []
 
-    claim.verifier = whoWillVerify
-    claim.status = 'Not started'
-    claim.assignedTo = whoWillVerify === 'Me' ? 'You' : whoWillVerify
-    claim.assignedDate = new Date().toISOString()
+  const claim = claims.find(claim => String(claim.id) === claimId)
+  if (!claim) {
+    return res.status(404).send('Claim not found')
+  }
 
-    ////FLASH MSG
-    req.flash('success', 'Claim assigned to <strong>' + claim.assignedTo + '</strong> on <span class="govuk-!-font-weight-bold">' + govukDate(claim.assignedDate) + '</span>')
+  // Save exactly what was submitted
+  claim.verifier = whoWillVerify
+  claim.status = 'Not started'
+  claim.assignedTo = whoWillVerify // ← no string replacement
+  claim.assignedDate = new Date().toISOString()
+
+  req.flash('success',
+    'Claim assigned to <strong>' + claim.assignedTo +
+    '</strong> on <span class="govuk-!-font-weight-bold">' +
+    govukDate(claim.assignedDate) + '</span>'
+  )
+
+  if (whoWillVerify === 'Me - [current_user]') {
+    return res.redirect(`/provider/role-and-experience/${claimId}`)
+  } else {
+    return res.redirect('/provider')
+  }
+})
 
 
-    if (whoWillVerify === 'Me') {
-      return res.redirect(`/provider/role-and-experience/${claimId}`)
-    } else {
-      return res.redirect('/provider')
-    }
-  })
 
 
   // ================================
@@ -217,7 +244,7 @@ module.exports = (router) => {
   
     // Optionally set to In progress if you want
     claim.status = 'Not started'
-    claim.assignedTo = 'You'
+    claim.assignedTo = whoWillVerify
     claim.assignedDate = new Date().toISOString()
   
     res.redirect(`/provider/role-and-experience/${claim.id}`)
@@ -228,34 +255,27 @@ module.exports = (router) => {
     const claims = req.session.data.claims || []
     const claim = claims.find(c => String(c.id) === req.params.claimId)
   
-    if (!claim) {
-      return res.status(404).send('Claim not found')
-    }
+    if (!claim) return res.status(404).send('Claim not found')
   
     const userChoice = req.body.continueVerification
   
     if (userChoice === 'Yes') {
-      // Update ownership
-      claim.assignedTo = 'You'
+      // Assign to current user
+      claim.assignedTo = 'Me - [current_user]'
       claim.status = 'In progress'
       claim.assignedDate = new Date().toISOString()
   
-      // Determine last visited part of the form
-      if (claim.contractedHours) {
-        return res.redirect(`/provider/check/${claim.id}`)
-      } else if (claim.performanceMeasures || claim.subjectToDisciplinaryAction) {
-        return res.redirect(`/provider/contracted-hours/${claim.id}`)
-      } else if (claim.contractAcademicYear || claim.hoursAcademicYear) {
-        return res.redirect(`/provider/performance-and-discipline/${claim.id}`)
-      } else {
-        return res.redirect(`/provider/role-and-experience/${claim.id}`)
-      }
+      // Return to the screen they left
+      const step = claim.lastVisitedStep || 'role-and-experience'
+      return res.redirect(`/provider/${step}/${claim.id}`)
+
     }
   
-    // No → read-only mode
-    req.flash('success', 'Read-only view of the claim form started by ' + claim.assignedTo)
+    // Otherwise show read-only view
+    req.flash('success', 'Claim: read only mode')
     return res.redirect(`/provider/read-only/${claim.id}`)
   })
+  
   
   
 
@@ -303,15 +323,24 @@ module.exports = (router) => {
     claim.first5Years = req.body.first5Years
     claim.hasTeachingQualification = req.body.hasTeachingQualification
     claim.contractType = req.body.contractType
-  
     claim.status = 'In progress'
+  
+    // Always mark where they were
+    claim.lastVisitedStep = 'role-and-experience'
+  
+    // Let the helper route based on contractType
+    if (req.body.completedSection === 'No') {
+      return res.redirect(`/provider/save/${claim.id}`)
+    }
   
     if (claim.contractType === 'Fixed-term') {
       return saveAndRedirect(claim, req, res, 'contract-academic-year')
     }
+  
     if (claim.contractType === 'Variable hours') {
       return saveAndRedirect(claim, req, res, 'hours-academic-year')
     }
+  
     return saveAndRedirect(claim, req, res, 'performance-and-discipline')
   })
   
@@ -329,12 +358,25 @@ module.exports = (router) => {
   router.post('/provider/contract-academic-year/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
+    claim.lastStepVisited = 'contract-academic-year'
   
     claim.contractAcademicYear = req.body.contractAcademicYear
     claim.status = 'In progress'
   
-    return saveAndRedirect(claim, req, res, 'performance-and-discipline')
+    const completed = req.body.completedSection
+    const returnUrl = req.query.returnUrl
+  
+    if (completed === 'No') {
+      return res.redirect(`/provider/save/${claim.id}`)
+    }
+  
+    if (returnUrl) {
+      return res.redirect(returnUrl)
+    }
+  
+    return res.redirect(`/provider/performance-and-discipline/${claim.id}`)
   })
+  
   
 
   // Hours academic year
@@ -350,7 +392,7 @@ module.exports = (router) => {
   router.post('/provider/hours-academic-year/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
-  
+    claim.lastStepVisited = 'hours-academic-year'
     claim.hoursAcademicYear = req.body.hoursAcademicYear
     claim.status = 'In progress'
   
@@ -372,12 +414,23 @@ module.exports = (router) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
   
+    // Save answers
     claim.performanceMeasures = req.body.performanceMeasures
     claim.subjectToDisciplinaryAction = req.body.subjectToDisciplinaryAction
     claim.status = 'In progress'
   
+    // Set the last visited step
+    claim.lastVisitedStep = 'performance-and-discipline'
+  
+    // Check if user wants to pause
+    if (req.body.completedSection === 'No') {
+      return res.redirect(`/provider/save/${claim.id}`)
+    }
+  
+    // Otherwise continue
     return saveAndRedirect(claim, req, res, 'contracted-hours')
   })
+  
   
 
   // Contracted hours
@@ -389,19 +442,6 @@ module.exports = (router) => {
       claim,
       returnUrl: req.query.returnUrl // 👈 make this available to your template
     })
-  })
-  
-
-  router.post('/provider/contracted-hours/:claimId', (req, res) => {
-    const claim = getClaim(req, res)
-    if (!claim) return res.status(404).send('Claim not found')
-  
-    claim.contractedHours = req.body.contractedHours
-    claim.sixteenToNineteen = req.body.sixteenToNineteen
-    claim.fundingAtLevelThreeAndBelow = req.body.fundingAtLevelThreeAndBelow
-    claim.status = 'In progress'
-  
-    return saveAndRedirect(claim, req, res, 'check')
   })
   
 
@@ -438,65 +478,38 @@ router.get('/provider/return/:claimId', (req, res) => {
   return res.redirect(`/provider/${nextStep}/${claim.id}`)
 })
 
-const saveAndRedirect = (claim, req, res, nextRoute) => {
-  claim.status = 'In progress'
-
-  const completed = req.body.completedSection
-  const returnUrl = req.query.returnUrl
-
-  if (completed === 'No') {
-    return res.redirect(`/provider/save/${claim.id}`)
-  }
-
-  // 🔁 If returnUrl is present, go back to check page
-  if (returnUrl) {
-    return res.redirect(returnUrl)
-  }
-
-  // ➡️ Continue forward as normal
-  return res.redirect(`/provider/${nextRoute}/${claim.id}`)
-}
-
-
-router.post('/provider/role-and-experience/:claimId', (req, res) => {
-  const claim = getClaim(req, res)
-  if (!claim) return res.status(404).send('Claim not found')
-
-  // ✅ Update answers
-  claim.teachingResponsibilities = req.body.teachingResponsibilities
-  claim.first5Years = req.body.first5Years
-  claim.hasTeachingQualification = req.body.hasTeachingQualification
-  claim.contractType = req.body.contractType
-
-  // ✅ Always set status to In progress
-  claim.status = 'In progress'
-
-  // ✅ Route based on contract type
-  if (claim.contractType === 'Fixed-term') {
-    return saveAndRedirect(claim, req, res, 'contract-academic-year')
-  }
-  if (claim.contractType === 'Variable hours') {
-    return saveAndRedirect(claim, req, res, 'hours-academic-year')
-  }
-  return saveAndRedirect(claim, req, res, 'performance-and-discipline')
-})
-
 
 router.post('/provider/contract-academic-year/:claimId', (req, res) => {
   const claim = getClaim(req, res)
   if (!claim) return res.status(404).send('Claim not found')
 
   claim.contractAcademicYear = req.body.contractAcademicYear
+  claim.status = 'In progress'
+  claim.lastVisitedStep = 'contract-academic-year'
+
+  if (req.body.completedSection === 'No') {
+    return res.redirect(`/provider/save/${claim.id}`)
+  }
+
   return saveAndRedirect(claim, req, res, 'performance-and-discipline')
 })
+
 
 router.post('/provider/hours-academic-year/:claimId', (req, res) => {
   const claim = getClaim(req, res)
   if (!claim) return res.status(404).send('Claim not found')
 
   claim.hoursAcademicYear = req.body.hoursAcademicYear
+  claim.status = 'In progress'
+  claim.lastVisitedStep = 'hours-academic-year'
+
+  if (req.body.completedSection === 'No') {
+    return res.redirect(`/provider/save/${claim.id}`)
+  }
+
   return saveAndRedirect(claim, req, res, 'performance-and-discipline')
 })
+
 
 router.post('/provider/performance-and-discipline/:claimId', (req, res) => {
   const claim = getClaim(req, res)
@@ -504,8 +517,16 @@ router.post('/provider/performance-and-discipline/:claimId', (req, res) => {
 
   claim.performanceMeasures = req.body.performanceMeasures
   claim.subjectToDisciplinaryAction = req.body.subjectToDisciplinaryAction
+  claim.status = 'In progress'
+  claim.lastVisitedStep = 'performance-and-discipline'
+
+  if (req.body.completedSection === 'No') {
+    return res.redirect(`/provider/save/${claim.id}`)
+  }
+
   return saveAndRedirect(claim, req, res, 'contracted-hours')
 })
+
 
 router.post('/provider/contracted-hours/:claimId', (req, res) => {
   const claim = getClaim(req, res)
@@ -514,8 +535,17 @@ router.post('/provider/contracted-hours/:claimId', (req, res) => {
   claim.contractedHours = req.body.contractedHours
   claim.sixteenToNineteen = req.body.sixteenToNineteen
   claim.fundingAtLevelThreeAndBelow = req.body.fundingAtLevelThreeAndBelow
+  claim.status = 'In progress'
+  claim.lastVisitedStep = 'contracted-hours'
+
+  if (req.body.completedSection === 'No') {
+    return res.redirect(`/provider/save/${claim.id}`)
+  }
+
   return saveAndRedirect(claim, req, res, 'check')
+
 })
+
 }
 
 
