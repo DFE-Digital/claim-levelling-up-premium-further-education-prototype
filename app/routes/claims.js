@@ -244,7 +244,7 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
   
     // Optionally set to In progress if you want
     claim.status = 'Not started'
-    claim.assignedTo = whoWillVerify
+    claim.assignedTo = 'Me - [current_user]'
     claim.assignedDate = new Date().toISOString()
   
     res.redirect(`/provider/role-and-experience/${claim.id}`)
