@@ -318,6 +318,18 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
   router.post('/provider/role-and-experience/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
+
+      if (!req.body.completedSection) {
+        const errors = [{
+          text: 'Select whether you have completed this section',
+          href: '#completedSection'
+        }]
+        return res.render('provider/role-and-experience', {
+          claim,
+          errors
+        })
+      }
+      
   
     claim.teachingResponsibilities = req.body.teachingResponsibilities
     claim.first5Years = req.body.first5Years

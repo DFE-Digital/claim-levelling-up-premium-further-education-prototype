@@ -18,5 +18,8 @@ addFilter('statusColour', status => {
   }
 })
 
-
-
+// Find a specific error object by field name (used in templates)
+addFilter('findError', function(errors, fieldName) {
+  const error = errors && errors.find(error => error.href === `#${fieldName}`)
+  return error ? { text: error.text } : null
+})
