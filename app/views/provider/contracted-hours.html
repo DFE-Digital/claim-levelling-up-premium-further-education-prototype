@@ -11,11 +11,11 @@
   <div class="govuk-grid-column-three-quarters">
     <h1 class="govuk-heading-l">{{pageName}}</h1>
 
-    {% if claim.status == 'In progress' %}
+    {# {% if claim.status == 'In progress' %}
       <div class="govuk-inset-text">
         Claim asssigned to {{ claim.assignedTo }} on {{ claim.dateSubmitted }}
       </div>
-    {% endif %}
+    {% endif %} #}
 
 
     {{ data.user | log }}
