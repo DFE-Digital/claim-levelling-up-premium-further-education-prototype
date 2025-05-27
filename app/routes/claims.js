@@ -370,6 +370,18 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
   router.post('/provider/contract-academic-year/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
+
+      if (!req.body.completedSection) {
+        const errors = [{
+          text: 'Select whether you have completed this section',
+          href: '#completedSection'
+        }]
+        return res.render('provider/contract-academic-year', {
+          claim,
+          errors
+        })
+      }
+
     claim.lastStepVisited = 'contract-academic-year'
   
     claim.contractAcademicYear = req.body.contractAcademicYear
@@ -404,6 +416,17 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
   router.post('/provider/hours-academic-year/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
+
+      if (!req.body.completedSection) {
+        const errors = [{
+          text: 'Select whether you have completed this section',
+          href: '#completedSection'
+        }]
+        return res.render('provider/hours-academic-year', {
+          claim,
+          errors
+        })
+      }
     claim.lastStepVisited = 'hours-academic-year'
     claim.hoursAcademicYear = req.body.hoursAcademicYear
     claim.status = 'In progress'
