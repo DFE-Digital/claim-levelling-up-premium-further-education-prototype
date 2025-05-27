@@ -1,0 +1,212 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Start page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block header %}
+  <!-- Blank header with no service name for the start page -->
+  {{ govukHeader() }}
+{% endblock %}
+
+{% block beforeContent %}
+
+  {{ govukBreadcrumbs({
+    items: [
+      {
+        text: "Home",
+        href: "#"
+      },
+      {
+        text: "Education, training and skills",
+        href: "#"
+      },
+      {
+        text: "Further and higher education, skills and vocational training ",
+        href: "#"
+      },
+
+      {
+        text: "TBC"
+      }
+    ]
+  }) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl">
+        Find out if you are eligible for a targeted retention incentive payment for further education teachers
+      </h1>
+
+      <p>Use this service to check your eligibility for a targeted retention incentive payment before you apply.</p>
+
+      <p>Before starting the eligibility check, it may be useful to have the following information to hand:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>your contract or written statement of employment</li>
+        <li>your teaching timetable</li>
+      </ul>
+
+      <p>Answering questions about eligibility takes [X] minutes and applying for the payment takes another [X] minutes.</p>
+
+      <div class="govuk-inset-text">
+        You will need a GOV.UK One Login account to apply for a targeted retention incentive payment. If you don’t have an account yet, we will help you create one. You will also need to have a form of photo ID to hand to <a href="https://www.gov.uk/using-your-gov-uk-one-login/proving-your-identity">prove your identity</a>.
+      </div>
+
+      {{ govukButton({
+        text: "Start now",
+        href: "teaching-responsibilities",
+        isStartButton: true
+      }) }}
+
+     <!--  <h2 class="govuk-heading-m">
+        Continue an existing application
+      </h2>
+
+      <p>
+        If you have already started an application, you can <a href="#">continue it</a>. You will be asked to sign in to GOV.UK One Login if you are not signed in already.
+      </p>
+
+      -->
+
+      <h2 class="govuk-heading-m">
+        Eligibility criteria
+      </h2>
+
+      <p> Claimants should be in the first 5 years of their further education (FE) teaching career in England and teach specific FE courses in the following subject areas:
+       
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>building and construction</li>
+          <li>chemistry</li>
+          <li>computing, including digital and ICT</li>
+          <li>early years</li>
+          <li>engineering and manufacturing, including transport engineering and electronics</li>
+          <li>maths</li>
+          <li>physics</li>
+        </ul>
+        </p>
+
+        <p>
+        Further information about the eligibility criteria can be found in the <a href="https://www.gov.uk/guidance/targeted-retention-incentive-payments-for-fe-teachers">targeted retention incentive payments for FE teachers guidance </a>.
+        </p>
+
+        <h2 class="govuk-heading-m">
+          Application process
+        </h2>
+
+        <p>You must apply between October 2024 and March 2025.</p>
+        <p>If you are eligible for a targeted retention incentive payment, we will collect some personal information to:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>prove your identity - this will be done via GOV.UK One Login</li>
+          <li>verify your claim</li>
+          <li>process your payment</li>
+        </ul>
+        <p>If you don’t have a GOV.UK One Login account yet, you will need to create one. To do this, you will need:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>an email address</li>
+          <li>a way to get security codes - this can be a mobile phone number or an authenticator app</li>
+        </ul>
+
+        <p>You can <a href="https://www.gov.uk/using-your-gov-uk-one-login/proving-your-identity">prove your identity</a> using the GOV.UK One Login application, by answering questions online or by visiting a Post Office.</p>
+
+        <div class="govuk-inset-text">
+          If you need to visit a Post Office to prove your identity, this process can take up to 10 working days. Your application details will not be saved and you will need to start your application again.
+        </div>
+
+      <h2 class="govuk-heading-m">
+        Payments and deductions
+      </h2>
+
+      <p>
+        If you meet the eligibility criteria, you could be eligible for between £2,000 and £6,000. The amount you are eligible for depends on:      
+      </p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li><a href='#'>the FE provider you teach in </a></li>
+        <li>the number of hours you teach</li>
+      </ul>
+
+      <p>
+        Payments are given up to [tbc] weeks from applying. You will receive an approval email with further information on your application.</p>
+
+      <!-- <h2 class="govuk-heading-m">
+        Further information
+      </h2>
+
+      <p>
+        You must apply between [MONTH] 2024 and March 2025.
+        <br>
+        <br>
+        If you are eligible for an incentive payment, we will collect personal information to verify your claim and process your payment.
+        <br>
+        <br>
+        Payments are given up to [TBC] weeks from applying. You will receive an approval email with further information on your application.
+      </p> -->
+
+    
+      <h2 class="govuk-heading-m">
+        Contact
+      </h2>
+
+      <p>
+        For further support, email  <a href="#">FE-Targeted.Retention-Incentive@education.gov.uk</a>.
+      </p>
+
+      <p>
+        You should receive a reply within [tbc] working days.
+      </p>
+
+
+    </div>
+
+    <!-- <div class="govuk-grid-column-one-third">
+
+      <aside class="govuk-prototype-kit-common-templates-related-items" role="complementary">
+        <h2 class="govuk-heading-m" id="subsection-title">
+          Related content
+        </h2>
+        <nav role="navigation" aria-labelledby="subsection-title">
+          <ul class="govuk-list govuk-!-font-size-16">
+            <li>
+              <a href="https://www.gov.uk/guidance/levelling-up-premium-payments-for-fe-teachers">
+                Levelling up premium payments for FE teachers
+              </a>
+            </li>
+            <li>
+              <a href="https://www.gov.uk/guidance/levelling-up-premium-payments-for-teachers">
+                Levelling up premium payments for school teachers
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                TBC - early years
+              </a>
+            </li>
+
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+            <p> Collection</p>
+
+            <li>
+              <a href="https://www.gov.uk/government/collections/additional-payments-for-teaching-eligibility-and-payment-details" class="govuk-!-font-weight-bold">
+                Additional payments for teaching: eligibility and payment details <span class="govuk-visually-hidden">in Subsection</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+    -->
+
+    </div>
+  </div>
+
+  
+
+{% endblock %}

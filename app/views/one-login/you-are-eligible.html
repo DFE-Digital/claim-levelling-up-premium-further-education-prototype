@@ -1,0 +1,60 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = 'Alternative verification examples' %}
+
+{% block header %}
+  {{ govukHeader({
+    productName: serviceName,
+    classes: "govuk-header--full-width-border"
+  }) }}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "/one-login"
+  }) }}
+{% endblock %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+  <div class="govuk-panel govuk-panel--confirmation" style="background: #1d70b8; color: white;">
+    <h1 class="govuk-panel__title">
+      You’re eligible for a targeted retention incentive payment
+    </h1>
+  </div>
+
+  <p class="govuk-body govuk-!-margin-top-6">
+    Based on what you’ve told us, you can apply for a targeted retention incentive payment of:
+  </p>
+
+
+  <h3 class="govuk-heading-l">£6,000</h3>
+
+  <a class="govuk-button" data-module="govuk-button" href="#">Apply now</a>
+
+  <div class="govuk-inset-text">
+    You will need a GOV.UK One Login account to apply for a targeted retention incentive payment. If you don’t have an account yet, we will help you create one. You will also need to have a form of photo ID to hand to <a class="govuk-link" href="#">prove your identity</a>.
+  </div>
+
+  <p class="govuk-body">If you leave this page now, your answers will not be saved. Create or sign into a OneLogin account to store your eligibility result and use it for your application.</p>
+
+  <p class="govuk-body">
+    The targeted retention incentive payment ranges from £2,000 to £6,000, depending on:
+  </p>
+
+  <ul class="govuk-list govuk-list--bullet">
+    <li>the provider you teach at</li>
+    <li>the number of hours you teach</li>
+  </ul>
+
+  <p class="govuk-body">
+    If you teach at a further education (FE) provider that has higher levels of disadvantage, you are eligible for a higher payment.
+  </p>
+  </div>
+</div>
+
+
+{% endblock %}

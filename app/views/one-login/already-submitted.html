@@ -1,0 +1,59 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = 'Alternative verification examples' %}
+
+{% block header %}
+  {{ govukHeader({
+    productName: serviceName,
+    classes: "govuk-header--full-width-border"
+  }) }}
+{% endblock %}
+
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <div class="govuk-panel govuk-!-margin-bottom-6" style="background: #1d70b8; color: white;">
+        <h1 class="govuk-panel__title">You've already submitted a claim in this claim window</h1>
+        <p class="govuk-body govuk-!-font-weight-bold" style="color: white;">
+          The claim you submitted has the reference number <strong>W438JFZC</strong>
+        </p>
+      </div>
+
+      <p class="govuk-body">
+        You will have received an email to your email address example@example.com.
+      </p>
+
+      <h2 class="govuk-heading-m">Apply for a targeted retention incentive payment next academic year</h2>
+
+      <p class="govuk-body">
+        As long as you continue to meet the <a href="#" class="govuk-link">eligibility criteria</a>, you could claim a targeted retention incentive payment in the next academic year.
+      </p>
+
+      <p class="govuk-body">
+        You can set a reminder so you know when you are able to apply. We cannot issue payments unless you apply.
+      </p>
+
+      <a class="govuk-button" data-module="govuk-button" href="#">
+        Set reminder
+      </a>
+
+      <h2 class="govuk-heading-m">Contact</h2>
+
+      <p class="govuk-body">
+        For further support, email<br>
+        <a href="mailto:FE-targeted.retention-incentive@education.gov.uk" class="govuk-link">
+          FE-targeted.retention-incentive@education.gov.uk
+        </a>.
+      </p>
+
+      <p class="govuk-body">You should receive a reply within 5 working days.</p>
+
+  </div>
+</div>
+
+
+
+
+{% endblock %}

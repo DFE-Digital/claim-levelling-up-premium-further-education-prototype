@@ -1,0 +1,76 @@
+{% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
+
+{% block pageTitle %}
+  {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+
+{% block header %}
+  {{ govukOneLoginServiceHeader({
+    signOutLink: "/test-signout",
+    oneLoginLink: "/test-one-login",
+    serviceNavigationParams: { 
+      
+      serviceName: "Claim a targeted retention incentive payment for further education teachers",
+      navigationLabel: "Test label" 
+    }
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl">
+        Find out if you are eligible for a targeted retention incentive payment for further education teachers
+      </h1>
+
+      <p class="govuk-body">
+        Use this service to check your eligibility for a targeted retention incentive payment before you apply.
+      </p>
+
+      <p class="govuk-body">
+        Before starting the eligibility check, it may be useful to have the following information to hand:
+      </p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>your contract or written statement of employment</li>
+        <li>your teaching timetable</li>
+      </ul>
+
+      <p class="govuk-body">
+        Answering questions about eligibility takes 10 minutes and applying for the payment takes another 5 minutes.
+      </p>
+
+      <a class="govuk-button govuk-button--start govuk-!-margin-bottom-6" role="button" draggable="false" data-module="govuk-button" href="#">
+        Start now
+      </a>
+
+      <h2 class="govuk-heading-m">Eligibility criteria</h2>
+
+      <p class="govuk-body">
+        Claimants should be in the first 5 years of their FE teaching career in England and teach specific FE courses in the following subject areas:
+      </p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>building and construction</li>
+        <li>chemistry</li>
+        <li>computing, including digital and ICT</li>
+        <li>early years</li>
+        <li>engineering and manufacturing, including transport engineering and electronics</li>
+        <li>maths</li>
+        <li>physics</li>
+      </ul>
+
+      <p class="govuk-body">
+        Further information about the eligibility criteria can be found in the 
+        <a href="#" class="govuk-link">targeted retention incentive payments for FE teachers guidance</a>.
+      </p>
+     
+
+    </div>
+  </div>
+
+
+{% endblock %}

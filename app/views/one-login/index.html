@@ -1,0 +1,51 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = 'One Login examples' %}
+
+{% block header %}
+  {{ govukHeader({
+    productName: serviceName,
+    classes: "govuk-header--full-width-border"
+  }) }}
+{% endblock %}
+
+
+{% block content %}
+<h1 class="govuk-heading-xl">{{pageName}}</h1>
+
+<section>
+  <h2 class="govuk-heading-m">Eligibility confirmation</h2>
+  <p class="govuk-body">
+    <a class="govuk-link" href="/one-login/you-are-eligible.html">
+      View screen
+    </a>
+  </p>
+</section>
+
+<section>
+  <h2 class="govuk-heading-m">Find Out if you're eligible</h2>
+  <p class="govuk-body">
+    <a class="govuk-link" href="/one-login/find-out.html">
+      View screen
+    </a>
+  </p>
+</section>
+
+<section>
+  <h2 class="govuk-heading-m">Already submitted claim</h2>
+  <p class="govuk-body">
+    <a class="govuk-link" href="/one-login/already-submitted.html">
+      View screen
+    </a>
+  </p>
+</section>
+
+<div class="govuk-button-group">
+  {{ govukButton({
+    text: "Go back to prototype start page",
+    href: "/"
+  }) }}
+</div>
+
+
+{% endblock %}
