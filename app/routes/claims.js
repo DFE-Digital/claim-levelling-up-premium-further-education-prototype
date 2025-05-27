@@ -308,43 +308,52 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
   // Multi-step form flow
   // ================================
 
-  // Role and experience
   router.get('/provider/role-and-experience/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
-    res.render('provider/role-and-experience', { claim })
+  
+    const returnUrl = req.query.returnUrl
+    res.render('provider/role-and-experience', { claim, returnUrl })
   })
 
+  // Role and experience
   router.post('/provider/role-and-experience/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
-
-      if (!req.body.completedSection) {
-        const errors = [{
-          text: 'Select whether you have completed this section',
-          href: '#completedSection'
-        }]
-        return res.render('provider/role-and-experience', {
-          claim,
-          errors
-        })
-      }
-      
   
+    const returnUrl = req.query.returnUrl
+  
+    if (!req.body.completedSection) {
+      const errors = [{
+        text: 'Select whether you have completed this section',
+        href: '#completedSection'
+      }]
+      return res.render('provider/role-and-experience', {
+        claim,
+        errors,
+        returnUrl // pass back to preserve link
+      })
+    }
+  
+    // Save form values
     claim.teachingResponsibilities = req.body.teachingResponsibilities
     claim.first5Years = req.body.first5Years
     claim.hasTeachingQualification = req.body.hasTeachingQualification
     claim.contractType = req.body.contractType
     claim.status = 'In progress'
-  
-    // Always mark where they were
     claim.lastVisitedStep = 'role-and-experience'
   
-    // Let the helper route based on contractType
+    // Pause journey
     if (req.body.completedSection === 'No') {
       return res.redirect(`/provider/save/${claim.id}`)
     }
   
+    // ✅ Return to check page if user came from there
+    if (returnUrl) {
+      return res.redirect(returnUrl)
+    }
+  
+    // Continue through the normal journey
     if (claim.contractType === 'Fixed-term') {
       return saveAndRedirect(claim, req, res, 'contract-academic-year')
     }
@@ -355,6 +364,7 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
   
     return saveAndRedirect(claim, req, res, 'performance-and-discipline')
   })
+  
   
 
   // Contract academic year
