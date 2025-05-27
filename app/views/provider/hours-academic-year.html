@@ -4,7 +4,10 @@
 
 {% set serviceNavId = "allClaims" %}
 
-
+{% set actionUrl = "/provider/hours-academic-year/" + claim.id %}
+{% if returnUrl %}
+  {% set actionUrl = actionUrl + "?returnUrl=" + returnUrl %}
+{% endif %}
 
 {% block content %}
 <div class="govuk-grid-row">
@@ -31,8 +34,8 @@
 
     {% include "_includes/claim/details.njk" %}
 
-    <form method="post" action="/provider/hours-academic-year/{{ claim.id }}">
-
+    {# <form method="post" action="/provider/hours-academic-year/{{ claim.id }}"> #}
+    <form method="post" action="{{ actionUrl }}">
       
       <h2 class="govuk-heading-m">Role and experience</h2>
 

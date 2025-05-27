@@ -35,29 +35,30 @@
       rows: [
         {
           key: { text: "Teaching responsibilities" },
-          value: { text: claim.teachingResponsibilities or "Not answered" }
+          value: { text: claim.teachingResponsibilities | default("Not answered") }
         },
         {
           key: { text: "In first 5 years of FE teaching" },
-          value: { text: claim.first5Years or "Not answered" }
+          value: { text: claim.first5Years | default("Not answered") }
         },
         {
           key: { text: "Teaching qualification" },
-          value: { text: claim.hasTeachingQualification or "Not answered" }
+          value: { text: claim.hasTeachingQualification | default("Not answered") }
         },
         {
           key: { text: "Type of contract" },
-          value: { text: claim.contractType or "Not answered" }
+          value: { text: claim.contractType | default("Not answered") }
         },
         {
           key: { text: "Contract covers full academic year" },
-          value: { text: claim.contractAcademicYear or "Not answered" }
+          value: { text: claim.contractAcademicYear | default("Not answered") }
         } if claim.contractAcademicYear,
         {
           key: { text: "Variable hours in academic year" },
-          value: { text: claim.hoursAcademicYear or "Not answered" }
+          value: { text: claim.hoursAcademicYear | default("Not answered") }
         } if claim.hoursAcademicYear
       ]
+    
     }) }}
 
     {# Performance and discipline summary card #}
