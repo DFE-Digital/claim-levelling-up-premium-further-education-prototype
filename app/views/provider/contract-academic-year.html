@@ -61,6 +61,7 @@
     
       {{ govukRadios({
         name: "completedSection",
+        errorMessage: errors | findError("completedSection"),
         fieldset: {
           legend: {
             text: "Have you completed this section?",
