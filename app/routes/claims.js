@@ -448,6 +448,17 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
   router.post('/provider/performance-and-discipline/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
+
+      if (!req.body.completedSection) {
+        const errors = [{
+          text: 'Select whether you have completed this section',
+          href: '#completedSection'
+        }]
+        return res.render('provider/performance-and-discipline', {
+          claim,
+          errors
+        })
+      }
   
     // Save answers
     claim.performanceMeasures = req.body.performanceMeasures
@@ -464,19 +475,6 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
   
     // Otherwise continue
     return saveAndRedirect(claim, req, res, 'contracted-hours')
-  })
-  
-  
-
-  // Contracted hours
-  router.get('/provider/contracted-hours/:claimId', (req, res) => {
-    const claim = getClaim(req, res)
-    if (!claim) return res.status(404).send('Claim not found')
-  
-    res.render('provider/contracted-hours', {
-      claim,
-      returnUrl: req.query.returnUrl // 👈 make this available to your template
-    })
   })
   
 
@@ -562,10 +560,32 @@ router.post('/provider/performance-and-discipline/:claimId', (req, res) => {
   return saveAndRedirect(claim, req, res, 'contracted-hours')
 })
 
+  // Contracted hours
+  router.get('/provider/contracted-hours/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+  
+    res.render('provider/contracted-hours', {
+      claim,
+      returnUrl: req.query.returnUrl // 👈 make this available to your template
+    })
+  })
+  
 
 router.post('/provider/contracted-hours/:claimId', (req, res) => {
   const claim = getClaim(req, res)
   if (!claim) return res.status(404).send('Claim not found')
+
+    if (!req.body.completedSection) {
+      const errors = [{
+        text: 'Select whether you have completed this section',
+        href: '#completedSection'
+      }]
+      return res.render('provider/contracted-hours', {
+        claim,
+        errors
+      })
+    }
 
   claim.contractedHours = req.body.contractedHours
   claim.sixteenToNineteen = req.body.sixteenToNineteen

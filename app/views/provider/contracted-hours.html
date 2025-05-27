@@ -9,6 +9,14 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-three-quarters">
+
+    {% if errors %}
+      {{ govukErrorSummary({
+        titleText: "There is a problem", 
+        errorList: errors
+      }) }}
+    {% endif %}
+
     <h1 class="govuk-heading-l">{{pageName}}</h1>
 
     {# {% if claim.status == 'In progress' %}
@@ -98,6 +106,7 @@
 
         {{ govukRadios({
           name: "completedSection",
+          errorMessage: errors | findError("completedSection"),
           fieldset: {
             legend: {
               text: "Have you completed this section?",
