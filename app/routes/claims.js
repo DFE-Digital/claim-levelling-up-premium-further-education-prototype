@@ -540,6 +540,7 @@ router.post('/provider/performance-and-discipline/:claimId', (req, res) => {
     claim.fundingAtLevelThreeAndBelow = req.body.fundingAtLevelThreeAndBelow
     claim.status = 'In progress'
     claim.lastVisitedStep = 'contracted-hours'
+    claim.moreDetail = req.body.moreDetail?.trim()
   
     if (req.body.completedSection === 'No') {
       return res.redirect(`/provider/save/${claim.id}`)

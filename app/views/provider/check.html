@@ -119,7 +119,12 @@
     {
       key: { text: "Teaches approved qualifications in engineering" },
       value: { text: claim.fundingAtLevelThreeAndBelow | default("Not answered") }
-    }    
+    },
+    {
+      key: { text: "More detail about this claim" },
+      value: { text: claim.moreDetail }
+    } if claim.moreDetail
+        
   ]
 }) }}
 
