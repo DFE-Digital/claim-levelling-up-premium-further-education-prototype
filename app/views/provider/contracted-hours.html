@@ -109,6 +109,18 @@
           ]
         }) }}
 
+        {{ govukCharacterCount({
+          name: "moreDetail",
+          id: "more-detail",
+          value: claim.moreDetail,
+          maxlength: 800,
+          label: {
+            text: "Do you want to provide more detail about this claim?",
+            classes: "govuk-label--m",
+            isPageHeading: false
+          }
+        }) }}
+
         {{ govukRadios({
           name: "completedSection",
           errorMessage: errors | findError("completedSection"),
