@@ -4,24 +4,18 @@
 
 
 
-{# UNVERIFIED Claims counter #}
-{% set unverifiedStatuses = ["Not started", "In progress"] %}
-{% set unverifiedCount = 0 %}
+{# DfE status counters #}
+{% set dfePendingCount = 0 %}
+{% set dfeApprovedCount = 0 %}
+{% set dfeRejectedCount = 0 %}
 
 {% for claim in data.claims %}
-  {% if claim.status in unverifiedStatuses %}
-    {% set unverifiedCount = unverifiedCount + 1 %}
-  {% endif %}
-{% endfor %}
-
-
-{# VERIFIED Claims counter #}
-{% set verifiedStatuses = ["Verified"] %}
-{% set verifiedCount = 0 %}
-
-{% for claim in data.claims %}
-  {% if claim.status in verifiedStatuses %}
-    {% set verifiedCount = verifiedCount + 1 %}
+  {% if claim.status == "Dfe pending" %}
+    {% set dfePendingCount = dfePendingCount + 1 %}
+  {% elseif claim.status == "Dfe approved" %}
+    {% set dfeApprovedCount = dfeApprovedCount + 1 %}
+  {% elseif claim.status == "Dfe rejected" %}
+    {% set dfeRejectedCount = dfeRejectedCount + 1 %}
   {% endif %}
 {% endfor %}
 
@@ -34,7 +28,7 @@
   html: '<h2 class="govuk-heading-m"> '+flash+' </h2>'
 }) if flash.length }}
 
-<h1 class="govuk-heading-l">Verified claims ( {{ verifiedCount }} )</h1>
+<h1 class="govuk-heading-l">Verified claims ( {{ dfePendingCount +  dfeApprovedCount + dfeRejectedCount }} )</h1>
 
 {{ data.user | log }}
 {{ data.claims | log }}
@@ -47,14 +41,14 @@
       {# <th scope="col" class="govuk-table__header" aria-sort="ascending">Claim reference</th> #}
       <th scope="col" class="govuk-table__header" aria-sort="none">Claimant name</th>
       <th scope="col" class="govuk-table__header" aria-sort="none">Claim reference</th>
-      <th scope="col" class="govuk-table__header" aria-sort="ascending">Date verified</th>
-      <th scope="col" class="govuk-table__header" aria-sort="none">Processed by</th>
+      <th scope="col" class="govuk-table__header" aria-sort="none">Date verified</th>
+      {# <th scope="col" class="govuk-table__header" aria-sort="none">Processed by</th> #}
       <th scope="col" class="govuk-table__header" aria-sort="none">Status</th>
     </tr>
   </thead>
   <tbody class="govuk-table__body govuk-!-font-size-16">
     {% for claim in claims %}
-      {% if claim.status == "Verified" %}
+    {% if claim.status in ["Dfe pending", "Dfe approved", "Dfe rejected"] %}
         <tr class="govuk-table__row">
           <td class="govuk-table__cell" data-sort-value="{{ claim.claimantName }}">
               <a href="/provider/completed/show/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
@@ -62,7 +56,7 @@
           <td class="govuk-table__cell" data-sort-value="{{ claim.claimReference }}">{{ claim.claimReference }}</td>
           <td class="govuk-table__cell" data-sort-value="{{ claim.dateVerifiedIso }}">{{ claim.dateVerified }}</td>
           
-          <td class="govuk-table__cell" data-sort-value="{{ claim.assignedTo }}">{{ claim.assignedTo }}</td>
+          {# <td class="govuk-table__cell" data-sort-value="{{ claim.assignedTo }}">{{ claim.assignedTo }}</td> #}
           <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">
             {{ govukTag({
               text: claim.status,

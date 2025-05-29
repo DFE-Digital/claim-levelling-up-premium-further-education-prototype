@@ -56,31 +56,36 @@ module.exports = (router) => {
     })
   })
 
-  // POST: Mark claim as Verified (from check screen)
-  router.post('/provider/index/:claimId', (req, res) => {
-    const claims = req.session.data.claims || []
-    const claim = claims.find(c => String(c.id) === req.params.claimId)
+// POST: Mark claim as Verified (from check screen)
+router.post('/provider/index/:claimId', (req, res) => {
+  const claims = req.session.data.claims || []
+  const claim = claims.find(c => String(c.id) === req.params.claimId)
 
-    if (!claim) {
-      return res.status(404).send('Claim not found')
-    }
+  if (!claim) {
+    return res.status(404).send('Claim not found')
+  }
 
-    const now = new Date()
+  // Update status to Dfe pending
+  claim.status = 'Dfe pending'
 
-    claim.status = 'Verified'
-    claim.assignedTo = '[Name_of_verifier]'
-    claim.assignedDate = now.toISOString()
-    claim.dateVerified = now.toLocaleDateString('en-GB', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-    })
-    claim.dateVerifiedIso = now.toISOString().split('T')[0]
+  // Store timestamp for ordering
+  const now = new Date()
+  const formatted = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+  const iso = now.toISOString().split('T')[0]
 
+  claim.dateVerified = formatted
+  claim.dateVerifiedIso = iso
 
-    req.flash('success', `Claim verified <a class="govuk-link" href="/provider/completed/show/${claim.id}"><br>View verified claim</a>`)
-    res.redirect('/provider')
-  })
+  // 🆕 Store last updated claim for ordering
+  req.session.data.lastUpdatedClaimId = claim.id
+
+  // Flash confirmation
+  req.flash('success', `Claim verified and sent to DfE <br> <a class="govuk-link" href="/provider/completed/show/${claim.id}">View submitted claim</a>`)
+
+  // Redirect to Verified claims
+  res.redirect('/provider')
+})
+
 
 
   // ================================
