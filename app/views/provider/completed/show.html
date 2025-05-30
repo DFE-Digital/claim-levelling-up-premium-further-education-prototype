@@ -18,29 +18,30 @@
 
       <span class="govuk-caption-l">{{claim.claimantName}}</span>
       <h1 class="govuk-heading-l">{{pageName}}
-          {% if claim.verified === true %}
-          {{ govukTag({
-            text: "Verified",
-            classes: "govuk-tag--blue"
-          }) }}
-          {% elseif claim.verified === false %}
-            {{ govukTag({
-              text: "Not verified",
-              classes: "govuk-tag--grey"
-            }) }}
-          {% else %}
-            {{ govukTag({
-              text: claim.status,
-              classes: claim.status | statusColour
-            }) }}
-        {% endif %}
+        {% if claim.status in ["Dfe pending", "Dfe approved", "Dfe rejected"] %}
+        {{ govukTag({
+          text: claim.status,
+          classes: claim.status | statusColour
+        }) }}
+      {% elseif claim.verified === true %}
+        {{ govukTag({
+          text: "Verified",
+          classes: "govuk-tag--turquoise"
+        }) }}
+      {% elseif claim.verified === false %}
+        {{ govukTag({
+          text: "Not verified",
+          classes: "govuk-tag--grey"
+        }) }}
+      {% endif %}
+      
       </h1>
       
 
-      {% if claim.status == 'Complete' %}
-      <div class="govuk-inset-text">
-        Claim verified by {{ claim.assignedTo }} on {{ claim.assignedDate | govukDate }} {{ claim.assignedDate | govukTime }}
-      </div>
+      {% if claim.status == 'Dfe pending' %}
+        <div class="govuk-inset-text">
+          Claim verified by {{ claim.assignedTo }} on {{ claim.assignedDate | govukDate }} {{ claim.assignedDate | govukTime }}
+        </div>
       {% endif %}
 
 
@@ -50,9 +51,7 @@
       {% include "_includes/claim/read-only-details.njk" %}
 
 
-      {{ govukInsetText({
-        html: "This claim was verified by <strong>" + claim.assignedTo + "</strong>."
-      }) }}
+     
   
       {# Role and experience card #}
       {{ govukSummaryList({
