@@ -80,7 +80,7 @@ router.post('/provider/index/:claimId', (req, res) => {
   req.session.data.lastUpdatedClaimId = claim.id
 
   // Flash confirmation
-  req.flash('success', `Claim verified and sent to DfE <br> <a class="govuk-link" href="/provider/completed/show/${claim.id}">View submitted claim</a>`)
+  req.flash('success', `Claim verified <br> <a class="govuk-link" href="/provider/completed/show/${claim.id}">View verified claim</a>`)
 
   // Redirect to Verified claims
   res.redirect('/provider')
