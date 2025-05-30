@@ -1,9 +1,4 @@
-{% set claimsVerifiedCount = 0 %}
-{% for claim in data.claims %}
-  {% if claim.status == "Not started" %}
-    {% set claimsVerifiedCount = claimsVerifiedCount + 1 %}
-  {% endif %}
-{% endfor %}
+
 
 {% set dfeApprovedCount = 0 %}
 {% for claim in data.claims %}
@@ -14,10 +9,11 @@
 
 {% set verifiedCount = 0 %}
 {% for claim in data.claims %}
-  {% if claim.status == "Verified" %}
+  {% if claim.status == 'Verified' %}
     {% set verifiedCount = verifiedCount + 1 %}
   {% endif %}
 {% endfor %}
+
 
 
 <div class="govuk-grid-row">
@@ -41,7 +37,7 @@
 
       {# STILL DO DO #}
       <a href="/provider" class="status-card status-card--draft">
-        <span class="status-card__count">{{ unverifiedCount }}</span>
+        <span class="status-card__count">50</span>
         <span class="status-card__status">Claims still to verify</span>
         <span class="govuk-visually-hidden">View these records.</span>
       </a>

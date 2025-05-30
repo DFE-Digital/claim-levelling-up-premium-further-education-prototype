@@ -2,24 +2,6 @@ const Pagination = require('../helpers/pagination')
 
 module.exports = router => {
 
-  router.get('/provider/completed', (req, res) => {
-    let allClaims = req.session.data.claims || []
-  
-    // Only get Verified claims
-    let verifiedClaims = allClaims.filter(claim => claim.status === 'Verified')
-  
-    // Apply pagination to the filtered list
-    let pageSize = 10
-    let pagination = new Pagination(verifiedClaims, req.query.page, pageSize)
-    let claims = pagination.getData()
-  
-    res.render('provider/completed/index', { 
-      claims,
-      pagination
-    })
-  })
-
-
   // GET: Update a verified claim
   router.get('/provider/completed/show/:claimId', (req, res) => {
     const claims = req.session.data.claims || []
@@ -53,29 +35,14 @@ module.exports = router => {
   })
 
 
-
   router.get('/provider/completed', (req, res) => {
     const claims = req.session.data.claims || []
-
-    // 1. Filter claims that are marked as 'Complete'
-    const completedClaims = claims.filter(claim => claim.status === 'Complete')
-
-
-    // 2. Add 'verified' flag to each completed claim
-    completedClaims.forEach(claim => {
-
-      console.log('Claim fields:', {
-        permanentContract: claim.permanentContract,
-        teachingResponsibilities: claim.teachingResponsibilities,
-        first5Years: claim.first5Years,
-        twelveHoursPerWeek: claim.twelveHoursPerWeek,
-        sixteenToNineteen: claim.sixteenToNineteen,
-        fundingAtLevelThreeAndBelow: claim.fundingAtLevelThreeAndBelow,
-        performanceMeasures: claim.performanceMeasures,
-        subjectToDisciplinaryAction: claim.subjectToDisciplinaryAction
-      })
-
-      // Check if all required fields are 'yes' NEED TO CHANGE LAST TWO TO NO for NIGELS NEW IDEA
+  
+    // 1. Define the verified claims you want to show
+    const verifiedClaims = claims.filter(claim => claim.status === 'Verified')
+  
+    // 2. You still want to add `.verified = true/false` based on logic
+    verifiedClaims.forEach(claim => {
       claim.verified = (
         claim.permanentContract === 'yes' &&
         claim.teachingResponsibilities === 'yes' &&
@@ -87,16 +54,21 @@ module.exports = router => {
         claim.subjectToDisciplinaryAction === 'no'
       )
     })
-
-    // 3. Paginate AFTER setting verified flags
+  
+    // 3. Paginate verified claims
     const pageSize = 10
-    const pagination = new Pagination(completedClaims, req.query.page, pageSize)
+    const pagination = new Pagination(verifiedClaims, req.query.page, pageSize)
     const paginatedClaims = pagination.getData()
-
-    // 4. Render the template with paginated verified claims
+  
+    // 4. Render the template with both paginated and full verified claims
     res.render('provider/completed/index', {
-      claims: paginatedClaims,
-      pagination
+      claims: paginatedClaims, // paginated table view
+      pagination,
+      data: {
+        claims: verifiedClaims, // used for cards and counters
+        user: req.session.data.user // or hardcode to `true` for testing
+      },
+      flash: req.flash('success')[0] || ''
     })
   })
   

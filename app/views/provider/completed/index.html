@@ -2,30 +2,12 @@
 
 {% set serviceNavId = "completedClaims" %}
 
-
-
-{# UNVERIFIED Claims counter #}
-{% set unverifiedStatuses = ["Not started", "In progress"] %}
-{% set unverifiedCount = 0 %}
-
-{% for claim in data.claims %}
-  {% if claim.status in unverifiedStatuses %}
-    {% set unverifiedCount = unverifiedCount + 1 %}
-  {% endif %}
-{% endfor %}
-
-
-{# VERIFIED Claims counter #}
-{% set verifiedStatuses = ["Verified"] %}
 {% set verifiedCount = 0 %}
-
 {% for claim in data.claims %}
-  {% if claim.status in verifiedStatuses %}
+  {% if claim.status == 'Verified' %}
     {% set verifiedCount = verifiedCount + 1 %}
   {% endif %}
 {% endfor %}
-
-
 
 {% block content %}
 
@@ -35,6 +17,8 @@
 }) if flash.length }}
 
 <h1 class="govuk-heading-l">Verified claims ( {{ verifiedCount }} )</h1>
+
+{# <p>Total logic-verified claims: {{ data.claims | length }}</p> #}
 
 {{ data.user | log }}
 {{ data.claims | log }}
@@ -54,7 +38,7 @@
   </thead>
   <tbody class="govuk-table__body govuk-!-font-size-16">
     {% for claim in claims %}
-      {% if claim.status == "Verified" %}
+      {% if claim.status == 'Verified' %}
         <tr class="govuk-table__row">
           <td class="govuk-table__cell" data-sort-value="{{ claim.claimantName }}">
               <a href="/provider/completed/show/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
