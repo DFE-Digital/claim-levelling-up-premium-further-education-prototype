@@ -10,7 +10,10 @@
     "trn": "5963615",
     "dateOfBirth": "24 June 2000",
     "dateSubmittedIso": "2024-09-16",
-    "dueDateIso": "2024-09-30"
+    "dueDateIso": "2024-09-30",
+    "teachingResponsibilities": "Yes",
+    "first5Years": "Yes",
+    "hasTeachingQualification": "Yes"
   },
   {
     "id": "1TXQL7",
@@ -23,7 +26,10 @@
     "trn": "2137926",
     "dateOfBirth": "29 November 1998",
     "dateSubmittedIso": "2024-09-17",
-    "dueDateIso": "2024-10-01"
+    "dueDateIso": "2024-10-01",
+    "teachingResponsibilities": "Yes",
+    "first5Years": "Yes",
+    "hasTeachingQualification": "Yes"
   },
   {
     "id": "27VW95",
@@ -36,7 +42,10 @@
     "trn": "7234028",
     "dateOfBirth": "12 January 2002",
     "dateSubmittedIso": "2024-09-18",
-    "dueDateIso": "2024-10-02"
+    "dueDateIso": "2024-10-02",
+    "teachingResponsibilities": "Yes",
+    "first5Years": "Yes",
+    "hasTeachingQualification": "Yes"
   },
   {
     "id": "38PEJX",
@@ -49,7 +58,10 @@
     "trn": "6332040",
     "dateOfBirth": "25 September 1999",
     "dateSubmittedIso": "2024-09-19",
-    "dueDateIso": "2024-10-03"
+    "dueDateIso": "2024-10-03",
+    "teachingResponsibilities": "Yes",
+    "first5Years": "Yes",
+    "hasTeachingQualification": "Yes"
   },
   {
     "id": "04QTZN",
