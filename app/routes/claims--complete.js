@@ -1,5 +1,3 @@
-const Pagination = require('../helpers/pagination')
-
 module.exports = router => {
 
   // GET: Update a verified claim
@@ -66,14 +64,11 @@ module.exports = router => {
     }
   
     // Pagination
-    const pageSize = 10
-    const pagination = new Pagination(filteredClaims, req.query.page, pageSize)
-    const paginatedClaims = pagination.getData()
+    const paginatedClaims = filteredClaims
   
     res.render('provider/completed/index', {
       claims: paginatedClaims,
-      pagination
-    })
+      })
   })
   
   

@@ -1,8 +1,5 @@
 const { govukDate } = require('@x-govuk/govuk-prototype-filters')
 
-const Pagination = require('../helpers/pagination')
-
-
 // Helper function: Save and redirect based on current step or returnUrl
   const saveAndRedirect = (claim, req, res, nextRoute) => {
   const completed = req.body.completedSection
@@ -43,17 +40,14 @@ module.exports = (router) => {
       claim.status === 'Not started' || claim.status === 'In progress'
     )
 
-    let pageSize = 10
-    let pagination = new Pagination(activeClaims, req.query.page, pageSize)
-    let claims = pagination.getData()
+    let claims = activeClaims
 
     console.log('All claims:', allClaims)
     console.log('Active claims:', activeClaims)
 
     res.render('provider/index', {
       claims,
-      pagination
-    })
+      })
   })
 
 // POST: Mark claim as Verified (from check screen)
