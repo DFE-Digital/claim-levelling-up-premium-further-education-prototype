@@ -1,7 +1,7 @@
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
-  Start page template – {{ serviceName }} – GOV.UK Prototype Kit
+  {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
 {% block beforeContent %}
@@ -22,14 +22,20 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-xl">
+      {# <h1 class="govuk-heading-xl">
         Have you previously received a Targeted Retention Incentive payment for work in further education?
+      </h1> #}
+      <h1 class="govuk-heading-l">
+        Did you apply for a targeted retention incentive payment for your work in further education between 1 Sept 2024 and 31 Aug 2025?
       </h1>
 
-      <p>This would have been for the 2024 to 2025 academic year.</p>
+      <div id="dob-hint" class="govuk-hint">
+        Tell us if you applied for the payment. Not whether it was approved or paid.
+      </div>
 
       <form method="post" novalidate>
           {{ govukRadios({
+            classes: "govuk-radios--inline",
             name: "receivedRetentionIncentive",
             fieldset: {
               legend: {
