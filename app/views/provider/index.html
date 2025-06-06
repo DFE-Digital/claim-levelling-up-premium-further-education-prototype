@@ -55,7 +55,7 @@
 
           <td class="govuk-table__cell" data-sort-value="{{ claim.claimantName }}">
             {% if claim.assignedTo == "Unassigned" %}
-              <a href="/provider/who-will-verify/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
+              <a href="/provider/role-and-experience/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
           
             {% elseif claim.status == "Not started" %}
               <a href="/provider/start-verifying/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
