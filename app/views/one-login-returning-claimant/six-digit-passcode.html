@@ -1,0 +1,72 @@
+{% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
+{% extends "layouts/main.html" %}
+{% set pageName = 'Enter the 6-digit passcode' %}
+
+{% block pageTitle %}
+  {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block header %}
+  {{ govukOneLoginServiceHeader({
+    signOutLink: "/one-login-signout",
+    oneLoginLink: "/#",
+    serviceNavigationParams: { 
+      serviceName: "Claim a targeted retention incentive payment for further education teachers",
+      navigationLabel: "Test label" 
+    }
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <span class="govuk-caption-l">Email address verification</span>
+      <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+      <p class="govuk-body">
+        We have sent an email to <strong>[user_work_email]</strong> with a 6-digit passcode.
+      </p>
+
+      <p class="govuk-body">
+        The passcode will expire 15 minutes after you receive it.
+      </p>
+
+      <form method="post">
+        {{ govukInput({
+          id: "passcode",
+          name: "passcode",
+          label: {
+            text: "Passcode",
+            classes: "govuk-visually-hidden"
+          },
+          classes: "govuk-input--width-10",
+          type: "text",
+          autocomplete: "one-time-code",
+          spellcheck: false
+        }) }}
+
+        <p class="govuk-body">
+          <a class="govuk-link" href="#">Resend passcode (you will be sent back to the email address page)</a>
+        </p>
+
+        <div class="govuk-button-group">
+          {{ govukButton({
+            text: "Confirm"
+          }) }}
+          {{ govukButton({
+            text: "Change email address",
+            classes: "govuk-button--secondary",
+            href: "/one-login-returning-claimant/work-email"
+          }) }}
+        </div>
+      </form>
+ </div>
+</div>   
+{% endblock %}

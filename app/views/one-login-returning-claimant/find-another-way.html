@@ -29,13 +29,13 @@
   <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-      <form method="post" action="/one-login-retunrning-claimant/find-another-way">
+      <form method="post" action="/one-login-returning-claimant/find-another-way">
         {{ govukRadios({
-          name: "another-way",
+          name: "findAnotherWay",
           fieldset: {
             legend: {
               text: "What would you like to do?",
-              classes: "govuk-fieldset__legend--m"
+              classes: "govuk-fieldset__legend--s"
             }
           },
           items: [

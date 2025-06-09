@@ -1,5 +1,5 @@
 {% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
-
+{% extends "layouts/main.html" %}
 {% set pageName = 'Enter work email' %}
 
 {% block pageTitle %}
@@ -37,7 +37,7 @@
       To verify your email address we will send you an email with a 6-digit passcode. You can enter the passcode on the next screen.
     </p>
 
-    <form method="post" action="/#">
+    <form method="post">
       {{ govukInput({
         name: "workEmail",
         type: "email",

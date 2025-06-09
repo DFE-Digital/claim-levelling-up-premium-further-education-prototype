@@ -1,0 +1,107 @@
+{% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
+{% extends "layouts/main.html" %}
+{% set pageName = 'Personal details' %}
+
+{% block pageTitle %}
+  {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block header %}
+  {{ govukOneLoginServiceHeader({
+    signOutLink: "/one-login-signout",
+    oneLoginLink: "/#",
+    serviceNavigationParams: { 
+      serviceName: "Claim a targeted retention incentive payment for further education teachers",
+      navigationLabel: "Test label" 
+    }
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">  
+
+    <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+    <form method="post">
+
+        {% call govukFieldset({
+          legend: {
+            text: "What is your full name?",
+            classes: "govuk-fieldset__legend--m",
+            isPageHeading: true
+          }
+        }) %}
+
+        {{ govukInput({
+          label: {
+            text: "First name(s)"
+          },
+          id: "return-claimant-first-name",
+          name: "returnClaimantFirstName"
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "Middle name(s)"
+          },
+          id: "return-claimant-middle-name",
+          name: "returnClaimantMiddleName"
+        }) }}
+
+
+        {{ govukInput({
+          label: {
+            text: "Last name"
+          },
+          id: "return-claimant-last-name",
+          name: "returnClaimantLastName"
+        }) }}
+
+      {% endcall %}
+
+
+        {{ govukDateInput({
+          id: "return-claimant-dob",
+          namePrefix: "returnClaimantDob",
+          fieldset: {
+            legend: {
+              text: "What is your date of birth?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          hint: {
+            text: "For example, 27 3 2007"
+          }
+        }) }}
+
+
+      {{ govukInput({
+        label: {
+          text: "What is your National Insurance number?",
+          classes: "govuk-label--m"
+        },
+        hint: {
+          text: "It's on your National Insurance card, benefit letter, payslip or P60. For example ‘QQ123456C’."
+        },
+        id: "return-claimant-national-insurance-number",
+        name: "returnClaimantNationalInsuranceNumber"
+      }) }}
+
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+
+    </form>
+    
+  </div>
+</div>
+{% endblock %}
