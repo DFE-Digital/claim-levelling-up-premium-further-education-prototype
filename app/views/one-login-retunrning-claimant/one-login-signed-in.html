@@ -1,18 +1,26 @@
-{% extends "layouts/main.html" %}
+{% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
+
+{% set pageName = "You've successfully signed in to GOV.UK One Login" %}
 
 {% block pageTitle %}
-  Start page template – {{ serviceName }} – GOV.UK Prototype Kit
-{% endblock %}
-
-{% block header %}
-  <!-- Blank header with no service name for the start page -->
-  {{ govukHeader() }}
+  {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
 {% block beforeContent %}
   {{ govukBackLink({
-    text: "Back",
-    href: "javascript:window.history.back()"
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block header %}
+  {{ govukOneLoginServiceHeader({
+    signOutLink: "/one-login-signout",
+    oneLoginLink: "/#",
+    serviceNavigationParams: { 
+      serviceName: "Claim a targeted retention incentive payment for further education teachers",
+      navigationLabel: "Test label" 
+    }
   }) }}
 {% endblock %}
 
@@ -21,7 +29,7 @@
   <div class="govuk-grid-column-two-thirds">
 
     <h1 class="govuk-heading-l">
-      You’ve successfully signed in to GOV.UK One Login
+      {{pageName}}
     </h1>
 
     <p class="govuk-body">

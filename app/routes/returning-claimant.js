@@ -1,57 +1,64 @@
 module.exports = router => {
 
-  router.post('/claimant/received-retention-incentive-before', (req, res) => {
+  router.post('/one-login-retunrning-claimant/received-retention-incentive-before', (req, res) => {
     let data = req.session.data
     let receivedRetentionIncentive = data.receivedRetentionIncentive
     if (receivedRetentionIncentive === 'Yes') {
-      ///this was previously /claimant/one-login-sign-in-only
-      res.redirect('/claimant/do-you-have-a-one-login-account')
+      ///this was previously /one-login-retunrning-claimant/one-login-sign-in-only
+      res.redirect('/one-login-retunrning-claimant/do-you-have-a-one-login-account')
     } else{
-      res.redirect('/claimant/do-you-have-a-one-login-account')
+      res.redirect('/one-login-retunrning-claimant/do-you-have-a-one-login-account')
     }
   })
 
-  router.post('/claimant/do-you-have-a-one-login-account', (req, res) => {
+  router.post('/one-login-retunrning-claimant/do-you-have-a-one-login-account', (req, res) => {
     let data = req.session.data
     let hasOneLoginAccount = data.hasOneLoginAccount
     if (hasOneLoginAccount === 'Yes' ||  hasOneLoginAccount === "I don't know") {
-      res.redirect('/claimant/one-login-sign-in-only')
+      res.redirect('/one-login-retunrning-claimant/one-login-sign-in-only')
     } else {
       res.redirect('/start')
     }
   })
 
-  router.post('/claimant/one-login-sign-in-only', (req, res) => {
+  router.post('/one-login-retunrning-claimant/one-login-sign-in-only', (req, res) => {
     let data = req.session.data
     
-    res.redirect('/claimant/one-login-email')
+    res.redirect('/one-login-retunrning-claimant/one-login-email')
     
   })
 
-  router.post('/claimant/one-login-email', (req, res) => {
+  router.post('/one-login-retunrning-claimant/one-login-email', (req, res) => {
     let data = req.session.data
     
-    res.redirect('/claimant/one-login-password')
+    res.redirect('/one-login-retunrning-claimant/one-login-password')
     
   })
 
-  router.post('/claimant/one-login-password', (req, res) => {
+  router.post('/one-login-retunrning-claimant/one-login-password', (req, res) => {
     let data = req.session.data
     
-    res.redirect('/claimant/one-login-one-time-passcode')
+    res.redirect('/one-login-retunrning-claimant/one-login-one-time-passcode')
     
   })
-  router.post('/claimant/one-login-one-time-passcode', (req, res) => {
+  router.post('/one-login-retunrning-claimant/one-login-one-time-passcode', (req, res) => {
     let data = req.session.data
     
-    res.redirect('/claimant/one-login-signed-in')
+    res.redirect('/one-login-retunrning-claimant/one-login-signed-in')
     
   })
 
-  router.post('/claimant/one-login-signed-in', (req, res) => {
+  router.post('/one-login-retunrning-claimant/one-login-signed-in', (req, res) => {
     let data = req.session.data
     
-    res.redirect('/start')
+    res.redirect('/one-login-retunrning-claimant/find-another-way')
+    
+  })
+
+  router.post('/one-login-retunrning-claimant/find-another-way', (req, res) => {
+    let data = req.session.data
+    
+    res.redirect('/one-login-retunrning-claimant/confirm-college')
     
   })
 }

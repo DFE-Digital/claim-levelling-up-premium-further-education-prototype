@@ -1,0 +1,65 @@
+{% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
+
+{% set pageName = 'Do you have access to your work email for [College_name]' %}
+
+{% block pageTitle %}
+  {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block header %}
+  {{ govukOneLoginServiceHeader({
+    signOutLink: "/one-login-signout",
+    oneLoginLink: "/#",
+    serviceNavigationParams: { 
+      serviceName: "Claim a targeted retention incentive payment for further education teachers",
+      navigationLabel: "Test label" 
+    }
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+    <p class="govuk-body">To complete this step, you'll need to be able to access your work email account. If you can't access it right now, you can return to this page later. If you pick 'no' we'll sign you out</p>
+
+    <form method="post" action="/#">
+      {{ govukRadios({
+        name: "has-work-email",
+        fieldset: {
+          legend: {
+            text: "Do you have access to your work email",
+            classes: "govuk-fieldset__legend--m govuk-visually-hidden"
+          }
+        },
+        items: [
+          {
+            value: "Yes",
+            text: "Yes"
+          },
+          {
+            value: "No",
+            text: "No"
+          }
+        ]
+      }) }}
+
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+    </form>
+
+    <p class="govuk-body">
+      <a href="#" class="govuk-link">Contact the GOV.UK One Login team (opens in new tab)</a>
+    </p>
+  </div>
+</div>    
+{% endblock %}
