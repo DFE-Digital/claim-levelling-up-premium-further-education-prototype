@@ -61,4 +61,16 @@ module.exports = router => {
     res.redirect('/one-login-retunrning-claimant/confirm-college')
     
   })
+
+  router.post('/one-login-retunrning-claimant/confirm-college', (req, res) => {
+    let data = req.session.data
+    if (data.hasWorkEmail === "Yes") {
+      res.redirect('/one-login-retunrning-claimant/work-email')
+      
+    } else {
+      
+    }
+    res.redirect('/one-login-retunrning-claimant/signed-you-out')
+    
+  })
 }
