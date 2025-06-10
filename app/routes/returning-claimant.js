@@ -268,4 +268,21 @@ router.post('/one-login-returning-claimant/do-you-have-a-one-login-account', (re
     res.redirect('/one-login-returning-claimant/success'); // or whatever next step
   })
 
+  /////////// ONE LOGIN SIGNOUT ////////////
+  router.get('/one-login-signout', (req, res) => {
+    // Clear the session data
+    req.session.destroy(err => {
+      if (err) {
+        console.error('Session clear error:', err)
+      }
+
+      // Optionally, you can also remove the cookie
+      res.clearCookie('connect.sid')
+
+      // Render the signed-out confirmation screen
+      res.render('one-login-returning-claimant/one-login-signed-out', {})
+    })
+  })
+
+
 }
