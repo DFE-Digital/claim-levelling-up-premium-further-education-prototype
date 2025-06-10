@@ -27,27 +27,23 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-!-margin-top-6">{% if error %}
+        {{ govukErrorSummary({
+            titleText: "There is a problem",
+            errorList: [ error ]
+          }) }}
+        {% endif %}
       <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-      <form method="post" action="/one-login-returning-claimant/find-another-way">
+      <form method="post" novalidate>
         {{ govukRadios({
-          name: "findAnotherWay",
-          fieldset: {
-            legend: {
-              text: "What would you like to do?",
-              classes: "govuk-fieldset__legend--s"
-            }
-          },
-          items: [
-            {
-              value: "continue",
-              text: "Continue to the service you were trying to use to look for other ways to prove your identity"
-            },
-            {
-              value: "retry",
-              text: "Try proving your identity with GOV.UK One Login again"
-            }
-          ]
+            name: "findAnotherWay",
+            value: data.findAnotherWay,
+            errorMessage: error if error and error.href == "#findAnotherWay",
+            items: [
+              { value: "continue", text: "Continue to the service you were trying to use to look for other ways to prove your identity" },
+              { value: "create", text: "Create a GOV.UK One Login instead" }
+            ]
         }) }}
 
         {{ govukButton({

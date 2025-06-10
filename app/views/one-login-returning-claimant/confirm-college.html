@@ -27,30 +27,28 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+    {% if error %}
+      {{ govukErrorSummary({
+        titleText: "There is a problem",
+        errorList: [ error ]
+      }) }}
+    {% endif %}
+
     <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
     <p class="govuk-body">To complete this step, you'll need to be able to access your work email account. If you can't access it right now, you can return to this page later. If you pick 'no' we'll sign you out</p>
 
-    <form method="post">
-      {{ govukRadios({
-        name: "hasWorkEmail",
-        fieldset: {
-          legend: {
-            text: "Do you have access to your work email",
-            classes: "govuk-fieldset__legend--m govuk-visually-hidden"
-          }
-        },
-        items: [
-          {
-            value: "Yes",
-            text: "Yes"
-          },
-          {
-            value: "No",
-            text: "No"
-          }
-        ]
-      }) }}
+
+      <form method="post" novalidate>
+        {{ govukRadios({
+          name: "hasWorkEmail",
+          value: data.hasWorkEmail,
+          errorMessage: error if error and error.href == "#hasWorkEmail",
+          items: [
+            { value: "Yes", text: "Yes" },
+            { value: "No", text: "No" }
+          ]
+        }) }}
 
       {{ govukButton({
         text: "Continue"

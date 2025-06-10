@@ -8,9 +8,9 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-  text: "Back",
-  href: "javascript:window.history.back()"
-}) }}
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
 {% endblock %}
 
 {% block header %}
@@ -28,60 +28,84 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">  
 
+      {% if errors %}
+      {{ govukErrorSummary({
+        titleText: "There is a problem",
+        errorList: errors
+      }) }}
+    {% endif %}
+
     <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-    <form method="post">
+    <form method="post" novalidate>
 
-        {% call govukFieldset({
-          legend: {
-            text: "What is your full name?",
-            classes: "govuk-fieldset__legend--m",
-            isPageHeading: true
-          }
-        }) %}
+      {% call govukFieldset({
+        legend: {
+          text: "What is your full name?",
+          classes: "govuk-fieldset__legend--m",
+          isPageHeading: true
+        }
+      }) %}
 
         {{ govukInput({
-          label: {
-            text: "First name(s)"
-          },
+          label: { text: "First name(s)" },
           id: "return-claimant-first-name",
-          name: "returnClaimantFirstName"
+          name: "returnClaimantFirstName",
+          value: data.returnClaimantFirstName,
+          errorMessage: fieldErrors.returnClaimantFirstName
         }) }}
 
         {{ govukInput({
-          label: {
-            text: "Middle name(s)"
-          },
+          label: { text: "Middle name(s) Optional" },
           id: "return-claimant-middle-name",
-          name: "returnClaimantMiddleName"
+          name: "returnClaimantMiddleName",
+          value: data.returnClaimantMiddleName
         }) }}
 
-
         {{ govukInput({
-          label: {
-            text: "Last name"
-          },
+          label: { text: "Last name" },
           id: "return-claimant-last-name",
-          name: "returnClaimantLastName"
+          name: "returnClaimantLastName",
+          value: data.returnClaimantLastName,
+          errorMessage: fieldErrors.returnClaimantLastName
         }) }}
 
       {% endcall %}
 
+      {% set dob = data.returnClaimantDob or {} %}
 
-        {{ govukDateInput({
-          id: "return-claimant-dob",
-          namePrefix: "returnClaimantDob",
-          fieldset: {
-            legend: {
-              text: "What is your date of birth?",
-              isPageHeading: true,
-              classes: "govuk-fieldset__legend--m"
-            }
-          },
-          hint: {
-            text: "For example, 27 3 2007"
+      {{ govukDateInput({
+        id: "return-claimant-dob",
+        namePrefix: "returnClaimantDob",
+        fieldset: {
+          legend: {
+            text: "What is your date of birth?",
+            isPageHeading: false,
+            classes: "govuk-fieldset__legend--m"
           }
-        }) }}
+        },
+        hint: {
+          text: "For example, 27 3 2007"
+        },
+        items: [
+          {
+            name: "day",
+            value: data["returnClaimantDob-day"],
+            classes: "govuk-input--width-2"
+          },
+          {
+            name: "month",
+            value: data["returnClaimantDob-month"],
+            classes: "govuk-input--width-2"
+          },
+          {
+            name: "year",
+            value: data["returnClaimantDob-year"],
+            classes: "govuk-input--width-4"
+          }
+        ],
+        errorMessage: fieldErrors.returnClaimantDob
+      }) }}
 
 
       {{ govukInput({
@@ -90,18 +114,17 @@
           classes: "govuk-label--m"
         },
         hint: {
-          text: "It's on your National Insurance card, benefit letter, payslip or P60. For example ‘QQ123456C’."
+          text: "It's on your National Insurance card, benefit letter, payslip or P60. For example 'QQ123456C'."
         },
         id: "return-claimant-national-insurance-number",
-        name: "returnClaimantNationalInsuranceNumber"
+        name: "returnClaimantNationalInsuranceNumber",
+        value: data.returnClaimantNationalInsuranceNumber,
+        errorMessage: fieldErrors.returnClaimantNationalInsuranceNumber
       }) }}
 
-      {{ govukButton({
-        text: "Continue"
-      }) }}
+      {{ govukButton({ text: "Continue" }) }}
 
     </form>
-    
   </div>
 </div>
 {% endblock %}

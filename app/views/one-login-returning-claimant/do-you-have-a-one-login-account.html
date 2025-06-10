@@ -28,38 +28,34 @@
 
       {# <p>This would have been for the 2024 to 2025 academic year.</p> #}
 
-      <form method="post" novalidate>
-          {{ govukRadios({
-            name: "hasOneLoginAccount",
-            fieldset: {
-              legend: {
-                text: "Legend text",
-                classes: "govuk-fieldset__legend--s govuk-visually-hidden"
-              }
-            },
-            value: data.hasOneLoginAccount,
-            items: [
-              {
-                value: "Yes",
-                text: "Yes"
-              },
-              {
-                value: "No",
-                text: "No"
-              },
-              {
-                divider: "or"
-              },
-              {
-                value: "I don't know",
-                text: "I don't know"
-              }
-            ]
-          }) }}
+      {% if error %}
+        {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: [ error ]
+        }) }}
+      {% endif %}
 
-          {{ govukButton({
-            text: "Continue"
-          }) }}
+      <form method="post" novalidate>
+        {{ govukRadios({
+          name: "hasOneLoginAccount",
+          fieldset: {
+            legend: {
+              text: pageName,
+              classes: "govuk-fieldset__legend--s govuk-visually-hidden"
+            }
+          },
+          value: data.hasOneLoginAccount,
+          errorMessage: error if error and error.href == "#hasOneLoginAccount",
+          items: [
+            { value: "Yes", text: "Yes" },
+            { value: "No", text: "No" },
+            { value: "I don't know", text: "I don't know" }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
       </form>
       
 

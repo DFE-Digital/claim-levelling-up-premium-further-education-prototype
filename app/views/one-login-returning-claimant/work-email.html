@@ -27,6 +27,12 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+    {% if error %}
+      {{ govukErrorSummary({
+        titleText: "There is a problem",
+        errorList: [ error ]
+      }) }}
+    {% endif %}
     <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
     <p class="govuk-body">
@@ -43,6 +49,8 @@
         type: "email",
         spellcheck: false,
         autocomplete: "email",
+        errorMessage: error if error and error.href == "#workEmail",
+        value: data.workEmail,
         fieldset: {
           legend: {
             text: "Enter your work email",

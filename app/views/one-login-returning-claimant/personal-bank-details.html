@@ -8,9 +8,9 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-  text: "Back",
-  href: "javascript:window.history.back()"
-}) }}
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
 {% endblock %}
 
 {% block header %}
@@ -27,20 +27,26 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">  
-
+        {% if errors %}
+          {{ govukErrorSummary({
+            titleText: "There is a problem",
+            errorList: errors
+          }) }}
+        {% endif %}
     <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
     <p class="govuk-body">You should give us the details for the bank account that your employer pays your salary into. We may need to check the information you give us with your employer so that we can make sure it's you.</p>
 
-    <form method="post">
 
-        {% call govukFieldset({
-          legend: {
-            text: "Your nbak details",
-            classes: "govuk-fieldset__legend--m govuk-visually-hidden",
-            isPageHeading: false
-          }
-        }) %}
+
+    <form method="post" novalidate>
+      {% call govukFieldset({
+        legend: {
+          text: "Your bank details",
+          classes: "govuk-fieldset__legend--m govuk-visually-hidden",
+          isPageHeading: false
+        }
+      }) %}
 
         {{ govukInput({
           label: {
@@ -52,6 +58,8 @@
           },
           id: "return-claimant-bank-account-name",
           name: "returnClaimantBankAccountName",
+          value: data.returnClaimantBankAccountName,
+          errorMessage: fieldErrors.returnClaimantBankAccountName,
           classes: "govuk-input--width-20"
         }) }}
 
@@ -65,9 +73,10 @@
           },
           id: "return-claimant-sort-code",
           name: "returnClaimantSortCode",
+          value: data.returnClaimantSortCode,
+          errorMessage: fieldErrors.returnClaimantSortCode,
           classes: "govuk-input--width-10"
         }) }}
-
 
         {{ govukInput({
           label: {
@@ -79,6 +88,8 @@
           },
           id: "return-claimant-account-number",
           name: "returnClaimantAccountNumber",
+          value: data.returnClaimantAccountNumber,
+          errorMessage: fieldErrors.returnClaimantAccountNumber,
           classes: "govuk-input--width-20"
         }) }}
 
@@ -87,7 +98,6 @@
       {{ govukButton({
         text: "Continue"
       }) }}
-
     </form>
     
   </div>

@@ -21,6 +21,12 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      {% if error %}
+        {{ govukErrorSummary({
+            titleText: "There is a problem",
+            errorList: [ error ]
+          }) }}
+      {% endif %}
 
       {# <h1 class="govuk-heading-xl">
         Have you previously received a Targeted Retention Incentive payment for work in further education?
@@ -34,31 +40,19 @@
       </div>
 
       <form method="post" novalidate>
-          {{ govukRadios({
-            classes: "govuk-radios--inline",
+        {{ govukRadios({
             name: "receivedRetentionIncentive",
-            fieldset: {
-              legend: {
-                text: "Legend text",
-                classes: "govuk-fieldset__legend--s govuk-visually-hidden"
-              }
-            },
             value: data.receivedRetentionIncentive,
+            errorMessage: error if error and error.href == "#receivedRetentionIncentive",
             items: [
-              {
-                value: "Yes",
-                text: "Yes"
-              },
-              {
-                value: "No",
-                text: "No"
-              }
+              { value: "Yes", text: "Yes" },
+              { value: "No", text: "No" }
             ]
-          }) }}
+        }) }}
 
-          {{ govukButton({
-            text: "Continue"
-          }) }}
+        {{ govukButton({
+          text: "Continue"
+        }) }}
       </form>
       
 

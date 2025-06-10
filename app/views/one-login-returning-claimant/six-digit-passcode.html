@@ -27,11 +27,17 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+    {% if error %}
+      {{ govukErrorSummary({
+        titleText: "There is a problem",
+        errorList: [ error ]
+      }) }}
+    {% endif %}
     <span class="govuk-caption-l">Email address verification</span>
       <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
       <p class="govuk-body">
-        We have sent an email to <strong>[user_work_email]</strong> with a 6-digit passcode.
+        We have sent an email to <strong>{{data.workEmail}}</strong> with a 6-digit passcode.
       </p>
 
       <p class="govuk-body">
@@ -40,20 +46,22 @@
 
       <form method="post">
         {{ govukInput({
-          id: "passcode",
-          name: "passcode",
           label: {
-            text: "Passcode",
-            classes: "govuk-visually-hidden"
+            text: "Enter the 6 digit security code"
           },
+          id: "six-digit-security-code",
+          name: "sixDigitSecurityCode",
           classes: "govuk-input--width-10",
           type: "text",
+          inputmode: "numeric",
+          pattern: "[0-9]*",
           autocomplete: "one-time-code",
-          spellcheck: false
+          value: data.sixDigitSecurityCode,
+          errorMessage: error if error and error.href == "#six-digit-security-code"
         }) }}
 
         <p class="govuk-body">
-          <a class="govuk-link" href="#">Resend passcode (you will be sent back to the email address page)</a>
+          <a class="govuk-link" href="/one-login-returning-claimant/work-email">Resend passcode (you will be sent back to the email address page)</a>
         </p>
 
         <div class="govuk-button-group">
