@@ -17,13 +17,13 @@
 
 
 <div class="govuk-grid-row">
-
-    {{ govukNotificationBanner({
-      type: "success",
-      html: '<h2 class="govuk-heading-m"> '+flash+' </h2>' | safe
-    }) if flash.length }}
-
+  
     <div class="govuk-grid-column-three-quarters">
+
+       {{ govukNotificationBanner({
+          type: "warning",
+          html: '<h2 class="govuk-heading-m"> '+flash+' </h2>' | safe
+        }) if flash.length }}
 
       <span class="govuk-caption-xl">{{claim.claimantName}}</span>
       <h1 class="govuk-heading-l">{{ pageName }}
