@@ -1,7 +1,7 @@
 {% extends "layouts/main.html" %}
 
 
-{% set pageName = 'Claim reference: ' + claim.claimReference %}
+{% set pageName =  claim.claimReference %}
 {% set serviceNavId = "allClaims" %}
 
 {% block beforeContent %}
@@ -14,8 +14,16 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-three-quarters">
-    <span class="govuk-caption-l">{{claim.claimantName}}</span>
-      <h1 class="govuk-heading-l">{{pageName}}</h1>
+    <span class="govuk-caption-xl">{{claim.claimantName}}</span>
+      <h1 class="govuk-heading-l">{{ pageName }}
+        {% if claim.verified %}
+          {{ govukTag({ text: "Verified", classes: "govuk-tag--blue" }) }}
+        {% elseif claim.status == "In progress" %}
+          {{ govukTag({ text: "In progress", classes: "govuk-tag--yellow" }) }}
+        {% elseif claim.status == "Not started" %}
+          {{ govukTag({ text: "Not started", classes: "govuk-tag--red" }) }}
+        {% endif %}
+      </h1>
 
     {# Role and experience summary card #}
     {{ govukSummaryList({
