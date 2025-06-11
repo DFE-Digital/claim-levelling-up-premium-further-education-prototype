@@ -36,12 +36,11 @@ module.exports = router => {
 
   router.get('/provider/completed', (req, res) => {
     const claims = req.session.data.claims || []
-  
-    // Only include DfE status claims
+
     const dfeStatuses = ['Dfe pending', 'Dfe approved', 'Dfe rejected']
     let filteredClaims = claims.filter(claim => dfeStatuses.includes(claim.status))
-  
-    // Optional: add verified flag (only for Dfe pending)
+
+    // Add verified flag for Dfe pending
     filteredClaims.forEach(claim => {
       if (claim.status === 'Dfe pending') {
         claim.verified = (
@@ -56,21 +55,17 @@ module.exports = router => {
         )
       }
     })
-  
-    // 🆕 Sort to show most recently updated DfE claim first
-    const updatedId = req.session.data.lastUpdatedClaimId
-    if (updatedId) {
-      filteredClaims.sort((a, b) => (a.id === updatedId ? -1 : b.id === updatedId ? 1 : 0))
-    }
-  
-    // Pagination
-    const paginatedClaims = filteredClaims
-  
+
+    // ✅ Sort all DfE claims alphabetically by surname
+    filteredClaims.sort((a, b) => {
+      const surnameA = a.claimantName.split(' ').slice(-1)[0].toLowerCase()
+      const surnameB = b.claimantName.split(' ').slice(-1)[0].toLowerCase()
+      return surnameA.localeCompare(surnameB)
+    })
+
     res.render('provider/completed/index', {
-      claims: paginatedClaims,
-      })
-  })
-  
-  
+      claims: filteredClaims
+    })
+  }) 
 
 }

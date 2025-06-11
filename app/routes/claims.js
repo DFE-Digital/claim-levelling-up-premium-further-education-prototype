@@ -50,7 +50,8 @@ module.exports = (router) => {
       })
   })
 
-// POST: Mark claim as Verified (from check screen)
+
+// POST: Mark claim as Verified (from check screen) and go to completed claims table
 router.post('/provider/index/:claimId', (req, res) => {
   const claims = req.session.data.claims || []
   const claim = claims.find(c => String(c.id) === req.params.claimId)
@@ -74,11 +75,15 @@ router.post('/provider/index/:claimId', (req, res) => {
   req.session.data.lastUpdatedClaimId = claim.id
 
   // Flash confirmation
-  req.flash('success', `Claim verified <br> <a class="govuk-link" href="/provider/completed/show/${claim.id}">View verified claim</a>`)
+  req.flash(
+    'success',
+    `Claim verified <br> <a class="govuk-link" href="/provider/completed/show/${claim.id}">View verified claim</a>`
+  )
 
-  // Redirect to Verified claims
-  res.redirect('/provider')
+  // ✅ Redirect to completed claims screen instead of main dashboard
+  res.redirect('/provider/completed')
 })
+
 
 
 

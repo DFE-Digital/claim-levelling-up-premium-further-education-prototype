@@ -1,6 +1,7 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = 'Check your answers' %}
+
+{% set pageName = 'Claim reference: ' + claim.claimReference %}
 {% set serviceNavId = "allClaims" %}
 
 {% block beforeContent %}
@@ -13,7 +14,8 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-three-quarters">
-    <h1 class="govuk-heading-l">{{ pageName }}</h1>
+    <span class="govuk-caption-l">{{claim.claimantName}}</span>
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
 
     {# Role and experience summary card #}
     {{ govukSummaryList({

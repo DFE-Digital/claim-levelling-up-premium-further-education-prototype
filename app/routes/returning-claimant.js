@@ -2,6 +2,7 @@ module.exports = router => {
 
 router.post('/one-login-returning-claimant/received-retention-incentive-before', (req, res) => {
   const received = req.session.data.receivedRetentionIncentive
+
   if (!received) {
     return res.render('one-login-returning-claimant/received-retention-incentive-before', {
       error: {
@@ -11,8 +12,15 @@ router.post('/one-login-returning-claimant/received-retention-incentive-before',
       data: req.session.data
     })
   }
-  res.redirect('/one-login-returning-claimant/do-you-have-a-one-login-account');
+
+  if (received === 'Yes') {
+    return res.redirect('/one-login-returning-claimant/one-login-sign-in-only')
+  }
+
+  // If No or anything else
+  res.redirect('/one-login-returning-claimant/do-you-have-a-one-login-account')
 })
+
 
 
 router.post('/one-login-returning-claimant/do-you-have-a-one-login-account', (req, res) => {
