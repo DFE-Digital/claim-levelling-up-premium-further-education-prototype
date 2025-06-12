@@ -18,7 +18,7 @@
 
       <span class="govuk-caption-l">{{claim.claimantName}}</span>
       <h1 class="govuk-heading-l">{{pageName}}
-        {% if claim.status in ["Dfe pending", "Dfe approved", "Dfe rejected"] %}
+        {% if claim.status in ["Pending", "Approved", "Rejected"] %}
         {{ govukTag({
           text: claim.status,
           classes: claim.status | statusColour
