@@ -59,8 +59,8 @@
             {% if claim.status == "Check required" and claim.assignedTo == "Unassigned" %}
               <a href="/provider/check-identity/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
 
-            {% elseif claim.status == "Not started" %}
-              <a href="/provider/start-verifying/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
+            {# {% elseif claim.status == "Not started" %}
+              <a href="/provider/start-verifying/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a> #}
 
             {% elseif claim.status == "In progress" %}
               <a href="/provider/finish-verifying/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
@@ -70,8 +70,6 @@
             {% endif %}
           </td>
 
-          
-           
   
           <td class="govuk-table__cell" data-sort-value="{{ claim.dateSubmittedIso }}">{{ claim.dateSubmitted }}</td>
           <td class="govuk-table__cell" data-sort-value="{{ claim.dueDateIso }}">{{ claim.dueDate }}</td>
