@@ -1,9 +1,10 @@
+
 {% extends "layouts/main.html" %}
 
 {% set serviceNavId = "allClaims" %}
 
 {# UNVERIFIED Claims counter #}
-{% set unverifiedStatuses = ["Not started", "In progress"] %}
+{% set unverifiedStatuses = ["Not started", "In progress", "Check required"] %}
 {% set unverifiedCount = 0 %}
 
 {% for claim in data.claims %}
@@ -53,17 +54,22 @@
     {% for claim in claims %}
         <tr class="govuk-table__row">
 
+          {# Make check req first block so logic works #}
           <td class="govuk-table__cell" data-sort-value="{{ claim.claimantName }}">
-            {% if claim.assignedTo == "Unassigned" %}
-              <a href="/provider/role-and-experience/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
-          
+            {% if claim.status == "Check required" and claim.assignedTo == "Unassigned" %}
+              <a href="/provider/check-identity/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
+
             {% elseif claim.status == "Not started" %}
               <a href="/provider/start-verifying/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
-          
+
             {% elseif claim.status == "In progress" %}
               <a href="/provider/finish-verifying/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
+
+            {% elseif claim.assignedTo == "Unassigned" %}
+              <a href="/provider/role-and-experience/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
             {% endif %}
           </td>
+
           
            
   

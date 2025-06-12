@@ -30,4 +30,12 @@
   @include govuk-media-query($from: tablet) {
     grid-template-columns: 1fr 1fr 1fr
   }
+
+  .app-home-statuses--4-up {
+  grid-template-columns: 1fr;
+  @include govuk-media-query($from: tablet) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 }

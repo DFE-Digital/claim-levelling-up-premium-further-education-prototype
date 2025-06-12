@@ -80,6 +80,22 @@
     "hasTeachingQualification": "Yes"
   },
   {
+  "id": "39LXAV",
+  "claimReference": "B7MKQH2T",
+  "claimantName": "Nathan Harper",
+  "dateSubmitted": "02 October 2024",
+  "dueDate": "16 October 2024",
+  "assignedTo": "Unassigned",
+  "status": "Check required",
+  "trn": "8235490",
+  "dateOfBirth": "12 February 1998",
+  "dateSubmittedIso": "2024-10-02",
+  "dueDateIso": "2024-10-16",
+  "teachingResponsibilities": "Yes",
+  "first5Years": "Yes",
+  "hasTeachingQualification": "Yes"
+  },
+  {
     "id": "10TFZR",
     "claimReference": "KF3ZPN8W",
     "claimantName": "Julia Bright",

@@ -37,7 +37,7 @@ module.exports = (router) => {
     let allClaims = req.session.data.claims || []
 
     let activeClaims = allClaims.filter(claim =>
-      claim.status === 'Not started' || claim.status === 'In progress'
+      ['Not started', 'In progress', 'Check required'].includes(claim.status)
     )
 
     let claims = activeClaims
@@ -85,6 +85,17 @@ router.post('/provider/index/:claimId', (req, res) => {
 })
 
 
+  // GET: Check identity screen for 'Check required' claims
+    router.get('/provider/check-identity/:claimId', (req, res) => {
+      const claims = req.session.data.claims || []
+      const claim = claims.find(c => String(c.id) === req.params.claimId)
+
+      if (!claim) {
+        return res.status(404).send('Claim not found')
+      }
+
+      res.render('provider/check-identity/index', { claim })
+    })
 
 
   // ================================
