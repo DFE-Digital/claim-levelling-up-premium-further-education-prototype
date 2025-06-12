@@ -1,0 +1,96 @@
+{% extends "layouts/main.html" %}
+
+
+{% set pageName =  'Claim reference: ' + claim.claimReference %}
+{% set serviceNavId = "allClaims" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-three-quarters">
+    <span class="govuk-caption-xl">{{claim.claimantName}}</span>
+      <h1 class="govuk-heading-l">{{ pageName }}
+        {% if claim.verified %}
+          {{ govukTag({ text: "Verified", classes: "govuk-tag--blue" }) }}
+        {% elseif claim.status == "In progress" %}
+          {{ govukTag({ text: "In progress", classes: "govuk-tag--yellow" }) }}
+        {% elseif claim.status == "Not started" %}
+          {{ govukTag({ text: "Not started", classes: "govuk-tag--red" }) }}
+        {% endif %}
+      </h1>
+
+    {# Role and experience summary card #}
+   {{ govukSummaryList({
+      card: {
+        title: {
+          text: "Additonal details about the claimant",
+          classes: "govuk-heading-m"
+        },
+        actions: {
+          items: [
+            {
+              href: "/provider/check-identity/" + claim.id,
+              text: "Change",
+              visuallyHiddenText: "check identity answers"
+            }
+          ]
+        }
+      },
+      rows: [
+        {
+          key: { text: "Do you know the claimant as " + claim.claimantName + "?" },
+          value: { text: data.isClaimantKnownToYou }
+        },
+        {
+          key: { text: "Date of birth" },
+          value: { text: formattedDob }
+        },
+        {
+          key: { text: "National Insurance number" },
+          value: { text: data.returnClaimantNationalInsuranceNumber }
+        },
+        {
+          key: { text: "Bank details match" },
+          value: { text: data.claimantBankDetailsMatch }
+        },
+        {
+          key: { text: "Work email address" },
+          value: { text: data.claimantWorkEmail }
+        }
+      ]
+    }) }}
+
+
+
+
+    <form method="post" action="/provider/check-identity/check/{{ claim.id }}">
+      <h2 class="govuk-heading-m">Declaration</h2>
+
+      {{ govukCheckboxes({
+        name: "Declaration",
+        items: [
+          {
+            value: "To the best of my knowledge, I confirm that the information provided in this form is correct.",
+            text: "To the best of my knowledge, I confirm that the information provided in this form is correct."
+          }
+        ]
+      }) }}
+
+      <div class="govuk-button-group">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Accept and send
+        </button>
+        <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

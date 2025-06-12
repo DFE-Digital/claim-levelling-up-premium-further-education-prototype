@@ -85,18 +85,6 @@ router.post('/provider/index/:claimId', (req, res) => {
 })
 
 
-  // GET: Check identity screen for 'Check required' claims
-    router.get('/provider/check-identity/:claimId', (req, res) => {
-      const claims = req.session.data.claims || []
-      const claim = claims.find(c => String(c.id) === req.params.claimId)
-
-      if (!claim) {
-        return res.status(404).send('Claim not found')
-      }
-
-      res.render('provider/check-identity/index', { claim })
-    })
-
 
   // ================================
   // WHO WILL VERIFY
