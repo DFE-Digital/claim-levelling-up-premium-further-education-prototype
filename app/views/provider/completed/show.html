@@ -2,7 +2,7 @@
 
 {% set serviceNavId = "completedClaims" %}
 
-{% set pageName =  claim.claimReference %}
+{% set pageName =  'Claim reference: ' + claim.claimReference %}
 
 {% block beforeContent %}
   {{ govukBackLink({
