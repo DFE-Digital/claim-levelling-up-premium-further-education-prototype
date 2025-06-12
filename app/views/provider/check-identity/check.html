@@ -48,6 +48,10 @@
           value: { text: data.isClaimantKnownToYou }
         },
         {
+          key: { text: "Also known as" },
+          value: { text: data.alsoKnownAs or "Not provided" }
+        } if data.alsoKnownAs,
+        {
           key: { text: "Date of birth" },
           value: { text: formattedDob }
         },

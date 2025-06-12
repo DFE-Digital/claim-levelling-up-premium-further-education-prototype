@@ -30,6 +30,7 @@ module.exports = router => {
 
     // Save each form field to the session
     sessionData.isClaimantKnownToYou = data.isClaimantKnownToYou
+    sessionData.alsoKnownAs = data.alsoKnownAs
     sessionData["returnClaimantDob-day"] = data["returnClaimantDob-day"]
     sessionData["returnClaimantDob-month"] = data["returnClaimantDob-month"]
     sessionData["returnClaimantDob-year"] = data["returnClaimantDob-year"]

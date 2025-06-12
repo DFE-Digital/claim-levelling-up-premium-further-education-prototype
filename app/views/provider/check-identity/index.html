@@ -57,7 +57,18 @@
           },
           {
             value: "I might know them by another name",
-            text: "I might know them by another name"
+            text: "I might know them by another name",
+            conditional: {
+              html: govukInput({
+                id: "also-known-as",
+                name: "alsoKnownAs",
+                label: {
+                  text: "Also known as"
+                },
+                value: data.alsoKnownAs,
+                classes: "govuk-!-width-two-thirds"
+              })
+            }
           }
         ]
       }) }}
