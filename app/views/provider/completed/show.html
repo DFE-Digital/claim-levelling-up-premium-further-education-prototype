@@ -38,9 +38,9 @@
       </h1>
       
 
-      {% if claim.status == 'Dfe pending' %}
+      {% if claim.status == 'Rejected' %}
         <div class="govuk-inset-text">
-          Claim verified by {{ claim.assignedTo }} on {{ claim.assignedDate | govukDate }} {{ claim.assignedDate | govukTime }}
+          Claimant has been notified on the reasons for rejection.
         </div>
       {% endif %}
 

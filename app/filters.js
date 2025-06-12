@@ -13,11 +13,11 @@ addFilter('statusColour', status => {
       return 'govuk-tag--yellow'
     case 'Not started':
       return 'govuk-tag--red'
-    case 'Dfe approved':
+    case 'Approved':
       return 'govuk-tag--green'
-    case 'Dfe rejected':
+    case 'Rejected':
       return 'govuk-tag--red'
-    case 'Dfe pending':
+    case 'Pending':
       return 'govuk-tag--grey'
   }
 })

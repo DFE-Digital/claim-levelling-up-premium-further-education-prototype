@@ -9,7 +9,7 @@ module.exports = router => {
       return res.status(404).send('Claim not found')
     }
   
-    const validStatuses = ['Dfe pending', 'Dfe approved', 'Dfe rejected']
+    const validStatuses = ['Pending', 'Approved', 'Rejected']
     if (!validStatuses.includes(claim.status)) {
       return res.status(400).send('Only DfE claims can be updated from this page.')
     }
@@ -37,12 +37,12 @@ module.exports = router => {
   router.get('/provider/completed', (req, res) => {
     const claims = req.session.data.claims || []
 
-    const dfeStatuses = ['Dfe pending', 'Dfe approved', 'Dfe rejected']
+    const dfeStatuses = ['Pending', 'Approved', 'Rejected']
     let filteredClaims = claims.filter(claim => dfeStatuses.includes(claim.status))
 
     // Add verified flag for Dfe pending
     filteredClaims.forEach(claim => {
-      if (claim.status === 'Dfe pending') {
+      if (claim.status === 'Pending') {
         claim.verified = (
           claim.contractType?.toLowerCase() === 'permanent' &&
           claim.teachingResponsibilities === 'Yes' &&

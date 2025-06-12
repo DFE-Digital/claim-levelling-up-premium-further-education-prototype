@@ -61,7 +61,7 @@ router.post('/provider/index/:claimId', (req, res) => {
   }
 
   // Update status to Dfe pending
-  claim.status = 'Dfe pending'
+  claim.status = 'Pending'
 
   // Store timestamp for ordering
   const now = new Date()

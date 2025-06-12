@@ -10,11 +10,11 @@
 {% set dfeRejectedCount = 0 %}
 
 {% for claim in data.claims %}
-  {% if claim.status == "Dfe pending" %}
+  {% if claim.status == "Pending" %}
     {% set dfePendingCount = dfePendingCount + 1 %}
-  {% elseif claim.status == "Dfe approved" %}
+  {% elseif claim.status == "Approved" %}
     {% set dfeApprovedCount = dfeApprovedCount + 1 %}
-  {% elseif claim.status == "Dfe rejected" %}
+  {% elseif claim.status == "Rejected" %}
     {% set dfeRejectedCount = dfeRejectedCount + 1 %}
   {% endif %}
 {% endfor %}
@@ -41,20 +41,20 @@
       {# <th scope="col" class="govuk-table__header">Claim reference</th> #}
       <th scope="col" class="govuk-table__header">Claimant name</th>
       <th scope="col" class="govuk-table__header">Claim reference</th>
-      <th scope="col" class="govuk-table__header">Date verified</th>
+      {# <th scope="col" class="govuk-table__header">Date verified</th> #}
       {# <th scope="col" class="govuk-table__header">Processed by</th> #}
-      <th scope="col" class="govuk-table__header">Status</th>
+      <th scope="col" class="govuk-table__header">DfE Status</th>
     </tr>
   </thead>
   <tbody class="govuk-table__body govuk-!-font-size-16">
     {% for claim in claims %}
-    {% if claim.status in ["Dfe pending", "Dfe approved", "Dfe rejected"] %}
+    {% if claim.status in ["Pending", "Approved", "Rejected"] %}
         <tr class="govuk-table__row">
           <td class="govuk-table__cell" data-sort-value="{{ claim.claimantName }}">
               <a href="/provider/completed/show/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
           </td>
           <td class="govuk-table__cell" data-sort-value="{{ claim.claimReference }}">{{ claim.claimReference }}</td>
-          <td class="govuk-table__cell" data-sort-value="{{ claim.dateVerifiedIso }}">{{ claim.dateVerified }}</td>
+          {# <td class="govuk-table__cell" data-sort-value="{{ claim.dateVerifiedIso }}">{{ claim.dateVerified }}</td> #}
           
           {# <td class="govuk-table__cell" data-sort-value="{{ claim.assignedTo }}">{{ claim.assignedTo }}</td> #}
           <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">
