@@ -9,14 +9,14 @@
   {% set actionUrl = actionUrl + "?returnUrl=" + returnUrl %}
 {% endif %}
 
-{% if claim.status == 'Not started' %}
+{# {% if claim.status == 'Not started' %} #}
   {% block beforeContent %}
     {{ govukBackLink({
       text: "Back",
       href: "javascript:window.history.back()"
     }) }}
   {% endblock %}
-{% endif %}
+{# {% endif %} #}
 
 {% block content %}
 <div class="govuk-grid-row">
