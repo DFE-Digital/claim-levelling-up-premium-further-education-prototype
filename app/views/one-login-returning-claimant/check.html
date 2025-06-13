@@ -112,7 +112,10 @@
               ]
             }) }}
 
-        {{ govukButton({ text: "Confirm and send" }) }}
+        <form method="post" action="/one-login-returning-claimant/check">
+          {{ govukButton({ text: "Confirm and send" }) }}
+        </form>
+
 
   </div>
 </div>

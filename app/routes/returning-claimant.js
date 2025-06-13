@@ -277,6 +277,20 @@ router.post('/one-login-returning-claimant/do-you-have-a-one-login-account', (re
     
   })
 
+
+  // GET: Show the CYA page
+router.get('/one-login-returning-claimant/check', (req, res) => {
+  const data = req.session.data
+  res.render('one-login-returning-claimant/check', { data })
+})
+
+// POST: Handle confirmation and redirect to success
+router.post('/one-login-returning-claimant/check', (req, res) => {
+  // Could do something with the data here before redirecting.
+
+  res.redirect('/one-login-returning-claimant/success')
+})
+
   /////////// ONE LOGIN SIGNOUT ////////////
   router.get('/one-login-signout', (req, res) => {
     // Clear the session data
