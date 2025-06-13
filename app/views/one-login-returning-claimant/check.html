@@ -1,0 +1,119 @@
+{% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
+{% extends "layouts/main.html" %}
+{% set pageName = 'Check your answers' %}
+
+{% block pageTitle %}
+  {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block header %}
+  {{ govukOneLoginServiceHeader({
+    signOutLink: "/one-login-signout",
+    oneLoginLink: "/#",
+    serviceNavigationParams: { 
+      serviceName: "Claim a targeted retention incentive payment for further education teachers",
+      navigationLabel: "Test label" 
+    }
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">  
+        {% if errors %}
+          {{ govukErrorSummary({
+            titleText: "There is a problem",
+            errorList: errors
+          }) }}
+        {% endif %}
+    <h1 class="govuk-heading-l">{{ pageName }}</h1>
+        {# Personal details card #}
+            {{ govukSummaryList({
+              card: {
+                title: {
+                  text: "Personal details",
+                  classes: "govuk-heading-m"
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/one-login-returning-claimant/personal-details",
+                      text: "Change",
+                      visuallyHiddenText: "personal details"
+                    }
+                  ]
+                }
+              },
+              rows: [
+                {
+                  key: { text: "First name(s)" },
+                  value: { text: data.returnClaimantFirstName or "Not provided" }
+                },
+                {
+                  key: { text: "Middle name(s)" },
+                  value: { text: data.returnClaimantMiddleName or "Not provided" }
+                },
+                {
+                  key: { text: "Last name" },
+                  value: { text: data.returnClaimantLastName or "Not provided" }
+                },
+                {
+                  key: { text: "Date of birth" },
+                  value: { 
+                    text: (data["returnClaimantDob-day"] or "") + " " + 
+                          (data["returnClaimantDob-month"] or "") + " " + 
+                          (data["returnClaimantDob-year"] or "") 
+                  }
+                },
+                {
+                  key: { text: "National Insurance number" },
+                  value: { text: data.returnClaimantNationalInsuranceNumber or "Not provided" }
+                }
+              ]
+            }) }}
+
+            {# Bank details card #}
+            {{ govukSummaryList({
+              card: {
+                title: {
+                  text: "Bank details",
+                  classes: "govuk-heading-m"
+                },
+                actions: {
+                  items: [
+                    {
+                      href: "/one-login-returning-claimant/personal-bank-details",
+                      text: "Change",
+                      visuallyHiddenText: "bank details"
+                    }
+                  ]
+                }
+              },
+              rows: [
+                {
+                  key: { text: "Name on the account" },
+                  value: { text: data.returnClaimantBankAccountName or "Not provided" }
+                },
+                {
+                  key: { text: "Sort code" },
+                  value: { text: data.returnClaimantSortCode or "Not provided" }
+                },
+                {
+                  key: { text: "Account number" },
+                  value: { text: data.returnClaimantAccountNumber or "Not provided" }
+                }
+              ]
+            }) }}
+
+        {{ govukButton({ text: "Confirm and send" }) }}
+
+  </div>
+</div>
+{% endblock %}

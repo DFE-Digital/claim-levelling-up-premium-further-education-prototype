@@ -18,16 +18,11 @@
         href: "#"
       },
       {
-        text: "Education, training and skills",
+        text: "Education, training, skills",
         href: "#"
       },
       {
-        text: "Further and higher education, skills and vocational training ",
-        href: "#"
-      },
-
-      {
-        text: "TBC"
+        text: "Further and higher education, skills and vocational training"
       }
     ]
   }) }}
@@ -40,23 +35,16 @@
     <div class="govuk-grid-column-two-thirds">
 
       <h1 class="govuk-heading-xl">
-        Check your eligibility and apply for a Targeted Retention Incentive payment for Further Education
+        {{ serviceName }}
       </h1>
+      <p>Use this service to check if you're eligible for the additional payments we give to some further education (FE) teachers to teach certain subjects in areas that have a high need for teachers.</p>
 
-      <p>Use this service to check your eligibility and apply for a targeted retention incentive payment.</p>
+      <p>If you meet the eligibility criteria, you can then apply for the money.</p>
 
-      <p>Before starting the eligibility check, it may be useful to have the following information to hand:</p>
 
-      <ul class="govuk-list govuk-list--bullet">
-        <li>your contract or written statement of employment</li>
-        <li>your teaching timetable</li>
-      </ul>
-
-      <p>Answering questions about eligibility takes [X] minutes and applying for the payment takes another [X] minutes.</p>
-
-      <div class="govuk-inset-text">
-        You will need a GOV.UK One Login account to apply for a targeted retention incentive payment. If you don’t have an account yet, we will help you create one. You will also need to have a form of photo ID to hand to <a href="https://www.gov.uk/using-your-gov-uk-one-login/proving-your-identity">prove your identity</a>.
-      </div>
+      {{ govukInsetText({
+          text: "This service uses GOV.UK One Login to prove your identity. You'll be able to create a GOV.UK One Login if you do not already have one. You will need photo ID to prove your identity."
+      }) }}
 
       {{ govukButton({
         text: "Start now",

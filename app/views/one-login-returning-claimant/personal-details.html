@@ -42,7 +42,7 @@
       {% call govukFieldset({
         legend: {
           text: "What is your full name?",
-          classes: "govuk-fieldset__legend--m",
+          classes: "govuk-fieldset__legend--m govuk-!-width-two-thirds",
           isPageHeading: true
         }
       }) %}
@@ -51,6 +51,7 @@
           label: { text: "First name(s)" },
           id: "return-claimant-first-name",
           name: "returnClaimantFirstName",
+          classes: "govuk-!-width-two-thirds",
           value: data.returnClaimantFirstName,
           errorMessage: fieldErrors.returnClaimantFirstName
         }) }}
@@ -59,6 +60,7 @@
           label: { text: "Middle name(s) Optional" },
           id: "return-claimant-middle-name",
           name: "returnClaimantMiddleName",
+          classes: "govuk-!-width-two-thirds",
           value: data.returnClaimantMiddleName
         }) }}
 
@@ -66,6 +68,7 @@
           label: { text: "Last name" },
           id: "return-claimant-last-name",
           name: "returnClaimantLastName",
+          classes: "govuk-!-width-two-thirds",
           value: data.returnClaimantLastName,
           errorMessage: fieldErrors.returnClaimantLastName
         }) }}
@@ -119,6 +122,7 @@
         id: "return-claimant-national-insurance-number",
         name: "returnClaimantNationalInsuranceNumber",
         value: data.returnClaimantNationalInsuranceNumber,
+        classes: "govuk-!-width-two-thirds",
         errorMessage: fieldErrors.returnClaimantNationalInsuranceNumber
       }) }}
 

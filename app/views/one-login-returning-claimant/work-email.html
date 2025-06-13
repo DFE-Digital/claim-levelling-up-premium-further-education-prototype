@@ -35,12 +35,9 @@
     {% endif %}
     <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-    <p class="govuk-body">
-      You need to use your work email address so that we can confirm your employment.
-    </p>
 
     <p class="govuk-body">
-      To verify your email address we will send you an email with a 6-digit passcode. You can enter the passcode on the next screen.
+      To verify your FE work email address we will send you an email with a 6-digit passcode.
     </p>
 
     <form method="post">
@@ -60,9 +57,10 @@
         
       }) }}
 
-      <p class="govuk-body">
-        <a href="#" class="govuk-link">Get help with access codes</a>
-      </p>
+      {{ govukDetails({
+        summaryText: "Why we need your FE work email address",
+        text: "You need to use your work email address so that we can confirm your employment."
+      }) }}
 
       {{ govukButton({
         text: "Continue"

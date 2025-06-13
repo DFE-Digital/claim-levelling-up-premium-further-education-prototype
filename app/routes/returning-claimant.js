@@ -272,8 +272,9 @@ router.post('/one-login-returning-claimant/do-you-have-a-one-login-account', (re
       data
     })
   }
-
-    res.redirect('/one-login-returning-claimant/success'); // or whatever next step
+    
+    res.redirect('/one-login-returning-claimant/check') // or whatever next step
+    
   })
 
   /////////// ONE LOGIN SIGNOUT ////////////
