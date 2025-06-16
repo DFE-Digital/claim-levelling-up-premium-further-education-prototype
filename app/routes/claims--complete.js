@@ -28,7 +28,7 @@ module.exports = router => {
     }
   
    // Set a flash message with HTML (text + link)
-   req.flash('success', `Claim Verified <a class="govuk-link" href="/provider/completed/check/${claim.id}"><br>View Verified claim</a>`)
+   req.flash('success', `Claim Verified for ${claim.claimantName} <a class="govuk-link" href="/provider/completed/check/${claim.id}"><br>View verified claim</a>`)
   
     res.redirect('/provider/completed')
   })

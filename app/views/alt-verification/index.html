@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = 'Alternative verification examples' %}
+{% set pageName = 'Alternative verification' %}
 
 {% block header %}
   {{ govukHeader({
@@ -14,6 +14,17 @@
 <h1 class="govuk-heading-xl">{{pageName}}</h1>
 
 <section>
+  <h2 class="govuk-heading-m">Did NOT pass IDV journey</h2>
+  <p class="govuk-body">
+    <a class="govuk-link" href="/one-login-returning-claimant/find-another-way">
+      Start journey
+    </a>
+  </p>
+</section>
+
+<hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+<section>
   <h2 class="govuk-heading-m">Bank details</h2>
   <p class="govuk-body">
     <a class="govuk-link" href="/alt-verification/bank-details.html">
@@ -21,6 +32,8 @@
     </a>
   </p>
 </section>
+
+<hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
 <section>
   <h2 class="govuk-heading-m">Work email</h2>
@@ -30,6 +43,8 @@
     </a>
   </p>
 </section>
+
+<hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
 <section>
   <h2 class="govuk-heading-m">Verification code</h2>
