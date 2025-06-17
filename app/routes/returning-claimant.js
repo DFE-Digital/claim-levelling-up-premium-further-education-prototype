@@ -107,7 +107,7 @@ router.post('/one-login-returning-claimant/do-you-have-a-one-login-account', (re
   router.post('/one-login-returning-claimant/one-login-signed-in', (req, res) => {
     let data = req.session.data
     
-    res.redirect('/one-login-returning-claimant/find-another-way')
+    res.redirect('/one-login-returning-claimant/confirm-college')
     
   })
 
