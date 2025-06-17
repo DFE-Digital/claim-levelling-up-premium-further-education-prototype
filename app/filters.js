@@ -18,7 +18,7 @@ addFilter('statusColour', status => {
     case 'Rejected':
       return 'govuk-tag--red'
     case 'Pending':
-      return 'govuk-tag--grey'
+      return 'govuk-tag--yellow'
     case 'Check required':
       return 'govuk-tag--light-blue'
   }
