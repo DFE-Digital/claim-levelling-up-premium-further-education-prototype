@@ -39,7 +39,7 @@ router.post('/provider/completed/:claimId', (req, res) => {
   claim.dateVerifiedIso = new Date().toISOString()
 
   // ✅ Flash message
-  req.flash('success', `Claim Verified for ${claim.claimantName} <a class="govuk-link" href="/provider/completed/check/${claim.id}"><br>View verified claim</a>`)
+  req.flash('success', `Claim Verified for ${claim.claimantName} <a class="govuk-link" href="/provider/completed/show/${claim.id}"><br>View verified claim</a>`)
 
   res.redirect('/provider/completed')
 })
