@@ -47,7 +47,7 @@ module.exports = (router) => {
 
     res.render('provider/index', {
       claims,
-      })
+    })
   })
 
 
@@ -61,7 +61,7 @@ router.post('/provider/index/:claimId', (req, res) => {
   }
 
   // Update status to Dfe pending
-  claim.status = 'Pending'
+  // claim.status = 'Pending'
 
   // Store timestamp for ordering
   const now = new Date()
