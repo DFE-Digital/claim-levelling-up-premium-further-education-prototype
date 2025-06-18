@@ -27,96 +27,155 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">  
-        {% if errors %}
-          {{ govukErrorSummary({
-            titleText: "There is a problem",
-            errorList: errors
-          }) }}
-        {% endif %}
+
+    {% if errors %}
+      {{ govukErrorSummary({
+        titleText: "There is a problem",
+        errorList: errors
+      }) }}
+    {% endif %}
+
     <h1 class="govuk-heading-l">{{ pageName }}</h1>
-        {# Personal details card #}
-            {{ govukSummaryList({
-              card: {
-                title: {
-                  text: "Personal details",
-                  classes: "govuk-heading-m"
-                },
-                actions: {
-                  items: [
-                    {
-                      href: "/one-login-returning-claimant/personal-details",
-                      text: "Change",
-                      visuallyHiddenText: "personal details"
-                    }
-                  ]
-                }
-              },
-              rows: [
-                {
-                  key: { text: "First name(s)" },
-                  value: { text: data.returnClaimantFirstName or "Not provided" }
-                },
-                {
-                  key: { text: "Middle name(s)" },
-                  value: { text: data.returnClaimantMiddleName or "Not provided" }
-                },
-                {
-                  key: { text: "Last name" },
-                  value: { text: data.returnClaimantLastName or "Not provided" }
-                },
-                {
-                  key: { text: "Date of birth" },
-                  value: { 
-                    text: (data["returnClaimantDob-day"] or "") + " " + 
-                          (data["returnClaimantDob-month"] or "") + " " + 
-                          (data["returnClaimantDob-year"] or "") 
-                  }
-                },
-                {
-                  key: { text: "National Insurance number" },
-                  value: { text: data.returnClaimantNationalInsuranceNumber or "Not provided" }
-                }
-              ]
-            }) }}
 
-            {# Bank details card #}
-            {{ govukSummaryList({
-              card: {
-                title: {
-                  text: "Bank details",
-                  classes: "govuk-heading-m"
-                },
-                actions: {
-                  items: [
-                    {
-                      href: "/one-login-returning-claimant/personal-bank-details",
-                      text: "Change",
-                      visuallyHiddenText: "bank details"
-                    }
-                  ]
-                }
-              },
-              rows: [
-                {
-                  key: { text: "Name on the account" },
-                  value: { text: data.returnClaimantBankAccountName or "Not provided" }
-                },
-                {
-                  key: { text: "Sort code" },
-                  value: { text: data.returnClaimantSortCode or "Not provided" }
-                },
-                {
-                  key: { text: "Account number" },
-                  value: { text: data.returnClaimantAccountNumber or "Not provided" }
-                }
-              ]
-            }) }}
-
-        <form method="post" action="/one-login-returning-claimant/check">
-          {{ govukButton({ text: "Confirm and send" }) }}
-        </form>
+    {# ✅ Full name card #}
+    {{ govukSummaryList({
+      card: {
+        title: {
+          text: "Full name",
+          classes: "govuk-heading-m"
+        },
+        actions: {
+          items: [
+            {
+              href: "/one-login-returning-claimant/what-is-your-name",
+              text: "Change",
+              visuallyHiddenText: "name"
+            }
+          ]
+        }
+      },
+      rows: [
+        {
+          key: { text: "First name(s)" },
+          value: { text: data.returnClaimantFirstName or "Not provided" }
+        },
+        {
+          key: { text: "Middle name(s)" },
+          value: { text: data.returnClaimantMiddleName or "Not provided" }
+        },
+        {
+          key: { text: "Last name" },
+          value: { text: data.returnClaimantLastName or "Not provided" }
+        }
+      ]
+    }) }}
 
 
+    {# ✅ Alias card if provided #}
+    {% if data.doesEmployerUseAnyOtherName === "Yes" %}
+      {{ govukSummaryList({
+        card: {
+          title: {
+            text: "Name your employer may know you by",
+            classes: "govuk-heading-m"
+          },
+          actions: {
+            items: [
+              {
+                href: "/one-login-returning-claimant/enter-any-other-name",
+                text: "Change",
+                visuallyHiddenText: "other name your employer may know you by"
+              }
+            ]
+          }
+        },
+        rows: [
+          {
+            key: { text: "First name(s)" },
+            value: { text: data.enterAliasFirstName or "Not provided" }
+          },
+          {
+            key: { text: "Middle name(s)" },
+            value: { text: data.enterAliasMiddleName or "Not provided" }
+          },
+          {
+            key: { text: "Last name" },
+            value: { text: data.enterAliasLastName or "Not provided" }
+          }
+        ]
+      }) }}
+    {% endif %}
+
+    {# ✅ DOB and NI number card #}
+    {{ govukSummaryList({
+      card: {
+        title: {
+          text: "Date of birth and National Insurance number",
+          classes: "govuk-heading-m"
+        },
+        actions: {
+          items: [
+            {
+              href: "/one-login-returning-claimant/personal-details",
+              text: "Change",
+              visuallyHiddenText: "date of birth and National Insurance number"
+            }
+          ]
+        }
+      },
+      rows: [
+        {
+          key: { text: "Date of birth" },
+          value: {
+            text: (data["returnClaimantDob-day"] or "") + " " +
+                  (data["returnClaimantDob-month"] or "") + " " +
+                  (data["returnClaimantDob-year"] or "")
+          }
+        },
+        {
+          key: { text: "National Insurance number" },
+          value: { text: data.returnClaimantNationalInsuranceNumber or "Not provided" }
+        }
+      ]
+    }) }}
+
+
+    {# ✅ Bank details card #}
+    {{ govukSummaryList({
+      card: {
+        title: {
+          text: "Bank details",
+          classes: "govuk-heading-m"
+        },
+        actions: {
+          items: [
+            {
+              href: "/one-login-returning-claimant/personal-bank-details",
+              text: "Change",
+              visuallyHiddenText: "bank details"
+            }
+          ]
+        }
+      },
+      rows: [
+        {
+          key: { text: "Name on the account" },
+          value: { text: data.returnClaimantBankAccountName or "Not provided" }
+        },
+        {
+          key: { text: "Sort code" },
+          value: { text: data.returnClaimantSortCode or "Not provided" }
+        },
+        {
+          key: { text: "Account number" },
+          value: { text: data.returnClaimantAccountNumber or "Not provided" }
+        }
+      ]
+    }) }}
+
+    <form method="post" action="/one-login-returning-claimant/check">
+      {{ govukButton({ text: "Confirm and send" }) }}
+    </form>
   </div>
 </div>
 {% endblock %}

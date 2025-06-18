@@ -196,50 +196,83 @@ router.post('/one-login-returning-claimant/do-you-have-a-one-login-account', (re
     res.redirect('/one-login-returning-claimant/personal-details') 
   })
 
+
+
+  //////// WHAT IS YOUR NAME ////////////
+  router.post('/one-login-returning-claimant/what-is-your-name', (req, res) => {
+    // Store names individually in session
+    req.session.data.returnClaimantFirstName = req.body.returnClaimantFirstName
+    req.session.data.returnClaimantMiddleName = req.body.returnClaimantMiddleName
+    req.session.data.returnClaimantLastName = req.body.returnClaimantLastName
+
+    // Optional: store a full name string if needed elsewhere
+    const fullName = [
+      req.body.returnClaimantFirstName,
+      req.body.returnClaimantMiddleName,
+      req.body.returnClaimantLastName
+    ].filter(Boolean).join(' ')
+
+    req.session.data.claimantName = fullName
+
+    res.redirect('/one-login-returning-claimant/does-employer-use-any-other-name')
+  })
+
+
+
+  //////// DOES EMPLOYER USE ANY OTHER NAME ////////////
+
+  router.post('/one-login-returning-claimant/does-employer-use-any-other-name', (req, res) => {
+    const doesEmployerUseAnyOtherName = req.body.doesEmployerUseAnyOtherName
+    req.session.data.doesEmployerUseAnyOtherName = doesEmployerUseAnyOtherName
+
+    if (doesEmployerUseAnyOtherName === 'Yes') {
+      res.redirect('/one-login-returning-claimant/enter-any-other-name')
+    } else {
+      res.redirect('/one-login-returning-claimant/personal-details')
+    }
+  })
+
+  //////// ENTER ANY OTHER NAME ////////////
+  router.post('/one-login-returning-claimant/enter-any-other-name', (req, res) => {
+  req.session.data.enterAliasFirstName = req.body.enterAliasFirstName
+  req.session.data.enterAliasMiddleName = req.body.enterAliasMiddleName
+  req.session.data.enterAliasLastName = req.body.enterAliasLastName
+
+  // Optional: store alias full name if you want to reuse it
+  const aliasFullName = [
+    req.body.enterAliasFirstName,
+    req.body.enterAliasMiddleName,
+    req.body.enterAliasLastName
+  ].filter(Boolean).join(' ')
+
+    req.session.data.aliasFullName = aliasFullName
+
+    res.redirect('/one-login-returning-claimant/personal-details')
+  })
+
+
+
+
   /////////// PERSONAL DETAILS //////////// 
   router.post('/one-login-returning-claimant/personal-details', (req, res) => {
-    const data = req.session.data
-    const errors = []
-    const fieldErrors = {}
+  // Store DOB components individually
+  req.session.data['returnClaimantDob-day'] = req.body['returnClaimantDob-day']
+  req.session.data['returnClaimantDob-month'] = req.body['returnClaimantDob-month']
+  req.session.data['returnClaimantDob-year'] = req.body['returnClaimantDob-year']
 
-    const day = data['returnClaimantDob-day']
-    const month = data['returnClaimantDob-month']
-    const year = data['returnClaimantDob-year']
+  // Optionally store a full DOB string (ISO-style for sorting, etc.)
+  req.session.data.returnClaimantDobFormatted = [
+    req.body['returnClaimantDob-year'],
+    req.body['returnClaimantDob-month'],
+    req.body['returnClaimantDob-day']
+  ].join('-')
 
-    if (!data.returnClaimantFirstName) {
-      const message = 'Enter your first name'
-      errors.push({ text: message, href: '#return-claimant-first-name' })
-      fieldErrors.returnClaimantFirstName = { text: message }
-    }
-
-    if (!data.returnClaimantLastName) {
-      const message = 'Enter your last name'
-      errors.push({ text: message, href: '#return-claimant-last-name' })
-      fieldErrors.returnClaimantLastName = { text: message }
-    }
-
-    if (!day || !month || !year) {
-      const message = 'Enter your full date of birth'
-      errors.push({ text: message, href: '#return-claimant-dob' })
-      fieldErrors.returnClaimantDob = { text: message }
-    }
-
-    if (!data.returnClaimantNationalInsuranceNumber) {
-      const message = 'Enter your National Insurance number'
-      errors.push({ text: message, href: '#return-claimant-national-insurance-number' })
-      fieldErrors.returnClaimantNationalInsuranceNumber = { text: message }
-    }
-
-    if (errors.length) {
-      return res.render('one-login-returning-claimant/personal-details', {
-        errors,
-        fieldErrors,
-        data
-      })
-    }
+    // Store NI number
+    req.session.data.returnClaimantNationalInsuranceNumber = req.body.returnClaimantNationalInsuranceNumber
 
     res.redirect('/one-login-returning-claimant/personal-bank-details')
   })
+
 
   /////////// PERSONAL BANK DETAILS ////////////
   router.post('/one-login-returning-claimant/personal-bank-details', (req, res) => {
