@@ -1,0 +1,174 @@
+
+{% extends "layouts/main.html" %}
+
+{% set serviceNavId = "allClaims" %}
+
+{% set pageName = 'Personal details' %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">  
+
+      {% if errors %}
+        {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: errors
+        }) }}
+      {% endif %}
+
+    <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+
+    <form method="post" novalidate>
+
+      {% set dob = data.returnClaimantDob or {} %}
+
+      {{ govukDateInput({
+        id: "return-claimant-dob",
+        namePrefix: "returnClaimantDob",
+        fieldset: {
+          legend: {
+            text: "What is " + claim.claimantName + "'s date of birth?",
+            isPageHeading: false,
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        hint: {
+          text: "For example, 27 3 2007"
+        },
+        items: [
+          {
+            name: "day",
+            value: data["returnClaimantDob-day"],
+            classes: "govuk-input--width-2"
+          },
+          {
+            name: "month",
+            value: data["returnClaimantDob-month"],
+            classes: "govuk-input--width-2"
+          },
+          {
+            name: "year",
+            value: data["returnClaimantDob-year"],
+            classes: "govuk-input--width-4"
+          }
+        ],
+        errorMessage: fieldErrors.returnClaimantDob
+      }) }} 
+
+      {{ govukInput({
+        label: {
+          text: "What is " + claim.claimantName + "'s postcode?",
+          classes: "govuk-label--m"
+        },
+        hint: {
+          text: "For example 'AA1 2BC'."
+        },
+        id: "return-claimant-postcode",
+        name: "returnClaimantPostcode",
+        value: data.returnClaimantPostcode,
+        classes: "govuk-!-width-one-third",
+        errorMessage: fieldErrors.returnClaimantPostcode
+      }) }}
+ 
+
+      {{ govukInput({
+        label: {
+         text: "What is " + claim.claimantName + "'s National Insurance number?",
+          classes: "govuk-label--m"
+        },
+        hint: {
+          text: "It's on your National Insurance card, benefit letter, payslip or P60. For example 'QQ123456C'."
+        },
+        id: "return-claimant-national-insurance-number",
+        name: "returnClaimantNationalInsuranceNumber",
+        value: data.returnClaimantNationalInsuranceNumber,
+        classes: "govuk-!-width-one-third",
+        errorMessage: fieldErrors.returnClaimantNationalInsuranceNumber
+      }) }}
+
+      <h3 class="govuk-heading-m">Do these bank details match what you have for {{ claim.claimantName }} ?</h3>
+
+      {{ govukTable({
+        firstCellIsHeader: true,
+        rows: [
+          [
+            {
+              text: "Name of bank"
+            },
+            {
+              text: "Natwest"
+            }
+          ],
+          [
+            {
+              text: "Bank sort code"
+            },
+            {
+              text: "12-34-56"
+            }
+          ],
+          [
+            {
+              text: "Account number ending in"
+            },
+            {
+              text: "****9876"
+            }
+          ]
+        ]
+      }) }}
+
+      {{ govukRadios({
+        name: "claimantBankDetailsMatch",
+        idPrefix: "claimant-bank-details-match",
+        fieldset: {
+          legend: {
+            text: "Do these bank details match what you have for " + claim.claimantName + " ?",
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--s govuk-visually-hidden"
+          }
+        },
+        value: data.claimantBankDetailsMatch,
+        items: [
+          {
+            value: "Yes",
+            text: "Yes"
+          },
+          {
+            value: "No",
+            text: "No"
+          }
+        ]
+      }) }}
+
+      <h3 class="govuk-heading-m">What is {{claim.claimantName}}'s Work email</h3>
+
+      {{ govukInsetText({
+        text: "Please enter the applicant's work email address. Generic domain names (e.g. gmail, outlook, hotmail) will not be accepted."
+      }) }}
+
+      {{ govukInput({
+        label: {
+          text: "Email address"
+        },
+       classes: "govuk-!-width-one-half",
+        id: "claimant-work-email",
+        name: "claimantWorkEmail"
+      }) }}
+
+
+      {{ govukButton({ text: "Continue" }) }}
+
+    </form>
+  </div>
+</div>
+{% endblock %}

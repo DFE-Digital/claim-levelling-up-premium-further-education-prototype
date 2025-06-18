@@ -1,0 +1,29 @@
+{% extends "layouts/main.html" %}
+
+{% set serviceNavId = "allClaims" %}
+
+{% set pageName = "End of verification" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">  
+
+
+    <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+    <p class="govuk-body">What happens next</p>
+    
+    <p class="govuk-body"><a href="#" class="govuk-link">Back to home</a></p>
+
+
+  </div>
+</div>
+{% endblock %}

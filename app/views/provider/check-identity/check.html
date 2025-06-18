@@ -25,51 +25,98 @@
         {% endif %}
       </h1>
 
-    {# Role and experience summary card #}
-   {{ govukSummaryList({
+       {# ✅ Applicant name summary card with individual change links #}
+      {{ govukSummaryList({
+        card: {
+          title: {
+            text: "Employee name and alias"
+          }
+        },
+        rows: [
+          {
+            key: { text: "Do you employ " + claim.claimantName + "?" },
+            value: { text: data.doYouEmploy or "Not answered" },
+            actions: {
+              items: [
+                {
+                  href: "/provider/check-identity/" + claim.id,
+                  text: "Change",
+                  visuallyHiddenText: "Do you employ " + claim.claimantName
+                }
+              ]
+            }
+          },
+          {
+            key: { text: "Is " + claim.claimantName + " employed by [fe_provider_name]?" },
+            value: { text: data.alsoKnownAs or "Not answered" },
+            actions: {
+              items: [
+                {
+                  href: "/provider/check-identity/also-known-as/" + claim.id,
+                  text: "Change",
+                  visuallyHiddenText: "Is " + claim.claimantName + " employed by " + claim.feProviderName
+                }
+              ]
+            }
+          } if data.doYouEmploy === 'No',
+          {
+            key: { text: "Can you confirm Nate Harper is " + claim.claimantName + "?" },
+            value: { text: data.confirmKnownAlias or "Not answered" },
+            actions: {
+              items: [
+                {
+                  href: "/provider/check-identity/also-known-as-confirm/" + claim.id,
+                  text: "Change",
+                  visuallyHiddenText: "Confirm alias is " + claim.claimantName
+                }
+              ]
+            }
+          } if data.doYouEmploy === 'No'
+        ]
+    }) }}
+
+
+  {# ✅ Personal details summary card with single change link #}
+    {{ govukSummaryList({
       card: {
         title: {
-          text: "Additonal details about the claimant",
-          classes: "govuk-heading-m"
+          text: "Personal details"
         },
         actions: {
           items: [
             {
-              href: "/provider/check-identity/" + claim.id,
-              text: "Change",
-              visuallyHiddenText: "check identity answers"
+              href: "/provider/check-identity/personal-details/" + claim.id,
+                text: "Change",
+              visuallyHiddenText: "Personal detailse"
             }
           ]
         }
       },
-      rows: [
-        {
-          key: { text: "Do you know the claimant as " + claim.claimantName + "?" },
-          value: { text: data.isClaimantKnownToYou }
-        },
-        {
-          key: { text: "Also known as" },
-          value: { text: data.alsoKnownAs or "Not provided" }
-        } if data.alsoKnownAs,
-        {
-          key: { text: "Date of birth" },
-          value: { text: formattedDob }
-        },
-        {
-          key: { text: "National Insurance number" },
-          value: { text: data.returnClaimantNationalInsuranceNumber }
-        },
-        {
-          key: { text: "Bank details match" },
-          value: { text: data.claimantBankDetailsMatch }
-        },
-        {
-          key: { text: "Work email address" },
-          value: { text: data.claimantWorkEmail }
-        }
-      ]
+       rows: [
+          {
+            key: { text: "Date of birth" },
+            value: {
+              text: (data["returnClaimantDob-year"] + "-" + data["returnClaimantDob-month"] + "-" + data["returnClaimantDob-day"]) | date("D MMMM YYYY")
+            }
+          },
+          {
+            key: { text: "Postcode" },
+            value: { text: data.returnClaimantPostcode or "Not provided" }
+          },
+          {
+            key: { text: "National Insurance number" },
+            value: { text: data.returnClaimantNationalInsuranceNumber or "Not provided" }
+          },
+          {
+            key: { text: "Bank details match" },
+            value: { text: data.claimantBankDetailsMatch or "Not answered" }
+          },
+          {
+            key: { text: "Work email address" },
+            value: { text: data.claimantWorkEmail or "Not provided" }
+          }
+        ]
     }) }}
-
 
 
 
@@ -88,7 +135,7 @@
 
       <div class="govuk-button-group">
         <button type="submit" class="govuk-button" data-module="govuk-button">
-          Accept and send
+          Confirm and send
         </button>
         <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
           Cancel

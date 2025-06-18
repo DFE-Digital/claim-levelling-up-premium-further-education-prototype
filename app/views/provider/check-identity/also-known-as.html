@@ -2,7 +2,7 @@
 
 {% set serviceNavId = "allClaims" %}
 
-{% set pageName = 'Further information is required on this claim' %}
+{% set pageName = 'You might know this applicant as Nate Harper' %}
 
 {% block beforeContent %}
   {{ govukBackLink({
@@ -25,24 +25,20 @@
 
     <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-    <p class="govuk-body">We were unable to verify the claimant's identity via GOV.UK One Login.</p>
-    <p class="govuk-body">You will need to provide additional information about the claimant referring to information you should have on file.</p>
-    <p class="govuk-body">You do not neeed to send any documents to DfE</p>
-
 
     <form method="post" novalidate>
 
       {{ govukRadios({
-        name: "doYouEmploy",
-        idPrefix: "is-claimant-known-to-you",
+        name: "alsoKnownAs",
+        idPrefix: "is-claimant-also-known-as",
         fieldset: {
           legend: {
-            text: "Do you employ " + claim.claimantName + " ?",
+            text: "Is Nate Harper employed by [name of FE provider]?",
             isPageHeading: true,
             classes: "govuk-fieldset__legend--m"
           }
         },
-        value: data.doYouEmploy,
+        value: data.alsoKnownAs,
         items: [
           {
             value: "Yes",
@@ -54,6 +50,11 @@
           }
         ]
       }) }}
+
+      {# {{ govukInsetText({
+        text: "If you recognise the 'also known as' name but not the claimant name, you must be confident the claimant name is related to the 'also known as' name. Otherwise do not confirm that the claimant is an employee."
+      }) }} #}
+
 
       {{ govukButton({ text: "Continue" }) }}
 
