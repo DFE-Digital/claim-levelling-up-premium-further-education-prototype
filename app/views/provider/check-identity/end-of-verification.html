@@ -4,12 +4,12 @@
 
 {% set pageName = "End of verification" %}
 
-{% block beforeContent %}
+{# {% block beforeContent %}
   {{ govukBackLink({
     text: "Back",
     href: "javascript:window.history.back()"
   }) }}
-{% endblock %}
+{% endblock %} #}
 
 
 {% block content %}
@@ -19,9 +19,10 @@
 
     <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-    <p class="govuk-body">What happens next</p>
+    <h3 class="govuk-heading-m">What happens next</h3>
+    <p class="govuk-body">Some stuff...</p>
     
-    <p class="govuk-body"><a href="#" class="govuk-link">Back to home</a></p>
+    <p class="govuk-body"><a href="/provider" class="govuk-link">Back to dashobard</a></p>
 
 
   </div>

@@ -47,12 +47,13 @@ router.post('/provider/check-identity/also-known-as/:claimId', function (req, re
 })
 
 // 5. GET: Confirm known alias
-router.get('/provider/check-identity/also-known-as-confirm/:claimId', function (req, res) {
+router.get('/provider/check-identity/end-of-verification/:claimId', function (req, res) {
   const claimId = req.params.claimId
   const claim = req.session.data.claims.find(c => c.id === claimId)
 
-  res.render('provider/check-identity/also-known-as-confirm', { claim })
+  res.render('provider/check-identity/end-of-verification', { claim })
 })
+
 
 // 6. POST: Confirm known alias
 router.post('/provider/check-identity/also-known-as-confirm/:claimId', function (req, res) {
@@ -65,6 +66,15 @@ router.post('/provider/check-identity/also-known-as-confirm/:claimId', function 
     res.redirect(`/provider/check-identity/personal-details/${claimId}`)
   }
 })
+
+// GET also known as confirm
+router.get('/provider/check-identity/also-known-as-confirm/:claimId', function (req, res) {
+  const claimId = req.params.claimId
+  const claim = req.session.data.claims.find(c => c.id === claimId)
+
+  res.render('provider/check-identity/also-known-as-confirm', { claim })
+})
+
 
 // 7. GET: Personal details form
 router.get('/provider/check-identity/personal-details/:claimId', function (req, res) {
