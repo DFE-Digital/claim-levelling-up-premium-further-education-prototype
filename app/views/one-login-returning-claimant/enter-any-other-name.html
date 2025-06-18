@@ -1,0 +1,89 @@
+{% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
+{% extends "layouts/main.html" %}
+{% set pageName = 'Personal details' %}
+
+{% block pageTitle %}
+  {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block header %}
+  {{ govukOneLoginServiceHeader({
+    signOutLink: "/one-login-signout",
+    oneLoginLink: "/#",
+    serviceNavigationParams: { 
+      serviceName: "Claim a targeted retention incentive payment for further education teachers",
+      navigationLabel: "Test label" 
+    }
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">  
+
+      {% if errors %}
+      {{ govukErrorSummary({
+        titleText: "There is a problem",
+        errorList: errors
+      }) }}
+    {% endif %}
+
+     <span class="govuk-caption-xl">{{ pageName }}</span>
+      <h1 class="govuk-heading-l">Enter any other name your employer might know you by</h1>
+
+      {{ govukInsetText({
+        text: "This could be because you've changed your name, for example, after getting married or because you're known by a different name at work."
+      }) }}
+
+    <form method="post" novalidate>
+
+      {% call govukFieldset({
+        legend: {
+          text: "Enter any other name your employer might know you by",
+          classes: "govuk-fieldset__legend--m govuk-!-width-two-thirds govuk-visually-hidden",
+          isPageHeading: false
+        }
+      }) %}
+
+        {{ govukInput({
+          label: { text: "First name(s)" },
+          id: "enter-alias-first-name",
+          name: "enterAliasFirstName",
+          classes: "govuk-!-width-two-thirds",
+          value: data.enterAliasFirstName,
+          errorMessage: fieldErrors.enterAliasFirstName
+        }) }}
+
+        {{ govukInput({
+          label: { text: "Middle name(s) Optional" },
+          id: "enter-alias-middle-name",
+          name: "enterAliasMiddleName",
+          classes: "govuk-!-width-two-thirds",
+          value: data.enterAliasMiddleName
+        }) }}
+
+        {{ govukInput({
+          label: { text: "Last name" },
+          id: "enter-alias-last-name",
+          name: "enterAliasLastName",
+          classes: "govuk-!-width-two-thirds",
+          value: data.enterAliasLastName,
+          errorMessage: fieldErrors.enterAliasLastName
+        }) }}
+
+      {% endcall %}
+     
+
+      {{ govukButton({ text: "Continue" }) }}
+
+    </form>
+  </div>
+</div>
+{% endblock %}
