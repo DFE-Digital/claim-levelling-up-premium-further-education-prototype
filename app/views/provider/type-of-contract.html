@@ -107,7 +107,7 @@
         },
         items: [
           {
-            value: "Yes",
+            value: "yes",
             text: "Yes"
           },
           {
@@ -126,18 +126,64 @@
       }) }}
 
       {# ////////////////////////////////////////////////#}
-    
       
-      {# ////////////////////////////////////////////////#}
+      {{ govukRadios({
+        name: "contractType",
+        value: claim.contractType,
+          fieldset: {
+            legend: {
+              text: "What type of contract does " + claim.claimantName + " have with [FE_Provider]?",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          hint: {
+            text: "This includes full-time and part-time contracts"
+          },
+          items: [
+            {
+              value: "Permanent",
+              text: "Permanent"
+            },
+            {
+              value: "Fixed-term",
+              text: "Fixed-term"
+            },
+            {
+              value: "Variable hours",
+              text: "Variable hours"
+            }
+          ]
+        }) }}
+      
+        {# ////////////////////////////////////////////////#}
+
+        {{ govukRadios({
+          name: "completedSection",
+          errorMessage: errors | findError("completedSection"),
+          fieldset: {
+            legend: {
+              text: "Have you completed this section?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "Yes",
+              text: "Yes"
+            },
+            {
+              value: "No",
+              text: "No, I want to come back to it later"
+            }
+          ]
+        }) }}
+        
 
     
         <div class="govuk-button-group">
           <button type="submit" class="govuk-button" name="action" value="continue">
-            Continue
-          </button>  
-          <button type="submit" class="govuk-button govuk-button--secondary" name="action" value="save">
-            Save and come back later
-          </button>      
+            Save and continue
+          </button>       
         </div>
     </form>
 

@@ -1,0 +1,83 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = claim.claimantName + " said last year that they planned to start a teaching qualification within 12 months." %}
+
+{% set serviceNavId = "allClaims" %}
+
+{% set actionUrl = "/provider/role-and-experience/" + claim.id %}
+{% if returnUrl %}
+  {% set actionUrl = actionUrl + "?returnUrl=" + returnUrl %}
+{% endif %}
+
+{# {% if claim.status == 'Not started' %} #}
+  {% block beforeContent %}
+    {{ govukBackLink({
+      text: "Back",
+      href: "javascript:window.history.back()"
+    }) }}
+  {% endblock %}
+{# {% endif %} #}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+      <p class="govuk-body">
+        They've confirmed the same intention in their application this year.
+      </p>
+
+      <p class="govuk-body">
+        Please tell us why they've not yet started or finished a teaching qualification.
+      </p>
+
+      <form method="post" action="#">
+        {{ govukCheckboxes({
+          name: "qualificationDelayReasons",
+          fieldset: {
+            legend: {
+              text: "Select all that apply",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "workload",
+              text: "Workload"
+            },
+            {
+              value: "funding",
+              text: "Funding issues"
+            },
+            {
+              value: "timing",
+              text: "Course not available at the right time"
+            },
+            {
+              value: "access",
+              text: "Can't access suitable course"
+            },
+            {
+              value: "newToSchool",
+              text: "They're new to the school"
+            },
+            {
+              value: "other",
+              text: "Other reason"
+            }
+          ]
+        }) }}
+
+    
+        <div class="govuk-button-group">
+          <button type="submit" class="govuk-button" name="action" value="continue">
+            Save and continue
+          </button>       
+        </div>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
