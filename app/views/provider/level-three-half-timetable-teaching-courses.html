@@ -45,19 +45,28 @@
 
     {% include "_includes/claim/details.njk" %}
 
-    {# <form method="post" action="/provider/contracted-hours/{{ claim.id }}{% if returnUrl %}?returnUrl={{ returnUrl }}{% endif %}"> #}
-    <form method="post" action="{{ actionUrl }}">  
+   <form method="post" action="{{ actionUrl }}">  
 
-      <h3 class="govuk-heading-m">Subject area</h3>
+      <h3 class="govuk-heading-m">Contracted hours</h3>
 
         {{ govukRadios({
-          name: "confirmHalfTimetabledHoursAtLevelThreeAndBelow",
-          value: claim.confirmHalfTimetabledHoursAtLevelThreeAndBelow,
+          name: "sixteenToNineteen",
+          value: claim.sixteenToNineteen,
           fieldset: {
             legend: {
-              html: "For at least half of their timetabled teaching hours, does " + claim.claimantName + " teach: qualifications approved for funding at level 3 and below in the <a href='https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=13&PageSize=10&Sort=Status' target='_blank'> [sector_name] (opens in a new tab)</a> sector subject area?",
+              text: "Does " + claim.claimantName + " spend at least half of their timetabled teaching time teaching these course?",
               classes: "govuk-fieldset__legend--s"
             }
+          },
+          hint: {
+            html: '<br>
+              <ul class="govuk-list govuk-list--bullet">
+                <li>[course_name_1]</li>
+                <li>[course_name_2]</li>
+                <li>[course_name_3]</li>
+                <li>[course_name_4]</li>
+              </ul>
+            '
           },
           items: [
             {
@@ -70,7 +79,7 @@
             }
           ]
         }) }}
-
+        
         <div class="govuk-button-group">
           <button type="submit" class="govuk-button" name="action" value="continue">
             Continue

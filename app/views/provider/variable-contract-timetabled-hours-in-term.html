@@ -45,32 +45,32 @@
 
     {% include "_includes/claim/details.njk" %}
 
-    {# <form method="post" action="/provider/contracted-hours/{{ claim.id }}{% if returnUrl %}?returnUrl={{ returnUrl }}{% endif %}"> #}
-    <form method="post" action="{{ actionUrl }}">  
+    <form method="post">  
 
-      <h3 class="govuk-heading-m">Subject area</h3>
+      <h3 class="govuk-heading-m">Type of contract</h3>
+
 
         {{ govukRadios({
-          name: "confirmHalfTimetabledHoursAtLevelThreeAndBelow",
-          value: claim.confirmHalfTimetabledHoursAtLevelThreeAndBelow,
+          name: "variableContractIsTimetabledForTwoAndHalfHoursPerWeek",
           fieldset: {
             legend: {
-              html: "For at least half of their timetabled teaching hours, does " + claim.claimantName + " teach: qualifications approved for funding at level 3 and below in the <a href='https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=13&PageSize=10&Sort=Status' target='_blank'> [sector_name] (opens in a new tab)</a> sector subject area?",
+              text: "Has " + claim.claimantName + " taught at [FE_provider] for at least one full academic term?",
               classes: "govuk-fieldset__legend--s"
             }
           },
           items: [
             {
-              value: "yes",
+              value: "Yes",
               text: "Yes"
             },
             {
-              value: "no",
+              value: "No",
               text: "No"
             }
           ]
         }) }}
-
+        
+    
         <div class="govuk-button-group">
           <button type="submit" class="govuk-button" name="action" value="continue">
             Continue

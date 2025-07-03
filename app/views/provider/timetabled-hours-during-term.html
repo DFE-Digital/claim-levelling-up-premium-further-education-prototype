@@ -48,25 +48,30 @@
     {# <form method="post" action="/provider/contracted-hours/{{ claim.id }}{% if returnUrl %}?returnUrl={{ returnUrl }}{% endif %}"> #}
     <form method="post" action="{{ actionUrl }}">  
 
-      <h3 class="govuk-heading-m">Subject area</h3>
+      <h3 class="govuk-heading-m">Contracted hours</h3>
 
         {{ govukRadios({
-          name: "confirmHalfTimetabledHoursAtLevelThreeAndBelow",
-          value: claim.confirmHalfTimetabledHoursAtLevelThreeAndBelow,
+          name: "contractedHours",
+          value: claim.contractedHours,
+          classes: "govuk-radios--inline",
           fieldset: {
             legend: {
-              html: "For at least half of their timetabled teaching hours, does " + claim.claimantName + " teach: qualifications approved for funding at level 3 and below in the <a href='https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=13&PageSize=10&Sort=Status' target='_blank'> [sector_name] (opens in a new tab)</a> sector subject area?",
+              text: "On average, how many hours per week was " + claim.claimantName + " timetabled to teach during the [autumn/spring/summer] term?",
               classes: "govuk-fieldset__legend--s"
             }
           },
           items: [
             {
-              value: "yes",
-              text: "Yes"
+              value: "12 hours or more per week",
+              text: "12 hours or more per week"
             },
             {
-              value: "no",
-              text: "No"
+              value: "2.5 hours or more but less than 12 hours per week",
+              text: "2.5 hours or more but less than 12 hours per week"
+            },
+            {
+              value: "Less than 2.5 hours per week",
+              text: "Less than 2.5 hours per week"
             }
           ]
         }) }}
@@ -79,6 +84,7 @@
             Save and come back later
           </button>      
         </div>
+
     </form>
 
   </div>

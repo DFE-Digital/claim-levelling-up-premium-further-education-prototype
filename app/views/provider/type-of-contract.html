@@ -1,5 +1,6 @@
 {% extends "layouts/main.html" %}
 
+
 {% set pageName = 'Review a targeted retention incentive payment claim' %}
 
 {% set serviceNavId = "allClaims" %}
@@ -48,82 +49,7 @@
       <form method="post" action="{{ actionUrl }}">
 
 
-      <h2 class="govuk-heading-m">Role and experience</h2>
-
-      {{ govukRadios({
-        name: "teachingResponsibilities",
-        value: claim.teachingResponsibilities,
-        fieldset: {
-          legend: {
-            text: "Is " + claim.claimantName + " a member of staff with teaching responsibilities?",
-            classes: "govuk-fieldset__legend--s"
-          }
-        },
-        items: [
-          {
-            value: "yes",
-            text: "Yes"
-          },
-          {
-            value: "no",
-            text: "No"
-          }
-        ]
-      }) }}
-
-      {# ////////////////////////////////////////////////#}
-
-      {{ govukRadios({
-        name: "first5Years",
-        value: claim.first5Years,
-        fieldset: {
-          legend: {
-            text: "Is " + claim.claimantName + " in the first 5 years of their further education (FE) teaching career in England?",
-            classes: "govuk-fieldset__legend--s"
-          }
-        },
-        items: [
-          {
-            value: "yes",
-            text: "Yes"
-          },
-          {
-            value: "no",
-            text: "No"
-          }
-        ]
-      }) }}
-
-      {# ////////////////////////////////////////////////#}
-
-      {{ govukRadios({
-        name: "hasTeachingQualification",
-        value: claim.hasTeachingQualification,
-        fieldset: {
-          legend: {
-            text: "Does " + claim.claimantName + " have a teaching qualification?",
-            classes: "govuk-fieldset__legend--s"
-          }
-        },
-        items: [
-          {
-            value: "yes",
-            text: "Yes"
-          },
-          {
-            value: "Not yet, but is enrolled on one",
-            text: "Not yet, but is enrolled on one"
-          },
-          {
-            value: "No, but is planning to enrol on one",
-            text: "No, but is planning to enrol on one"
-          },
-          {
-            value: "No, and has no plan to enrol on one in the next 12 months",
-            text: "No, and has no plan to enrol on one in the next 12 months"
-          }
-        ]
-      }) }}
+      <h2 class="govuk-heading-m">Type of contract</h2>
 
       {# ////////////////////////////////////////////////#}
       
@@ -135,55 +61,36 @@
               text: "What type of contract does " + claim.claimantName + " have with [FE_Provider]?",
               classes: "govuk-fieldset__legend--s"
             }
-          },
-          hint: {
-            text: "This includes full-time and part-time contracts"
-          },
-          items: [
-            {
-              value: "Permanent",
-              text: "Permanent"
             },
-            {
-              value: "Fixed-term",
-              text: "Fixed-term"
+            hint: {
+              text: "This includes full-time and part-time contracts"
             },
-            {
-              value: "Variable hours",
-              text: "Variable hours"
-            }
-          ]
-        }) }}
+            items: [
+              {
+                value: "Permanent",
+                text: "Permanent"
+              },
+              {
+                value: "Fixed-term",
+                text: "Fixed-term"
+              },
+              {
+                value: "Variable hours",
+                text: "Variable hours"
+              }
+            ]
+          }) }}
       
         {# ////////////////////////////////////////////////#}
 
-        {{ govukRadios({
-          name: "completedSection",
-          errorMessage: errors | findError("completedSection"),
-          fieldset: {
-            legend: {
-              text: "Have you completed this section?",
-              classes: "govuk-fieldset__legend--m"
-            }
-          },
-          items: [
-            {
-              value: "Yes",
-              text: "Yes"
-            },
-            {
-              value: "No",
-              text: "No, I want to come back to it later"
-            }
-          ]
-        }) }}
         
-
-    
         <div class="govuk-button-group">
           <button type="submit" class="govuk-button" name="action" value="continue">
-            Save and continue
-          </button>       
+            Continue
+          </button>  
+          <button type="submit" class="govuk-button govuk-button--secondary" name="action" value="save">
+            Save and come back later
+          </button>      
         </div>
     </form>
 

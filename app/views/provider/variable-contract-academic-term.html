@@ -45,98 +45,17 @@
 
     {% include "_includes/claim/details.njk" %}
 
-    {# <form method="post" action="/provider/contracted-hours/{{ claim.id }}{% if returnUrl %}?returnUrl={{ returnUrl }}{% endif %}"> #}
-    <form method="post" action="{{ actionUrl }}">  
+   <form method="post">  
 
-      <h3 class="govuk-heading-m">Contracted hours</h3>
+      <h3 class="govuk-heading-m">Type of contract</h3>
+
 
         {{ govukRadios({
-          name: "contractedHours",
-          value: claim.contractedHours,
-          classes: "govuk-radios--inline",
+          name: "variableContractHasTaughtForOneAcademicTerm",
           fieldset: {
             legend: {
-              text: "On average, how many hours per week is " + claim.claimantName + " timetabled to teach during the current term?",
+              text: "Is " + claim.claimantName + " timetabled to teach at least 2.5 hours per week st [FE-Provider] in the [spring_or_summer] term?",
               classes: "govuk-fieldset__legend--s"
-            }
-          },
-          items: [
-            {
-              value: "12 hours or more per week",
-              text: "12 hours or more per week"
-            },
-            {
-              value: "2.5 hours or more but less than 12 hours per week",
-              text: "2.5 hours or more but less than 12 hours per week"
-            },
-            {
-              value: "Less than 2.5 hours per week",
-              text: "Less than 2.5 hours per week"
-            }
-          ]
-        }) }}
-
-        {{ govukRadios({
-          name: "sixteenToNineteen",
-          value: claim.sixteenToNineteen,
-          fieldset: {
-            legend: {
-              text: "For at least half of their timetabled teaching hours, does " + claim.claimantName + " teach 16- to 19-year-olds, including those up to age 25 with an Education, Health and Care Plan (EHCP)?",
-              classes: "govuk-fieldset__legend--s"
-            }
-          },
-          items: [
-            {
-              value: "yes",
-              text: "Yes"
-            },
-            {
-              value: "no",
-              text: "No"
-            }
-          ]
-        }) }}
-
-        {{ govukRadios({
-          name: "fundingAtLevelThreeAndBelow",
-          value: claim.fundingAtLevelThreeAndBelow,
-          fieldset: {
-            legend: {
-              html: "For at least half of their timetabled teaching hours, does " + claim.claimantName + " teach:<ul class='govuk-list govuk-list--bullet'><li>qualifications approved for funding at level 3 and below in the <a href='https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=13&PageSize=10&Sort=Status' target='_blank'>engineering (opens in a new tab)</a> sector subject area?</li></ul>",
-              classes: "govuk-fieldset__legend--s"
-            }
-          },
-          items: [
-            {
-              value: "yes",
-              text: "Yes"
-            },
-            {
-              value: "no",
-              text: "No"
-            }
-          ]
-        }) }}
-
-        {# {{ govukCharacterCount({
-          name: "moreDetail",
-          id: "more-detail",
-          value: claim.moreDetail,
-          maxlength: 800,
-          label: {
-            text: "Do you want to provide more detail about this claim?",
-            classes: "govuk-label--m",
-            isPageHeading: false
-          }
-        }) }} #}
-
-        {{ govukRadios({
-          name: "completedSection",
-          errorMessage: errors | findError("completedSection"),
-          fieldset: {
-            legend: {
-              text: "Have you completed this section?",
-              classes: "govuk-fieldset__legend--m"
             }
           },
           items: [
@@ -146,17 +65,19 @@
             },
             {
               value: "No",
-              text: "No, I want to come back to it later"
+              text: "No"
             }
           ]
         }) }}
         
-
     
         <div class="govuk-button-group">
           <button type="submit" class="govuk-button" name="action" value="continue">
-            Save and continue
-          </button>       
+            Continue
+          </button>  
+          <button type="submit" class="govuk-button govuk-button--secondary" name="action" value="save">
+            Save and come back later
+          </button>      
         </div>
     </form>
 
