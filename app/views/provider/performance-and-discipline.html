@@ -5,6 +5,7 @@
 {% set serviceNavId = "allClaims" %}
 
 {% set actionUrl = "/provider/performance-and-discipline/" + claim.id %}
+
 {% if returnUrl %}
   {% set actionUrl = actionUrl + "?returnUrl=" + returnUrl %}
 {% endif %}
@@ -43,7 +44,7 @@
 
     {% include "_includes/claim/details.njk" %}
 
-    {# <form method="post" action="/provider/performance-and-discipline/{{ claim.id }}"> #}
+    
     <form method="post" action="{{ actionUrl }}">  
     
       <h3 class="govuk-heading-m">Performance and discipline</h3>
@@ -70,8 +71,8 @@
         }) }}
 
         {{ govukRadios({
-          name: "subjectToDisciplinaryAction",
-          value: claim.subjectToDisciplinaryAction,
+          name: "performanceAndDiscipline",
+          value: claim.performanceAndDiscipline,
           fieldset: {
             legend: {
               text: "Is " + claim.claimantName + " currently subject to any disciplinary action?",

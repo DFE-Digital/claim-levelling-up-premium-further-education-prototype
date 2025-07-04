@@ -5,7 +5,8 @@
 {% set serviceNavId = "allClaims" %}
 
 
-{% set actionUrl = "/provider/type-of-contract/" + claim.id %}
+{% set actionUrl = "/provider/fixed-term-contract-academic-year/" + claim.id %}
+
 {% if returnUrl %}
   {% set actionUrl = actionUrl + "?returnUrl=" + returnUrl %}
 {% endif %}
@@ -33,12 +34,7 @@
 
     <h1 class="govuk-heading-l">{{pageName}}</h1>
 
-    {# {% if claim.status == 'In progress' %}
-      <div class="govuk-inset-text">
-        Claim asssigned to {{ claim.assignedTo }} on {{ claim.dateSubmitted }}
-      </div>
-    {% endif %} #}
-
+ 
 
     {{ data.user | log }}
     {{ data.claims | log }}

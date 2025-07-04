@@ -5,7 +5,8 @@
 {% set serviceNavId = "allClaims" %}
 
 
-{% set actionUrl = "/provider/contracted-hours/" + claim.id %}
+{% set actionUrl = "/provider/timetabled-hours-during-term/" + claim.id %}
+
 {% if returnUrl %}
   {% set actionUrl = actionUrl + "?returnUrl=" + returnUrl %}
 {% endif %}
@@ -51,8 +52,8 @@
       <h3 class="govuk-heading-m">Contracted hours</h3>
 
         {{ govukRadios({
-          name: "contractedHours",
-          value: claim.contractedHours,
+          name: "timetabledHoursDuringTerm",
+          value: claim.timetabledHoursDuringTerm,
           classes: "govuk-radios--inline",
           fieldset: {
             legend: {

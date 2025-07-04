@@ -5,7 +5,8 @@
 {% set serviceNavId = "allClaims" %}
 
 
-{% set actionUrl = "/provider/contracted-hours/" + claim.id %}
+{% set actionUrl = "/provider/variable-contract-individual-hours-term/" + claim.id %}
+
 {% if returnUrl %}
   {% set actionUrl = actionUrl + "?returnUrl=" + returnUrl %}
 {% endif %}
@@ -33,11 +34,6 @@
 
     <h1 class="govuk-heading-l">{{pageName}}</h1>
 
-    {# {% if claim.status == 'In progress' %}
-      <div class="govuk-inset-text">
-        Claim asssigned to {{ claim.assignedTo }} on {{ claim.dateSubmitted }}
-      </div>
-    {% endif %} #}
 
 
     {{ data.user | log }}
@@ -51,7 +47,7 @@
 
 
         {{ govukRadios({
-          name: "variableContractIsTimetabledForTwoAndHalfHoursPerWeek",
+          name: "variableContractTimetabledHours",
           fieldset: {
             legend: {
               text: "Has " + claim.claimantName + " taught at [FE_provider] for at least one full academic term?",

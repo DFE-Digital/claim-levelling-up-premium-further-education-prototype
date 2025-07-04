@@ -410,84 +410,98 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     return saveAndRedirect(claim, req, res, 'performance-and-discipline')
   })
   
-  
+  //////////////////////////////////////////////////////////////////////////////////
 
-  // Contract academic year
-  router.get('/provider/contract-academic-year/:claimId', (req, res) => {
+
+
+  // GET: Variable contract academic term
+  router.get('/provider/variable-contract-academic-term/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
-    res.render('provider/contract-academic-year', { 
-      claim,
-      returnUrl: req.query.returnUrl // 👈 make this available to your template
-    })
+
+    res.render('provider/variable-contract-academic-term', { claim })
   })
 
-  router.post('/provider/contract-academic-year/:claimId', (req, res) => {
+  // POST: Variable contract academic term
+  router.post('/provider/variable-contract-academic-term/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
+
+    // Save submitted answer
+    claim.variableContractAcademicTerm = req.body.variableContractAcademicTerm
+
+    return saveAndRedirect(claim, req, res, 'variable-contract-timetabled-hours-in-term')
+  })
+    
+
+  //////////////////////////////////////////////////////////////////////////////////
   
-    const returnUrl = req.query.returnUrl
-    const completed = req.body.completedSection
   
-    claim.contractAcademicYear = req.body.contractAcademicYear 
-    claim.status = 'In progress'
-    claim.lastVisitedStep = 'contract-academic-year'
-  
-    if (completed === 'No') {
-      return res.redirect(`/provider/save/${claim.id}`)
-    }
-  
-    // ✅ Use helper which will return to check if returnUrl is present
+  // GET: Variable contract individual hours in term
+  router.get('/provider/variable-contract-timetabled-hours-in-term/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    res.render('provider/variable-contract-timetabled-hours-in-term', { claim })
+  })
+
+  // POST: Variable contract individual hours in term
+  router.post('/provider/variable-contract-timetabled-hours-in-term/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    // Save submitted value
+    claim.variableContractTimetabledHours = req.body.variableContractTimetabledHours
+
     return saveAndRedirect(claim, req, res, 'performance-and-discipline')
   })
-  
-  
-  
+    
 
-  /////////////// Hours academic year
-  router.get('/provider/hours-academic-year/:claimId', (req, res) => {
-    const claim = getClaim(req, res)
-    if (!claim) return res.status(404).send('Claim not found')
-    res.render('provider/hours-academic-year', { 
-      claim,
-      returnUrl: req.query.returnUrl // 👈 make this available to your template
-     })
-  })
-
-
-
-  router.post('/provider/hours-academic-year/:claimId', (req, res) => {
-    const claim = getClaim(req, res)
-    if (!claim) return res.status(404).send('Claim not found')
-  
-    const returnUrl = req.query.returnUrl
-    const completed = req.body.completedSection
-  
-    claim.hoursAcademicYear = req.body.hoursAcademicYear
-    claim.status = 'In progress'
-    claim.lastVisitedStep = 'hours-academic-year'
-  
-    if (completed === 'No') {
-      return res.redirect(`/provider/save/${claim.id}`)
-    }
-  
-    // ✅ Use helper which will return to check if returnUrl is present
-    return saveAndRedirect(claim, req, res, 'performance-and-discipline')
-  })
+  //////////////////////////////////////////////////////////////////////////////////
   
   
-  
-  
-
-  // Performance and discipline
+  // GET: Performance and discipline
   router.get('/provider/performance-and-discipline/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
-    res.render('provider/performance-and-discipline', { 
-      claim,
-      returnUrl: req.query.returnUrl // 👈 make this available to your template
-     })
+
+    res.render('provider/performance-and-discipline', { claim })
   })
+
+  // POST: Performance and discipline
+  router.post('/provider/performance-and-discipline/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    // Save both responses
+    claim.performanceMeasures = req.body.performanceMeasures
+    claim.performanceAndDiscipline = req.body.performanceAndDiscipline
+
+    return saveAndRedirect(claim, req, res, 'timetabled-hours-during-term')
+  })
+
+  //////////////////////////////////////////////////////////////////////////////////
+  
+
+  // GET: Timetabled hours during term
+  router.get('/provider/timetabled-hours-during-term/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    res.render('provider/timetabled-hours-during-term', { claim })
+  })
+
+  // POST: Timetabled hours during term
+  router.post('/provider/timetabled-hours-during-term/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    // Save answer
+    claim.timetabledHoursDuringTerm = req.body.timetabledHoursDuringTerm
+
+    return saveAndRedirect(claim, req, res, 'teaches-sixteen-to-nineteen')
+  })
+
 
 
 
