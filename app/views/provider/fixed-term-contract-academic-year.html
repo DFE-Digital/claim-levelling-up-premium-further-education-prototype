@@ -5,7 +5,7 @@
 {% set serviceNavId = "allClaims" %}
 
 
-{% set actionUrl = "/provider/contracted-hours/" + claim.id %}
+{% set actionUrl = "/provider/type-of-contract/" + claim.id %}
 {% if returnUrl %}
   {% set actionUrl = actionUrl + "?returnUrl=" + returnUrl %}
 {% endif %}
@@ -51,7 +51,7 @@
 
 
         {{ govukRadios({
-          name: "fixedTermContractIsForFullAcademicYear",
+          name: "fixedTermAcademicYear",
           fieldset: {
             legend: {
               text: "Is " + claim.claimantName + " fixed-term contract for the full 2025 to 2026 academic year?",

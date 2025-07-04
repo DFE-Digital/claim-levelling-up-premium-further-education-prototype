@@ -311,71 +311,104 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
   // Multi-step form flow
   // ================================
 
+  // GET: Role and experience
   router.get('/provider/role-and-experience/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
-  
-    const returnUrl = req.query.returnUrl
-    res.render('provider/role-and-experience', { claim, returnUrl })
+
+    res.render('provider/role-and-experience', { claim })
   })
 
-  // Role and experience
+  // POST: Role and experience
   router.post('/provider/role-and-experience/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
-  
-    const returnUrl = req.query.returnUrl
-  
-    // ✅ Validate required input
-    if (!req.body.completedSection) {
-      const errors = [{
-        text: 'Select whether you have completed this section',
-        href: '#completedSection'
-      }]
-      return res.render('provider/role-and-experience', {
-        claim,
-        errors,
-        returnUrl // 👈 ensures it’s passed back to the template
-      })
+
+    const qualification = req.body.hasTeachingQualification
+
+    // Save value to session
+    claim.hasTeachingQualification = qualification
+
+    // Decide next step
+    if (qualification === 'No, but is planning to enrol on one') {
+      return saveAndRedirect(claim, req, res, 'qualification-mitigations')
+    } else {
+      return saveAndRedirect(claim, req, res, 'type-of-contract')
     }
-  
-    // ✅ Save submitted answers
-    claim.teachingResponsibilities = req.body.teachingResponsibilities
-    claim.first5Years = req.body.first5Years
-    claim.hasTeachingQualification = req.body.hasTeachingQualification
-    claim.contractType = req.body.contractType
-    claim.status = 'In progress'
-    claim.lastVisitedStep = 'role-and-experience'
-  
-    // ✅ Save and pause
-    if (req.body.completedSection === 'No') {
-      return res.redirect(`/provider/save/${claim.id}`)
+  })
+
+  //////////////////////////////////////////////////////////////////////////////////
+
+  // GET: Qualification mitigations
+  router.get('/provider/qualification-mitigations/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    res.render('provider/qualification-mitigations', { claim })
+  })
+
+  // POST: Qualification mitigations
+  router.post('/provider/qualification-mitigations/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    // Save response (e.g. mitigating circumstances or confirmation)
+    claim.qualificationMitigations = req.body.qualificationMitigations
+
+    return saveAndRedirect(claim, req, res, 'type-of-contract')
+  })
+
+  //////////////////////////////////////////////////////////////////////////////////
+
+  // GET: Type of contract
+  router.get('/provider/type-of-contract/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    res.render('provider/type-of-contract', { claim })
+  })
+
+  // POST: Type of contract
+  router.post('/provider/type-of-contract/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    const contractType = req.body.contractType
+    claim.contractType = contractType
+
+    if (contractType === 'Fixed-term') {
+      return saveAndRedirect(claim, req, res, 'fixed-term-contract-academic-year')
     }
-  
-    // ✅ Fixed-term requires next screen first
-    if (claim.contractType === 'Fixed-term') {
-      if (returnUrl) {
-        return res.redirect(`/provider/contract-academic-year/${claim.id}?returnUrl=${encodeURIComponent(returnUrl)}`)
-      }
-      return saveAndRedirect(claim, req, res, 'contract-academic-year')
+
+    if (contractType === 'Variable hours') {
+      return saveAndRedirect(claim, req, res, 'variable-contract-academic-term')
     }
-  
-    // ✅ Variable hours requires next screen first
-    if (claim.contractType === 'Variable hours') {
-      if (returnUrl) {
-        return res.redirect(`/provider/hours-academic-year/${claim.id}?returnUrl=${encodeURIComponent(returnUrl)}`)
-      }
-      return saveAndRedirect(claim, req, res, 'hours-academic-year')
-    }
-  
-    // ✅ Permanent — go directly back to check if returnUrl present
-    if (returnUrl) {
-      return res.redirect(returnUrl)
-    }
-  
+
+    // Permanent (or anything else) goes directly to performance
     return saveAndRedirect(claim, req, res, 'performance-and-discipline')
   })
-  
+
+  //////////////////////////////////////////////////////////////////////////////////
+
+
+  // GET: Fixed-term contract academic year
+  router.get('/provider/fixed-term-contract-academic-year/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    res.render('provider/fixed-term-contract-academic-year', { claim })
+  })
+
+  // POST: Fixed-term contract academic year
+  router.post('/provider/fixed-term-contract-academic-year/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    // Save submitted value
+    claim.fixedTermAcademicYear = req.body.fixedTermAcademicYear
+
+    return saveAndRedirect(claim, req, res, 'performance-and-discipline')
+  })
   
   
 
