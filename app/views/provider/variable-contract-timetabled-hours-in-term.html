@@ -5,7 +5,7 @@
 {% set serviceNavId = "allClaims" %}
 
 
-{% set actionUrl = "/provider/variable-contract-individual-hours-term/" + claim.id %}
+{% set actionUrl = "/provider/variable-contract-timetabled-hours-in-term/" + claim.id %}
 
 {% if returnUrl %}
   {% set actionUrl = actionUrl + "?returnUrl=" + returnUrl %}
@@ -41,7 +41,7 @@
 
     {% include "_includes/claim/details.njk" %}
 
-    <form method="post">  
+    <form method="post" action="{{ actionUrl }}">  
 
       <h3 class="govuk-heading-m">Type of contract</h3>
 

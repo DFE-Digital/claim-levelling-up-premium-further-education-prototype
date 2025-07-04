@@ -5,7 +5,8 @@
 {% set serviceNavId = "allClaims" %}
 
 
-{% set actionUrl = "/provider/contracted-hours/" + claim.id %}
+{% set actionUrl = "/provider/teaches-sixteen-to-nineteen/" + claim.id %}
+
 {% if returnUrl %}
   {% set actionUrl = actionUrl + "?returnUrl=" + returnUrl %}
 {% endif %}
@@ -33,11 +34,6 @@
 
     <h1 class="govuk-heading-l">{{pageName}}</h1>
 
-    {# {% if claim.status == 'In progress' %}
-      <div class="govuk-inset-text">
-        Claim asssigned to {{ claim.assignedTo }} on {{ claim.dateSubmitted }}
-      </div>
-    {% endif %} #}
 
 
     {{ data.user | log }}
@@ -45,14 +41,14 @@
 
     {% include "_includes/claim/details.njk" %}
 
-    {# <form method="post" action="/provider/contracted-hours/{{ claim.id }}{% if returnUrl %}?returnUrl={{ returnUrl }}{% endif %}"> #}
+ 
     <form method="post" action="{{ actionUrl }}">  
 
       <h3 class="govuk-heading-m">Contracted hours</h3>
 
         {{ govukRadios({
-          name: "sixteenToNineteen",
-          value: claim.sixteenToNineteen,
+          name: "teachesSixteenToNineteen",
+          value: claim.teachesSixteenToNineteen,
           fieldset: {
             legend: {
               text: "Does " + claim.claimantName + " spend at least half of their timetabled teaching hours delivering 16 to 19 study programmes, T Levels, or apprenticeships funded through the 16 to 19 funding system?",

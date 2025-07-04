@@ -20,7 +20,7 @@
 
 {% block content %}
 <div class="govuk-grid-row">
-  {# <div class="govuk-grid-column-full"> #}
+  
     <div class="govuk-grid-column-three-quarters">
 
       {% if errors %}
@@ -44,88 +44,86 @@
 
     {% include "_includes/claim/details.njk" %}
 
-    {# <form method="post" action="/provider/role-and-experience/{{ claim.id }}"> #}
       <form method="post" action="{{ actionUrl }}">
-
 
       <h2 class="govuk-heading-m">Role and experience</h2>
 
-      {{ govukRadios({
-        name: "teachingResponsibilities",
-        value: claim.teachingResponsibilities,
-        fieldset: {
-          legend: {
-            text: "Is " + claim.claimantName + " a member of staff with teaching responsibilities?",
-            classes: "govuk-fieldset__legend--s"
-          }
-        },
-        items: [
-          {
-            value: "yes",
-            text: "Yes"
-          },
-          {
-            value: "no",
-            text: "No"
-          }
-        ]
-      }) }}
+          {{ govukRadios({
+            name: "teachingResponsibilities",
+            value: claim.teachingResponsibilities,
+            fieldset: {
+              legend: {
+                text: "Is " + claim.claimantName + " a member of staff with teaching responsibilities?",
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            items: [
+              {
+                value: "yes",
+                text: "Yes"
+              },
+              {
+                value: "no",
+                text: "No"
+              }
+            ]
+          }) }}
 
-      {# ////////////////////////////////////////////////#}
+          {# ////////////////////////////////////////////////#}
 
-      {{ govukRadios({
-        name: "first5Years",
-        value: claim.first5Years,
-        fieldset: {
-          legend: {
-            text: "Is " + claim.claimantName + " in the first 5 years of their further education (FE) teaching career in England?",
-            classes: "govuk-fieldset__legend--s"
-          }
-        },
-        items: [
-          {
-            value: "yes",
-            text: "Yes"
-          },
-          {
-            value: "no",
-            text: "No"
-          }
-        ]
-      }) }}
+          {{ govukRadios({
+            name: "first5Years",
+            value: claim.first5Years,
+            fieldset: {
+              legend: {
+                text: "Is " + claim.claimantName + " in the first 5 years of their further education (FE) teaching career in England?",
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            items: [
+              {
+                value: "yes",
+                text: "Yes"
+              },
+              {
+                value: "no",
+                text: "No"
+              }
+            ]
+          }) }}
 
-      {# ////////////////////////////////////////////////#}
+          {# ////////////////////////////////////////////////#}
 
-      {{ govukRadios({
-        name: "hasTeachingQualification",
-        value: hasTeachingQualification,
-        fieldset: {
-          legend: {
-            text: "Does " + claim.claimantName + " have a teaching qualification?",
-            classes: "govuk-fieldset__legend--s"
-          }
-        },
-        items: [
-          {
-            value: "Yes",
-            text: "Yes"
-          },
-          {
-            value: "Not yet, but is enrolled on one",
-            text: "Not yet, but is enrolled on one"
-          },
-          {
-            value: "No, but is planning to enrol on one",
-            text: "No, but is planning to enrol on one"
-          },
-          {
-            value: "No, and has no plan to enrol on one in the next 12 months",
-            text: "No, and has no plan to enrol on one in the next 12 months"
-          }
-        ]
-      }) }}
+          {{ govukRadios({
+            name: "hasTeachingQualification",
+            value: hasTeachingQualification,
+            fieldset: {
+              legend: {
+                text: "Does " + claim.claimantName + " have a teaching qualification?",
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            items: [
+              {
+                value: "Yes",
+                text: "Yes"
+              },
+              {
+                value: "Not yet, but is enrolled on one",
+                text: "Not yet, but is enrolled on one"
+              },
+              {
+                value: "No, but is planning to enrol on one",
+                text: "No, but is planning to enrol on one"
+              },
+              {
+                value: "No, and has no plan to enrol on one in the next 12 months",
+                text: "No, and has no plan to enrol on one in the next 12 months"
+              }
+            ]
+          }) }}
 
-      {# ////////////////////////////////////////////////#}
+          {# ////////////////////////////////////////////////#}
     
     
         <div class="govuk-button-group">

@@ -502,6 +502,135 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     return saveAndRedirect(claim, req, res, 'teaches-sixteen-to-nineteen')
   })
 
+  //////////////////////////////////////////////////////////////////////////////////
+
+  // GET: Teaches 16 to 19
+  router.get('/provider/teaches-sixteen-to-nineteen/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    res.render('provider/teaches-sixteen-to-nineteen', { claim })
+  })
+
+  // POST: Teaches 16 to 19
+  router.post('/provider/teaches-sixteen-to-nineteen/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    // Save response
+    claim.teachesSixteenToNineteen = req.body.teachesSixteenToNineteen
+
+    return saveAndRedirect(claim, req, res, 'level-three-confirm')
+  })
+
+  //////////////////////////////////////////////////////////////////////////////////
+
+
+  // GET: Level 3 confirm
+  router.get('/provider/level-three-confirm/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    res.render('provider/level-three-confirm', { claim })
+  })
+
+  // POST: Level 3 confirm
+  router.post('/provider/level-three-confirm/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    const teachesLevelThree = req.body.teachesLevelThree
+    claim.teachesLevelThree = teachesLevelThree
+
+    if (teachesLevelThree === 'Yes') {
+      return saveAndRedirect(claim, req, res, 'level-three-half-timetabled-teaching-courses')
+    }
+
+    return saveAndRedirect(claim, req, res, 'level-three-subject-area')
+  })
+
+  //////////////////////////////////////////////////////////////////////////////////
+
+
+  // GET: Level 3 half timetable teaching courses
+  router.get('/provider/level-three-half-timetable-teaching-courses/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    res.render('provider/level-three-half-timetable-teaching-courses', { claim })
+  })
+
+  // POST: Level 3 half timetable teaching courses
+  router.post('/provider/level-three-half-timetable-teaching-courses/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    claim.levelThreeHalfTimetableTeachingCourses = req.body.levelThreeHalfTimetableTeachingCourses
+
+    return saveAndRedirect(claim, req, res, 'check')
+})
+
+
+  //////////////////////////////////////////////////////////////////////////////////
+
+
+  // GET: Level 3 subject area
+  router.get('/provider/level-three-subject-area/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    res.render('provider/level-three-subject-area', { claim })
+  })
+
+  // POST: Level 3 subject area
+  router.post('/provider/level-three-subject-area/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    claim.levelThreeSubjectArea = req.body.levelThreeSubjectArea
+
+    return saveAndRedirect(claim, req, res, 'level-three-subject-area-courses')
+  })
+
+  //////////////////////////////////////////////////////////////////////////////////
+
+
+  // GET: Level 3 subject area courses
+  router.get('/provider/level-three-subject-area-courses/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    res.render('provider/level-three-subject-area-courses', { claim })
+  })
+
+  // POST: Level 3 subject area courses
+  router.post('/provider/level-three-subject-area-courses/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    let selected = req.body.levelThreeSubjectAreaCourses
+
+    // Handle multiple or single selections
+    if (typeof selected === 'string') {
+      selected = [selected]
+    }
+
+    claim.levelThreeSubjectAreaCourses = selected
+
+    // If "none" is selected, assume ineligible and go straight to check
+    if (!selected || selected.includes('none')) {
+      return saveAndRedirect(claim, req, res, 'check')
+    }
+
+    // Otherwise, eligible
+    return saveAndRedirect(claim, req, res, 'check')
+  })
+
+
+  //////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 
 

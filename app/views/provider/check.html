@@ -1,6 +1,5 @@
 {% extends "layouts/main.html" %}
 
-
 {% set pageName =  'Claim reference: ' + claim.claimReference %}
 {% set serviceNavId = "allClaims" %}
 
@@ -25,7 +24,6 @@
         {% endif %}
       </h1>
 
-    {# Role and experience summary card #}
     {{ govukSummaryList({
       card: {
         title: {
@@ -43,35 +41,37 @@
         }
       },
       rows: [
-        {
-          key: { text: "Teaching responsibilities" },
-          value: { text: claim.teachingResponsibilities | default("Not answered") }
-        },
-        {
-          key: { text: "In first 5 years of FE teaching" },
-          value: { text: claim.first5Years | default("Not answered") }
-        },
-        {
-          key: { text: "Teaching qualification" },
-          value: { text: claim.hasTeachingQualification | default("Not answered") }
-        },
-        {
-          key: { text: "Type of contract" },
-          value: { text: claim.contractType | default("Not answered") }
-        },
-        {
-          key: { text: "Contract covers full academic year" },
-          value: { text: claim.contractAcademicYear | default("Not answered") }
-        } if claim.contractAcademicYear,
-        {
-          key: { text: "Variable hours in academic year" },
-          value: { text: claim.hoursAcademicYear | default("Not answered") }
-        } if claim.hoursAcademicYear
+        { key: { text: "Teaching responsibilities" }, value: { text: claim.teachingResponsibilities | default("Not answered") } },
+        { key: { text: "In first 5 years of FE teaching" }, value: { text: claim.first5Years | default("Not answered") } },
+        { key: { text: "Teaching qualification" }, value: { text: claim.hasTeachingQualification | default("Not answered") } },
+        { key: { text: "Mitigating circumstances for qualification" }, value: { text: claim.qualificationMitigations | default("Not answered") } } if claim.qualificationMitigations
       ]
-    
     }) }}
 
-    {# Performance and discipline summary card #}
+    {{ govukSummaryList({
+      card: {
+        title: {
+          text: "Type of contract",
+          classes: "govuk-heading-m"
+        },
+        actions: {
+          items: [
+            {
+              href: "/provider/type-of-contract/" + claim.id + "?returnUrl=/provider/check/" + claim.id,
+              text: "Change",
+              visuallyHiddenText: "type of contract"
+            }
+          ]
+        }
+      },
+      rows: [
+        { key: { text: "Contract type" }, value: { text: claim.contractType | default("Not answered") } },
+        { key: { text: "Fixed-term covers full academic year" }, value: { text: claim.fixedTermAcademicYear | default("Not answered") } } if claim.contractType == "Fixed-term",
+        { key: { text: "Variable contract academic term" }, value: { text: claim.variableContractAcademicTerm | default("Not answered") } } if claim.contractType == "Variable hours",
+        { key: { text: "Timetabled hours in term" }, value: { text: claim.variableContractTimetabledHours | default("Not answered") } } if claim.contractType == "Variable hours"
+      ]
+    }) }}
+
     {{ govukSummaryList({
       card: {
         title: {
@@ -89,55 +89,56 @@
         }
       },
       rows: [
-        {
-          key: { text: "Subject to performance measures" },
-          value: { text: claim.performanceMeasures or "Not answered" }
-        },
-        {
-          key: { text: "Subject to disciplinary action" },
-          value: { text: claim.subjectToDisciplinaryAction or "Not answered" }
-        }
+        { key: { text: "Subject to performance measures" }, value: { text: claim.performanceMeasures | default("Not answered") } },
+        { key: { text: "Subject to disciplinary action" }, value: { text: claim.performanceAndDiscipline | default("Not answered") } }
       ]
     }) }}
 
-{# Contracted hours summary card #}
-{{ govukSummaryList({
-  card: {
-    title: {
-      text: "Contracted hours",
-      classes: "govuk-heading-m"
-    },
-    actions: {
-      items: [
-        {
-          href: "/provider/contracted-hours/" + claim.id + "?returnUrl=/provider/check/" + claim.id,
-          text: "Change",
-          visuallyHiddenText: "contracted hours"
+    {{ govukSummaryList({
+      card: {
+        title: {
+          text: "Contracted hours",
+          classes: "govuk-heading-m"
+        },
+        actions: {
+          items: [
+            {
+              href: "/provider/timetabled-hours-during-term/" + claim.id + "?returnUrl=/provider/check/" + claim.id,
+              text: "Change",
+              visuallyHiddenText: "contracted hours"
+            }
+          ]
         }
+      },
+      rows: [
+        { key: { text: "Timetabled hours per week" }, value: { text: claim.timetabledHoursDuringTerm | default("Not answered") } },
+        { key: { text: "Teaches 16-19-year-olds or those with EHCP" }, value: { text: claim.teachesSixteenToNineteen | default("Not answered") } }
       ]
-    }
-  },
-  rows: [
-    {
-      key: { text: "Timetabled hours per week" },
-      value: { text: claim.contractedHours or "Not answered" }
-    },
-    {
-      key: { text: "Teaches 16-19-year-olds or those with EHCP" },
-      value: { text: claim.sixteenToNineteen | default("Not answered") }
-    },
-    {
-      key: { text: "Teaches approved qualifications in engineering" },
-      value: { text: claim.fundingAtLevelThreeAndBelow | default("Not answered") }
-    },
-    {
-      key: { text: "More detail about this claim" },
-      value: { text: claim.moreDetail }
-    } if claim.moreDetail
-        
-  ]
-}) }}
+    }) }}
 
+    {{ govukSummaryList({
+      card: {
+        title: {
+          text: "Subject area",
+          classes: "govuk-heading-m"
+        },
+        actions: {
+          items: [
+            {
+              href: "/provider/level-three-confirm/" + claim.id + "?returnUrl=/provider/check/" + claim.id,
+              text: "Change",
+              visuallyHiddenText: "subject area"
+            }
+          ]
+        }
+      },
+      rows: [
+        { key: { text: "Teaches Level 3 courses" }, value: { text: claim.teachesLevelThree | default("Not answered") } },
+        { key: { text: "Subject area" }, value: { text: claim.levelThreeSubjectArea | default("Not answered") } } if claim.levelThreeSubjectArea,
+        { key: { text: "Subject area courses" }, value: { text: claim.levelThreeSubjectAreaCourses | join(', ') if claim.levelThreeSubjectAreaCourses else "Not answered" } } if claim.levelThreeSubjectAreaCourses,
+        { key: { text: "Half timetable explanation" }, value: { text: claim.levelThreeHalfTimetableTeachingCoursesExplanation | default("Not answered") } } if claim.levelThreeHalfTimetableTeachingCoursesExplanation
+      ]
+    }) }}
 
     <form method="post" action="/provider/completed/{{ claim.id }}">
       <h2 class="govuk-heading-m">Declaration</h2>

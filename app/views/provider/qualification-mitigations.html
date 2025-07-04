@@ -24,21 +24,25 @@
 
       <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-      <p class="govuk-body">
-        They've confirmed the same intention in their application this year.
-      </p>
+      {{ govukInsetText({
+        text: "They've confirmed the same intention in their application this year. Please tell us why they haven't yet started or finished a teaching qualification."
+      }) }}
 
-      <p class="govuk-body">
-        Please tell us why they've not yet started or finished a teaching qualification.
-      </p>
 
-      <form method="post" action="#">
+       {{ data.user | log }}
+        {{ data.claims | log }}
+
+        {% include "_includes/claim/details.njk" %}
+
+      <form method="post" action="{{ actionUrl }}">
+
+      <h2 class="govuk-heading-m">Role and experience</h2>
         {{ govukCheckboxes({
           name: "qualificationDelayReasons",
           fieldset: {
             legend: {
               text: "Select all that apply",
-              classes: "govuk-fieldset__legend--m"
+              classes: "govuk-fieldset__legend--s"
             }
           },
           items: [
@@ -69,11 +73,13 @@
           ]
         }) }}
 
-    
         <div class="govuk-button-group">
           <button type="submit" class="govuk-button" name="action" value="continue">
-            Save and continue
-          </button>       
+            Continue
+          </button>  
+          <button type="submit" class="govuk-button govuk-button--secondary" name="action" value="save">
+            Save and come back later
+          </button>      
         </div>
     </form>
 
