@@ -324,18 +324,29 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    const qualification = req.body.hasTeachingQualification
+    // Save submitted values
+    claim.teachingResponsibilities = req.body.teachingResponsibilities
+    claim.first5Years = req.body.first5Years
+    claim.hasTeachingQualification = req.body.hasTeachingQualification
+    claim.status = 'In progress'
+    claim.lastVisitedStep = 'role-and-experience'
 
-    // Save value to session
-    claim.hasTeachingQualification = qualification
-
-    // Decide next step
-    if (qualification === 'No, but is planning to enrol on one') {
-      return saveAndRedirect(claim, req, res, 'qualification-mitigations')
-    } else {
-      return saveAndRedirect(claim, req, res, 'type-of-contract')
+    // 🔍 KEY CHECK: if user clicked "Save and come back later"
+    if (req.body.action === 'save') {
+      claim.assignedTo = 'You (current user)'
+      claim.status = 'In progress'
+      claim.lastVisitedStep = 'role-and-experience'
+      return res.redirect(`/provider/save/${claim.id}`)
     }
+
+    // Branching logic on qualification
+    if (claim.hasTeachingQualification === 'No, but is planning to enrol on one') {
+      return saveAndRedirect(claim, req, res, 'qualification-mitigations')
+    }
+
+    return saveAndRedirect(claim, req, res, 'type-of-contract')
   })
+
 
   //////////////////////////////////////////////////////////////////////////////////
 
