@@ -678,8 +678,24 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    claim.levelThreeSubjectArea = req.body.levelThreeSubjectArea
+    // Retrieve and normalise the submitted values
+    let selected = req.body['levelThreeSubjectArea'] || req.body.levelThreeSubjectArea
 
+    if (typeof selected === 'string') {
+      selected = [selected]
+    }
+
+    if (!selected || !Array.isArray(selected)) {
+      selected = []
+    }
+
+    // Remove artefacts like "_unchecked"
+    selected = selected.filter(value => value && value !== '_unchecked')
+
+    // Save to session data
+    claim.levelThreeSubjectArea = selected
+
+    // Handle save and come back later
     if (req.body.action === 'save') {
       claim.status = 'In progress'
       claim.assignedTo = 'You (current user)'
@@ -689,6 +705,7 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
 
     return saveAndRedirect(claim, req, res, 'level-three-subject-area-courses')
   })
+
 
 
   //////////////////////////////////////////////////////////////////////////////////
@@ -703,31 +720,38 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
   })
 
 
-  // POST: Level 3 subject area courses
+ // POST: Level 3 subject area courses
   router.post('/provider/level-three-subject-area-courses/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    let selected = req.body.levelThreeSubjectAreaCourses
+    // Retrieve and normalise the submitted values
+    let selected = req.body['levelThreeSubjectAreaCourses[]'] || req.body.levelThreeSubjectAreaCourses
 
-    // Normalise to array if only one selected
     if (typeof selected === 'string') {
       selected = [selected]
     }
 
-    claim.levelThreeSubjectAreaCourses = selected
-
-    // Handle save-and-exit
-    if (req.body.action === 'save') {
-      claim.status = 'In progress'
-      claim.assignedTo = 'You (current user)'
-      claim.lastVisitedStep = 'level-three-subject-area-courses'
-      return res.redirect(`/provider/save/${claim.id}`)
+    // Fallback if nothing selected
+    if (!selected || !Array.isArray(selected)) {
+      selected = []
     }
 
-    // Always go to check page next
+    // Remove any artefacts like "_unchecked"
+    selected = selected.filter(value => value && value !== '_unchecked')
+
+    // Save to session data
+    claim.levelThreeSubjectAreaCourses = selected
+
+    // If "none" is selected, skip to check screen
+    if (selected.includes('none')) {
+      return saveAndRedirect(claim, req, res, 'check')
+    }
+
+    // Otherwise, continue to check screen
     return saveAndRedirect(claim, req, res, 'check')
   })
+
 
 
 
