@@ -387,6 +387,7 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     res.render('provider/type-of-contract', { claim })
   })
 
+  
   // POST: Type of contract
   router.post('/provider/type-of-contract/:claimId', (req, res) => {
     const claim = getClaim(req, res)
@@ -394,6 +395,13 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
 
     const contractType = req.body.contractType
     claim.contractType = contractType
+
+    if (req.body.action === 'save') {
+      claim.status = 'In progress'
+      claim.assignedTo = 'You (current user)'
+      claim.lastVisitedStep = 'type-of-contract'
+      return res.redirect(`/provider/save/${claim.id}`)
+    }
 
     if (contractType === 'Fixed-term') {
       return saveAndRedirect(claim, req, res, 'fixed-term-contract-academic-year')
@@ -403,9 +411,9 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
       return saveAndRedirect(claim, req, res, 'variable-contract-academic-term')
     }
 
-    // Permanent (or anything else) goes directly to performance
     return saveAndRedirect(claim, req, res, 'performance-and-discipline')
   })
+
 
   //////////////////////////////////////////////////////////////////////////////////
 
@@ -423,11 +431,18 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    // Save submitted value
     claim.fixedTermAcademicYear = req.body.fixedTermAcademicYear
+
+    if (req.body.action === 'save') {
+      claim.status = 'In progress'
+      claim.assignedTo = 'You (current user)'
+      claim.lastVisitedStep = 'fixed-term-contract-academic-year'
+      return res.redirect(`/provider/save/${claim.id}`)
+    }
 
     return saveAndRedirect(claim, req, res, 'performance-and-discipline')
   })
+
   
   //////////////////////////////////////////////////////////////////////////////////
 
@@ -441,16 +456,24 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     res.render('provider/variable-contract-academic-term', { claim })
   })
 
+  
   // POST: Variable contract academic term
   router.post('/provider/variable-contract-academic-term/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    // Save submitted answer
     claim.variableContractAcademicTerm = req.body.variableContractAcademicTerm
+
+    if (req.body.action === 'save') {
+      claim.status = 'In progress'
+      claim.assignedTo = 'You (current user)'
+      claim.lastVisitedStep = 'variable-contract-academic-term'
+      return res.redirect(`/provider/save/${claim.id}`)
+    }
 
     return saveAndRedirect(claim, req, res, 'variable-contract-timetabled-hours-in-term')
   })
+
     
 
   //////////////////////////////////////////////////////////////////////////////////
