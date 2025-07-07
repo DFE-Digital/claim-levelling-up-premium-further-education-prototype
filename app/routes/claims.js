@@ -1,25 +1,21 @@
 const { govukDate } = require('@x-govuk/govuk-prototype-filters')
 
 // Helper function: Save and redirect based on current step or returnUrl
-  const saveAndRedirect = (claim, req, res, nextRoute) => {
-  const completed = req.body.completedSection
-  const returnUrl = req.query.returnUrl
 
-  claim.status = 'In progress'
+const saveAndRedirect = (claim, req, res, nextStep, opts = {}) => {
+  // Optionally store returnUrl passed in via opts, query or session
+  const returnUrl = opts.returnUrl || req.query.returnUrl || req.session.data.returnUrl
 
-  // ✅ Ensure route name only is stored
-  claim.lastVisitedStep = nextRoute
-
-  if (completed === 'No') {
-    return res.redirect(`/provider/save/${claim.id}`)
-  }
-
+  // Clear the session returnUrl after using it
   if (returnUrl) {
+    req.session.data.returnUrl = null
     return res.redirect(returnUrl)
   }
 
-  return res.redirect(`/provider/${nextRoute}/${claim.id}`)
+  // Default behaviour: go to the next step
+  return res.redirect(`/provider/${nextStep}/${claim.id}`)
 }
+
 
 
 module.exports = (router) => {
@@ -422,6 +418,8 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     if (!claim) return res.status(404).send('Claim not found')
 
     const contractType = req.body.contractType
+    const returnUrl = req.body.returnUrl
+
     claim.contractType = contractType
     claim.status = 'In progress'
     claim.lastVisitedStep = 'type-of-contract'
@@ -431,21 +429,31 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
       return res.redirect(`/provider/save/${claim.id}`)
     }
 
-    const returnUrl = req.body.returnUrl
+    // 🧠 Store returnUrl in session so we can forward it across screens
     if (returnUrl) {
-      return res.redirect(returnUrl)
+      req.session.data.returnUrl = returnUrl
     }
 
+    // ⛳️ Route based on contract type
     if (contractType === 'Fixed-term') {
-      return saveAndRedirect(claim, req, res, 'fixed-term-contract-academic-year')
+      return saveAndRedirect(claim, req, res, 'fixed-term-contract-academic-year', { returnUrl })
     }
 
     if (contractType === 'Variable hours') {
-      return saveAndRedirect(claim, req, res, 'variable-contract-academic-term')
+      return saveAndRedirect(claim, req, res, 'variable-contract-academic-term', { returnUrl })
+    }
+
+    // Default: Permanent
+    const storedReturn = req.session.data.returnUrl
+    if (storedReturn) {
+      req.session.data.returnUrl = null
+      return res.redirect(storedReturn)
     }
 
     return saveAndRedirect(claim, req, res, 'performance-and-discipline')
   })
+
+
 
 
 
@@ -479,13 +487,15 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
       return res.redirect(`/provider/save/${claim.id}`)
     }
 
-    const returnUrl = req.body.returnUrl
+    const returnUrl = req.session.data.returnUrl
     if (returnUrl) {
+      req.session.data.returnUrl = null
       return res.redirect(returnUrl)
     }
 
     return saveAndRedirect(claim, req, res, 'performance-and-discipline')
   })
+
 
 
   
@@ -561,13 +571,15 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
       return res.redirect(`/provider/save/${claim.id}`)
     }
 
-    const returnUrl = req.body.returnUrl
+    const returnUrl = req.session.data.returnUrl
     if (returnUrl) {
+      req.session.data.returnUrl = null
       return res.redirect(returnUrl)
     }
 
     return saveAndRedirect(claim, req, res, 'performance-and-discipline')
   })
+
 
     
 
