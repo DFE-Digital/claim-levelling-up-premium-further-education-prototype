@@ -624,12 +624,14 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
       return res.redirect(`/provider/save/${claim.id}`)
     }
 
+    // ✅ Branching based on 'Yes' or 'No'
     if (teachesLevelThree === 'Yes') {
       return saveAndRedirect(claim, req, res, 'level-three-half-timetable-teaching-courses')
     }
 
     return saveAndRedirect(claim, req, res, 'level-three-subject-area')
   })
+
 
 
   //////////////////////////////////////////////////////////////////////////////////
