@@ -45,6 +45,7 @@ router.post('/provider/completed/:claimId', (req, res) => {
 })
 
 
+  ///// GET: Show all verified claims /////////////////////////
 
   router.get('/provider/completed', (req, res) => {
     const claims = req.session.data.claims || []
@@ -52,7 +53,7 @@ router.post('/provider/completed/:claimId', (req, res) => {
     const dfeStatuses = ['Pending', 'Approved', 'Rejected']
     let filteredClaims = claims.filter(claim => dfeStatuses.includes(claim.status))
 
-    // Add verified flag for Dfe pending
+    // Add verified flag for DfE pending
     filteredClaims.forEach(claim => {
       if (claim.status === 'Pending') {
         claim.verified = (
@@ -68,16 +69,22 @@ router.post('/provider/completed/:claimId', (req, res) => {
       }
     })
 
-    // ✅ Sort all DfE claims alphabetically by surname
+    // ✅ Sort by claimantLastName then claimantFirstName
     filteredClaims.sort((a, b) => {
-      const surnameA = a.claimantName.split(' ').slice(-1)[0].toLowerCase()
-      const surnameB = b.claimantName.split(' ').slice(-1)[0].toLowerCase()
-      return surnameA.localeCompare(surnameB)
+      const lastNameA = (a.claimantLastName || '').toLowerCase()
+      const lastNameB = (b.claimantLastName || '').toLowerCase()
+      const firstNameA = (a.claimantFirstName || '').toLowerCase()
+      const firstNameB = (b.claimantFirstName || '').toLowerCase()
+
+      if (lastNameA !== lastNameB) {
+        return lastNameA.localeCompare(lastNameB)
+      }
+      return firstNameA.localeCompare(firstNameB)
     })
 
     res.render('provider/completed/index', {
       claims: filteredClaims
     })
-  }) 
+  })
 
 }

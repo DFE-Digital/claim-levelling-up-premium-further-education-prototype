@@ -41,7 +41,7 @@
       {# <th scope="col" class="govuk-table__header">Claim reference</th> #}
       <th scope="col" class="govuk-table__header">Claimant name</th>
       <th scope="col" class="govuk-table__header">Claim reference</th>
-      {# <th scope="col" class="govuk-table__header">Date verified</th> #}
+      <th scope="col" class="govuk-table__header">Date verified</th>
       {# <th scope="col" class="govuk-table__header">Processed by</th> #}
       <th scope="col" class="govuk-table__header">DfE Status</th>
     </tr>
@@ -50,11 +50,15 @@
     {% for claim in claims %}
     {% if claim.status in ["Pending", "Approved", "Rejected"] %}
         <tr class="govuk-table__row">
-          <td class="govuk-table__cell" data-sort-value="{{ claim.claimantName }}">
-              <a href="/provider/completed/show/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
+
+          <td class="govuk-table__cell">
+            <a href="/provider/completed/show/{{ claim.id }}" class="govuk-link">
+              {{ claim.claimantLastName }}, {{ claim.claimantFirstName }}
+            </a>
           </td>
+
           <td class="govuk-table__cell" data-sort-value="{{ claim.claimReference }}">{{ claim.claimReference }}</td>
-          {# <td class="govuk-table__cell" data-sort-value="{{ claim.dateVerifiedIso }}">{{ claim.dateVerified }}</td> #}
+          <td class="govuk-table__cell" data-sort-value="{{ claim.dateVerifiedIso }}">{{ claim.dateVerified }}</td>
           
           {# <td class="govuk-table__cell" data-sort-value="{{ claim.assignedTo }}">{{ claim.assignedTo }}</td> #}
           <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">
