@@ -557,8 +557,16 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     // Save answer
     claim.timetabledHoursDuringTerm = req.body.timetabledHoursDuringTerm
 
+    if (req.body.action === 'save') {
+      claim.status = 'In progress'
+      claim.assignedTo = 'You (current user)'
+      claim.lastVisitedStep = 'timetabled-hours-during-term'
+      return res.redirect(`/provider/save/${claim.id}`)
+    }
+
     return saveAndRedirect(claim, req, res, 'teaches-sixteen-to-nineteen')
   })
+
 
   //////////////////////////////////////////////////////////////////////////////////
 
