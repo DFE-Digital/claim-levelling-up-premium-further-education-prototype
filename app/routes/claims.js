@@ -487,16 +487,24 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     res.render('provider/variable-contract-timetabled-hours-in-term', { claim })
   })
 
-  // POST: Variable contract individual hours in term
+
+  // POST: Variable contract timetabled hours in term
   router.post('/provider/variable-contract-timetabled-hours-in-term/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    // Save submitted value
     claim.variableContractTimetabledHours = req.body.variableContractTimetabledHours
+
+    if (req.body.action === 'save') {
+      claim.status = 'In progress'
+      claim.assignedTo = 'You (current user)'
+      claim.lastVisitedStep = 'variable-contract-timetabled-hours-in-term'
+      return res.redirect(`/provider/save/${claim.id}`)
+    }
 
     return saveAndRedirect(claim, req, res, 'performance-and-discipline')
   })
+
     
 
   //////////////////////////////////////////////////////////////////////////////////
@@ -519,8 +527,16 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     claim.performanceMeasures = req.body.performanceMeasures
     claim.performanceAndDiscipline = req.body.performanceAndDiscipline
 
+    if (req.body.action === 'save') {
+      claim.status = 'In progress'
+      claim.assignedTo = 'You (current user)'
+      claim.lastVisitedStep = 'performance-and-discipline'
+      return res.redirect(`/provider/save/${claim.id}`)
+    }
+
     return saveAndRedirect(claim, req, res, 'timetabled-hours-during-term')
   })
+
 
   //////////////////////////////////////////////////////////////////////////////////
   
