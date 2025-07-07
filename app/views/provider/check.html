@@ -24,8 +24,6 @@
         {% endif %}
       </h1>
 
-    {############### ROLE AND EXPERIENCE   ################}
-
     {{ govukSummaryList({
       card: {
         title: {
@@ -49,8 +47,6 @@
         { key: { text: "Mitigating circumstances for qualification" }, value: { text: claim.qualificationMitigations | default("Not answered") } } if claim.qualificationMitigations
       ]
     }) }}
-
-    {############### TYPE OF CONTRACT ################}
 
     {{ govukSummaryList({
       card: {
@@ -76,9 +72,6 @@
       ]
     }) }}
 
-
-    {############### PERFORMANCE AND DISCIPLINE ################}
-
     {{ govukSummaryList({
       card: {
         title: {
@@ -101,9 +94,6 @@
       ]
     }) }}
 
-
-    {############### CONTRACTED HOURS ################}
-
     {{ govukSummaryList({
       card: {
         title: {
@@ -125,8 +115,6 @@
         { key: { text: "Teaches 16-19-year-olds or those with EHCP" }, value: { text: claim.teachesSixteenToNineteen | default("Not answered") } }
       ]
     }) }}
-
-    {############### SUBJECT AREA ################}
 
     {{ govukSummaryList({
       card: {
@@ -152,8 +140,6 @@
             ]
 
     }) }}
-
-    
 
     <form method="post" action="/provider/completed/{{ claim.id }}">
       <h2 class="govuk-heading-m">Declaration</h2>

@@ -60,11 +60,11 @@
           },
           items: [
             {
-              value: "Yes",
+              value: "yes",
               text: "Yes"
             },
             {
-              value: "No",
+              value: "no",
               text: "No"
             }
           ]
@@ -81,22 +81,17 @@
           },
           items: [
             {
-              value: "Yes",
+              value: "yes",
               text: "Yes"
             },
             {
-              value: "No",
+              value: "no",
               text: "No"
             }
           ]
         }) }}
 
-          {# TO HANDLE THE RETURN TO CHECK LOGIC #}  
-          {% if returnUrl %}
-            <input type="hidden" name="returnUrl" value="{{ returnUrl }}">
-          {% endif %}
-
-      
+    
         <div class="govuk-button-group">
           <button type="submit" class="govuk-button" name="action" value="continue">
             Continue
