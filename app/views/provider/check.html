@@ -133,11 +133,27 @@
         }
       },
       rows: [
-              { key: { text: "Teaches Level 3 courses" }, value: { text: claim.teachesLevelThree | default("Not answered") } },
-              { key: { text: "Subject area" }, value: { text: claim.levelThreeSubjectArea | default("Not answered") } } if claim.levelThreeSubjectArea,
-              { key: { text: "Subject area courses" }, value: { text: claim.levelThreeSubjectAreaCourses | join(', ') } } if claim.levelThreeSubjectAreaCourses,
-              { key: { text: "Half timetable explanation" }, value: { text: claim.levelThreeHalfTimetableTeachingCoursesExplanation | default("Not answered") } } if claim.levelThreeHalfTimetableTeachingCoursesExplanation
-            ]
+        {
+          key: { text: "Teaches Level 3 courses" },
+          value: { text: claim.teachesLevelThree | default("Not answered") }
+        },
+        
+        {
+          key: { text: "Subject area" },
+          value: { text: claim.levelThreeSubjectArea | default("Not answered") }
+        } if claim.levelThreeSubjectArea,
+        
+        {
+          key: { text: "Subject area courses" },
+          value: { text: claim.levelThreeSubjectAreaCourses | join(', ') | default("Not answered") }
+        } if claim.levelThreeSubjectAreaCourses,
+
+        {
+          key: { text: "Spend at least half timetabled teaching time teaching relevant courses" },
+          value: { text: claim.levelThreeHalfTimetableTeachingCourses | default("Not answered") }
+        } if claim.levelThreeHalfTimetableTeachingCourses
+      ]
+
 
     }) }}
 
