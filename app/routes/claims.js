@@ -363,11 +363,19 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    // Save response (e.g. mitigating circumstances or confirmation)
     claim.qualificationMitigations = req.body.qualificationMitigations
+
+    // Handle save action
+    if (req.body.action === 'save') {
+      claim.assignedTo = 'You (current user)'
+      claim.status = 'In progress'
+      claim.lastVisitedStep = 'qualification-mitigations'
+      return res.redirect(`/provider/save/${claim.id}`)
+    }
 
     return saveAndRedirect(claim, req, res, 'type-of-contract')
   })
+
 
   //////////////////////////////////////////////////////////////////////////////////
 

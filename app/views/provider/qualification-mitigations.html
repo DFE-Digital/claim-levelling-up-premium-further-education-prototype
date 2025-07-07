@@ -4,7 +4,8 @@
 
 {% set serviceNavId = "allClaims" %}
 
-{% set actionUrl = "/provider/role-and-experience/" + claim.id %}
+{% set actionUrl = "/provider/qualification-mitigations/" + claim.id %}
+
 {% if returnUrl %}
   {% set actionUrl = actionUrl + "?returnUrl=" + returnUrl %}
 {% endif %}
