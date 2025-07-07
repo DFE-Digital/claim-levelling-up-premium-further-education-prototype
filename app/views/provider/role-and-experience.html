@@ -50,7 +50,7 @@
 
           {{ govukRadios({
             name: "teachingResponsibilities",
-            value: claim.teachingResponsibilities if not claim.teachingResponsibilities else "Not answered",
+            value: claim.teachingResponsibilities,
             fieldset: {
               legend: {
                 text: "Is " + claim.claimantName + " a member of staff with teaching responsibilities?",
@@ -73,7 +73,7 @@
 
           {{ govukRadios({
             name: "first5Years",
-            value: claim.first5Years if not claim.first5Years else "Not answered",
+            value: claim.first5Years,
             fieldset: {
               legend: {
                 text: "Is " + claim.claimantName + " in the first 5 years of their further education (FE) teaching career in England?",
@@ -96,7 +96,7 @@
 
           {{ govukRadios({
             name: "hasTeachingQualification",
-            value: claim.hasTeachingQualification if not claim.hasTeachingQualification else "Not answered",
+            value: claim.hasTeachingQualification,
             fieldset: {
               legend: {
                 text: "Does " + claim.claimantName + " have a teaching qualification?",
