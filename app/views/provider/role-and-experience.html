@@ -32,11 +32,11 @@
       
     <h1 class="govuk-heading-l">{{pageName}}</h1>
 
-    {% if claim.status == 'In progress' %}
+    {# {% if claim.status == 'In progress' %}
       <div class="govuk-inset-text">
         Claim processed by {{ claim.assignedTo }} on [todays_date]
       </div>
-    {% endif %}
+    {% endif %} #}
 
 
     {{ data.user | log }}
@@ -59,11 +59,11 @@
             },
             items: [
               {
-                value: "yes",
+                value: "Yes",
                 text: "Yes"
               },
               {
-                value: "no",
+                value: "No",
                 text: "No"
               }
             ]
@@ -82,11 +82,11 @@
             },
             items: [
               {
-                value: "yes",
+                value: "Yes",
                 text: "Yes"
               },
               {
-                value: "no",
+                value: "No",
                 text: "No"
               }
             ]
@@ -122,6 +122,13 @@
               }
             ]
           }) }}
+
+
+          {# TO HANDLE THE RETURN TO CHECK LOGIC #}  
+          {% if returnUrl %}
+            <input type="hidden" name="returnUrl" value="{{ returnUrl }}">
+          {% endif %}
+
 
           {# ////////////////////////////////////////////////#}
     
