@@ -800,6 +800,15 @@ const getNextIncompleteStep = (claim) => {
   return 'check'
 }
 
+
+  // ================================
+  // Developer utility: Reset all claims
+  // ================================
+  router.get('/reset', (req, res) => {
+    req.session.data.claims = []
+    res.redirect('/provider')
+  })
+
 // Route for returning users based on their progress
 router.get('/provider/return/:claimId', (req, res) => {
   const claim = getClaim(req, res)
