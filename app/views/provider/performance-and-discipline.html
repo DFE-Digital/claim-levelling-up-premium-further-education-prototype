@@ -5,10 +5,10 @@
 {% set serviceNavId = "allClaims" %}
 
 {% set actionUrl = "/provider/performance-and-discipline/" + claim.id %}
-
 {% if returnUrl %}
   {% set actionUrl = actionUrl + "?returnUrl=" + returnUrl %}
 {% endif %}
+
 
 {# {% if claim.status == 'Not started' %} #}
   {% block beforeContent %}
@@ -46,7 +46,7 @@
 
     
     <form method="post" action="{{ actionUrl }}">  
-    
+      <input type="hidden" name="returnUrl" value="{{ returnUrl }}">
       <h3 class="govuk-heading-m">Performance and discipline</h3>
 
         {{ govukRadios({

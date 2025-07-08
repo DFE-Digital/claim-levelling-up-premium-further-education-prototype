@@ -573,19 +573,29 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    // Save both responses
+    // Save submitted values
     claim.performanceMeasures = req.body.performanceMeasures
-    claim.performanceAndDiscipline = req.body.performanceAndDiscipline
+    claim.subjectToDisciplinaryAction = req.body.subjectToDisciplinaryAction
+    claim.status = 'In progress'
+    claim.lastVisitedStep = 'performance-and-discipline'
 
+    // Handle Save and come back later
     if (req.body.action === 'save') {
-      claim.status = 'In progress'
       claim.assignedTo = 'You (current user)'
-      claim.lastVisitedStep = 'performance-and-discipline'
       return res.redirect(`/provider/save/${claim.id}`)
     }
 
+    const returnUrl = req.body.returnUrl
+
+    // 🔁 If changing from check page, go back to it
+    if (returnUrl) {
+      return res.redirect(returnUrl)
+    }
+
+    // ➡️ Otherwise, continue to next step
     return saveAndRedirect(claim, req, res, 'timetabled-hours-during-term')
   })
+
 
 
   //////////////////////////////////////////////////////////////////////////////////
