@@ -8,6 +8,7 @@
 {% if returnUrl %}
   {% set actionUrl = actionUrl + "?returnUrl=" + returnUrl %}
 {% endif %}
+ 
 
 
 {# {% if claim.status == 'Not started' %} #}
@@ -32,13 +33,6 @@
 
     <h1 class="govuk-heading-l">{{pageName}}</h1>
 
-    {# {% if claim.status == 'In progress' %}
-      <div class="govuk-inset-text">
-        Claim asssigned to {{ claim.assignedTo }} on {{ claim.dateSubmitted }}
-      </div>
-    {% endif %} #}
-
-
     {{ data.user | log }}
     {{ data.claims | log }}
 
@@ -46,50 +40,52 @@
 
     
     <form method="post" action="{{ actionUrl }}">  
+      
       <input type="hidden" name="returnUrl" value="{{ returnUrl }}">
-      <h3 class="govuk-heading-m">Performance and discipline</h3>
 
-        {{ govukRadios({
-          name: "performanceMeasures",
-          value: claim.performanceMeasures,
-          fieldset: {
-            legend: {
-              text: "Is " + claim.claimantName + " currently subject to any performance measures?",
-              classes: "govuk-fieldset__legend--s"
-            }
-          },
-          items: [
-            {
-              value: "yes",
-              text: "Yes"
-            },
-            {
-              value: "no",
-              text: "No"
-            }
-          ]
-        }) }}
+        <h3 class="govuk-heading-m">Performance and discipline</h3>
 
-        {{ govukRadios({
-          name: "performanceAndDiscipline",
-          value: claim.performanceAndDiscipline,
-          fieldset: {
-            legend: {
-              text: "Is " + claim.claimantName + " currently subject to any disciplinary action?",
-              classes: "govuk-fieldset__legend--s"
-            }
-          },
-          items: [
-            {
-              value: "yes",
-              text: "Yes"
-            },
-            {
-              value: "no",
-              text: "No"
-            }
-          ]
-        }) }}
+            {{ govukRadios({
+              name: "performanceMeasures",
+              value: performanceMeasures,
+              fieldset: {
+                legend: {
+                  text: "Is " + claim.claimantName + " currently subject to any performance measures?",
+                  classes: "govuk-fieldset__legend--s"
+                }
+              },
+              items: [
+                {
+                  value: "Yes",
+                  text: "Yes"
+                },
+                {
+                  value: "No",
+                  text: "No"
+                }
+              ]
+            }) }}
+
+            {{ govukRadios({
+              name: "disciplinaryAction",
+              value: disciplinaryAction,
+              fieldset: {
+                legend: {
+                  text: "Is " + claim.claimantName + " currently subject to any disciplinary action?",
+                  classes: "govuk-fieldset__legend--s"
+                }
+              },
+              items: [
+                {
+                  value: "Yes",
+                  text: "Yes"
+                },
+                {
+                  value: "No",
+                  text: "No"
+                }
+              ]
+            }) }}
 
     
         <div class="govuk-button-group">

@@ -308,6 +308,12 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     res.render('provider/verified', { claim })
   })
 
+
+
+
+
+
+
   // ================================
   // Multi-step form flow
   // ================================
@@ -335,11 +341,10 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     claim.teachingResponsibilities = req.body.teachingResponsibilities
     claim.first5Years = req.body.first5Years
     claim.hasTeachingQualification = req.body.hasTeachingQualification
-    claim.qualificationMitigations = req.body.qualificationMitigations
     claim.status = 'In progress'
     claim.lastVisitedStep = 'role-and-experience'
 
-    // Handle Save and come back later
+    // Save and come back later
     if (req.body.action === 'save') {
       claim.assignedTo = 'You (current user)'
       return res.redirect(`/provider/save/${claim.id}`)
@@ -347,19 +352,23 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
 
     const returnUrl = req.body.returnUrl
 
-    // Branching logic: if qualification requires mitigation
+    // 👇 Branching logic if qualification mitigation is needed
     if (claim.hasTeachingQualification === 'No, but is planning to enrol on one') {
-      return saveAndRedirect(claim, req, res, 'qualification-mitigations')
+      const redirectUrl = `/provider/qualification-mitigations/${claim.id}`
+      return returnUrl
+        ? res.redirect(`${redirectUrl}?returnUrl=${encodeURIComponent(returnUrl)}`)
+        : res.redirect(redirectUrl)
     }
 
-    // If user is coming from check page, return to it
+    // 👇 If returning from check, go back there
     if (returnUrl) {
       return res.redirect(returnUrl)
     }
 
-    // Otherwise continue to next step
+    // 👉 Otherwise, continue in normal flow
     return saveAndRedirect(claim, req, res, 'type-of-contract')
   })
+
 
 
 
@@ -370,8 +379,11 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    res.render('provider/qualification-mitigations', { claim })
+    const returnUrl = req.query.returnUrl
+    res.render('provider/qualification-mitigations', { claim, returnUrl })
   })
+
+
 
   // POST: Qualification mitigations
   router.post('/provider/qualification-mitigations/:claimId', (req, res) => {
@@ -379,17 +391,25 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     if (!claim) return res.status(404).send('Claim not found')
 
     claim.qualificationMitigations = req.body.qualificationMitigations
+    claim.status = 'In progress'
+    claim.lastVisitedStep = 'qualification-mitigations'
 
-    // Handle save action
     if (req.body.action === 'save') {
       claim.assignedTo = 'You (current user)'
-      claim.status = 'In progress'
-      claim.lastVisitedStep = 'qualification-mitigations'
       return res.redirect(`/provider/save/${claim.id}`)
     }
 
+    // 👇 return to check page if it came from there
+    const returnUrl = req.body.returnUrl
+    if (returnUrl) {
+      return res.redirect(returnUrl)
+    }
+
+    // 👉 otherwise continue journey
     return saveAndRedirect(claim, req, res, 'type-of-contract')
   })
+
+
 
 
   //////////////////////////////////////////////////////////////////////////////////
@@ -565,8 +585,14 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    res.render('provider/performance-and-discipline', { claim })
+    const returnUrl = req.query.returnUrl // 🧠 extract from query string
+
+    res.render('provider/performance-and-discipline', {
+      claim,
+      returnUrl // ✅ pass to template
+    })
   })
+
 
   // POST: Performance and discipline
   router.post('/provider/performance-and-discipline/:claimId', (req, res) => {
@@ -585,16 +611,16 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
       return res.redirect(`/provider/save/${claim.id}`)
     }
 
+    // 🔁 Handle return to check.html
     const returnUrl = req.body.returnUrl
-
-    // 🔁 If changing from check page, go back to it
     if (returnUrl) {
       return res.redirect(returnUrl)
     }
 
-    // ➡️ Otherwise, continue to next step
+    // ➡️ Otherwise, continue to next step in the journey
     return saveAndRedirect(claim, req, res, 'timetabled-hours-during-term')
   })
+
 
 
 
