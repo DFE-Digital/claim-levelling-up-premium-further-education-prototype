@@ -677,14 +677,20 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
   //////////////////////////////////////////////////////////////////////////////////
 
 
+  
   // GET: Level 3 half timetable teaching courses
   router.get('/provider/level-three-half-timetable-teaching-courses/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    res.render('provider/level-three-half-timetable-teaching-courses', { claim })
+    res.render('provider/level-three-half-timetable-teaching-courses', {
+      claim,
+      returnUrl: req.query.returnUrl
+    })
   })
 
+
+  
   // POST: Level 3 half timetable teaching courses
   router.post('/provider/level-three-half-timetable-teaching-courses/:claimId', (req, res) => {
     const claim = getClaim(req, res)
@@ -699,8 +705,14 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
       return res.redirect(`/provider/save/${claim.id}`)
     }
 
+    const returnUrl = req.body.returnUrl
+    if (returnUrl) {
+      return res.redirect(returnUrl)
+    }
+
     return saveAndRedirect(claim, req, res, 'check')
   })
+
 
 
 
@@ -712,8 +724,12 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    res.render('provider/level-three-subject-area', { claim })
+    res.render('provider/level-three-subject-area', {
+      claim,
+      returnUrl: req.query.returnUrl
+    })
   })
+
 
   // POST: Level 3 subject area
   router.post('/provider/level-three-subject-area/:claimId', (req, res) => {
@@ -745,8 +761,11 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
       return res.redirect(`/provider/save/${claim.id}`)
     }
 
-    return saveAndRedirect(claim, req, res, 'level-three-subject-area-courses')
+    // 👇 Carry returnUrl forward to the next screen
+    const returnUrl = req.body.returnUrl
+    return res.redirect(`/provider/level-three-subject-area-courses/${claim.id}?returnUrl=${encodeURIComponent(returnUrl)}`)
   })
+
 
 
 
@@ -774,25 +793,46 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
       selected = [selected]
     }
 
-    // Fallback if nothing selected
     if (!selected || !Array.isArray(selected)) {
       selected = []
     }
 
-    // Remove any artefacts like "_unchecked"
+    // Remove artefacts like "_unchecked"
     selected = selected.filter(value => value && value !== '_unchecked')
 
     // Save to session data
     claim.levelThreeSubjectAreaCourses = selected
 
-    // If "none" is selected, skip to check screen
+    // Handle save and come back later
+    if (req.body.action === 'save') {
+      claim.status = 'In progress'
+      claim.assignedTo = 'You (current user)'
+      claim.lastVisitedStep = 'level-three-subject-area-courses'
+      return res.redirect(`/provider/save/${claim.id}`)
+    }
+
+    // ✅ Branching logic
+    const returnUrl = req.body.returnUrl
+
+    // If 'none' was selected, skip the half-timetable question and go back if returnUrl exists
+    if (selected.includes('none') && returnUrl) {
+      return res.redirect(returnUrl)
+    }
+
+    // If 'none' was selected but it's part of the normal journey
     if (selected.includes('none')) {
       return saveAndRedirect(claim, req, res, 'check')
     }
 
-    // Otherwise, continue to check screen
-    return saveAndRedirect(claim, req, res, 'check')
+    // If returnUrl exists, return to check.html
+    if (returnUrl) {
+      return res.redirect(`/provider/level-three-half-timetable-teaching-courses/${claim.id}?returnUrl=${encodeURIComponent(returnUrl)}`)
+    }
+
+    // Otherwise, continue through normal journey
+    return saveAndRedirect(claim, req, res, 'level-three-half-timetable-teaching-courses')
   })
+
 
 
 

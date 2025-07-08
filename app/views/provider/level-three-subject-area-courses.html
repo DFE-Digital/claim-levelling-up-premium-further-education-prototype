@@ -6,7 +6,6 @@
 
 
 {% set actionUrl = "/provider/level-three-subject-area-courses/" + claim.id %}
-
 {% if returnUrl %}
   {% set actionUrl = actionUrl + "?returnUrl=" + returnUrl %}
 {% endif %}
@@ -41,7 +40,7 @@
     {% include "_includes/claim/details.njk" %}
 
     <form method="post" action="{{ actionUrl }}">  
-
+        <input type="hidden" name="returnUrl" value="{{ returnUrl }}">
       <h3 class="govuk-heading-m">Subject area</h3>
 
           {{ govukCheckboxes({
