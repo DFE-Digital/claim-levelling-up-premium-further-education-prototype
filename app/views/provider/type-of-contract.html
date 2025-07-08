@@ -48,13 +48,15 @@
     
       <form method="post" action="{{ actionUrl }}">
 
+      <input type="hidden" name="returnUrl" value="{{ returnUrl }}">        
+
       <h2 class="govuk-heading-m">Type of contract</h2>
 
       {# ////////////////////////////////////////////////#}
       
       {{ govukRadios({
         name: "contractType",
-        value: claim.contractType,
+        value: contractType,
           fieldset: {
             legend: {
               text: "What type of contract does " + claim.claimantName + " have with [FE_Provider]?",

@@ -385,8 +385,10 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    res.render('provider/type-of-contract', { claim })
+    const returnUrl = req.query.returnUrl
+    res.render('provider/type-of-contract', { claim, returnUrl }) // ✅ pass it in
   })
+
 
   
   // POST: Type of contract
@@ -404,18 +406,23 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
       return res.redirect(`/provider/save/${claim.id}`)
     }
 
-    const returnUrl = req.body.returnUrl
+    const returnUrl = req.body.returnUrl // ✅ Read it from the hidden field in form
+
+
+    if (contractType === 'Fixed-term') {
+      return res.redirect(`/provider/fixed-term-contract-academic-year/${claim.id}?returnUrl=${encodeURIComponent(returnUrl)}`)
+    }
+
+
+    if (contractType === 'Variable hours') {
+      return res.redirect(`/provider/variable-contract-academic-term/${claim.id}?returnUrl=${encodeURIComponent(returnUrl)}`)
+    }
+
+    // For Permanent contracts, no branch — return directly
     if (returnUrl) {
       return res.redirect(returnUrl)
     }
 
-    if (contractType === 'Fixed-term') {
-      return saveAndRedirect(claim, req, res, 'fixed-term-contract-academic-year')
-    }
-
-    if (contractType === 'Variable hours') {
-      return saveAndRedirect(claim, req, res, 'variable-contract-academic-term')
-    }
 
     return saveAndRedirect(claim, req, res, 'performance-and-discipline')
   })
@@ -430,8 +437,10 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    res.render('provider/fixed-term-contract-academic-year', { claim })
+    const returnUrl = req.query.returnUrl
+    res.render('provider/fixed-term-contract-academic-year', { claim, returnUrl }) // ✅ make sure it's passed
   })
+
 
   // POST: Fixed-term contract academic year
   router.post('/provider/fixed-term-contract-academic-year/:claimId', (req, res) => {
@@ -449,10 +458,12 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
 
     const returnUrl = req.body.returnUrl
     if (returnUrl) {
-      return res.redirect(returnUrl)
+      return res.redirect(returnUrl) // ✅ go back to check
     }
 
+
     return saveAndRedirect(claim, req, res, 'performance-and-discipline')
+
   })
 
 
@@ -466,7 +477,9 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    res.render('provider/variable-contract-academic-term', { claim })
+    const returnUrl = req.query.returnUrl
+    res.render('provider/variable-contract-academic-term', { claim, returnUrl })
+
   })
 
   
@@ -484,6 +497,9 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
       return res.redirect(`/provider/save/${claim.id}`)
     }
 
+    const returnUrl = req.body.returnUrl
+    return res.redirect(`/provider/variable-contract-timetabled-hours-in-term/${claim.id}?returnUrl=${encodeURIComponent(returnUrl)}`)
+
     return saveAndRedirect(claim, req, res, 'variable-contract-timetabled-hours-in-term')
   })
 
@@ -497,7 +513,9 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    res.render('provider/variable-contract-timetabled-hours-in-term', { claim })
+    const returnUrl = req.query.returnUrl
+    res.render('provider/variable-contract-timetabled-hours-in-term', { claim, returnUrl })
+
   })
 
 
@@ -519,8 +537,8 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     if (returnUrl) {
       return res.redirect(returnUrl)
     }
-
     return saveAndRedirect(claim, req, res, 'performance-and-discipline')
+
   })
 
     

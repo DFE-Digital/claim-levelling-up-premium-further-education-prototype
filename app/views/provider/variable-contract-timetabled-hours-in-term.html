@@ -42,6 +42,7 @@
     {% include "_includes/claim/details.njk" %}
 
     <form method="post" action="{{ actionUrl }}">  
+      <input type="hidden" name="returnUrl" value="{{ returnUrl }}">
 
       <h3 class="govuk-heading-m">Type of contract</h3>
 
