@@ -9,6 +9,7 @@
   {% set actionUrl = actionUrl + "?returnUrl=" + returnUrl %}
 {% endif %}
 
+
 {# {% if claim.status == 'Not started' %} #}
   {% block beforeContent %}
     {{ govukBackLink({
@@ -45,7 +46,7 @@
     {% include "_includes/claim/details.njk" %}
 
       <form method="post" action="{{ actionUrl }}">
-
+        <input type="hidden" name="returnUrl" value="{{ returnUrl }}">
       <h2 class="govuk-heading-m">Role and experience</h2>
 
           {{ govukRadios({

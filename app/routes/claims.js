@@ -317,8 +317,14 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    res.render('provider/role-and-experience', { claim })
+    const returnUrl = req.query.returnUrl
+
+    res.render('provider/role-and-experience', {
+      claim,
+      returnUrl
+    })
   })
+
 
   // POST: Role and experience
   router.post('/provider/role-and-experience/:claimId', (req, res) => {
@@ -329,24 +335,32 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     claim.teachingResponsibilities = req.body.teachingResponsibilities
     claim.first5Years = req.body.first5Years
     claim.hasTeachingQualification = req.body.hasTeachingQualification
+    claim.qualificationMitigations = req.body.qualificationMitigations
     claim.status = 'In progress'
     claim.lastVisitedStep = 'role-and-experience'
 
-    // 🔍 KEY CHECK: if user clicked "Save and come back later"
+    // Handle Save and come back later
     if (req.body.action === 'save') {
       claim.assignedTo = 'You (current user)'
-      claim.status = 'In progress'
-      claim.lastVisitedStep = 'role-and-experience'
       return res.redirect(`/provider/save/${claim.id}`)
     }
 
-    // Branching logic on qualification
+    const returnUrl = req.body.returnUrl
+
+    // Branching logic: if qualification requires mitigation
     if (claim.hasTeachingQualification === 'No, but is planning to enrol on one') {
       return saveAndRedirect(claim, req, res, 'qualification-mitigations')
     }
 
+    // If user is coming from check page, return to it
+    if (returnUrl) {
+      return res.redirect(returnUrl)
+    }
+
+    // Otherwise continue to next step
     return saveAndRedirect(claim, req, res, 'type-of-contract')
   })
+
 
 
   //////////////////////////////////////////////////////////////////////////////////
@@ -582,15 +596,18 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    res.render('provider/timetabled-hours-during-term', { claim })
+    res.render('provider/timetabled-hours-during-term', {
+      claim,
+      returnUrl: req.query.returnUrl
+    })
   })
+
 
   // POST: Timetabled hours during term
   router.post('/provider/timetabled-hours-during-term/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    // Save answer
     claim.timetabledHoursDuringTerm = req.body.timetabledHoursDuringTerm
 
     if (req.body.action === 'save') {
@@ -600,8 +617,10 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
       return res.redirect(`/provider/save/${claim.id}`)
     }
 
-    return saveAndRedirect(claim, req, res, 'teaches-sixteen-to-nineteen')
+    const returnUrl = req.body.returnUrl
+    return res.redirect(`/provider/teaches-sixteen-to-nineteen/${claim.id}?returnUrl=${encodeURIComponent(returnUrl)}`)
   })
+
 
 
   //////////////////////////////////////////////////////////////////////////////////
@@ -611,15 +630,18 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    res.render('provider/teaches-sixteen-to-nineteen', { claim })
+    res.render('provider/teaches-sixteen-to-nineteen', {
+      claim,
+      returnUrl: req.query.returnUrl
+    })
   })
+
 
   // POST: Teaches 16 to 19
   router.post('/provider/teaches-sixteen-to-nineteen/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    // Save response
     claim.teachesSixteenToNineteen = req.body.teachesSixteenToNineteen
 
     if (req.body.action === 'save') {
@@ -629,8 +651,14 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
       return res.redirect(`/provider/save/${claim.id}`)
     }
 
+    const returnUrl = req.body.returnUrl
+    if (returnUrl) {
+      return res.redirect(returnUrl)
+    }
+
     return saveAndRedirect(claim, req, res, 'level-three-confirm')
   })
+
 
 
   //////////////////////////////////////////////////////////////////////////////////
