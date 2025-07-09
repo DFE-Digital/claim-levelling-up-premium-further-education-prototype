@@ -55,15 +55,15 @@
         <tr class="govuk-table__row">
 
           {# Make check req first block so logic works #}
-          <td class="govuk-table__cell" data-sort-value="{{ claim.claimantName }}">
+          <td class="govuk-table__cell">
             {% if claim.idCheckRequired == "Yes" %}
-              <a href="/provider/check-identity/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
+              <a href="/provider/check-identity/{{ claim.id }}" class="govuk-link"> {{ claim.claimantFirstName }} {{ claim.claimantLastName }}</a>
 
             {% elseif claim.status == "In progress" %}
-              <a href="/provider/finish-verifying/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
+              <a href="/provider/finish-verifying/{{ claim.id }}" class="govuk-link"> {{ claim.claimantFirstName }} {{ claim.claimantLastName }}</a>
 
             {% elseif claim.status == "Not started" %}
-              <a href="/provider/member-of-staff/{{ claim.id }}" class="govuk-link">{{ claim.claimantName }}</a>
+              <a href="/provider/member-of-staff/{{ claim.id }}" class="govuk-link"> {{ claim.claimantFirstName }} {{ claim.claimantLastName }}</a>
             {% endif %}
           </td>
 

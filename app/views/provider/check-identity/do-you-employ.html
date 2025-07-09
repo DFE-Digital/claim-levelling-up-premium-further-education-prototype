@@ -30,12 +30,35 @@
     <p class="govuk-body">You do not need to send any documents to DfE</p>
 
 
-    
+    <form method="post" novalidate>
 
+      {{ govukRadios({
+        name: "doYouEmploy",
+        idPrefix: "is-claimant-known-to-you",
+        fieldset: {
+          legend: {
+            text: "Do you employ " + claim.claimantName + " ?",
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        value: data.doYouEmploy,
+        items: [
+          {
+            value: "Yes",
+            text: "Yes"
+          },
+          {
+            value: "No",
+            text: "No"
+          }
+        ]
+      }) }}
 
       {{ govukButton({ text: "Continue" }) }}
 
-  
+    </form>
+    {{ govukButton({ text: "Continue" }) }}
   </div>
 </div>
 {% endblock %}

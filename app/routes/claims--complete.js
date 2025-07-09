@@ -39,7 +39,9 @@ router.post('/provider/completed/:claimId', (req, res) => {
   claim.dateVerifiedIso = new Date().toISOString()
 
   // ✅ Flash message
-  req.flash('success', `Claim Verified for ${claim.claimantName} <a class="govuk-link" href="/provider/completed/show/${claim.id}"><br>View verified claim</a>`)
+  req.flash('success', `Claim Verified for ${claim.claimantName}`)
+
+  //req.flash('success', `Claim Verified for ${claim.claimantName} <a class="govuk-link" href="/provider/completed/show/${claim.id}"><br>View verified claim</a>`)
 
   res.redirect('/provider/completed')
 })
@@ -69,18 +71,20 @@ router.post('/provider/completed/:claimId', (req, res) => {
       }
     })
 
-    // ✅ Sort by claimantLastName then claimantFirstName
+    
+   // ✅ Sort by claimantFirstName then claimantLastName
     filteredClaims.sort((a, b) => {
-      const lastNameA = (a.claimantLastName || '').toLowerCase()
-      const lastNameB = (b.claimantLastName || '').toLowerCase()
       const firstNameA = (a.claimantFirstName || '').toLowerCase()
       const firstNameB = (b.claimantFirstName || '').toLowerCase()
+      const lastNameA = (a.claimantLastName || '').toLowerCase()
+      const lastNameB = (b.claimantLastName || '').toLowerCase()
 
-      if (lastNameA !== lastNameB) {
-        return lastNameA.localeCompare(lastNameB)
+      if (firstNameA !== firstNameB) {
+        return firstNameA.localeCompare(firstNameB)
       }
-      return firstNameA.localeCompare(firstNameB)
+      return lastNameA.localeCompare(lastNameB)
     })
+
 
     res.render('provider/completed/index', {
       claims: filteredClaims

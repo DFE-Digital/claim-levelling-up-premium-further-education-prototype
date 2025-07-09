@@ -32,23 +32,33 @@ module.exports = (router) => {
   // PROVIDER DASHBOARD
   // ================================
 
-  // GET: Active claims (Not started / In progress)
-  router.get('/provider', (req, res) => {
-    let allClaims = req.session.data.claims || []
 
-    let activeClaims = allClaims.filter(claim =>
-      ['Not started', 'In progress', 'Check required'].includes(claim.status)
-    )
+// GET: Active claims (Not started / In progress / Check required)
+router.get('/provider', (req, res) => {
+  let allClaims = req.session.data.claims || []
 
-    let claims = activeClaims
+  let activeClaims = allClaims.filter(claim =>
+    ['Not started', 'In progress'].includes(claim.status)
+  )
 
-    console.log('All claims:', allClaims)
-    console.log('Active claims:', activeClaims)
+  // ✅ Sort by first name, then last name (A–Z)
+  // activeClaims.sort((a, b) => {
+  //   const firstNameA = (a.claimantFirstName || '').toLowerCase()
+  //   const firstNameB = (b.claimantFirstName || '').toLowerCase()
+  //   const lastNameA = (a.claimantLastName || '').toLowerCase()
+  //   const lastNameB = (b.claimantLastName || '').toLowerCase()
 
-    res.render('provider/index', {
-      claims,
-    })
+  //   if (firstNameA !== firstNameB) {
+  //     return firstNameA.localeCompare(firstNameB)
+  //   }
+  //   return lastNameA.localeCompare(lastNameB)
+  // })
+
+  res.render('provider/index', {
+    claims: activeClaims
   })
+})
+
 
 
 // POST: Mark claim as Verified (from check screen) and go to completed claims table
