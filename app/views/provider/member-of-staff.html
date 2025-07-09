@@ -1,0 +1,105 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = 'Review a targeted retention incentive payment claim' %}
+
+{% set serviceNavId = "allClaims" %}
+
+{% set actionUrl = "/provider/role-and-experience/" + claim.id %}
+{% if returnUrl %}
+  {% set actionUrl = actionUrl + "?returnUrl=" + returnUrl %}
+{% endif %}
+
+
+{# {% if claim.status == 'Not started' %} #}
+  {% block beforeContent %}
+    {{ govukBackLink({
+      text: "Back",
+      href: "javascript:window.history.back()"
+    }) }}
+  {% endblock %}
+{# {% endif %} #}
+
+{% block content %}
+<div class="govuk-grid-row">
+  
+    <div class="govuk-grid-column-three-quarters">
+
+      {% if errors %}
+        {{ govukErrorSummary({
+          titleText: "There is a problem", 
+          errorList: errors
+        }) }}
+      {% endif %}
+      
+    <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+    {% if claim.status == 'In progress' %}
+      <div class="govuk-inset-text">
+        Claim processed by {{ claim.assignedTo }} on [todays_date]
+      </div>
+    {% endif %}
+
+
+    {{ data.user | log }}
+    {{ data.claims | log }}
+
+    {% include "_includes/claim/details.njk" %}
+
+      <form method="post" action="{{ actionUrl }}">
+        <input type="hidden" name="returnUrl" value="{{ returnUrl }}">
+      <h2 class="govuk-heading-m">Role and experience</h2>
+
+          {{ govukRadios({
+            name: "teachingResponsibilities",
+            value: teachingResponsibilities or undefined,
+            fieldset: {
+              legend: {
+                text: "Is " + claim.claimantName + " a member of staff with teaching responsibilities?",
+                classes: "govuk-fieldset__legend--s"
+              }
+            },
+            hint: {
+              text: " This includes all job titles where the role involves teaching further education students"
+            },
+            items: [
+              {
+                value: "Yes",
+                text: "Yes"
+              },
+              {
+                value: "No",
+                text: "No"
+              }
+            ]
+          }) }}
+
+        
+          {# ////////////////////////////////////////////////#}
+    
+    
+        <div class="govuk-button-group">
+          <button type="submit" class="govuk-button" name="action" value="continue">
+            Continue
+          </button>  
+          <button type="submit" class="govuk-button govuk-button--secondary" name="action" value="save">
+            Save and come back later
+          </button>      
+        </div>
+    </form>
+
+    {{ govukDetails({
+      summaryText: "Who counts as a teacher for this payment",
+      html:"
+        <p class='govuk-body'>
+          An FE teacher is someone who teaches, even if it's not their main job. This payment isn't for support staff like assistants or technicians.
+        </p>
+        <p class='govuk-body'>
+          They're likely to have a teaching contract, teach groups of students, plan and mark work, or be working towards a teaching qualification.
+        </p>
+      "
+    }) }}
+
+  </div>
+</div>
+
+{% endblock %}
