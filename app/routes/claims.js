@@ -601,7 +601,7 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
 
     // Save submitted values
     claim.performanceMeasures = req.body.performanceMeasures
-    claim.subjectToDisciplinaryAction = req.body.subjectToDisciplinaryAction
+    claim.disciplinaryAction = req.body.disciplinaryAction
     claim.status = 'In progress'
     claim.lastVisitedStep = 'performance-and-discipline'
 
@@ -841,11 +841,15 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    res.render('provider/level-three-subject-area-courses', { claim })
+    res.render('provider/level-three-subject-area-courses', {
+      claim,
+      returnUrl: req.query.returnUrl
+    })
   })
 
 
- // POST: Level 3 subject area courses
+ 
+  // POST: Level 3 subject area courses
   router.post('/provider/level-three-subject-area-courses/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
@@ -875,27 +879,22 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
       return res.redirect(`/provider/save/${claim.id}`)
     }
 
-    // ✅ Branching logic
     const returnUrl = req.body.returnUrl
 
-    // If 'none' was selected, skip the half-timetable question and go back if returnUrl exists
-    if (selected.includes('none') && returnUrl) {
+    // ✅ Always return to check.html if returnUrl exists (regardless of 'none')
+    if (returnUrl) {
       return res.redirect(returnUrl)
     }
 
-    // If 'none' was selected but it's part of the normal journey
+    // ✅ If 'none' selected, end journey
     if (selected.includes('none')) {
       return saveAndRedirect(claim, req, res, 'check')
     }
 
-    // If returnUrl exists, return to check.html
-    if (returnUrl) {
-      return res.redirect(`/provider/level-three-half-timetable-teaching-courses/${claim.id}?returnUrl=${encodeURIComponent(returnUrl)}`)
-    }
-
-    // Otherwise, continue through normal journey
+    // ✅ Otherwise continue through normal journey
     return saveAndRedirect(claim, req, res, 'level-three-half-timetable-teaching-courses')
   })
+
 
 
 
