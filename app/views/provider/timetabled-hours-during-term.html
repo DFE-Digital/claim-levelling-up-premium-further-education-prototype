@@ -56,16 +56,20 @@
           },
           items: [
             {
-              value: "12 hours or more per week",
-              text: "12 hours or more per week"
+              value: "20 hours or more each week",
+              text: "20 hours or more each week"
             },
             {
-              value: "2.5 hours or more but less than 12 hours per week",
-              text: "2.5 hours or more but less than 12 hours per week"
+              value: "12 hours to 20 hours each week",
+              text: "12 hours to 20 hours each week"
             },
             {
-              value: "Less than 2.5 hours per week",
-              text: "Less than 2.5 hours per week"
+              value: "2.5 to 12 hours each week",
+              text: "2.5 to 12 hours each week"
+            },
+            {
+              value: "Fewer than 2.5 hours each week",
+              text: "Fewer than 2.5 hours each week"
             }
           ]
         }) }}
@@ -80,6 +84,18 @@
         </div>
 
     </form>
+
+    {{ govukDetails({
+      summaryText: "How to work out timetabled teaching hours",
+      html:"
+        <p class='govuk-body'>
+          'Timetabled teaching hours' means time spent teaching groups of students in lessons or classes.
+        </p>
+        <p class='govuk-body'>
+          If these hours vary during the term (for example, on a variable hours contract), use the average number of hours per week for the current term.
+        </p>
+      "
+    }) }}
 
   </div>
 </div>
