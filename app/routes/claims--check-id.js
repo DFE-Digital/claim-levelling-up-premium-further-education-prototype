@@ -6,7 +6,7 @@ function getClaim(req, res) {
 
 module.exports = router => {
 
- // 1. GET: "Do you employ" screen
+ // 1. GET: "Further information is required on this claim" screen
 router.get('/provider/check-identity/:claimId', function (req, res) {
   const claimId = req.params.claimId
   const claim = req.session.data.claims.find(c => c.id === claimId)
@@ -14,13 +14,33 @@ router.get('/provider/check-identity/:claimId', function (req, res) {
   res.render('provider/check-identity/index', { claim })
 })
 
-// 2. POST: "Do you employ?"
+// 2. POST: "Further information is required on this claim" screen
 router.post('/provider/check-identity/:claimId', function (req, res) {
   const claimId = req.params.claimId
   const doYouEmploy = req.body.doYouEmploy
 
   if (doYouEmploy === 'Yes') {
     res.redirect(`/provider/check-identity/personal-details/${claimId}`)
+  } else {
+    res.redirect(`/provider/check-identity/also-known-as/${claimId}`)
+  }
+})
+
+ // 2a. GET: "Do you employ" screen
+router.get('/provider/do-you-employ/:claimId', function (req, res) {
+  const claimId = req.params.claimId
+  const claim = req.session.data.claims.find(c => c.id === claimId)
+
+  res.render('provider/do-you-employ/index', { claim })
+})
+
+// 2b. POST: "Do you employ?"
+router.post('/provider/do-you-employ/:claimId', function (req, res) {
+  const claimId = req.params.claimId
+  const doYouEmploy = req.body.doYouEmploy
+
+  if (doYouEmploy === 'Yes') {
+    res.redirect(`/provider/do-you-employ/personal-details/${claimId}`)
   } else {
     res.redirect(`/provider/check-identity/also-known-as/${claimId}`)
   }

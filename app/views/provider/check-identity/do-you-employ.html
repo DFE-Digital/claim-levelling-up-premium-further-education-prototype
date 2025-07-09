@@ -29,9 +29,7 @@
     <p class="govuk-body">You will need to provide additional information about the claimant referring to information you should have on file.</p>
     <p class="govuk-body">You do not need to send any documents to DfE</p>
 
-
-    <form method="post" novalidate>
-
+<form action="/provider/do-you-employ/{{ claim.id }}" method="post" novalidate>
       {{ govukRadios({
         name: "doYouEmploy",
         idPrefix: "is-claimant-known-to-you",
@@ -58,7 +56,6 @@
       {{ govukButton({ text: "Continue" }) }}
 
     </form>
-    {{ govukButton({ text: "Continue" }) }}
   </div>
 </div>
 {% endblock %}
