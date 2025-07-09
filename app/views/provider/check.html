@@ -141,20 +141,18 @@
         {
           key: { text: "Subject area" },
           value: { text: claim.levelThreeSubjectArea | default("Not answered") }
-        } if claim.levelThreeSubjectArea,
+        } if claim.teachesLevelThree === 'No' and claim.levelThreeSubjectArea,
         
         {
           key: { text: "Subject area courses" },
           value: { text: claim.levelThreeSubjectAreaCourses | join(', ') | default("Not answered") }
-        } if claim.levelThreeSubjectAreaCourses,
+        } if claim.teachesLevelThree === 'No' and claim.levelThreeSubjectAreaCourses,
 
         {
           key: { text: "Spend at least half timetabled teaching time teaching relevant courses" },
           value: { text: claim.levelThreeHalfTimetableTeachingCourses | default("Not answered") }
-        } if claim.levelThreeHalfTimetableTeachingCourses
+        } if claim.teachesLevelThree === 'Yes'
       ]
-
-
     }) }}
 
     <form method="post" action="/provider/completed/{{ claim.id }}">

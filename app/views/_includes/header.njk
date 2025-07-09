@@ -5,31 +5,27 @@
 {% endif%}         
 
 
+{{ govukHeader({
+  productName: serviceName,
+  classes: "govuk-header--full-width-border"
+}) }}
 
-{% if data.user %} 
-  {{ govukOneLoginServiceHeader({
-    signOutLink: "/account/sign-out",
-    oneLoginLink: "#",
-    serviceNavigationParams: { 
-      navigation: [
-       {
-        href: "/provider",
-        text: "Unverified claims",
-        current: serviceNavId == "allClaims"
-        },
-        {
-          href: "/provider/completed",
-          text: "Verified claims",
-          current: serviceNavId == "completedClaims" 
-        }
-      ], 
-      serviceName: serviceName,
-      navigationLabel: "Test label" 
+{{ govukServiceNavigation({
+  navigation: [
+    {
+      href: "/provider",
+      text: "Unverified claims",
+      current: serviceNavId == "allClaims"
+    },
+    {
+      href: "/provider/completed",
+      text: "Verified claims",
+      current: serviceNavId == "completedClaims"
+      
+    },
+    {
+      href: "/account/sign-out",
+      text: "Sign out"
     }
-  }) }}
-{% else %}  
-  {{ govukHeader({
-    productName: serviceName,
-    classes: "govuk-header--full-width-border"
-  }) }}
-{% endif %}
+  ] if data.user
+}) }}

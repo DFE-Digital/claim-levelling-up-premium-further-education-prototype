@@ -33,13 +33,6 @@
       
     <h1 class="govuk-heading-l">{{pageName}}</h1>
 
-    {% if claim.status == 'In progress' %}
-      <div class="govuk-inset-text">
-        Claim processed by {{ claim.assignedTo }} on [todays_date]
-      </div>
-    {% endif %}
-
-
     {{ data.user | log }}
     {{ data.claims | log }}
 
