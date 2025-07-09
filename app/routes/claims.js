@@ -251,7 +251,7 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     claim.assignedTo = 'Me - [current_user]'
     claim.assignedDate = new Date().toISOString()
   
-    res.redirect(`/provider/role-and-experience/${claim.id}`)
+    res.redirect(`/provider/member-of-staff/${claim.id}`)
   })
 
   /////confirm FINISH VERIFICATION
@@ -265,12 +265,13 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
   
     if (userChoice === 'Yes') {
       // Assign to current user
-      claim.assignedTo = 'Me - [current_user]'
+      claim.assignedTo = 'You - [current_user]'
       claim.status = 'In progress'
       claim.assignedDate = new Date().toISOString()
   
       // Return to the screen they left
-      const step = claim.lastVisitedStep || 'role-and-experience'
+      // OR ensures any claim with no recorded lastVisitedStep will now begin at your new first screen.
+      const step = claim.lastVisitedStep || 'member-of-staff'
       return res.redirect(`/provider/${step}/${claim.id}`)
 
     }
@@ -318,6 +319,42 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
   // Multi-step form flow
   // ================================
 
+
+  // GET : Member of staff
+  router.get('/provider/member-of-staff/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    const returnUrl = req.query.returnUrl
+    res.render('provider/member-of-staff', { 
+      claim, 
+      returnUrl 
+    })
+  })
+
+
+
+  // POST: Member of staff
+  router.post('/provider/member-of-staff/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    claim.teachingResponsibilities = req.body.teachingResponsibilities
+    claim.status = 'In progress'
+    claim.lastVisitedStep = 'member-of-staff'
+
+    if (req.body.action === 'save') {
+      claim.assignedTo = 'You (current user)'
+      return res.redirect(`/provider/save/${claim.id}`)
+    }
+
+    const returnUrl = req.body.returnUrl
+    const nextStep = `/provider/role-and-experience/${claim.id}`
+    return res.redirect(`${nextStep}?returnUrl=${encodeURIComponent(returnUrl)}`)
+  })
+
+
+
   // GET: Role and experience
   router.get('/provider/role-and-experience/:claimId', (req, res) => {
     const claim = getClaim(req, res)
@@ -332,15 +369,16 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
   })
 
 
+
   // POST: Role and experience
   router.post('/provider/role-and-experience/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    // Save submitted values
-    claim.teachingResponsibilities = req.body.teachingResponsibilities
+    // ✅ teachingResponsibilities is now handled in member-of-staff
     claim.first5Years = req.body.first5Years
     claim.hasTeachingQualification = req.body.hasTeachingQualification
+    claim.qualificationMitigations = req.body.qualificationMitigations
     claim.status = 'In progress'
     claim.lastVisitedStep = 'role-and-experience'
 
@@ -368,6 +406,7 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     // 👉 Otherwise, continue in normal flow
     return saveAndRedirect(claim, req, res, 'type-of-contract')
   })
+
 
 
 
@@ -432,34 +471,39 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
 
     const contractType = req.body.contractType
     claim.contractType = contractType
+    claim.status = 'In progress'
+    claim.lastVisitedStep = 'type-of-contract'
 
     if (req.body.action === 'save') {
-      claim.status = 'In progress'
       claim.assignedTo = 'You (current user)'
-      claim.lastVisitedStep = 'type-of-contract'
       return res.redirect(`/provider/save/${claim.id}`)
     }
 
-    const returnUrl = req.body.returnUrl // ✅ Read it from the hidden field in form
+    const returnUrl = req.body.returnUrl
 
-
+    // 🔀 Branch: Fixed-term
     if (contractType === 'Fixed-term') {
       return res.redirect(`/provider/fixed-term-contract-academic-year/${claim.id}?returnUrl=${encodeURIComponent(returnUrl)}`)
     }
 
-
+    // 🔀 Branch: Variable hours
     if (contractType === 'Variable hours') {
       return res.redirect(`/provider/variable-contract-academic-term/${claim.id}?returnUrl=${encodeURIComponent(returnUrl)}`)
     }
 
-    // For Permanent contracts, no branch — return directly
+    // 🔀 Branch: Employed by another organisation
+    if (contractType === 'Employed by another organisation (for example, an agency or contractor)') {
+      return saveAndRedirect(claim, req, res, 'performance-and-discipline')
+    }
+
+    // 🔁 Permanent (and default): go to returnUrl or next step
     if (returnUrl) {
       return res.redirect(returnUrl)
     }
 
-
     return saveAndRedirect(claim, req, res, 'performance-and-discipline')
   })
+
 
 
 
@@ -909,23 +953,65 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
 // ==================================
 
 const getNextIncompleteStep = (claim) => {
-  if (!claim.teachingResponsibilities || !claim.first5Years || !claim.hasTeachingQualification || !claim.contractType) {
+  if (!claim.teachingResponsibilities) {
+    return 'member-of-staff'
+  }
+
+  if (!claim.first5Years || !claim.hasTeachingQualification) {
     return 'role-and-experience'
   }
-  if (claim.contractType === 'Fixed-term' && !claim.contractAcademicYear) {
-    return 'contract-academic-year'
+
+  if (claim.hasTeachingQualification === 'No, but is planning to enrol on one' && !claim.qualificationMitigations) {
+    return 'qualification-mitigations'
   }
-  if (claim.contractType === 'Variable hours' && !claim.hoursAcademicYear) {
-    return 'hours-academic-year'
+
+  if (!claim.contractType) {
+    return 'type-of-contract'
   }
+
+  if (claim.contractType === 'Fixed-term' && !claim.fixedTermAcademicYear) {
+    return 'fixed-term-contract-academic-year'
+  }
+
+  if (claim.contractType === 'Variable hours' && !claim.variableContractAcademicTerm) {
+    return 'variable-contract-academic-term'
+  }
+
+  if (claim.contractType === 'Variable hours' && !claim.variableContractTimetabledHours) {
+    return 'variable-contract-timetabled-hours-in-term'
+  }
+
   if (!claim.performanceMeasures || !claim.subjectToDisciplinaryAction) {
     return 'performance-and-discipline'
   }
-  if (!claim.contractedHours || !claim.sixteenToNineteen || !claim.fundingAtLevelThreeAndBelow) {
-    return 'contracted-hours'
+
+  if (!claim.timetabledHoursDuringTerm) {
+    return 'timetabled-hours-during-term'
   }
+
+  if (!claim.teachesSixteenToNineteen) {
+    return 'teaches-sixteen-to-nineteen'
+  }
+
+  if (typeof claim.teachesLevelThree === 'undefined') {
+    return 'level-three-confirm'
+  }
+
+  if (claim.teachesLevelThree === 'Yes' && !claim.levelThreeHalfTimetableTeachingCourses) {
+    return 'level-three-half-timetable-teaching-courses'
+  }
+
+  if (claim.teachesLevelThree === 'No' && (!claim.levelThreeSubjectArea || claim.levelThreeSubjectArea.length === 0)) {
+    return 'level-three-subject-area'
+  }
+
+  if (claim.teachesLevelThree === 'No' && (!claim.levelThreeSubjectAreaCourses || claim.levelThreeSubjectAreaCourses.length === 0)) {
+    return 'level-three-subject-area-courses'
+  }
+
   return 'check'
 }
+
 
 
   // ================================

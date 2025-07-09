@@ -49,27 +49,6 @@
         <input type="hidden" name="returnUrl" value="{{ returnUrl }}">
       <h2 class="govuk-heading-m">Role and experience</h2>
 
-          {{ govukRadios({
-            name: "teachingResponsibilities",
-            value: teachingResponsibilities or undefined,
-            fieldset: {
-              legend: {
-                text: "Is " + claim.claimantName + " a member of staff with teaching responsibilities?",
-                classes: "govuk-fieldset__legend--s"
-              }
-            },
-            items: [
-              {
-                value: "Yes",
-                text: "Yes"
-              },
-              {
-                value: "No",
-                text: "No"
-              }
-            ]
-          }) }}
-
           {# ////////////////////////////////////////////////#}
 
           {{ govukRadios({

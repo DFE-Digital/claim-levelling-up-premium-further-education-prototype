@@ -4,7 +4,7 @@
 
 {% set serviceNavId = "allClaims" %}
 
-{% set actionUrl = "/provider/role-and-experience/" + claim.id %}
+{% set actionUrl = "/provider/member-of-staff/" + claim.id %}
 {% if returnUrl %}
   {% set actionUrl = actionUrl + "?returnUrl=" + returnUrl %}
 {% endif %}
@@ -33,12 +33,6 @@
       
     <h1 class="govuk-heading-l">{{pageName}}</h1>
 
-    {% if claim.status == 'In progress' %}
-      <div class="govuk-inset-text">
-        Claim processed by {{ claim.assignedTo }} on [todays_date]
-      </div>
-    {% endif %}
-
 
     {{ data.user | log }}
     {{ data.claims | log }}
@@ -47,7 +41,7 @@
 
       <form method="post" action="{{ actionUrl }}">
         <input type="hidden" name="returnUrl" value="{{ returnUrl }}">
-      <h2 class="govuk-heading-m">Role and experience</h2>
+          <h2 class="govuk-heading-m">Role and experience</h2>
 
           {{ govukRadios({
             name: "teachingResponsibilities",
