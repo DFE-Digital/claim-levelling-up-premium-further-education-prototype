@@ -29,7 +29,7 @@
     <form method="post" novalidate>
 
       {{ govukRadios({
-        name: "alsoKnownAs",
+        name: "mightKnowAs",
         idPrefix: "is-claimant-also-known-as",
         fieldset: {
           legend: {
@@ -38,7 +38,7 @@
             classes: "govuk-fieldset__legend--m"
           }
         },
-        value: data.alsoKnownAs,
+        value: data.mightKnowAs,
         items: [
           {
             value: "Yes",

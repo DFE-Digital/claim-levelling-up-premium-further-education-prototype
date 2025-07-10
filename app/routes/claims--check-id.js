@@ -7,64 +7,67 @@ function getClaim(req, res) {
 module.exports = router => {
 
  // 1. GET: "Further information is required on this claim" screen
-router.get('/provider/check-identity/:claimId', function (req, res) {
-  const claimId = req.params.claimId
-  const claim = req.session.data.claims.find(c => c.id === claimId)
+  router.get('/provider/check-identity/:claimId', function (req, res) {
+    const claimId = req.params.claimId
+    const claim = req.session.data.claims.find(c => c.id === claimId)
 
-  res.render('provider/check-identity/index', { claim })
+    if (!claim) return res.status(404).send('Claim not found')
+
+    res.render('provider/check-identity/index', { claim })
+  })
+
+
+// 2. POST: "Further information is required on this claim" screens
+router.post('/provider/check-identity/:claimId', function (req, res) {
+  const claimId = req.params.claimId
+  res.redirect(`/provider/check-identity/do-you-employ/${claimId}`)
 })
 
-// 2. POST: "Further information is required on this claim" screen
-router.post('/provider/check-identity/:claimId', function (req, res) {
+
+
+ // 2a. GET: "Do you employ" screen
+  router.get('/provider/check-identity/do-you-employ/:claimId', function (req, res) {
+    const claimId = req.params.claimId
+    const claim = req.session.data.claims.find(c => c.id === claimId)
+
+    if (!claim) return res.status(404).send('Claim not found')
+
+    res.render('provider/check-identity/do-you-employ', { claim })
+  })
+
+
+// 2b. POST: "Do you employ?"
+router.post('/provider/check-identity/do-you-employ/:claimId', function (req, res) {
   const claimId = req.params.claimId
   const doYouEmploy = req.body.doYouEmploy
 
   if (doYouEmploy === 'Yes') {
     res.redirect(`/provider/check-identity/personal-details/${claimId}`)
   } else {
-    res.redirect(`/provider/check-identity/also-known-as/${claimId}`)
+    res.redirect(`/provider/check-identity/you-might-know-as/${claimId}`)
   }
 })
 
- // 2a. GET: "Do you employ" screen
-router.get('/provider/do-you-employ/:claimId', function (req, res) {
+// 3. GET: "You might know this person as a different name"
+router.get('/provider/check-identity/you-might-know-as/:claimId', function (req, res) {
   const claimId = req.params.claimId
   const claim = req.session.data.claims.find(c => c.id === claimId)
 
-  res.render('provider/do-you-employ/index', { claim })
+  res.render('provider/check-identity/you-might-know-as', { claim })
 })
 
-// 2b. POST: "Do you employ?"
-router.post('/provider/do-you-employ/:claimId', function (req, res) {
-  const claimId = req.params.claimId
-  const doYouEmploy = req.body.doYouEmploy
-
-  if (doYouEmploy === 'Yes') {
-    res.redirect(`/provider/do-you-employ/personal-details/${claimId}`)
-  } else {
-    res.redirect(`/provider/check-identity/also-known-as/${claimId}`)
-  }
-})
-
-// 3. GET: "Also known as?"
-router.get('/provider/check-identity/also-known-as/:claimId', function (req, res) {
-  const claimId = req.params.claimId
-  const claim = req.session.data.claims.find(c => c.id === claimId)
-
-  res.render('provider/check-identity/also-known-as', { claim })
-})
-
-// 4. POST: "Also known as?"
-router.post('/provider/check-identity/also-known-as/:claimId', function (req, res) {
+// 4. POST: "You might know this person as a different name"
+router.post('/provider/check-identity/you-might-know-as/:claimId', function (req, res) {
   const claimId = req.params.claimId
   const alsoKnownAs = req.body.alsoKnownAs
 
   if (alsoKnownAs === 'Yes') {
-    res.redirect(`/provider/check-identity/also-known-as-confirm/${claimId}`)
+    res.redirect(`/provider/check-identity/personal-details/${claimId}`)
   } else {
     res.redirect(`/provider/check-identity/end-of-verification/${claimId}`)
   }
 })
+
 
 // 5. GET: Confirm known alias
 router.get('/provider/check-identity/end-of-verification/:claimId', function (req, res) {
