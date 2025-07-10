@@ -3,7 +3,7 @@
 
 {% set serviceNavId = "allClaims" %}
 
-{% set pageName = 'Personal details' %}
+{% set pageName = 'About ' + claim.claimantName %}
 
 {% block beforeContent %}
   {{ govukBackLink({
@@ -36,7 +36,7 @@
         namePrefix: "returnClaimantDob",
         fieldset: {
           legend: {
-            text: "What is " + claim.claimantName + "'s date of birth?",
+            text: "Enter their date of birth",
             isPageHeading: false,
             classes: "govuk-fieldset__legend--m"
           }
@@ -66,7 +66,7 @@
 
       {{ govukInput({
         label: {
-          text: "What is " + claim.claimantName + "'s postcode?",
+          text: "Enter their postcode",
           classes: "govuk-label--m"
         },
         hint: {
@@ -82,11 +82,11 @@
 
       {{ govukInput({
         label: {
-         text: "What is " + claim.claimantName + "'s National Insurance number?",
+         text: "Enter their National Insurance Number",
           classes: "govuk-label--m"
         },
         hint: {
-          text: "It's on your National Insurance card, benefit letter, payslip or P60. For example 'QQ123456C'."
+          text: "For example 'QQ123456C'"
         },
         id: "return-claimant-national-insurance-number",
         name: "returnClaimantNationalInsuranceNumber",
@@ -150,10 +150,10 @@
         ]
       }) }}
 
-      <h3 class="govuk-heading-m">What is {{claim.claimantName}}'s Work email</h3>
+      <h3 class="govuk-heading-m">Enter their work email</h3>
 
       {{ govukInsetText({
-        text: "Please enter the applicant's work email address. Generic domain names (e.g. gmail, outlook, hotmail) will not be accepted."
+        text: "This must be their work email address. Generic email domains, for example gmail, outlook or hotmail, will not be accepted."
       }) }}
 
       {{ govukInput({
@@ -162,7 +162,8 @@
         },
        classes: "govuk-!-width-one-half",
         id: "claimant-work-email",
-        name: "claimantWorkEmail"
+        name: "claimantWorkEmail",
+        value: data.claimantWorkEmail
       }) }}
 
 

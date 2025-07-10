@@ -39,7 +39,7 @@
             actions: {
               items: [
                 {
-                  href: "/provider/check-identity/" + claim.id,
+                  href: "/provider/check-identity/do-you-employ/" + claim.id,
                   text: "Change",
                   visuallyHiddenText: "Do you employ " + claim.claimantName
                 }
@@ -48,26 +48,13 @@
           },
           {
             key: { text: "Is Nate Harper employed by [fe_provider_name]?" },
-            value: { text: data.alsoKnownAs or "Not answered" },
+            value: { text: data.mightKnowAs or "Not answered" },
             actions: {
               items: [
                 {
-                  href: "/provider/check-identity/also-known-as/" + claim.id,
+                  href: "/provider/check-identity/you-might-know-as/" + claim.id,
                   text: "Change",
                   visuallyHiddenText: "Is " + claim.claimantName + " employed by " + claim.feProviderName
-                }
-              ]
-            }
-          } if data.doYouEmploy === 'No',
-          {
-            key: { text: "Can you confirm Nate Harper is " + claim.claimantName + "?" },
-            value: { text: data.confirmKnownAlias or "Not answered" },
-            actions: {
-              items: [
-                {
-                  href: "/provider/check-identity/also-known-as-confirm/" + claim.id,
-                  text: "Change",
-                  visuallyHiddenText: "Confirm alias is " + claim.claimantName
                 }
               ]
             }

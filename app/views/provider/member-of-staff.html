@@ -30,6 +30,11 @@
           errorList: errors
         }) }}
       {% endif %}
+
+      {{ govukNotificationBanner({
+        type: "success",
+        html: '<h2 class="govuk-heading-m"> '+flash+' </h2>' | safe
+      }) if flash.length }}
       
     <h1 class="govuk-heading-l">{{pageName}}</h1>
 

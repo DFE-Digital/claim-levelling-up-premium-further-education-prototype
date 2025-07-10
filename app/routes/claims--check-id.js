@@ -59,9 +59,9 @@ router.get('/provider/check-identity/you-might-know-as/:claimId', function (req,
 // 4. POST: "You might know this person as a different name"
 router.post('/provider/check-identity/you-might-know-as/:claimId', function (req, res) {
   const claimId = req.params.claimId
-  const alsoKnownAs = req.body.alsoKnownAs
+  const mightKnowAs = req.body.mightKnowAs
 
-  if (alsoKnownAs === 'Yes') {
+  if (mightKnowAs === 'Yes') {
     res.redirect(`/provider/check-identity/personal-details/${claimId}`)
   } else {
     res.redirect(`/provider/check-identity/end-of-verification/${claimId}`)
@@ -69,7 +69,7 @@ router.post('/provider/check-identity/you-might-know-as/:claimId', function (req
 })
 
 
-// 5. GET: Confirm known alias
+// 5. GET: Confirm end of verification
 router.get('/provider/check-identity/end-of-verification/:claimId', function (req, res) {
   const claimId = req.params.claimId
   const claim = req.session.data.claims.find(c => c.id === claimId)
@@ -78,43 +78,53 @@ router.get('/provider/check-identity/end-of-verification/:claimId', function (re
 })
 
 
-// 6. POST: Confirm known alias
-router.post('/provider/check-identity/also-known-as-confirm/:claimId', function (req, res) {
+// 6. POST: personal details
+router.post('/provider/check-identity/personal-details/:claimId', function (req, res) {
   const claimId = req.params.claimId
-  const confirmKnownAlias = req.body.confirmKnownAlias
+  const claims = req.session.data.claims || []
+  const claim = claims.find(c => c.id === claimId)
 
-  if (confirmKnownAlias === 'Yes') {
-    res.redirect(`/provider/check-identity/personal-details/${claimId}`)
-  } else {
-    res.redirect(`/provider/check-identity/personal-details/${claimId}`)
+  if (!claim) {
+    return res.status(404).send('Claim not found')
   }
+
+  // Save to claim object
+  claim.returnClaimantDob = {
+    day: req.body['returnClaimantDob-day'],
+    month: req.body['returnClaimantDob-month'],
+    year: req.body['returnClaimantDob-year']
+  }
+  claim.returnClaimantPostcode = req.body.returnClaimantPostcode
+  claim.returnClaimantNationalInsuranceNumber = req.body.returnClaimantNationalInsuranceNumber
+  claim.claimantBankDetailsMatch = req.body.claimantBankDetailsMatch
+  claim.claimantWorkEmail = req.body.claimantWorkEmail
+
+  // Also store flat values for use in check.html
+  req.session.data["returnClaimantDob-day"] = req.body['returnClaimantDob-day']
+  req.session.data["returnClaimantDob-month"] = req.body['returnClaimantDob-month']
+  req.session.data["returnClaimantDob-year"] = req.body['returnClaimantDob-year']
+  req.session.data.returnClaimantPostcode = req.body.returnClaimantPostcode
+  req.session.data.returnClaimantNationalInsuranceNumber = req.body.returnClaimantNationalInsuranceNumber
+  req.session.data.claimantBankDetailsMatch = req.body.claimantBankDetailsMatch
+  req.session.data.claimantWorkEmail = req.body.claimantWorkEmail
+
+  res.redirect(`/provider/check-identity/check/${claimId}`)
 })
 
-// GET also known as confirm
-router.get('/provider/check-identity/also-known-as-confirm/:claimId', function (req, res) {
-  const claimId = req.params.claimId
-  const claim = req.session.data.claims.find(c => c.id === claimId)
-
-  res.render('provider/check-identity/also-known-as-confirm', { claim })
-})
-
-
-// 7. GET: Personal details form
+// 6a. GET: personal details form
 router.get('/provider/check-identity/personal-details/:claimId', function (req, res) {
   const claimId = req.params.claimId
-  const claim = req.session.data.claims.find(c => c.id === claimId)
+  const claims = req.session.data.claims || []
+  const claim = claims.find(c => c.id === claimId)
+
+  if (!claim) {
+    return res.status(404).send('Claim not found')
+  }
 
   res.render('provider/check-identity/personal-details', { claim })
 })
 
-// 8. POST: Submit personal details → Check answers
-router.post('/provider/check-identity/personal-details/:claimId', function (req, res) {
-  const claimId = req.params.claimId
 
-  // Store submitted data in session if needed here
-
-  res.redirect(`/provider/check-identity/check/${claimId}`)
-})
 
 // 9. POST: Check your answers
 router.post('/provider/check-identity/check/:claimId', (req, res) => { 
@@ -122,44 +132,47 @@ router.post('/provider/check-identity/check/:claimId', (req, res) => {
   if (!claim) return res.status(404).send('Claim not found')
 
   // Update claim status and clear assignment
-  claim.status = 'Not started'
-  claim.assignedTo = 'Unassigned'
+  claim.status = 'In progress'
+  claim.assignedTo = 'You - (current user)'
 
+  // Optional: Store declaration confirmation if needed
+  claim.identityDeclarationConfirmed = true
 
-   // Set a flash message with HTML (text + link)
-   req.flash('success', `Additional information for ${claim.claimantName} submitted <a class="govuk-link" href="/provider/role-and-experience/${claim.id}"><br>Start verification</a>`)
+  // Set flash message
+  req.flash('success', `Additional information for ${claim.claimantName} submitted`)
 
-  res.redirect('/provider')
+  // Redirect to the first step in the verification flow
+  res.redirect(`/provider/member-of-staff/${claim.id}`)
 })
 
-    // 10. GET: check to provider page
-    router.get('/provider/check-identity/check/:claimId', (req, res) => {
-      const claim = getClaim(req, res)
-      if (!claim) return res.status(404).send('Claim not found')
+  // 10. GET: check to
+  router.get('/provider/check-identity/check/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
 
-      const dobDay = req.session.data["returnClaimantDob-day"]
-      const dobMonth = req.session.data["returnClaimantDob-month"]
-      const dobYear = req.session.data["returnClaimantDob-year"]
+    const dobDay = req.session.data["returnClaimantDob-day"]
+    const dobMonth = req.session.data["returnClaimantDob-month"]
+    const dobYear = req.session.data["returnClaimantDob-year"]
 
-      const monthNames = {
-        "1": "January", "01": "January",
-        "2": "February", "02": "February",
-        "3": "March", "03": "March",
-        "4": "April", "04": "April",
-        "5": "May", "05": "May",
-        "6": "June", "06": "June",
-        "7": "July", "07": "July",
-        "8": "August", "08": "August",
-        "9": "September", "09": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
-      }
+    const monthNames = {
+      "1": "January", "01": "January",
+      "2": "February", "02": "February",
+      "3": "March", "03": "March",
+      "4": "April", "04": "April",
+      "5": "May", "05": "May",
+      "6": "June", "06": "June",
+      "7": "July", "07": "July",
+      "8": "August", "08": "August",
+      "9": "September", "09": "September",
+      "10": "October",
+      "11": "November",
+      "12": "December"
+    }
 
 
-      res.render('provider/check-identity/check', {
-        claim,
-        data: req.session.data
-      })
+    res.render('provider/check-identity/check', {
+      claim,
+      data: req.session.data
     })
+  })
 }
