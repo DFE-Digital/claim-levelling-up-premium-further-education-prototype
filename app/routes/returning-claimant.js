@@ -123,7 +123,7 @@ router.post('/one-login-returning-claimant/do-you-have-a-one-login-account', (re
         data: req.session.data
       })
     }
-    if (choice === 'continue') {
+    if (choice === 'goToService') {
       res.redirect('/one-login-returning-claimant/confirm-college');
     } else {
       res.redirect('https://govuk-one-login-prototype-6d2545e2d700.herokuapp.com/page-index/authentication/create-account');
