@@ -106,33 +106,37 @@ router.post('/one-login-returning-claimant/do-you-have-a-one-login-account', (re
   /////////// ONE LOGIN SIGNED IN AND ID TRIAGE FLOW ////////////
   router.post('/one-login-returning-claimant/one-login-signed-in', (req, res) => {
     let data = req.session.data
-    
-    res.redirect('/one-login-returning-claimant/do you-live-in-the-uk')
-    
+
+    res.redirect('/one-login-returning-claimant/triage/do-you-live-in-the-uk')
+
   })
 
 
-  router.post('/one-login-returning-claimant/do you-live-in-the-uk', (req, res) => {
+  router.post('/one-login-returning-claimant/triage/do-you-live-in-the-uk', (req, res) => {
+    let liveInTheUK = req.session.data.liveInTheUK
+    if (liveInTheUK === 'Yes') {
+      // User lives in the UK
+       res.redirect('/one-login-returning-claimant/triage/do-you-live-in-the-uk')
+    } else {
+      // User does not live in the UK
+       res.redirect('/one-login-returning-claimant/triage/types-of-identification')
+    }
+  })
+
+
+  router.post('/one-login-returning-claimant/triage/types-of-identification', (req, res) => {
     let data = req.session.data
-    
-    res.redirect('/one-login-returning-claimant/types-of-id')
-    
+
+    res.redirect('/one-login-returning-claimant/triage/prove-id-at-post-office')
+
   })
 
 
-  router.post('/one-login-returning-claimant/types-of-id', (req, res) => {
-    let data = req.session.data
-    
-    res.redirect('/one-login-returning-claimant/prove-id-at-post-office')
-    
-  })
-
-
-  router.post('/one-login-returning-claimant/prove-id-at-post-office', (req, res) => {
+  router.post('/one-login-returning-claimant/triage/prove-id-at-post-office', (req, res) => {
   let data = req.session.data
-  
-  res.redirect('/one-login-returning-claimant/prove-id-at-bank-or-building-society')
-    
+
+  res.redirect('/one-login-returning-claimant/triage/prove-id-at-bank-or-building-society')
+
   })
 
 

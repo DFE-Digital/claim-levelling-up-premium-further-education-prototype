@@ -32,9 +32,6 @@
       {{ pageName}}
     </h1>
 
-    <p class="govuk-body">
-      How you can prove your identity depends on where you live.
-    </p>
 
     <form method="post" novalidate>
       {{ govukRadios({
@@ -42,9 +39,13 @@
         fieldset: {
           legend: {
             text: "Do you live in the UK, the Channel Islands or the Isle of Man?",
-            isPageHeading: false
+            isPageHeading: false,
+            classes: "govuk-fieldset__legend--m govuk-visually-hidden"
           }
         },
+         hint: {
+            text: " How you can prove your identity depends on where you live."
+          },
         items: [
           {
             value: "Yes",
