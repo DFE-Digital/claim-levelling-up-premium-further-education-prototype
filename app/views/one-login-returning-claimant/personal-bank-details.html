@@ -97,6 +97,11 @@
 
       {% endcall %}
 
+      {{ govukDetails({
+        summaryText: "Problems entering these details",
+        text: "If you keep entering your bank details without success and you know the detials you are entering are correct, you will be able to confirm these on the next screen."
+      }) }}
+
       {{ govukButton({
         text: "Continue"
       }) }}

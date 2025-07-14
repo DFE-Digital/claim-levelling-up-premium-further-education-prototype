@@ -322,11 +322,12 @@ router.post('/one-login-returning-claimant/do-you-have-a-one-login-account', (re
 
 
   /////////// PERSONAL BANK DETAILS ////////////
-  router.post('/one-login-returning-claimant/personal-bank-details', (req, res) => {
+router.post('/one-login-returning-claimant/personal-bank-details', (req, res) => {
   const data = req.session.data
   const errors = []
   const fieldErrors = {}
 
+  // Validate required fields
   if (!data.returnClaimantBankAccountName) {
     const message = 'Enter the name on the account'
     errors.push({ text: message, href: '#return-claimant-bank-account-name' })
@@ -352,10 +353,46 @@ router.post('/one-login-returning-claimant/do-you-have-a-one-login-account', (re
       data
     })
   }
-    
-    res.redirect('/one-login-returning-claimant/check') // or whatever next step
-    
-  })
+
+  // Simulated correct values (customise for your research)
+  const isCorrect =
+    data.returnClaimantBankAccountName === 'Nathan Harper' &&
+    data.returnClaimantSortCode === '112233' &&
+    data.returnClaimantAccountNumber === '12345678'
+
+  // Initialise attempt count if not present
+  if (!data.bankAttemptCount) {
+    data.bankAttemptCount = 0
+  }
+
+  if (isCorrect) {
+    // Reset attempt count and error flag
+    data.bankAttemptCount = 0
+    data.bankDetailsError = false
+    return res.redirect('/one-login-returning-claimant/check')
+  } else {
+    // Count failed attempt
+    data.bankAttemptCount += 1
+    data.bankDetailsError = true
+
+    if (data.bankAttemptCount >= 3) {
+      return res.redirect('/one-login-returning-claimant/check')
+    } else {
+      const retryMessage = 'The details you entered don’t match what we expect. Try again.'
+      return res.render('one-login-returning-claimant/personal-bank-details', {
+        errors: [{
+          text: retryMessage,
+          href: '#return-claimant-bank-account-name' // Pick one anchor to highlight
+        }],
+        fieldErrors: {
+          returnClaimantBankAccountName: { text: retryMessage }
+        },
+        data
+      })
+    }
+  }
+})
+
 
 
   // GET: Show the CYA page

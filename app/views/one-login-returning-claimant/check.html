@@ -35,6 +35,16 @@
       }) }}
     {% endif %}
 
+    {% if data.bankDetailsError %}
+      {{ govukErrorSummary({
+        titleText: "There is a problem",
+        errorList: [{
+          html: "Enter your bank details.<br>They must match what we have on record.",
+          href: "#bank-details"
+        }]
+      }) }}
+    {% endif %}
+
     <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
     {# ✅ Full name card #}
@@ -138,6 +148,18 @@
         }
       ]
     }) }}
+
+
+
+    {##################### Bank details error inset text #######################}
+    {# If there is a bank details error, show an inset text message #}
+    {% if data.bankDetailsError %}
+      <div class="govuk-inset-text" id="bank-details">
+        <p class="govuk-error-message">
+          <span class="govuk-visually-hidden"></span> We couldn’t verify these bank details
+        </p>
+      </div>
+    {% endif %}
 
 
     {# ✅ Bank details card #}
