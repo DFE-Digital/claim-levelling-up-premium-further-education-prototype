@@ -171,7 +171,7 @@ router.post('/one-login-returning-claimant/do-you-have-a-one-login-account', (re
       })
     }
     if (choice === 'goToService') {
-      res.redirect('/one-login-returning-claimant/confirm-college');
+      res.redirect('/one-login-returning-claimant/confirm-college-email');
     } else {
       res.redirect('https://govuk-one-login-prototype-6d2545e2d700.herokuapp.com/page-index/authentication/create-account');
     }
@@ -180,11 +180,11 @@ router.post('/one-login-returning-claimant/do-you-have-a-one-login-account', (re
 
 
   /////////// CONFIRM COLLEGE WORK EMAIL ACCOUNT ////////////
-  router.post('/one-login-returning-claimant/confirm-college', (req, res) => {
+  router.post('/one-login-returning-claimant/confirm-college-email', (req, res) => {
     const hasWorkEmail = req.session.data.hasWorkEmail
     
     if (!hasWorkEmail) {
-      return res.render('one-login-returning-claimant/confirm-college', {
+      return res.render('one-login-returning-claimant/confirm-college-email', {
         error: {
           text: 'Select if you have access to your college email account',
           href: '#hasWorkEmail'
