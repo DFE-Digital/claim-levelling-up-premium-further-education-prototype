@@ -29,12 +29,12 @@
       {{ govukSummaryList({
         card: {
           title: {
-            text: "Employee name and alias"
+            text: "Employment status"
           }
         },
         rows: [
           {
-            key: { text: "Do you employ " + claim.claimantName + "?" },
+            key: { text: "Does " + claim.feProvider + " employ " + claim.claimantName + "?" },
             value: { text: data.doYouEmploy or "Not answered" },
             actions: {
               items: [
