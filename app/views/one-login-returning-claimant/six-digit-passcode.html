@@ -1,6 +1,6 @@
 {% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
 {% extends "layouts/main.html" %}
-{% set pageName = 'Enter the 6-digit passcode' %}
+{% set pageName = 'Check your FE work email' %}
 
 {% block pageTitle %}
   {{ serviceName }} – GOV.UK Prototype Kit
@@ -37,7 +37,7 @@
       <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
       <p class="govuk-body">
-        We have sent an email to <strong>{{data.workEmail}}</strong> with a 6-digit passcode.
+        We have sent a 6-digit passcode to <strong>{{data.workEmail}}</strong>.
       </p>
 
       <p class="govuk-body">
@@ -47,7 +47,7 @@
       <form method="post">
         {{ govukInput({
           label: {
-            text: "Enter the 6 digit security code"
+            text: "Enter the 6-digit security code"
           },
           id: "six-digit-security-code",
           name: "sixDigitSecurityCode",
