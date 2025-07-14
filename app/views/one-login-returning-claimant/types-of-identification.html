@@ -1,0 +1,88 @@
+{% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
+
+{% set pageName = "Do you live in the UK, the Channel Islands or the Isle of Man?" %}
+
+{% block pageTitle %}
+  {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{# {% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %} #}
+
+{% block header %}
+  {{ govukOneLoginServiceHeader({
+    signOutLink: "/one-login-signout",
+    oneLoginLink: "/#",
+    serviceNavigationParams: { 
+      serviceName: "Claim a targeted retention incentive payment for further education teachers",
+      navigationLabel: "Test label" 
+    }
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+      Tell us if you have one of the following types of photo ID
+    </h1>
+
+    <p class="govuk-body">This will help us find the best way for you to prove your identity.</p>
+
+    <p class="govuk-body">You can use one of the following types of photo ID:</p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>UK photocard driving licence</li>
+      <li>UK passport</li>
+      <li>non-UK passport with a biometric chip</li>
+      <li>UK biometric residence permit (BRP)</li>
+      <li>UK biometric residence card (BRC)</li>
+      <li>UK Frontier Worker permit (FWP)</li>
+    </ul>
+
+    {{ govukInsetText({
+      html: 'You can use an expired BRP, BRC or FWP up to 18 months after its expiry date if you have a smartphone.'
+    }) }}
+
+    <p class="govuk-body">
+      Find out more about the different types of
+      <a class="govuk-link" href="#">photo ID we accept (opens in a new tab)</a>.
+    </p>
+
+    <form method="post">
+      {{ govukRadios({
+        name: "typesOfIdentification",
+        fieldset: {
+          legend: {
+            text: "Do you have any of these types of photo ID?",
+            classes: "govuk-fieldset__legend--m"
+          },
+          hint: {
+            text: "You’ll need to have your photo ID ready. You cannot use a photocopy or digital copy."
+          }
+        },
+        items: [
+          {
+            value: "Yes",
+            text: "Yes"
+          },
+          {
+            value: "No",
+            text: "No"
+          }
+        ]
+      }) }}
+
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}

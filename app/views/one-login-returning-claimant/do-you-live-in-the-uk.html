@@ -1,0 +1,67 @@
+{% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
+
+{% set pageName = "Do you live in the UK, the Channel Islands or the Isle of Man?" %}
+
+{% block pageTitle %}
+  {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{# {% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %} #}
+
+{% block header %}
+  {{ govukOneLoginServiceHeader({
+    signOutLink: "/one-login-signout",
+    oneLoginLink: "/#",
+    serviceNavigationParams: { 
+      serviceName: "Claim a targeted retention incentive payment for further education teachers",
+      navigationLabel: "Test label" 
+    }
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+      {{ pageName}}
+    </h1>
+
+    <p class="govuk-body">
+      How you can prove your identity depends on where you live.
+    </p>
+
+    <form method="post" novalidate>
+      {{ govukRadios({
+        name: "liveInTheUK",
+        fieldset: {
+          legend: {
+            text: "Do you live in the UK, the Channel Islands or the Isle of Man?",
+            isPageHeading: false
+          }
+        },
+        items: [
+          {
+            value: "Yes",
+            text: "Yes"
+          },
+          {
+            value: "No",
+            text: "No"
+          }
+        ]
+      }) }}
+
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}

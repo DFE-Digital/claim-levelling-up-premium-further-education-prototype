@@ -103,13 +103,40 @@ router.post('/one-login-returning-claimant/do-you-have-a-one-login-account', (re
 
 
 
-
+  /////////// ONE LOGIN SIGNED IN AND ID TRIAGE FLOW ////////////
   router.post('/one-login-returning-claimant/one-login-signed-in', (req, res) => {
     let data = req.session.data
     
-    res.redirect('/one-login-returning-claimant/confirm-college')
+    res.redirect('/one-login-returning-claimant/do you-live-in-the-uk')
     
   })
+
+
+  router.post('/one-login-returning-claimant/do you-live-in-the-uk', (req, res) => {
+    let data = req.session.data
+    
+    res.redirect('/one-login-returning-claimant/types-of-id')
+    
+  })
+
+
+  router.post('/one-login-returning-claimant/types-of-id', (req, res) => {
+    let data = req.session.data
+    
+    res.redirect('/one-login-returning-claimant/prove-id-at-post-office')
+    
+  })
+
+
+  router.post('/one-login-returning-claimant/prove-id-at-post-office', (req, res) => {
+  let data = req.session.data
+  
+  res.redirect('/one-login-returning-claimant/prove-id-at-bank-or-building-society')
+    
+  })
+
+
+  
 
   /////////// FIND ANOTHER WAY ////////////
   router.post('/one-login-returning-claimant/find-another-way', (req, res) => {
