@@ -379,13 +379,17 @@ router.post('/one-login-returning-claimant/personal-bank-details', (req, res) =>
       return res.redirect('/one-login-returning-claimant/check')
     } else {
       const retryMessage = 'The details you entered don’t match what we expect. Try again.'
+
       return res.render('one-login-returning-claimant/personal-bank-details', {
-        errors: [{
-          text: retryMessage,
-          href: '#return-claimant-bank-account-name' // Pick one anchor to highlight
-        }],
+        errors: [
+          { text: retryMessage, href: '#return-claimant-bank-account-name' },
+          { text: retryMessage, href: '#return-claimant-sort-code' },
+          { text: retryMessage, href: '#return-claimant-account-number' }
+        ],
         fieldErrors: {
-          returnClaimantBankAccountName: { text: retryMessage }
+          returnClaimantBankAccountName: { text: retryMessage },
+          returnClaimantSortCode: { text: retryMessage },
+          returnClaimantAccountNumber: { text: retryMessage }
         },
         data
       })
