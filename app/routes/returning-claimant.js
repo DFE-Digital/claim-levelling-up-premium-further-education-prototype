@@ -125,18 +125,34 @@ router.post('/one-login-returning-claimant/do-you-have-a-one-login-account', (re
 
 
   router.post('/one-login-returning-claimant/triage/types-of-identification', (req, res) => {
-    let data = req.session.data
-
-    res.redirect('/one-login-returning-claimant/triage/prove-id-at-post-office')
-
+    let typesOfIdentification = req.session.data.typesOfIdentification
+    if (typesOfIdentification === 'Yes') {
+      res.redirect('/one-login-returning-claimant/triage/types-of-identification')
+    } else {
+      res.redirect('/one-login-returning-claimant/triage/prove-id-at-post-office')
+    }
   })
 
 
   router.post('/one-login-returning-claimant/triage/prove-id-at-post-office', (req, res) => {
-  let data = req.session.data
+    let proveAtPostOffice = req.session.data.proveAtPostOffice
+    if (proveAtPostOffice === 'Yes') {
+      res.redirect('/one-login-returning-claimant/triage/prove-id-at-post-office')
+    } else {
+      res.redirect('/one-login-returning-claimant/triage/prove-id-at-bank')
 
-  res.redirect('/one-login-returning-claimant/triage/prove-id-at-bank-or-building-society')
+    }
+  })
 
+
+  router.post('/one-login-returning-claimant/triage/prove-id-at-bank', (req, res) => {
+    let proveAtPostOffice = req.session.data.proveAtPostOffice
+    if (proveAtPostOffice === 'Yes') {
+      res.redirect('/one-login-returning-claimant/triage/prove-id-at-bank')
+    } else {
+      res.redirect('/one-login-returning-claimant/find-another-way')
+
+    }
   })
 
 

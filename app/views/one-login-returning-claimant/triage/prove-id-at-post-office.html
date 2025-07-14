@@ -1,0 +1,98 @@
+{% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
+
+{% set pageName = "Prove your identity at a Post Office with one of the following types of photo ID" %}
+
+{% block pageTitle %}
+  {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{# {% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %} #}
+
+{% block header %}
+  {{ govukOneLoginServiceHeader({
+    signOutLink: "/one-login-signout",
+    oneLoginLink: "/#",
+    serviceNavigationParams: { 
+      serviceName: "Claim a targeted retention incentive payment for further education teachers",
+      navigationLabel: "Test label" 
+    }
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+      {{ pageName }}
+    </h1>
+
+    <p class="govuk-body">
+      Based on what you told us, you cannot prove your identity online.
+    </p>
+
+    <p class="govuk-body">
+      If you have any of the following types of photo ID, you can prove your identity at a Post Office instead.
+    </p>
+
+    <h2 class="govuk-heading-m">European Union (EU) photocard driving licence</h2>
+    <p class="govuk-body">You can use an EU driving licence if:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>it is a plastic photocard, not a paper or handwritten licence</li>
+      <li>it has not expired</li>
+      <li>the address on it is the same as your current address (if it has an address)</li>
+    </ul>
+
+    <h2 class="govuk-heading-m">Non-UK passport</h2>
+    <p class="govuk-body">
+      You can use a non-UK passport as long as it has not expired.
+    </p>
+
+    <h2 class="govuk-heading-m">National identity card from a European Economic Area country</h2>
+    <p class="govuk-body">
+      You can use a national identity card from a European Economic Area (EEA) country if:
+    </p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>it is a plastic photocard, not a paper or handwritten card</li>
+      <li>it has not expired</li>
+      <li>the address on it is the same as your current address (if it has an address)</li>
+    </ul>
+
+    <p class="govuk-body">
+      The EEA includes EU countries, Norway, Iceland and Liechtenstein.
+    </p>
+
+    <form method="post">
+      {{ govukRadios({
+        name: "proveAtPostOffice",
+        fieldset: {
+          legend: {
+            text: "Do you have any of these types of photo ID?",
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        items: [
+          {
+            value: "Yes",
+            text: "Yes"
+          },
+          {
+            value: "No",
+            text: "No"
+          }
+        ]
+      }) }}
+
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}

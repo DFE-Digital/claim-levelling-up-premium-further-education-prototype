@@ -1,6 +1,6 @@
 {% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
 
-{% set pageName = "Do you live in the UK, the Channel Islands or the Isle of Man?" %}
+{% set pageName = "Prove your identity at a Post Office with one of the following types of photo ID" %}
 
 {% block pageTitle %}
   {{ serviceName }} – GOV.UK Prototype Kit
@@ -29,41 +29,35 @@
   <div class="govuk-grid-column-two-thirds">
 
     <h1 class="govuk-heading-l">
-      Tell us if you have one of the following types of photo ID
+      Prove your identity with bank or building society details and security questions
     </h1>
 
-    <p class="govuk-body">This will help us find the best way for you to prove your identity.</p>
+    <p class="govuk-body">
+      You can use any current account with a UK bank or building society to prove your identity. Your name must be on the account.
+    </p>
 
-    <p class="govuk-body">You can use one of the following types of photo ID:</p>
-
+    <h2 class="govuk-heading-m">Provide some personal details</h2>
+    <p class="govuk-body">We'll ask you for your:</p>
     <ul class="govuk-list govuk-list--bullet">
-      <li>UK photocard driving licence</li>
-      <li>UK passport</li>
-      <li>non-UK passport with a biometric chip</li>
-      <li>UK biometric residence permit (BRP)</li>
-      <li>UK biometric residence card (BRC)</li>
-      <li>UK Frontier Worker permit (FWP)</li>
+      <li>name</li>
+      <li>date of birth</li>
+      <li>sort code and account number</li>
+      <li>National Insurance number</li>
+      <li>current address (you might also need your previous address if you've recently moved)</li>
     </ul>
 
-    {{ govukInsetText({
-      html: 'You can use an expired BRP, BRC or FWP up to 18 months after its expiry date if you have a smartphone.'
-    }) }}
-
+    <h2 class="govuk-heading-m">Answer some security questions</h2>
     <p class="govuk-body">
-      Find out more about the different types of
-      <a class="govuk-link" href="#">photo ID we accept (opens in a new tab)</a>.
+      We'll then ask you some security questions. This helps us check if the details you've given are being used by you.
     </p>
 
     <form method="post">
       {{ govukRadios({
-        name: "typesOfIdentification",
+        name: "proveAtBank",
         fieldset: {
           legend: {
-            text: "Do you have any of these types of photo ID?",
+            text: "Do you have a UK bank or building society current account in your name?",
             classes: "govuk-fieldset__legend--m"
-          },
-          hint: {
-            text: "You'll need to have your photo ID ready. You cannot use a photocopy or digital copy."
           }
         },
         items: [
@@ -73,7 +67,7 @@
           },
           {
             value: "No",
-            text: "No"
+            text: "No - prove my identity another way"
           }
         ]
       }) }}
