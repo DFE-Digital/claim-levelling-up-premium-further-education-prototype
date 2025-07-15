@@ -67,6 +67,15 @@
 
           {# ////////////////////////////////////////////////#}
 
+          {{ govukDetails({
+            summaryText: "What counts towards the first 5 years of an FE teaching career",
+            html: "Only teaching at post-16 providers in England counts. It includes independent training providers. Teaching in schools, outside England or overseas does not count.<br><br>
+            Teachers who taught in FE before August 2020 are not eligible, even if they've since returned."
+          }) }}
+
+          {# ////////////////////////////////////////////////#}
+
+
           {{ govukRadios({
             name: "hasTeachingQualification",
             value: hasTeachingQualification or undefined,
