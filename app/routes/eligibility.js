@@ -1,19 +1,4 @@
-//
-// For guidance on how to create routes see:
-// https://prototype-kit.service.gov.uk/docs/create-routes
-//
-
-const govukPrototypeKit = require('govuk-prototype-kit')
-const router = govukPrototypeKit.requests.setupRouter()
-
-//Flash messages
-const flash = require('connect-flash')
-router.use(flash())
-
-router.all('*', (req, res, next) => {
-  res.locals.flash = req.flash('success')
-  next()
-})
+module.exports = router => {
 
 
 // Eligible provider
@@ -247,18 +232,7 @@ router.post('/next-subject-page', function (req, res) {
     }
   });
 
-
-
-  ///// Call in other routes
-  require('./routes/account')(router)
-  require('./routes/claims')(router)
-  
-  require('./routes/claims--assign')(router)
-  require('./routes/claims--complete')(router)
-  require('./routes/claims--check-id')(router)
-
-  require('./routes/returning-claimant')(router)
-
+}
 
 
  

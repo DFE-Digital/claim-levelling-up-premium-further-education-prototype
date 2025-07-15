@@ -258,6 +258,7 @@ router.post('/next-subject-page', function (req, res) {
   require('./routes/claims--check-id')(router)
 
   require('./routes/returning-claimant')(router)
+  require('./routes/eligibility')(router)
 
 
 
