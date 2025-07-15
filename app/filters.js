@@ -19,7 +19,7 @@ addFilter('statusColour', status => {
       return 'govuk-tag--red'
     case 'Pending':
       return 'govuk-tag--yellow'
-    case 'Check required':
+    case 'Overdue':
       return 'govuk-tag--light-blue'
   }
 })

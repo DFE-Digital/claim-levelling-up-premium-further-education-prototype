@@ -38,7 +38,7 @@ router.get('/provider', (req, res) => {
   let allClaims = req.session.data.claims || []
 
   let activeClaims = allClaims.filter(claim =>
-    ['Not started', 'In progress'].includes(claim.status)
+    ['Not started', 'In progress', 'Overdue'].includes(claim.status)
   )
 
   // ✅ Sort by first name, then last name (A–Z)
