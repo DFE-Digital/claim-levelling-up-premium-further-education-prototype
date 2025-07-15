@@ -1,0 +1,67 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+
+      <h1 class="govuk-heading-l">
+        Do you spend at least half of your timetabled teaching hours teaching these eligible courses?
+      </h1>
+
+      <form class="form" action="/half-teaching-hours" method="post">
+
+        <p>At least 50% of your timetabled teaching hours must be spent teaching students of all ages in the following courses:</p>
+    
+        <ul class="govuk-list govuk-list--bullet">
+          <li>qualifications approved for funding at level 3 and below in the <a href="https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=28&PageSize=10&Sort=Status">mathematics and statistics (opens in a new tab)</a> sector subject area</li>
+          <li>qualifications approved for funding at level 3 and below in the <a href="https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=26&PageSize=10&Sort=Status">manufacturing technologies (opens in a new tab) </a>sector subject area </li>
+          <li>level 2 or level 3 apprenticeships in the <a href="https://occupational-maps.instituteforapprenticeships.org/maps/route/engineering-manufacturing">engineering and manufacturing occupational route (opens in a new tab)</a>
+          </li>
+        </ul>
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+            </legend>
+            <div class="govuk-radios" data-module="govuk-radios">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="teachingcourses" name="teachingcourses" type="radio" value="Yes">
+                <label class="govuk-label govuk-radios__label" for="teachingcourses">
+                  Yes
+                </label>
+              </div>
+              <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="teachingcourses-2" name="teachingcourses" type="radio" value="No">
+                  <label class="govuk-label govuk-radios__label" for="teachingcourses-2">
+                    No
+                  </label>
+                </div>
+
+          </fieldset>
+        </div>
+
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

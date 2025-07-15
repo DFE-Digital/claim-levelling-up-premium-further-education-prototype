@@ -1,0 +1,66 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        On average, how many hours per week are you timetabled to teach at [name of FE provider] during the current term?      </h1>
+
+      <form class="form" action="/academic-year-fe-fixed" method="post">
+
+        
+          <div id="account-number-hint" class="govuk-hint">
+            ‘Timetabled teaching hours’ refer to the time you spend teaching lessons to students of all ages.        
+          </div>
+
+
+        <div class="govuk-!-padding-bottom-5"></div> 
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset">
+            <div class="govuk-radios" data-module="govuk-radios">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="week" name="week" type="radio" value="More than 12 hours per week">
+                <label class="govuk-label govuk-radios__label" for="week-more">
+                  More than 12 hours per week
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="week-2" name="week" type="radio" value="Between 2.5 and 12 hours per week">
+                <label class="govuk-label govuk-radios__label" for="week-between">
+                  Between 2.5 and 12 hours per week
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="week-3" name="week" type="radio" value="Less than 2.5 hours per week">
+                <label class="govuk-label govuk-radios__label" for="week-less">
+                  Less than 2.5 hours per week
+                </label>
+              </div>
+          </fieldset>
+        </div>
+
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

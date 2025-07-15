@@ -1,0 +1,82 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-l">
+          Do you have a teaching qualification?
+        </h1>
+
+      <form class="form" action="/performance" method="post">
+
+        <div id="account-number-hint" class="govuk-hint">
+          Your response will be noted for future claims.  
+          <br>
+          <br>
+
+          If you don’t have a teaching qualification yet, to remain eligible for a retention payment next year, make sure you either: 
+
+        </div>
+
+        <div id="account-number-hint" class="govuk-hint"> 
+          <ul class="govuk-list govuk-list--bullet inherit-colour">
+            <li>complete a teaching qualification in the next 12 months</li>
+            <li>enrol on a teaching qualification in the next 12 months</li>
+          </ul>
+        </div> 
+
+
+        <br>
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset">
+            <div class="govuk-radios" data-module="govuk-radios">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="qualification" name="qualification" type="radio" value="Yes">
+                <label class="govuk-label govuk-radios__label" for="qualification">
+                  Yes
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="qualification-2" name="qualification" type="radio" value="Not yet, I am currently enrolled on one and working towards completing it">
+                <label class="govuk-label govuk-radios__label" for="qualification-2">
+                  Not yet, I am currently enrolled on one and working towards completing it 
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="qualification-3" name="qualification" type="radio" value="No, but I plan to enrol on one in the next 12 months">
+                <label class="govuk-label govuk-radios__label" for="qualification-3">
+                  No, but I plan to enrol on one in the next 12 months
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="qualification-4" name="qualification" type="radio" value="No, and I do not plan to enrol on one in the next 12 months">
+                <label class="govuk-label govuk-radios__label" for="qualification-4">
+                  No, and I do not plan to enrol on one in the next 12 months 
+                </label>
+              </div>
+          </fieldset>
+        </div> 
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

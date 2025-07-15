@@ -1,0 +1,67 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        An eligible further education (FE) provider in England must employ you as a teacher      </h1>
+
+      <form class="form" action="/where-you-are-employed" method="post">
+
+        <p>
+          Eligible FE providers include:
+        </p>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>statutory FE providers, such as FE colleges, sixth-form colleges or designated institutions </li>
+          <li>16- to 19-only academies and free schools</li>
+        </ul>
+
+        <P>
+          If you are unsure whether your FE provider is eligible, you can refer to the <a href="#">full list of eligible FE providers</a> for more information.
+        </P>
+
+ 
+
+        <div class="govuk-form-group">
+          <h1 class="govuk-label-wrapper">
+            <label class="govuk-label govuk-label--m" for="event-name">
+              Which FE provider are you employed by?            
+            </label>
+          </h1>
+          <div id="event-name-hint" class="govuk-hint">
+            Enter the name of your employer. If you work at an FE provider with multiple campuses, enter the name of the FE provider group.
+
+            <br>
+            <br>
+
+            Use at least three characters.          
+          </div>
+          
+          <input class="govuk-input" id="event-name" name="eventName" type="text" aria-describedby="event-name-hint">
+        </div>
+        
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
