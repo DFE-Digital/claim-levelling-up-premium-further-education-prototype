@@ -327,7 +327,11 @@ router.post('/one-login-returning-claimant/personal-bank-details', (req, res) =>
   const errors = []
   const fieldErrors = {}
 
-  // Validate required fields
+  const correctName = 'Nathan Harper'
+  const correctSortCode = '112233'
+  const correctAccountNumber = '12345678'
+
+  // Step 1: Required field validation
   if (!data.returnClaimantBankAccountName) {
     const message = 'Enter the name on the account'
     errors.push({ text: message, href: '#return-claimant-bank-account-name' })
@@ -346,7 +350,8 @@ router.post('/one-login-returning-claimant/personal-bank-details', (req, res) =>
     fieldErrors.returnClaimantAccountNumber = { text: message }
   }
 
-  if (errors.length) {
+  // If any required fields are missing, return immediately
+  if (errors.length > 0) {
     return res.render('one-login-returning-claimant/personal-bank-details', {
       errors,
       fieldErrors,
@@ -354,48 +359,66 @@ router.post('/one-login-returning-claimant/personal-bank-details', (req, res) =>
     })
   }
 
-  // Simulated correct values (customise for your research)
-  const isCorrect =
-    data.returnClaimantBankAccountName === 'Nathan Harper' &&
-    data.returnClaimantSortCode === '112233' &&
-    data.returnClaimantAccountNumber === '12345678'
+  // Step 2: Field-level correctness check
+  const incorrectFields = []
 
-  // Initialise attempt count if not present
+  if (data.returnClaimantBankAccountName !== correctName) {
+    incorrectFields.push({
+      field: 'returnClaimantBankAccountName',
+      message: 'Name on the account doesn’t match what we expect',
+      href: '#return-claimant-bank-account-name'
+    })
+  }
+
+  if (data.returnClaimantSortCode !== correctSortCode) {
+    incorrectFields.push({
+      field: 'returnClaimantSortCode',
+      message: 'Sort code doesn’t match what we expect',
+      href: '#return-claimant-sort-code'
+    })
+  }
+
+  if (data.returnClaimantAccountNumber !== correctAccountNumber) {
+    incorrectFields.push({
+      field: 'returnClaimantAccountNumber',
+      message: 'Account number doesn’t match what we expect',
+      href: '#return-claimant-account-number'
+    })
+  }
+
+  const isCorrect = incorrectFields.length === 0
+
+  // Step 3: Attempt logic
   if (!data.bankAttemptCount) {
     data.bankAttemptCount = 0
   }
 
   if (isCorrect) {
-    // Reset attempt count and error flag
     data.bankAttemptCount = 0
     data.bankDetailsError = false
     return res.redirect('/one-login-returning-claimant/check')
   } else {
-    // Count failed attempt
     data.bankAttemptCount += 1
     data.bankDetailsError = true
 
     if (data.bankAttemptCount >= 3) {
       return res.redirect('/one-login-returning-claimant/check')
     } else {
-      const retryMessage = 'The details you entered don’t match what we expect. Try again.'
+      // Populate fieldErrors and errors based on incorrect fields
+      incorrectFields.forEach(({ field, message, href }) => {
+        fieldErrors[field] = { text: message }
+        errors.push({ text: message, href })
+      })
 
       return res.render('one-login-returning-claimant/personal-bank-details', {
-        errors: [
-          { text: retryMessage, href: '#return-claimant-bank-account-name' },
-          { text: retryMessage, href: '#return-claimant-sort-code' },
-          { text: retryMessage, href: '#return-claimant-account-number' }
-        ],
-        fieldErrors: {
-          returnClaimantBankAccountName: { text: retryMessage },
-          returnClaimantSortCode: { text: retryMessage },
-          returnClaimantAccountNumber: { text: retryMessage }
-        },
+        errors,
+        fieldErrors,
         data
       })
     }
   }
 })
+
 
 
 
