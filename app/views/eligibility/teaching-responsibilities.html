@@ -28,29 +28,29 @@
 
         {{ govukRadios({
           classes: "govuk-radios",
-          name: "changedName",
+          name: "claimantTeachingResponsibilities",
           fieldset: {
             legend: {
-              text: "",
-              isPageHeading: true,
-              classes: "govuk-fieldset__legend--l"
+              text: " Are you a member of staff with teaching responsibilities?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--l govuk-visually-hidden"
             }
-          },
-          items: [
-            {
-              value: "yes",
-              text: "Yes"
             },
-            {
-              value: "no",
-              text: "No"
-            }
-          ]
-        }) }}
-      
-        {{ govukButton({
-          text: "Continue"
-        }) }}
+            items: [
+              {
+                value: "Yes",
+                text: "Yes"
+              },
+              {
+                value: "No",
+                text: "No"
+              }
+            ]
+          }) }}
+        
+          {{ govukButton({
+            text: "Continue"
+          }) }}
 
       </form>
 

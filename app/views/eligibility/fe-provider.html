@@ -16,7 +16,8 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <form method="post">
-      {{ govukInput({
+
+      {{ xGovukAutocomplete({
         label: {
           text: "Which FE provider employs you?",
           classes: "govuk-label--l",
@@ -25,9 +26,20 @@
         hint: {
           html: "If you work at an FE provider with multiple campuses, enter the name of the FE provider group. <br>Enter at least 3 characters."
         },
-        id: "feProvider",
-        name: "feProvider"
+        id: "worksAtFeProvider",
+        name: "worksAtFeProvider",
+        allowEmpty: false,
+        items: [
+          { text: "Austria" },
+          { text: "Belgium" },
+          { text: "Bulgaria" },
+          { text: "Croatia" },
+          { text: "Republic of Cyprus" },
+          { text: "Czech Republic" },
+          { text: "Denmark" }
+        ]
       }) }}
+      
 
       {{ govukDetails({
         summaryText: "What FE providers are eligible?",
