@@ -4,6 +4,8 @@
   Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
+{% set pageName = "On average, how many hours per week are you timetabled to teach at " + data.worksAtFeProvider + " during the current term?" %}
+
 {% block beforeContent %}
   {{ govukBackLink({
   text: "Back",
@@ -16,43 +18,39 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">
-        On average, how many hours per week are you timetabled to teach at [name of FE provider] during the current term?      </h1>
+      <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-      <form class="form" action="/academic-year-in-further-education" method="post">
+      {{ govukHint({
+        id: "teaching-hours-hint",
+        text: "'Timetabled teaching hours' refer to the time you spend teaching lessons to students of all ages."
+      }) }}
 
-        
-          <div id="account-number-hint" class="govuk-hint">
-            ‘Timetabled teaching hours’ refer to the time you spend teaching lessons to students of all ages.        
-          </div>
+      <form class="form" method="post">
 
-
-        <div class="govuk-!-padding-bottom-5"></div>
-
-        <div class="govuk-form-group">
-          <fieldset class="govuk-fieldset">
-            <div class="govuk-radios" data-module="govuk-radios">
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="week" name="week" type="radio" value="More than 12 hours per week">
-                <label class="govuk-label govuk-radios__label" for="week-more">
-                  More than 12 hours per week
-                </label>
-              </div>
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="week-2" name="week" type="radio" value="Between 2.5 and 12 hours per week">
-                <label class="govuk-label govuk-radios__label" for="week-between">
-                  Between 2.5 and 12 hours per week
-                </label>
-              </div>
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="week-3" name="week" type="radio" value="Less than 2.5 hours per week">
-                <label class="govuk-label govuk-radios__label" for="week-less">
-                  Less than 2.5 hours per week
-                </label>
-              </div>
-          </fieldset>
-        </div>
-
+        {{ govukRadios({
+          name: "claimantTeachingHoursPerWeek",
+          fieldset: {
+            legend: {
+              text: pageName,
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m govuk-visually-hidden"
+            }
+          },
+          items: [
+            {
+              value: "More than 12 hours per week",
+              text: "More than 12 hours per week"
+            },
+            {
+              value: "Between 2.5 and 12 hours per week",
+              text: "Between 2.5 and 12 hours per week"
+            },
+            {
+              value: "Less than 2.5 hours per week",
+              text: "Less than 2.5 hours per week"
+            }
+          ]
+        }) }}
 
         {{ govukButton({
           text: "Continue"
@@ -64,3 +62,4 @@
   </div>
 
 {% endblock %}
+

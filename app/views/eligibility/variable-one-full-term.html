@@ -4,6 +4,9 @@
   Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
+
+{% set pageName = "Have you taught at " + data.worksAtFeProvider + " for at least one academic term?" %}
+
 {% block beforeContent %}
   {{ govukBackLink({
   text: "Back",
@@ -17,27 +20,27 @@
     <div class="govuk-grid-column-two-thirds">
 
       <h1 class="govuk-heading-l">
-        Does your fixed-term contract cover the full 2025 to 2026 academic year?
+          {{ pageName }}  
       </h1>
 
       <form method="post">
 
         {{ govukRadios({
-          name: "claimantFixedTermContract",
+          name: "claimantTaughtOneFullTerm",
           fieldset: {
             legend: {
-              text: "Does your contract cover the full 2025 to 2026 academic year?",
+              text: "Have you taught at " + data.worksAtFeProvider + " for at least one academic term?",
               classes: "govuk-fieldset__legend--m govuk-visually-hidden"
             }
           },
           items: [
             {
               value: "Yes",
-              text: "Yes, it covers the full 2025 to 2026 academic year"
+              text: "Yes, I have taught at " + data.worksAtFeProvider + " for at least one academic term"
             },
             {
               value: "No",
-              text: "No, it does not cover the full 2025 to 2026 academic year"
+              text: "No, I have not taught at " + data.worksAtFeProvider + " for at least one academic term"
             }
           ]
         }) }}

@@ -4,6 +4,8 @@
   Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
+{% set pageName = "Are you timetabled to teach at least 2.5 hours per week at " + data.worksAtFeProvider + " next term?" %}
+
 {% block beforeContent %}
   {{ govukBackLink({
   text: "Back",
@@ -16,28 +18,30 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">
-        Does your fixed-term contract cover the full 2025 to 2026 academic year?
-      </h1>
+      <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
       <form method="post">
 
+        {{ govukHint({
+          text: "If you don't know, you should speak to HR or apply when you know your arrangements for next term."
+        }) }}
+
         {{ govukRadios({
-          name: "claimantFixedTermContract",
+          name: "claimantVariableTimetabledToTeach",
           fieldset: {
             legend: {
-              text: "Does your contract cover the full 2025 to 2026 academic year?",
+              text: "Are you timetabled to teach at least 2.5 hours at " + data.worksAtFeProvider + " next term?",
               classes: "govuk-fieldset__legend--m govuk-visually-hidden"
             }
           },
           items: [
             {
               value: "Yes",
-              text: "Yes, it covers the full 2025 to 2026 academic year"
+              text: "Yes"
             },
             {
               value: "No",
-              text: "No, it does not cover the full 2025 to 2026 academic year"
+              text: "No"
             }
           ]
         }) }}
