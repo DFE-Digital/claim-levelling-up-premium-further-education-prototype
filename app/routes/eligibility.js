@@ -155,5 +155,34 @@ module.exports = router => {
   })
 
 
+  ////////////////////// POST: SUBJECT AREAS //////////////////////
+
+router.post('/subject-areas', function (req, res) {
+  subjectAreas = req.session.data['subjects']
+
+  if (subjectAreas.includes('I do not teach any of these subjects')) {
+    res.redirect('/eligibility/not-eligible')
+    } else {
+        var subjectValue = subjectAreas[0]
+        subjectAreas.splice(0, 1)
+        if (subjectValue === 'Building and construction') {
+          res.redirect(['/eligibility/subject-area/courses/building-course'])
+        } else if (subjectValue === 'Chemistry') {
+          res.redirect('/eligibility/subject-area/courses/chemistry-course')
+        } else if (subjectValue === 'Computing, including digital and ICT') {
+          res.redirect('/eligibility/subject-area/courses/computing-course')
+        } else if (subjectValue === 'Early years') {
+          res.redirect('/eligibility/subject-area/courses/early-years-course')
+        } else if (subjectValue === 'Engineering and manufacturing, including transport engineering and electronics') {
+          res.redirect('/eligibility/subject-area/courses/engineering-course')
+        } else if (subjectValue === 'Maths') {
+          res.redirect('/eligibility/subject-area/courses/maths-course')
+        } else if (subjectValue === 'Physics') {
+          res.redirect('/eligibility/subject-area/courses/physics-course')
+        }
+    }
+  })
+
+
 
 }
