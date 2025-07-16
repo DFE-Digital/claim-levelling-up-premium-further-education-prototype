@@ -127,5 +127,33 @@ module.exports = router => {
 
   })
 
+  ////////////////////// POST: TEACHING HOURS PER WEEK //////////////////////
+  router.post('/eligibility/teaching-hours-per-week', (req, res) => {
+    const claimantTeachingHoursPerWeek = req.body.claimantTeachingHoursPerWeek
+
+    // Store the selected value in session
+    req.session.data.claimantTeachingHoursPerWeek = claimantTeachingHoursPerWeek
+
+    if (claimantTeachingHoursPerWeek === 'More than 12 hours per week' || claimantTeachingHoursPerWeek === 'Between 2.5 and 12 hours per week') {
+      res.redirect('/eligibility/hours-teaching-sixteen-to-nineteen')
+    } else if (claimantTeachingHoursPerWeek === 'Less than 2.5 hours per week') {
+      res.redirect('/eligibility/not-eligible')
+    } else {
+      // No option selected – redirect back to form (you could add error handling here)
+      res.redirect('/eligibility/teaching-hours-per-week')
+    }
+  })
+
+
+    ////////////////////// POST: SIXTEEN TO NINETEEN //////////////////////
+  router.post('/eligibility/hours-teaching-sixteen-to-nineteen', (req, res) => {
+    const sixteenToNineteenTeachingHours = req.body.sixteenToNineteenTeachingHours
+    req.session.data.sixteenToNineteenTeachingHours = sixteenToNineteenTeachingHours
+
+      res.redirect('/eligibility/subject-area/subject-areas')
+
+  })
+
+
 
 }

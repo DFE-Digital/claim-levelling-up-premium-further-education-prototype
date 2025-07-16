@@ -1,0 +1,65 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% set pageName = "Do you spend at least half of your timetabled teaching hours working with students aged 16 to 19?" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        {{ pageName }}
+      </h1>
+
+      <p>This also includes students aged:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>19 or over, if they started their course before turning 19</li>
+        <li>up to 25 if they have an Education, Health and Care Plan (EHCP)</li>
+        <li>14 to 16, but only if directly enrolled on a funded study programme at an FE provider</li>
+      </ul>
+
+        <form method="post">
+
+          {{ govukRadios({
+            name: "sixteenToNineteenTeachingHours",
+            fieldset: {
+              legend: {
+                text: "Do you spend at least half of your timetabled teaching hours working with students aged 16 to 19?",
+                classes: "govuk-fieldset__legend--m govuk-visually-hidden"
+              }
+            },
+            items: [
+              {
+                value: "Yes",
+                text: "Yes"
+              },
+              {
+                value: "No",
+                text: "No"
+              }
+            ]
+          }) }}
+
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+
+        </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}
