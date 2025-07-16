@@ -1,0 +1,62 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-l">
+          Do you have a teaching qualification?
+        </h1>
+
+          <form method="post">
+
+            {{ govukRadios({
+              name: "claimantTeachingQualification",
+              fieldset: {
+                legend: {
+                  text: "Do you have or are you working towards a teaching qualification?",
+                  classes: "govuk-fieldset__legend--m"
+                }
+              },
+              items: [
+                {
+                  value: "Yes",
+                  text: "Yes"
+                },
+                {
+                  value: "Not yet, I am currently enrolled on one and working towards completing it",
+                  text: "Not yet, I am currently enrolled on one and working towards completing it"
+                },
+                {
+                  value: "No, but I plan to enrol on one in the next 12 months",
+                  text: "No, but I plan to enrol on one in the next 12 months"
+                },
+                {
+                  value: "No, and I do not plan to enrol on one in the next 12 months",
+                  text: "No, and I do not plan to enrol on one in the next 12 months"
+                }
+              ]
+            }) }}
+
+            {{ govukButton({
+              text: "Continue"
+            }) }}
+
+          </form>
+
+    </div>
+  </div>
+
+{% endblock %}

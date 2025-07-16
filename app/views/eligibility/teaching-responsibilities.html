@@ -16,63 +16,56 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form class="form" action="/fe-provider" method="post">
+      <h1 class="govuk-heading-l">
+        Are you a member of staff with teaching responsibilities?
+      </h1>
 
-       <h1 class="govuk-heading-l">
-        To apply for a targeted retention incentive payment, you must be employed as a member of staff with teaching responsibilities
-       </h1>
+      <div id="dob-hint" class="govuk-hint">
+        This includes all job titles where the role involves teaching further education students.
+      </div>
 
-        <p>Your job title could include:</p>
+      <form method="post">
 
-        <ul class="govuk-list govuk-list--bullet">
-          <li> advanced practitioner</li>
-          <li>practitioner</li>
-          <li>instructor</li>
-          <li>lecturer</li>
-          <li> teacher</li>
-          <li>trainer</li>
-          <li>tutor</li>
-        </ul>
-
-        <div class="govuk-form-group">
-          <fieldset class="govuk-fieldset">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-              <h1 class="govuk-fieldset__heading">
-                Are you a member of staff with teaching responsibilities?
-              </h1>
-            </legend>
-            <div class="govuk-radios" data-module="govuk-radios">
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="memberOfstaff" name="memberOfstaff" type="radio" value="Yes">
-                <label class="govuk-label govuk-radios__label" for="memberOfstaff">
-                  Yes
-                </label>
-              </div>
-
-              <script>
-                function handleRadioClick(value) {
-                  if (value === "yes") {
-                    // Redirect to the 'fe-provider' page
-                    window.location.href = 'fe-provider';
-                  }
-                }
-              </script>
-
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="memberOfstaff-2" name="memberOfstaff" type="radio" value="No">
-                <label class="govuk-label govuk-radios__label" for="memberOfstaff-2">
-                  No
-                </label>
-              </div>
-          </fieldset>
-        </div>
-
-
+        {{ govukRadios({
+          classes: "govuk-radios",
+          name: "changedName",
+          fieldset: {
+            legend: {
+              text: "",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes"
+            },
+            {
+              value: "no",
+              text: "No"
+            }
+          ]
+        }) }}
+      
         {{ govukButton({
           text: "Continue"
         }) }}
 
       </form>
+
+      <details class="govuk-details">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">
+            Who counts as a teacher for this payment
+          </span>
+        </summary>
+        <div class="govuk-details__text">
+          <p>An FE teacher is someone who teaches, even if it’s not their main job. This payment isn’t for support staff like assistants or technicians.</p>
+
+          <p>They're likely to have a teaching contract, teach groups of students, plan and mark work, or be working towards a teaching qualification.</p>
+        </div>
+      </details>
 
     </div>
   </div>
