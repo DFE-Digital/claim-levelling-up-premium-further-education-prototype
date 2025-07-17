@@ -13,7 +13,7 @@
 
 {% set subjectListHtml %}
   {% if data.subjects %}
-    <ul class="govuk-list govuk-list--bullet">
+    <ul class="govuk-list govuk-list">
       {% for subject in data.subjects %}
         <li>{{ subject }}</li>
       {% endfor %}
@@ -146,7 +146,7 @@
               value: { html: subjectListHtml },
               actions: {
                 items: [{
-                  href: "/change/subject-areas",
+                  href: "#",
                   text: "Change",
                   visuallyHiddenText: "subject areas"
                 }]
@@ -165,10 +165,10 @@
             },
             {
               key: { text: "Do you spend at least half of your timetabled teaching hours teaching these eligible courses?" },
-              value: { text: data.teachingEligibleCourses },
+              value: { text: data.halfTimetabledTeachingHoursEligibleCourses },
               actions: {
                 items: [{
-                  href: "/change/eligible-course-hours",
+                  href: "#",
                   text: "Change",
                   visuallyHiddenText: "eligible course teaching hours"
                 }]
@@ -176,10 +176,10 @@
             },
             {
               key: { text: "Are you subject to performance measures?" },
-              value: { text: data.performanceMeasures },
+              value: { text: data.claimantPerformanceMeasures },
               actions: {
                 items: [{
-                  href: "/change/performance-measures",
+                  href: "#",
                   text: "Change",
                   visuallyHiddenText: "performance measures"
                 }]
@@ -187,10 +187,10 @@
             },
             {
               key: { text: "Are you subject to disciplinary action?" },
-              value: { text: data.disciplinaryAction },
+              value: { text: data.claimantDisciplinaryAction },
               actions: {
                 items: [{
-                  href: "/change/disciplinary-action",
+                  href: "#",
                   text: "Change",
                   visuallyHiddenText: "disciplinary action"
                 }]
@@ -208,7 +208,7 @@
 
       
 
-      <form action="/you-are-eligible" method="post" novalidate>
+      <form action="/eligibility/you-are-eligible" method="post" novalidate>
 
         {{ govukButton({
           text: "Confirm and send"
