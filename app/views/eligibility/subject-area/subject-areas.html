@@ -4,6 +4,8 @@
   Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
+{% set subjectAreas = data.subjects %}
+
 {% block beforeContent %}
   {{ govukBackLink({
   text: "Back",

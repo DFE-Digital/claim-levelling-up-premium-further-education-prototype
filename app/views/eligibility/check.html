@@ -11,15 +11,6 @@
   }) }}
 {% endblock %}
 
-{% set subjectListHtml %}
-  {% if data.subjects %}
-    <ul class="govuk-list govuk-list">
-      {% for subject in data.subjects %}
-        <li>{{ subject }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-{% endset %}
 
 {% block content %}
   <div class="govuk-grid-row">
@@ -141,9 +132,13 @@
                 }]
               }
             },
+
+
+
+
             {
               key: { text: "Which subject areas do you teach?" },
-              value: { html: subjectListHtml },
+              value: { html: data.subjects + "<br>" },
               actions: {
                 items: [{
                   href: "#",
@@ -152,17 +147,96 @@
                 }]
               }
             },
+            
+
+
+
             {
-              key: { text: "Which subject area courses do you teach?" },
-              html: { text: data.subjectCourses },
+              key: { text: "Building and construction courses" },
+              value: { text: data.building },
               actions: {
                 items: [{
-                  href: "/change/subject-courses",
+                  href: "#",
                   text: "Change",
-                  visuallyHiddenText: "subject area courses"
+                  visuallyHiddenText: "courses for " + subject
                 }]
               }
-            },
+            } if data.building,
+
+            {
+              key: { text: "Chemistry courses" },
+              value: { text: data.chemistry },
+              actions: {
+                items: [{
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "courses for " + subject
+                }]
+              }
+            } if data.chemistry,
+
+            {
+              key: { text: "Computing courses" },
+              value: { text: data.computing },
+              actions: {
+                items: [{
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "courses for " + subject
+                }]
+              }
+            } if data.computing,
+
+            {
+              key: { text: "Early years courses" },
+              value: { text: data.earlyYears },
+              actions: {
+                items: [{
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "courses for " + subject
+                }]
+              }
+            } if data.earlyYears,
+
+            {
+              key: { text: "Engineering courses" },
+              value: { text: data.engineering },
+              actions: {
+                items: [{
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "courses for " + subject
+                }]
+              }
+            } if data.engineering,
+
+            {
+                key: { text: "Maths courses" },
+                value: { text: data.maths },
+                actions: {
+                  items: [{
+                    href: "#",
+                    text: "Change",
+                    visuallyHiddenText: "courses for " + subject
+                  }]
+                }
+              } if data.maths,
+
+              {
+                key: { text: "Physics courses" },
+                value: { text: data.physics },
+                actions: {
+                  items: [{
+                    href: "#",
+                    text: "Change",
+                    visuallyHiddenText: "courses for " + subject
+                  }]
+                }
+              } if data.physics,
+
+
+
             {
               key: { text: "Do you spend at least half of your timetabled teaching hours teaching these eligible courses?" },
               value: { text: data.halfTimetabledTeachingHoursEligibleCourses },
