@@ -16,87 +16,40 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form class="form" action="/next-subject-page" method="post">
+<form method="post" action="/next-subject-page">
 
-        <div class="govuk-form-group">
-          <fieldset class="govuk-fieldset" aria-describedby="countries-hint">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-              <h1 class="govuk-fieldset__heading">
-                Which engineering and manufacturing courses do you teach?
-              </h1>
+  {{ govukHiddenInput({
+    name: "previousCoursePage",
+    value: "Engineering and manufacturing"
+  }) }}
 
-              <br>
+  {{ govukCheckboxes({
+    name: "engineering",
+    fieldset: {
+      legend: {
+        text: "Which engineering and manufacturing courses do you teach?",
+        isPageHeading: true,
+        classes: "govuk-fieldset__legend--l"
+      }
+    },
+    hint: {
+      html: '
+        <p class="govuk-hint govuk-!-margin-bottom-2">
+          If you are unsure whether the course(s) you teach is eligible, please email:
+          <a class="govuk-link" href="mailto:FE-Targeted.Retention-Incentive@education.gov.uk">FE-Targeted.Retention-Incentive@education.gov.uk</a>
+        </p>
+        <p class="govuk-hint">Select all that apply</p>
+      '
+    },
+    items: [
+      {
+        value: "Qualifications approved for funding at level 3 and below in the engineering sector subject area",
+        html: 'Qualifications approved for funding at level 3 and below in the <a class="govuk-link" href="https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=13">engineering (opens in a new tab)</a> sector subject area'
+      },
+      {
+        value: "Qualifications approved for funding at level 3 and below in the manufacturing technologies sector subject area",
+        html: 'Qualificat
 
-              <div id="account-number-hint" class="govuk-hint">
-                If you are unsure whether the course(s) you teach is eligible, please email: <a href=''>FE-Targeted.Retention-Incentive@education.gov.uk</a>         
-              </div>
-
-            </legend>
-            <div id="countries-hint" class="govuk-hint">
-              Select all that apply
-            </div>
-            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-              <input name="previousCoursePage" type="text" style="display:none" value="Qualifications approved for funding at level 3 and below in the engineering sector subject area">                
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="engineering" name="engineering" type="checkbox" value="Qualifications approved for funding at level 3 and below in the engineering sector subject area">
-                <label class="govuk-label govuk-checkboxes__label" for="engineering">
-                  Qualifications approved for funding at level 3 and below in the <a href="https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=13&PageSize=10&Sort=Status">engineering (opens in a new tab)</a> sector subject area
-                </label>
-              </div>
-              <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="engineering-2" name="engineering" type="checkbox" value="Qualifications approved for funding at level 3 and below in the manufacturing technologies sector subject area">
-                <label class="govuk-label govuk-checkboxes__label" for="engineering-2">
-                  Qualifications approved for funding at level 3 and below in the <a href="https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=26&PageSize=10&Sort=Status">manufacturing technologies (opens in a new tab) </a>sector subject area
-                </label>
-              </div>
-              <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-                <div class="govuk-checkboxes__item">
-                  <input class="govuk-checkboxes__input" id="engineering-3" name="engineering" type="checkbox" value="Qualifications approved for funding at level 3 and below in the transportation operations and maintenance sector subject area">
-                  <label class="govuk-label govuk-checkboxes__label" for="engineering-3">
-                    Qualifications approved for funding at level 3 and below in the <a href="https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=47&PageSize=10&Sort=Status">transportation operations and maintenance (opens in a new tab) </a> sector subject area
-                </div>
-                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-                  <div class="govuk-checkboxes__item">
-                    <input class="govuk-checkboxes__input" id="engineering-4" name="engineering" type="checkbox" value="T Level in design and development for engineering and manufacturing">
-                    <label class="govuk-label govuk-checkboxes__label" for="engineering-4">
-                      T Level in design and development for engineering and manufacturing
-                  </div>
-                  <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-                    <div class="govuk-checkboxes__item">
-                      <input class="govuk-checkboxes__input" id="engineering-5" name="engineering" type="checkbox" value="T Level in maintenance, installation and repair for engineering and manufacturing">
-                      <label class="govuk-label govuk-checkboxes__label" for="engineering-5">
-                        T Level in maintenance, installation and repair for engineering and manufacturing
-                    </div>
-                    <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-                      <div class="govuk-checkboxes__item">
-                        <input class="govuk-checkboxes__input" id="engineering-6" name="engineering" type="checkbox" value="T Level in engineering, manufacturing, processing and control">
-                        <label class="govuk-label govuk-checkboxes__label" for="engineering-6">
-                          T Level in engineering, manufacturing, processing and control
-                      </div>
-                      <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-                        <div class="govuk-checkboxes__item">
-                          <input class="govuk-checkboxes__input" id="engineering-7" name="engineering" type="checkbox" value="Level 2 or level 3 apprenticeships in the engineering and manufacturing occupational route">
-                          <label class="govuk-label govuk-checkboxes__label" for="engineering-7">
-                            Level 2 or level 3 apprenticeships in the <a href="https://occupational-maps.instituteforapprenticeships.org/maps/route/engineering-manufacturing">engineering and manufacturing occupational route (opens in a new tab)</a>
-                        </div>
-              <div class="govuk-checkboxes__divider">or</div>
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="chemistry-4" name="chemistry" type="checkbox" value="none" data-behaviour="exclusive">
-                <label class="govuk-label govuk-checkboxes__label" for="chemistry-4">
-                  I do not teach any of these courses
-                </label>
-              </div>
-            </div>
-          </fieldset>
-        </div>
- 
-
-        {{ govukButton({
-          text: "Continue"
-        }) }}
-
-      </form>
 
     </div>
   </div>
