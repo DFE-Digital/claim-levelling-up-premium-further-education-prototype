@@ -16,78 +16,69 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form class="form" action="/next-subject-page" method="post">
+  <form method="post" action="/next-subject-page">
 
-            <div class="govuk-form-group">
-          <fieldset class="govuk-fieldset" aria-describedby="countries-hint">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-              <h1 class="govuk-fieldset__heading">
-                Which building and construction courses do you teach?
-              </h1>
-            </legend>
+    {{ govukHiddenInput({
+      name: "previousCoursePage",
+      value: "Building and construction"
+    }) }}
 
-            <br>
+    {{ govukCheckboxes({
+      name: "building",
+      fieldset: {
+        legend: {
+          text: "Which building and construction courses do you teach?",
+          classes: "govuk-fieldset__legend--l",
+          isPageHeading: true
+        }
+      },
+      hint: {
+        html: '
+          <p class="govuk-hint govuk-!-margin-bottom-2">
+            If you are unsure whether the course(s) you teach is eligible, please email:
+            <a class="govuk-link" href="mailto:FE-Targeted.Retention-Incentive@education.gov.uk">FE-Targeted.Retention-Incentive@education.gov.uk</a>
+          </p>
+          <p class="govuk-hint govuk-!-margin-bottom-2">Select all that apply</p>
+        '
+      },
+      items: [
+        {
+          value: "Qualifications approved for funding at level 3 and below in the building and construction sector subject area",
+          html: 'Qualifications approved for funding at level 3 and below in the <a class="govuk-link" href="https://www.qualifications.education.gov.uk/Search?Status=Approved&amp;Level=0,1,2,3,4&amp;Sub=7" target="_blank" rel="noopener noreferrer">building and construction</a> sector subject area'
+        },
+        {
+          value: "T Level in building services engineering for construction",
+          text: "T Level in building services engineering for construction"
+        },
+        {
+          value: "T Level in onsite construction",
+          text: "T Level in onsite construction"
+        },
+        {
+          value: "T Level in design, surveying and planning for construction",
+          text: "T Level in design, surveying and planning for construction"
+        },
+        {
+          value: "Level 2 or level 3 apprenticeships in the construction and the built environment occupational route",
+          html: 'Level 2 or level 3 apprenticeships in the <a class="govuk-link" href="https://occupational-maps.instituteforapprenticeships.org/maps/route/construction" target="_blank" rel="noopener noreferrer">construction and the built environment occupational route</a>'
+        },
+        {
+          divider: "or"
+        },
+        {
+          value: "I do not teach any of these courses",
+          text: "I do not teach any of these courses",
+          behaviour: "exclusive"
+        }
+      ]
+    }) }}
 
-            <div id="account-number-hint" class="govuk-hint">
-              If you are unsure whether the course(s) you teach is eligible, please email: <a href=''>FE-Targeted.Retention-Incentive@education.gov.uk</a>         
-            </div>
-  
-            <br>
+    {{ govukButton({
+      text: "Continue"
+    }) }}
 
+  </form>
 
-
-            <div id="countries-hint" class="govuk-hint">
-              Select all that apply
-            </div>
-            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-              <input name="previousCoursePage" type="text" style="display:none" value="Building and construction">
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="building" name="subjects" type="checkbox" value="Qualifications approved for funding at level 3 and below in the building and construction sector subject area">
-                <label class="govuk-label govuk-checkboxes__label" for="building">
-                  Qualifications approved for funding at level 3 and below in the <a href="https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=7">building and construction (opens in a new tab)</a> sector subject area
-                </label>
-              </div>
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="building-2" name="building" type="checkbox" value="T Level in building services engineering for construction">
-                <label class="govuk-label govuk-checkboxes__label" for="building-2">
-                  T Level in building services engineering for construction
-                </label>
-              </div>
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="building-3" name="building" type="checkbox" value="T Level in onsite construction">
-                <label class="govuk-label govuk-checkboxes__label" for="building-3">
-                  T Level in onsite construction
-                </label>
-              </div>
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="building-4" name="building" type="checkbox" value="T Level in design, surveying and planning for construction">
-                <label class="govuk-label govuk-checkboxes__label" for="building-4">
-                  T Level in design, surveying and planning for construction
-                </label>
-              </div>
-              
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="building-5" name="building" type="checkbox" value="Level 2 or level 3 apprenticeships in the construction and the built environment occupational route">
-                <label class="govuk-label govuk-checkboxes__label" for="building-5">
-                  Level 2 or level 3 apprenticeships in the<a href="https://occupational-maps.instituteforapprenticeships.org/maps/route/construction"> construction and the built environment occupational route (opens in a new tab)</a>
-                </label>
-              </div>
-              <div class="govuk-checkboxes__divider">or</div>
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="building-6" name="building" type="checkbox" value="I do not teach any of these courses" data-behaviour="exclusive">
-                <label class="govuk-label govuk-checkboxes__label" for="building-6">
-                  I do not teach any of these courses
-                </label>
-              </div>
-            </div>
-          </fieldset>
-        </div>
-
-        {{ govukButton({
-          text: "Continue"
-        }) }}
-
-      </form>
 
     </div>
   </div>
