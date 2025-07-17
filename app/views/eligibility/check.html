@@ -11,6 +11,16 @@
   }) }}
 {% endblock %}
 
+{% set subjectListHtml %}
+  {% if data.subjects %}
+    <ul class="govuk-list govuk-list--bullet">
+      {% for subject in data.subjects %}
+        <li>{{ subject }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endset %}
+
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds-from-desktop">
@@ -23,10 +33,10 @@
           rows: [
             {
               key: { text: "Which academic year did you start teaching in further education in England?" },
-              value: { text: data.teachingStartYear },
+              value: { text: data.academicYearInFurtherEducation },
               actions: {
                 items: [{
-                  href: "/change/start-teaching-year",
+                  href: "#",
                   text: "Change",
                   visuallyHiddenText: "academic year you started teaching"
                 }]
@@ -34,10 +44,10 @@
             },
             {
               key: { text: "Do you have a teaching qualification?" },
-              value: { text: data.hasTeachingQualification },
+              value: { text: data.claimantTeachingQualification },
               actions: {
                 items: [{
-                  href: "/change/teaching-qualification",
+                  href: "#",
                   text: "Change",
                   visuallyHiddenText: "teaching qualification"
                 }]
@@ -45,10 +55,10 @@
             },
             {
               key: { text: "Are you a member of staff with teaching responsibilities?" },
-              value: { text: data.hasTeachingResponsibilities },
+              value: { text: data.claimantTeachingResponsibilities },
               actions: {
                 items: [{
-                  href: "/change/teaching-responsibilities",
+                  href: "#",
                   text: "Change",
                   visuallyHiddenText: "teaching responsibilities"
                 }]
@@ -56,21 +66,21 @@
             },
             {
               key: { text: "Which FE provider directly employs you?" },
-              value: { text: data.feProvider },
+              value: { text: data.worksAtFeProvider },
               actions: {
                 items: [{
-                  href: "/change/fe-provider",
+                  href: "#",
                   text: "Change",
                   visuallyHiddenText: "FE provider"
                 }]
               }
             },
             {
-              key: { text: "What type of contract do you have directly with " + data.feProvider + "?" },
-              value: { text: data.contractType },
+              key: { text: "What type of contract do you have directly with " + data.worksAtFeProvider + "?" },
+              value: { text: data.claimantContractType },
               actions: {
                 items: [{
-                  href: "/change/contract-type",
+                  href: "#",
                   text: "Change",
                   visuallyHiddenText: "contract type"
                 }]
@@ -78,7 +88,7 @@
             },
             {
               key: { text: "Does your fixed-term contract cover the full 2025 to 2026 academic year?" },
-              value: { text: data.fixedTermCoversFullYear },
+              value: { text: data.claimantFixedTermContract },
               actions: {
                 items: [{
                   href: "/change/fixed-term-full-year",
@@ -86,35 +96,35 @@
                   visuallyHiddenText: "fixed-term contract coverage"
                 }]
               }
-            },
+            } if data.claimantContractType === 'Fixed-term',
             {
-              key: { text: "Have you taught at " + data.feProvider + " for at least one academic term?" },
-              value: { text: data.taughtAtProviderOneTerm },
+              key: { text: "Have you taught at " + data.worksAtFeProvider + " for at least one academic term?" },
+              value: { text: data.claimantTaughtOneFullTerm },
               actions: {
                 items: [{
-                  href: "/change/one-term-taught",
+                  href: "#",
                   text: "Change",
                   visuallyHiddenText: "academic term at provider"
                 }]
               }
-            },
+            } if data.claimantContractType === 'Variable',
             {
-              key: { text: "Are you timetabled to teach at least 2.5 hours per week at " + data.feProvider + " next term?" },
-              value: { text: data.teachesNextTerm25Hours },
+              key: { text: "Are you timetabled to teach at least 2.5 hours per week at " + data.worksAtFeProvider + " next term?" },
+              value: { text: data.claimantVariableTimetabledToTeach },
               actions: {
                 items: [{
-                  href: "/change/next-term-hours",
+                  href: "#",
                   text: "Change",
                   visuallyHiddenText: "next term teaching hours"
                 }]
               }
-            },
+            } if data.claimantContractType === 'Variable',
             {
-              key: { text: "On average, how many hours a week are you timetabled to teach at " + data.feProvider + " during the current term?" },
-              value: { text: data.teachingHoursCurrentTerm },
+              key: { text: "On average, how many hours a week are you timetabled to teach at " + data.worksAtFeProvider + " during the current term?" },
+              value: { text: data.claimantTeachingHoursPerWeek },
               actions: {
                 items: [{
-                  href: "/change/current-term-hours",
+                  href: "#",
                   text: "Change",
                   visuallyHiddenText: "current term teaching hours"
                 }]
@@ -122,10 +132,10 @@
             },
             {
               key: { text: "Do you spend at least half your timetabled teaching hours working with students aged 16 to 19?" },
-              value: { text: data.teaching16to19 },
+              value: { text: data.sixteenToNineteenTeachingHours },
               actions: {
                 items: [{
-                  href: "/change/teaching-16-19",
+                  href: "#",
                   text: "Change",
                   visuallyHiddenText: "teaching 16 to 19 year olds"
                 }]
@@ -133,7 +143,7 @@
             },
             {
               key: { text: "Which subject areas do you teach?" },
-              html: { text: data.subjectAreas },
+              value: { html: subjectListHtml },
               actions: {
                 items: [{
                   href: "/change/subject-areas",

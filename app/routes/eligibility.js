@@ -157,58 +157,98 @@ module.exports = router => {
 
 ////////////////////// POST: SUBJECT AREAS //////////////////////
 
+let subjectAreas = null // Will be populated from session after subject area selection
+
+// Initial subject areas page POST (already in your code)
 router.post('/eligibility/subject-area/subject-areas', function (req, res) {
-  subjectAreas = req.session.data['subjects'] /// ['subjects '] <-- this is the name value of the checkboxes component
+  subjectAreas = req.session.data['subjects'] || []
 
   if (subjectAreas.includes('I do not teach any of these subjects')) {
-    res.redirect('/eligibility/not-eligible')
-    } else {
-        var subjectValue = subjectAreas[0]
-        subjectAreas.splice(0, 1)
-        if (subjectValue === 'Building and construction') {
-          res.redirect(['/eligibility/subject-area/courses/building-course'])
-        } else if (subjectValue === 'Chemistry') {
-          res.redirect('/eligibility/subject-area/courses/chemistry-course')
-        } else if (subjectValue === 'Computing, including digital and ICT') {
-          res.redirect('/eligibility/subject-area/courses/computing-course')
-        } else if (subjectValue === 'Early years') {
-          res.redirect('/eligibility/subject-area/courses/early-years-course')
-        } else if (subjectValue === 'Engineering and manufacturing, including transport engineering and electronics') {
-          res.redirect('/eligibility/subject-area/courses/engineering-course')
-        } else if (subjectValue === 'Maths') {
-          res.redirect('/eligibility/subject-area/courses/maths-course')
-        } else if (subjectValue === 'Physics') {
-          res.redirect('/eligibility/subject-area/courses/physics-course')
-        }
-    }
-  })
+    return res.redirect('/eligibility/not-eligible')
+  }
+
+  // Reset subjectCourses array at start of journey
+  req.session.data.subjectCourses = []
+
+  // Start subject course routing
+  const subjectValue = subjectAreas.shift()
+  req.session.data.remainingSubjects = subjectAreas
+  routeToSubjectCourse(res, subjectValue)
+})
+
+// Generic handler for all course POSTs
+router.post('/eligibility/subject-area/next-subject-page', function (req, res) {
+  if (!req.session.data.subjectCourses) {
+    req.session.data.subjectCourses = []
+  }
+
+  // Collect selected courses from the posted form
+  const selectedCourses = req.body.previousCoursePage
+    ? req.body[req.body.previousCoursePage.toLowerCase().replace(/\s+/g, '')]
+    : null
+
+  if (Array.isArray(selectedCourses)) {
+    req.session.data.subjectCourses.push(...selectedCourses)
+  } else if (selectedCourses) {
+    req.session.data.subjectCourses.push(selectedCourses)
+  }
+
+  // Move to next subject course screen
+  const nextSubject = req.session.data.remainingSubjects.shift()
+  if (nextSubject) {
+    routeToSubjectCourse(res, nextSubject)
+  } else {
+    res.redirect('/eligibility/half-timetabled-teaching-hours-teaching-eligible-courses')
+  }
+})
+
+// Helper to map subject name to route
+function routeToSubjectCourse(res, subjectName) {
+  const routeMap = {
+    'Building and construction': '/eligibility/subject-area/courses/building-course',
+    'Chemistry': '/eligibility/subject-area/courses/chemistry-course',
+    'Computing, including digital and ICT': '/eligibility/subject-area/courses/computing-course',
+    'Early years': '/eligibility/subject-area/courses/early-years-course',
+    'Engineering and manufacturing, including transport engineering and electronics': '/eligibility/subject-area/courses/engineering-course',
+    'Maths': '/eligibility/subject-area/courses/maths-course',
+    'Physics': '/eligibility/subject-area/courses/physics-course'
+  }
+
+  const redirectUrl = routeMap[subjectName]
+  if (redirectUrl) {
+    res.redirect(redirectUrl)
+  } else {
+    res.redirect('/eligibility/half-timetabled-teaching-hours-teaching-eligible-courses')
+  }
+}
+
 
   //////////////// NEXT SUBJECT PAGE HANDLER ////////////////
 
-    var subjectAreas = null;
+    // var subjectAreas = null;
 
-    router.post('/eligibility/subject-area/next-subject-page', function (req, res) {
-      //var currentSubjectIndex = subjectAreas.indexOf(req.body.previousCoursePage);
-      if (subjectAreas.length > 0){
-        var subjectValue = subjectAreas[0]
-        subjectAreas.splice(0, 1)
-        if (subjectValue === 'Chemistry') {
-          res.redirect('/eligibility/subject-area/courses/chemistry-course')
-        } else if (subjectValue === 'Computing, including digital and ICT') {
-          res.redirect('/eligibility/subject-area/courses/computing-course')
-        } else if (subjectValue === 'Early years') {
-          res.redirect('/eligibility/subject-area/courses/early-years-course')
-        } else if (subjectValue === 'Engineering and manufacturing, including transport engineering and electronics') {
-          res.redirect('/eligibility/subject-area/courses/engineering-course')
-        } else if (subjectValue === 'Maths') {
-          res.redirect('/eligibility/subject-area/courses/maths-course')
-        } else if (subjectValue === 'Physics') {
-          res.redirect('/eligibility/subject-area/courses/physics-course')
-        }
-      } else {
-        res.redirect('/eligibility/half-timetabled-teaching-hours-teaching-eligible-courses')
-      }
-    })
+    // router.post('/eligibility/subject-area/next-subject-page', function (req, res) {
+    //   //var currentSubjectIndex = subjectAreas.indexOf(req.body.previousCoursePage);
+    //   if (subjectAreas.length > 0){
+    //     var subjectValue = subjectAreas[0]
+    //     subjectAreas.splice(0, 1)
+    //     if (subjectValue === 'Chemistry') {
+    //       res.redirect('/eligibility/subject-area/courses/chemistry-course')
+    //     } else if (subjectValue === 'Computing, including digital and ICT') {
+    //       res.redirect('/eligibility/subject-area/courses/computing-course')
+    //     } else if (subjectValue === 'Early years') {
+    //       res.redirect('/eligibility/subject-area/courses/early-years-course')
+    //     } else if (subjectValue === 'Engineering and manufacturing, including transport engineering and electronics') {
+    //       res.redirect('/eligibility/subject-area/courses/engineering-course')
+    //     } else if (subjectValue === 'Maths') {
+    //       res.redirect('/eligibility/subject-area/courses/maths-course')
+    //     } else if (subjectValue === 'Physics') {
+    //       res.redirect('/eligibility/subject-area/courses/physics-course')
+    //     }
+    //   } else {
+    //     res.redirect('/eligibility/half-timetabled-teaching-hours-teaching-eligible-courses')
+    //   }
+    // })
 
     router.post('/eligibility/half-timetabled-teaching-hours-teaching-eligible-courses', function (req, res) {
       var halfTimetabledTeachingHoursEligibleCourses = req.session.data['halfTimetabledTeachingHoursEligibleCourses']
