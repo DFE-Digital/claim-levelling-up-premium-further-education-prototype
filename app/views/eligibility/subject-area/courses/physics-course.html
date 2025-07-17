@@ -16,66 +16,58 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form class="form" action="/next-subject-page" method="post">
+      <form method="post" action="/next-subject-page">
 
-        <div class="govuk-form-group">
-          <fieldset class="govuk-fieldset" aria-describedby="countries-hint">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-              <h1 class="govuk-fieldset__heading">
-                Which physics courses do you teach?
-              </h1>
-            </legend>
+        {{ govukHiddenInput({
+          name: "previousCoursePage",
+          value: "Physics"
+        }) }}
 
-          <br>
-
-          <div id="account-number-hint" class="govuk-hint">
-            If you are unsure whether the course(s) you teach is eligible, please email: <a href=''>FE-Targeted.Retention-Incentive@education.gov.uk</a>         
-          </div>
-
-          <br>
-          
-            <div id="countries-hint" class="govuk-hint">
-              Select all that apply
-            </div>
-            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-              <input name="previousCoursePage" type="text" style="display:none" value="Physics">
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="physics" name="physics" type="checkbox" value="A or AS level in physics">
-                <label class="govuk-label govuk-checkboxes__label" for="physics">
-                  A or AS level in physics
-              </div>
-              <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="physics-2" name="physics" type="checkbox" value="GCSE in physics">
-                <label class="govuk-label govuk-checkboxes__label" for="physics-2">
-                  GCSE in physics
-                </label>
-              </div>
-              <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-                <div class="govuk-checkboxes__item">
-                  <input class="govuk-checkboxes__input" id="physics-3" name="physics" type="checkbox" value="IBO level 1 / level 2 MYP physics">
-                  <label class="govuk-label govuk-checkboxes__label" for="physics-3">
-                  IBO level 1 / level 2 MYP physics
-                  </label>
-                </div>
-                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-                  <div class="govuk-checkboxes__item">
-                    <input class="govuk-checkboxes__input" id="physics-3" name="physics" type="checkbox" value="IBO level 3 in SL and HL physics, taught as part of a diploma or career related programme or as a standalone certificate">
-                    <label class="govuk-label govuk-checkboxes__label" for="physics-3">
-                      IBO level 3 in SL and HL physics, taught as part of a diploma or career related programme or as a standalone certificate
-                    </label>
-                  </div>
-              
-              <div class="govuk-checkboxes__divider">or</div>
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="chemistry-4" name="chemistry" type="checkbox" value="none" data-behaviour="exclusive">
-                <label class="govuk-label govuk-checkboxes__label" for="chemistry-4">
-                  I do not teach any of these courses
-                </label>
-              </div>
-            </div>
-          </fieldset>
-        </div>
+        {{ govukCheckboxes({
+          name: "physics",
+          fieldset: {
+            legend: {
+              text: "Which physics courses do you teach?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          hint: {
+            html: '
+              <p class="govuk-hint govuk-!-margin-bottom-2">
+                If you are unsure whether the course(s) you teach is eligible, please email:
+                <a class="govuk-link" href="mailto:FE-Targeted.Retention-Incentive@education.gov.uk">FE-Targeted.Retention-Incentive@education.gov.uk</a>
+              </p>
+              <p class="govuk-hint">Select all that apply</p>
+            '
+          },
+          items: [
+            {
+              value: "A or AS level in physics",
+              text: "A or AS level in physics"
+            },
+            {
+              value: "GCSE in physics",
+              text: "GCSE in physics"
+            },
+            {
+              value: "IBO level 1 / level 2 MYP physics",
+              text: "IBO level 1 / level 2 MYP physics"
+            },
+            {
+              value: "IBO level 3 in SL and HL physics, taught as part of a diploma or career related programme or as a standalone certificate",
+              text: "IBO level 3 in SL and HL physics, taught as part of a diploma or career related programme or as a standalone certificate"
+            },
+            {
+              divider: "or"
+            },
+            {
+              value: "none",
+              text: "I do not teach any of these courses",
+              behaviour: "exclusive"
+            }
+          ]
+        }) }}
 
         {{ govukButton({
           text: "Continue"
