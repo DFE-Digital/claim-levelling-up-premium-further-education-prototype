@@ -16,95 +16,80 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
   
-      <form class="form" action="/next-subject-page" method="post">
+      <form method="post" action="/next-subject-page">
 
-        <div class="govuk-form-group">
-          <fieldset class="govuk-fieldset" aria-describedby="countries-hint">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-              <h1 class="govuk-fieldset__heading">
-                Which computing courses do you teach?
-              </h1>
-            </legend>
+      {{ govukHiddenInput({
+        name: "previousCoursePage",
+        value: "Computing"
+      }) }}
 
-            <br>
+      {{ govukCheckboxes({
+        name: "computing",
+        fieldset: {
+          legend: {
+            text: "Which computing courses do you teach?",
+            classes: "govuk-fieldset__legend--l",
+            isPageHeading: true
+          }
+        },
+        hint: {
+          html: '
+            <p class="govuk-hint govuk-!-margin-bottom-2">
+              If you are unsure whether the course(s) you teach is eligible, please email:
+              <a class="govuk-link" href="mailto:FE-Targeted.Retention-Incentive@education.gov.uk">FE-Targeted.Retention-Incentive@education.gov.uk</a>
+            </p>
+            <p class="govuk-hint govuk-!-margin-bottom-2">Select all that apply</p>
+          '
+        },
+        items: [
+          {
+            value: "Qualifications approved for funding at level 3 and below in the ICT practitioners (opens in a new tab) sector subject area",
+            html: 'Qualifications approved for funding at level 3 and below in the <a class="govuk-link" href="https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=23&PageSize=10&Sort=Status" target="_blank" rel="noopener noreferrer">ICT practitioners (opens in a new tab)</a> sector subject area'
+          },
+          {
+            value: "Qualifications approved for funding at level 3 and below in the ICT for users sector subject area",
+            html: 'Qualifications approved for funding at level 3 and below in the <a class="govuk-link" href="https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=22&PageSize=10&Sort=Status" target="_blank" rel="noopener noreferrer">ICT for users (opens in a new tab)</a> sector subject area'
+          },
+          {
+            value: "Digital functional skills qualifications and essential digital skills qualifications",
+            text: "Digital functional skills qualifications and essential digital skills qualifications"
+          },
+          {
+            value: "T Level in digital support services",
+            text: "T Level in digital support services"
+          },
+          {
+            value: "T Level in digital business services",
+            text: "T Level in digital business services"
+          },
+          {
+            value: "T Level in digital production, design and development",
+            text: "T Level in digital production, design and development"
+          },
+          {
+            value: "IBO level 3 SL and HL computer science, taught as part of a diploma or career related programme or as a standalone certificate",
+            text: "IBO level 3 SL and HL computer science, taught as part of a diploma or career related programme or as a standalone certificate"
+          },
+          {
+            value: "Level 2 or level 3 apprenticeships in the digital occupational route",
+            html: 'Level 2 or level 3 apprenticeships in the <a class="govuk-link" href="https://occupational-maps.instituteforapprenticeships.org/maps/route/digital" target="_blank" rel="noopener noreferrer">digital occupational route (opens in a new tab)</a>'
+          },
+          {
+            divider: "or"
+          },
+          {
+            value: "none",
+            text: "I do not teach any of these courses",
+            behaviour: "exclusive"
+          }
+        ]
+      }) }}
 
-            <div id="account-number-hint" class="govuk-hint">
-              If you are unsure whether the course(s) you teach is eligible, please email: <a href=''>FE-Targeted.Retention-Incentive@education.gov.uk</a>         
-            </div>
-  
-            <br>
+      {{ govukButton({
+        text: "Continue"
+      }) }}
 
-
-
-            <div id="countries-hint" class="govuk-hint">
-              Select all that apply
-            </div>
-            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="computing" name="computing" type="checkbox" value="Qualifications approved for funding at level 3 and below in the ICT practitioners (opens in a new tab) sector subject area">
-                <input type="text" style="display:none" name="previousCoursePage" value="Qualifications approved for funding at level 3 and below in the ICT practitioners (opens in a new tab) sector subject area">
-                <label class="govuk-label govuk-checkboxes__label" for="computing">
-                  Qualifications approved for funding at level 3 and below in the <a href="https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=23&PageSize=10&Sort=Status">ICT practitioners (opens in a new tab)</a> sector subject area
-                </label>
-              </div>
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="computing-2" name="computing" type="checkbox" value="Qualifications approved for funding at level 3 and below in the ICT for users sector subject area">
-                <label class="govuk-label govuk-checkboxes__label" for="computing-2">
-                  Qualifications approved for funding at level 3 and below in the <a href="https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=22&PageSize=10&Sort=Status">ICT for users (opens in a new tab)</a> sector subject area 
-                </label>
-              </div>
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="computing-3" name="computing" type="checkbox" value="Digital functional skills qualifications and essential digital skills qualifications">
-                <label class="govuk-label govuk-checkboxes__label" for="computing-3">
-                  Digital functional skills qualifications and essential digital skills qualifications
-                </label>
-              </div>
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="computing-4" name="computing" type="checkbox" value="digital">
-                <label class="govuk-label govuk-checkboxes__label" for="computing-4">
-                  T Level in digital support services
-                </label>
-              </div>
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="computing-5" name="computing" type="checkbox" value="T Level in digital business services">
-                <label class="govuk-label govuk-checkboxes__label" for="computing-5">
-                  T Level in digital business services
-                </label>
-              </div>
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="computing-3" name="computing" type="checkbox" value="T Level in digital production, design and development">
-                <label class="govuk-label govuk-checkboxes__label" for="computing-3">
-                  T Level in digital production, design and development
-                </label>
-              </div>
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="computing-6" name="computing" type="checkbox" value="IBO level 3 SL and HL computer science, taught as part of a diploma or career related programme or as a standalone certificate">
-                <label class="govuk-label govuk-checkboxes__label" for="computing-6">
-                  IBO level 3 SL and HL computer science, taught as part of a diploma or career related programme or as a standalone certificate
-                </label>
-              </div>
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="computing-7" name="computing" type="checkbox" value="Level 2 or level 3 apprenticeships in the digital occupational route">
-                <label class="govuk-label govuk-checkboxes__label" for="computing-7">
-                  Level 2 or level 3 apprenticeships in the <a href="https://occupational-maps.instituteforapprenticeships.org/maps/route/digital">digital occupational route (opens in a new tab)</a>
-                </label>
-              </div>
-              <div class="govuk-checkboxes__divider">or</div>
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="chemistry-4" name="chemistry" type="checkbox" value="none" data-behaviour="exclusive">
-                <label class="govuk-label govuk-checkboxes__label" for="chemistry-4">
-                  I do not teach any of these courses
-                </label>
-              </div>
-            </div>
-          </fieldset>
-        </div>
-
-        {{ govukButton({
-          text: "Continue"
-        }) }}
-
-      </form>
+    </form>
 
     </div>
   </div>
