@@ -17,75 +17,65 @@
     <div class="govuk-grid-column-two-thirds">
 
 
-      <form class="form" action="/next-subject-page" method="post">
+      <form method="post" action="/next-subject-page">
 
-        <div class="govuk-form-group">
-          <fieldset class="govuk-fieldset" aria-describedby="countries-hint">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-              <h1 class="govuk-fieldset__heading">
-                Which early years courses do you teach?
-              </h1>
-            </legend>
+        {{ govukHiddenInput({
+          name: "previousCoursePage",
+          value: "Early years"
+        }) }}
 
-            <br>
-
-            <div id="account-number-hint" class="govuk-hint">
-              If you are unsure whether the course(s) you teach is eligible, please email: <a href=''>FE-Targeted.Retention-Incentive@education.gov.uk</a>         
-            </div>
-  
-            <br>
-
-
-
-            <div id="countries-hint" class="govuk-hint">
-              Select all that apply
-            </div>
-            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-              <input name="previousCoursePage" type="text" style="display:none" value="Early years">
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="earlyYears" name="earlyYears" type="checkbox" value="Early years practioner (level 2) apprenticeships">
-                <label class="govuk-label govuk-checkboxes__label" for="earlyYears">
-                 Early years practioner (level 2) apprenticeships
-                </label>
-              </div>
-              <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-                <div class="govuk-checkboxes__item">
-                  <input class="govuk-checkboxes__input" id="earlyYears-2" name="earlyYears" type="checkbox" value="Early years educator (level 3) apprenticeships">
-                  <label class="govuk-label govuk-checkboxes__label" for="earlyYears-2">
-                   Early years educator (level 3) apprenticeships
-                  </label>
-                </div>
-                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-                  <div class="govuk-checkboxes__item">
-                    <input class="govuk-checkboxes__input" id="earlyYears-3" name="earlyYears" type="checkbox" value="T Level in education and early years (early years educator)">
-                    <label class="govuk-label govuk-checkboxes__label" for="earlyYears-3">
-                      T Level in education and early years (early years educator)
-                    </label>
-                  </div>
-                  <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-                    <div class="govuk-checkboxes__item">
-                      <input class="govuk-checkboxes__input" id="earlyYears-3" name="earlyYears" type="checkbox" value="A course at level 3 and below that leads to an early years qualification which enables providers to count the recipient in staff:child ratios">
-                      <label class="govuk-label govuk-checkboxes__label" for="earlyYears-3">
-                        A course that leads to an <a href="https://www.gov.uk/government/publications/early-years-qualifications-achieved-in-england">early years qualification (opens in a new tab)</a> which enables providers to count the recipient in staff:child ratios
-                      </label>
-                    </div>
-              
-              <div class="govuk-checkboxes__divider">or</div>
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="chemistry-4" name="chemistry" type="checkbox" value="none" data-behaviour="exclusive">
-                <label class="govuk-label govuk-checkboxes__label" for="chemistry-4">
-                  I do not teach any of these courses
-                </label>
-              </div>
-            </div>
-          </fieldset>
-        </div>
+        {{ govukCheckboxes({
+          name: "earlyYears",
+          fieldset: {
+            legend: {
+              text: "Which early years courses do you teach?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          hint: {
+            html: '
+              <p class="govuk-hint govuk-!-margin-bottom-2">
+                If you are unsure whether the course(s) you teach is eligible, please email:
+                <a class="govuk-link" href="mailto:FE-Targeted.Retention-Incentive@education.gov.uk">FE-Targeted.Retention-Incentive@education.gov.uk</a>
+              </p>
+              <p class="govuk-hint">Select all that apply</p>
+            '
+          },
+          items: [
+            {
+              value: "Early years practioner (level 2) apprenticeships",
+              text: "Early years practioner (level 2) apprenticeships"
+            },
+            {
+              value: "Early years educator (level 3) apprenticeships",
+              text: "Early years educator (level 3) apprenticeships"
+            },
+            {
+              value: "T Level in education and early years (early years educator)",
+              text: "T Level in education and early years (early years educator)"
+            },
+            {
+              value: "A course at level 3 and below that leads to an early years qualification which enables providers to count the recipient in staff:child ratios",
+              html: 'A course that leads to an <a class="govuk-link" href="https://www.gov.uk/government/publications/early-years-qualifications-achieved-in-england" target="_blank" rel="noopener noreferrer">early years qualification (opens in a new tab)</a> which enables providers to count the recipient in staff:child ratios'
+            },
+            {
+              divider: "or"
+            },
+            {
+              value: "none",
+              text: "I do not teach any of these courses",
+              behaviour: "exclusive"
+            }
+          ]
+        }) }}
 
         {{ govukButton({
           text: "Continue"
         }) }}
 
       </form>
+
 
     </div>
   </div>
