@@ -20,68 +20,62 @@
         Tell us if you are currently under any performance measures or disciplinary action
       </h1>
 
-      <form class="form" action="/check-answers" method="post">
+          <form method="post">
 
-        <div class="govuk-form-group">
-          <fieldset class="govuk-fieldset">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-              <h1 class="govuk-fieldset__heading">
-                Are you subject to any formal performance measures as a result of continuous poor teaching standards?
-              </h1>
-            </legend>
-            <div id="performance-hint" class="govuk-hint">
-              This will be as a result of your underperformance as a teacher over a period of time. It could put your employment at the further education (FE) provider at risk and is something we may check with them as it will affect your eligibility.
-            </div>
+            {{ govukRadios({
+              name: "claimantPerformanceMeasures",
+              fieldset: {
+                legend: {
+                  text: "Are you subject to any formal performance measures as a result of continuous poor teaching standards?",
+                  isPageHeading: true,
+                  classes: "govuk-fieldset__legend--m"
+                }
+              },
+              hint: {
+                html: "This will be as a result of your underperformance as a teacher over a period of time. It could put your employment at the further education (FE) provider at risk and is something we may check with them as it will affect your eligibility."
+              },
+              items: [
+                {
+                  value: "Yes",
+                  text: "Yes"
+                },
+                {
+                  value: "No",
+                  text: "No"
+                }
+              ]
+            }) }}
 
-            <div class="govuk-radios" data-module="govuk-radios">
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="performance" name="performance-measure" type="radio" value="Yes">
-                <label class="govuk-label govuk-radios__label" for="performance">
-                  Yes
-                </label>
-              </div>
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="performance-2" name="performance-measure" type="radio" value="No">
-                <label class="govuk-label govuk-radios__label" for="performance-2">
-                  No
-                </label>
-              </div>
-          </fieldset>
-        </div>
+            {{ govukRadios({
+              name: "claimantDisciplinaryAction",
+              fieldset: {
+                legend: {
+                  text: "Are you currently subject to disciplinary action?",
+                  isPageHeading: false,
+                  classes: "govuk-fieldset__legend--m"
+                }
+              },
+              hint: {
+                html: "This is more serious than performance measures and could be because of misconduct. It is something we may check with your FE provider as it will affect your eligibility."
+              },
+              items: [
+                {
+                  value: "Yes",
+                  text: "Yes"
+                },
+                {
+                  value: "No",
+                  text: "No"
+                }
+              ]
+            }) }}
 
-        <div class="govuk-form-group">
-          <fieldset class="govuk-fieldset">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-              <h1 class="govuk-fieldset__heading">
-                Are you currently subject to disciplinary action?
-              </h1>
-            </legend>
-            <div id="performance-hint" class="govuk-hint">
-              This is more serious than performance measures and could be because of misconduct. It is something we may check with your FE provider as it will affect your eligibility.
-            </div>
+            {{ govukButton({
+              text: "Continue"
+            }) }}
 
-            <div class="govuk-radios" data-module="govuk-radios">
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="disciplinary-3" name="disciplinary-action" type="radio" value="Yes">
-                <label class="govuk-label govuk-radios__label" for="performance-3">
-                  Yes
-                </label>
-              </div>
-              <div class="govuk-radios__item">
-                <input class="govuk-radios__input" id="disciplinary-4" name="disciplinary-action" type="radio" value="No">
-                <label class="govuk-label govuk-radios__label" for="disciplinary-4">
-                  No
-                </label>
-              </div>
-          </fieldset>
-        </div>
+          </form>
 
-
-        {{ govukButton({
-          text: "Continue"
-        }) }}
-
-      </form>
 
     </div>
   </div>

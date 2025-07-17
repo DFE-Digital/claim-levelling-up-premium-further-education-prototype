@@ -17,12 +17,9 @@
     <div class="govuk-grid-column-two-thirds">
 
 
-        <form method="post" action="/next-subject-page">
-
-            {{ govukHiddenInput({
-              name: "previousCoursePage",
-              value: "Qualifications approved for funding at level 3 and below in the mathematics and statistics sector subject area"
-            }) }}
+        <form method="post" action="/eligibility/subject-area/next-subject-page">
+          
+            <input type="hidden" name="previousCoursePage" value="Maths"> 
 
             {{ govukCheckboxes({
               name: "maths",

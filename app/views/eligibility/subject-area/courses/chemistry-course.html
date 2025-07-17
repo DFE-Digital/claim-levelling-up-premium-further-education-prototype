@@ -16,12 +16,10 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form method="post" action="/next-subject-page">
+      <form method="post" action="/eligibility/subject-area/next-subject-page">
 
-        {{ govukHiddenInput({
-          name: "previousCoursePage",
-          value: "Chemistry"
-        }) }}
+        <input type="hidden" name="previousCoursePage" value="Chemistry">
+
 
         {{ govukCheckboxes({
           name: "chemistry",

@@ -155,9 +155,9 @@ module.exports = router => {
   })
 
 
-  ////////////////////// POST: SUBJECT AREAS //////////////////////
+////////////////////// POST: SUBJECT AREAS //////////////////////
 
-router.post('/subject-areas', function (req, res) {
+router.post('/eligibility/subject-area/subject-areas', function (req, res) {
   subjectAreas = req.session.data['subjects'] /// ['subjects '] <-- this is the name value of the checkboxes component
 
   if (subjectAreas.includes('I do not teach any of these subjects')) {
@@ -183,35 +183,65 @@ router.post('/subject-areas', function (req, res) {
     }
   })
 
-
   //////////////// NEXT SUBJECT PAGE HANDLER ////////////////
 
-var subjectAreas = null;
+    var subjectAreas = null;
 
-router.post('/next-subject-page', function (req, res) {
-  //var currentSubjectIndex = subjectAreas.indexOf(req.body.previousCoursePage);
-  if (subjectAreas.length > 0){
-    var subjectValue = subjectAreas[0];
-    subjectAreas.splice(0, 1);
-    if (subjectValue === 'Chemistry') {
-      res.redirect('/chemistry-course');
-    } else if (subjectValue === 'Computing, including digital and ICT') {
-      res.redirect('/computing-course');
-    } else if (subjectValue === 'Early years') {
-      res.redirect('/early-years-course');
-    } else if (subjectValue === 'Engineering and manufacturing, including transport engineering and electronics') {
-      res.redirect('/engineering-course');
-    } else if (subjectValue === 'Maths') {
-      res.redirect('/maths-course');
-    } else if (subjectValue === 'Physics') {
-      res.redirect('/physics-course');
-    } 
+    router.post('/eligibility/subject-area/next-subject-page', function (req, res) {
+      //var currentSubjectIndex = subjectAreas.indexOf(req.body.previousCoursePage);
+      if (subjectAreas.length > 0){
+        var subjectValue = subjectAreas[0]
+        subjectAreas.splice(0, 1)
+        if (subjectValue === 'Chemistry') {
+          res.redirect('/eligibility/subject-area/courses/chemistry-course')
+        } else if (subjectValue === 'Computing, including digital and ICT') {
+          res.redirect('/eligibility/subject-area/courses/computing-course')
+        } else if (subjectValue === 'Early years') {
+          res.redirect('/eligibility/subject-area/courses/early-years-course')
+        } else if (subjectValue === 'Engineering and manufacturing, including transport engineering and electronics') {
+          res.redirect('/eligibility/subject-area/courses/engineering-course')
+        } else if (subjectValue === 'Maths') {
+          res.redirect('/eligibility/subject-area/courses/maths-course')
+        } else if (subjectValue === 'Physics') {
+          res.redirect('/eligibility/subject-area/courses/physics-course')
+        }
+      } else {
+        res.redirect('/eligibility/half-timetabled-teaching-hours-teaching-eligible-courses')
+      }
+    })
 
-  } else {
-    res.redirect('/teaching-courses');
-  }
-});
+    router.post('/eligibility/half-timetabled-teaching-hours-teaching-eligible-courses', function (req, res) {
+      var halfTimetabledTeachingHoursEligibleCourses = req.session.data['halfTimetabledTeachingHoursEligibleCourses']
+      if (halfTimetabledTeachingHoursEligibleCourses == 'No') {
+        res.redirect('/eligibility/performance')
+      } else {
+        res.redirect('/eligibility/performance')
+      }
+    })
 
+    ///////////////// PERFORMANCE CHECK //////////////////////
+    router.post('/eligibility/performance', function (req, res) {
+      const performance = req.session.data['claimantPerformanceMeasures']
+      const disciplinary = req.session.data['claimantDisciplinaryAction']
 
+      const bothAreNo = (performance === 'No' && disciplinary === 'No')
 
+      // In production you can block or redirect based on eligibility
+      // For now, always allow continuation for user testing
+
+      if (!bothAreNo) {
+        console.warn('⚠️ User has answered Yes to one or both performance/disciplinary questions')
+        // You can also log to session for analytics:
+        req.session.data['ineligibleByPerformanceCheck'] = true
+      }
+
+      res.redirect('/eligibility/check')
+    })
+
+    ///////////// YOU ARE ELIGIBLE PAGE ///////////////
+    router.post('/eligibility/check', (req, res) => {
+      // Here you would typically handle the form submission, e.g. save to database
+      // For now, just redirect to a confirmation page
+      res.redirect('/eligibility/you-are-eligible')
+    })
 }

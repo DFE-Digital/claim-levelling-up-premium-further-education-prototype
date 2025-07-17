@@ -17,12 +17,9 @@
     <div class="govuk-grid-column-two-thirds">
 
 
-      <form method="post" action="/next-subject-page">
+      <form method="post" action="/eligibility/subject-area/next-subject-page">
 
-        {{ govukHiddenInput({
-          name: "previousCoursePage",
-          value: "Early years"
-        }) }}
+        <input type="hidden" name="previousCoursePage" value="Early years">
 
         {{ govukCheckboxes({
           name: "earlyYears",
