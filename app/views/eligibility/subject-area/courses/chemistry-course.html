@@ -16,72 +16,65 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form class="form" action="/next-subject-page" method="post">
+      <form method="post" action="/next-subject-page">
 
-          <div class="govuk-form-group">
-          <fieldset class="govuk-fieldset" aria-describedby="countries-hint">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-              <h1 class="govuk-fieldset__heading">
-                Which chemistry courses do you teach?
-              </h1>
-            </legend>
+        {{ govukHiddenInput({
+          name: "previousCoursePage",
+          value: "Chemistry"
+        }) }}
 
-            <br>
-
-            <div id="account-number-hint" class="govuk-hint">
-              If you are unsure whether the course(s) you teach is eligible, please email: <a href=''>FE-Targeted.Retention-Incentive@education.gov.uk</a>         
-            </div>
-  
-            <br>
-
-
-
-            <div id="countries-hint" class="govuk-hint">
-              Select all that apply
-            </div>
-            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-              <input name="previousCoursePage" type="text" style="display:none" value="Chemistry">
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="chemistry" name="chemistry" type="checkbox" value="A or AS level in chemistry">
-                <label class="govuk-label govuk-checkboxes__label" for="chemistry">
-                 A or AS level in chemistry
-                </label>
-              </div>
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="chemistry-2" name="chemistry" type="checkbox" value="GCSE in chemistry">
-                <label class="govuk-label govuk-checkboxes__label" for="chemistry-2">
-                  GCSE in chemistry
-                </label>
-              </div>
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="chemistry-3" name="chemistry" type="checkbox" value="IBO level 3 SL and HL chemistry, taught as part of a diploma or career related programme or as a standalone certificate">
-                <label class="govuk-label govuk-checkboxes__label" for="chemistry-3">
-                IBO level 3 SL and HL chemistry, taught as part of a diploma or career related programme or as a standalone certificate
-                </label>
-              </div>
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="chemistry-4" name="chemistry" type="checkbox" value="IBO level 1 / level 2 MYP chemistry">
-                <label class="govuk-label govuk-checkboxes__label" for="chemistry-4">
-                	IBO level 1 / level 2 MYP chemistry
-                </label>
-              </div>
-              <div class="govuk-checkboxes__divider">or</div>
-              <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" id="chemistry-5" name="chemistry" type="checkbox" value="none" data-behaviour="exclusive">
-                <label class="govuk-label govuk-checkboxes__label" for="chemistry-5">
-                  I do not teach any of these courses
-                </label>
-              </div>
-            </div>
-          </fieldset>
-        </div>
-
+        {{ govukCheckboxes({
+          name: "chemistry",
+          fieldset: {
+            legend: {
+              text: "Which chemistry courses do you teach?",
+              classes: "govuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          hint: {
+            html: '
+              <p class="govuk-hint govuk-!-margin-bottom-2">
+                If you are unsure whether the course(s) you teach is eligible, please email:
+                <a class="govuk-link" href="mailto:FE-Targeted.Retention-Incentive@education.gov.uk">FE-Targeted.Retention-Incentive@education.gov.uk</a>
+              </p>
+              <p class="govuk-hint govuk-!-margin-bottom-2">Select all that apply</p>
+            '
+          },
+          items: [
+            {
+              value: "A or AS level in chemistry",
+              text: "A or AS level in chemistry"
+            },
+            {
+              value: "GCSE in chemistry",
+              text: "GCSE in chemistry"
+            },
+            {
+              value: "IBO level 3 SL and HL chemistry, taught as part of a diploma or career related programme or as a standalone certificate",
+              text: "IBO level 3 SL and HL chemistry, taught as part of a diploma or career related programme or as a standalone certificate"
+            },
+            {
+              value: "IBO level 1 / level 2 MYP chemistry",
+              text: "IBO level 1 / level 2 MYP chemistry"
+            },
+            {
+              divider: "or"
+            },
+            {
+              value: "none",
+              text: "I do not teach any of these courses",
+              behaviour: "exclusive"
+            }
+          ]
+        }) }}
 
         {{ govukButton({
           text: "Continue"
         }) }}
 
       </form>
+
 
     </div>
   </div>
