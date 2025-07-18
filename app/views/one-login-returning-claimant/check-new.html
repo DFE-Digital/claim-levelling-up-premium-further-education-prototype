@@ -27,7 +27,7 @@
 
 {% block content %}
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">  
+  <div class="govuk-grid-column-three-quarters">  
 <h1 class="govuk-heading-l">Check your answers before sending employment check details</h1>
 
   <h2 class="govuk-heading-m">Identity details</h2>
@@ -36,47 +36,64 @@
     rows: [
       {
         key: { text: "What is your full name?" },
-        value: { text: data.fullName },
+        value: { text: data.returnClaimantFirstName + " " + data.returnClaimantLastName },
         actions: { items: [{ href: "/change/full-name", text: "Change", visuallyHiddenText: "full name" }] }
       },
       {
         key: { text: "What is your address?" },
-        value: { text: data.address },
-        actions: { items: [{ href: "/change/address", text: "Change", visuallyHiddenText: "address" }] }
+        value: {
+          html: '<ul class="govuk-list">
+                  <li>3 King St</li>
+                  <li>Parkville</li>
+                  <li>North Parkshire</li>
+                  <li>PR1 9SP</li>
+                </ul>'
+        },
+        actions: {
+          items: [{
+            href: "#",
+            text: "Change",
+            visuallyHiddenText: "address"
+          }]
+        }
       },
       {
-        key: { text: "What is your date of birth?" },
-        value: { text: data.dateOfBirth },
-        actions: { items: [{ href: "/change/date-of-birth", text: "Change", visuallyHiddenText: "date of birth" }] }
+        key: { text: "Date of birth" },
+          value: {
+            text: (data["returnClaimantDob-day"] or "") + " " +
+                  (data["returnClaimantDob-month"] or "") + " " +
+                  (data["returnClaimantDob-year"] or "")
+          },
+        actions: { items: [{ href: "#", text: "Change", visuallyHiddenText: "date of birth" }] }
       },
       {
         key: { text: "How is your gender recorded on your employer’s payroll system?" },
-        value: { text: data.gender },
-        actions: { items: [{ href: "/change/gender", text: "Change", visuallyHiddenText: "gender" }] }
+        value: { text: "Male" },
+        actions: { items: [{ href: "#", text: "Change", visuallyHiddenText: "gender" }] }
       },
       {
         key: { text: "What is your TRN? (optional)" },
-        value: { text: data.trn },
-        actions: { items: [{ href: "/change/trn", text: "Change", visuallyHiddenText: "TRN" }] }
+        value: { text: "92345567" },
+        actions: { items: [{ href: "#", text: "Change", visuallyHiddenText: "TRN" }] }
       },
       {
         key: { text: "What is your National Insurance number?" },
-        value: { text: data.nino },
-        actions: { items: [{ href: "/change/nino", text: "Change", visuallyHiddenText: "National Insurance number" }] }
+        value: { text: data.returnClaimantNationalInsuranceNumber or "Not provided" },
+        actions: { items: [{ href: "#", text: "Change", visuallyHiddenText: "National Insurance number" }] }
       },
       {
         key: { text: "Email address" },
-        value: { text: data.email },
+        value: { text: data.workEmail },
         actions: { items: [{ href: "/change/email", text: "Change", visuallyHiddenText: "email address" }] }
       },
       {
         key: { text: "Would you like to provide your mobile number?" },
-        value: { text: data.provideMobile },
+        value: { text: "Yes" },
         actions: { items: [{ href: "/change/provide-mobile", text: "Change", visuallyHiddenText: "mobile number preference" }] }
       },
       {
         key: { text: "Mobile number" },
-        value: { text: data.mobile },
+        value: { text: "07900 000 000" },
         actions: { items: [{ href: "/change/mobile", text: "Change", visuallyHiddenText: "mobile number" }] }
       }
     ]
@@ -103,17 +120,17 @@
     rows: [
       {
         key: { text: "Name on bank account" },
-        value: { text: data.bankAccountName },
+        value: { text: data.returnClaimantBankAccountName or "Not provided" },
         actions: { items: [{ href: "/change/bank-account-name", text: "Change", visuallyHiddenText: "bank account name" }] }
       },
       {
         key: { text: "Bank sort code" },
-        value: { text: data.bankSortCode },
+        value: { text: data.returnClaimantSortCode or "Not provided" },
         actions: { items: [{ href: "/change/sort-code", text: "Change", visuallyHiddenText: "bank sort code" }] }
       },
       {
         key: { text: "Bank account number" },
-        value: { text: data.bankAccountNumber },
+        value: { text: data.returnClaimantAccountNumber or "Not provided" },
         actions: { items: [{ href: "/change/account-number", text: "Change", visuallyHiddenText: "bank account number" }] }
       }
     ]
