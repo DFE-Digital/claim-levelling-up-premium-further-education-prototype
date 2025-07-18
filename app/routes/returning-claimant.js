@@ -43,7 +43,7 @@ router.post('/one-login-returning-claimant/received-retention-incentive-before',
   }
 
   // No → go to eligibility
-  res.redirect('/eligibility')
+  res.redirect('/eligibility/start')
 })
 
 ///// TO render the res.redirect('/eligibility') route handler above
