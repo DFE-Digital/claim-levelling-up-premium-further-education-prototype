@@ -25,6 +25,7 @@ router.post('/one-login-returning-claimant/do-you-have-a-one-login-account', (re
 
 
 router.post('/one-login-returning-claimant/received-retention-incentive-before', (req, res) => {
+  console.log('User selected:', req.session.data.receivedRetentionIncentive)
   const received = req.session.data.receivedRetentionIncentive
 
   if (!received) {
@@ -44,6 +45,12 @@ router.post('/one-login-returning-claimant/received-retention-incentive-before',
   // No → go to eligibility
   res.redirect('/eligibility')
 })
+
+///// TO render the res.redirect('/eligibility') route handler above
+router.get('/eligibility', function (req, res) {
+  res.render('eligibility/index')
+})
+
 
 
 
