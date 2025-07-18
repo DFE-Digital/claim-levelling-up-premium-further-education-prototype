@@ -28,7 +28,17 @@
 
     {{ govukDetails({
       summaryText: "Why we need this information",
-      html: "We are asking for this information because the applicant has not been able to prove their identity using One Gov Login. <br> Providing this information does not break the GDPR rules."
+      html:"
+        <p class='govuk-body'>
+          The applicant was not able to prove their identity using One Gov Login, so we need to do an employment check.
+        </p>
+        <p class='govuk-body'>
+          The applicant has already provided this information and understands it will be verified by their employer.
+        </p>
+        <p class='govuk-body'>
+          Providing this information does not break GDPR rules. 
+        </p>
+      "
     }) }}
 
 

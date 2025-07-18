@@ -41,7 +41,7 @@
 
     <form method="post" action="{{ actionUrl }}">  
         <input type="hidden" name="returnUrl" value="{{ returnUrl }}">
-      <h3 class="govuk-heading-m">Subject area</h3>
+      <h3 class="govuk-heading-m">Courses</h3>
 
           {{ govukCheckboxes({
             name: "levelThreeSubjectAreaCourses",
@@ -81,7 +81,7 @@
               },
               {
                 value: "none",
-                text: "They do not teach any eligible subjects"
+                text: "They do not teach any eligible courses"
               }
             ]
           }) }}
