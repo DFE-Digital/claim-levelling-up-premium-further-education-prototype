@@ -1,0 +1,83 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+  <form method="post" action="/eligibility/subject-area/next-subject-page">
+
+    <input type="hidden" name="previousCoursePage" value="building">
+
+    {{ govukCheckboxes({
+      name: "building",
+      fieldset: {
+        legend: {
+          text: "Which building and construction courses do you teach?",
+          classes: "govuk-fieldset__legend--l",
+          isPageHeading: true
+        }
+      },
+      hint: {
+        html: '
+          <p class="govuk-hint govuk-!-margin-bottom-2">
+            If you are unsure whether the course(s) you teach is eligible, please email:
+            <a class="govuk-link" href="mailto:FE-Targeted.Retention-Incentive@education.gov.uk">FE-Targeted.Retention-Incentive@education.gov.uk</a>
+          </p>
+          <p class="govuk-hint govuk-!-margin-bottom-2">Select all that apply</p>
+        '
+      },
+      items: [
+        {
+          value: "Qualifications approved for funding at level 3 and below in the building and construction sector subject area",
+          html: 'Qualifications approved for funding at level 3 and below in the <a class="govuk-link" href="https://www.qualifications.education.gov.uk/Search?Status=Approved&amp;Level=0,1,2,3,4&amp;Sub=7" target="_blank" rel="noopener noreferrer">building and construction</a> sector subject area'
+        },
+        {
+          value: "T Level in building services engineering for construction",
+          text: "T Level in building services engineering for construction"
+        },
+        {
+          value: "T Level in onsite construction",
+          text: "T Level in onsite construction"
+        },
+        {
+          value: "T Level in design, surveying and planning for construction",
+          text: "T Level in design, surveying and planning for construction"
+        },
+        {
+          value: "Level 2 or level 3 apprenticeships in the construction and the built environment occupational route",
+          html: 'Level 2 or level 3 apprenticeships in the <a class="govuk-link" href="https://occupational-maps.instituteforapprenticeships.org/maps/route/construction" target="_blank" rel="noopener noreferrer">construction and the built environment occupational route</a>'
+        },
+        {
+          divider: "or"
+        },
+        {
+          value: "I do not teach any of these courses",
+          text: "I do not teach any of these courses",
+          behaviour: "exclusive"
+        }
+      ]
+    }) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+
+  </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}

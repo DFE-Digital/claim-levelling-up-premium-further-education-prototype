@@ -1,0 +1,80 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        Which academic year did you start teaching in further education in England?      
+      </h1>
+
+      <!--academic-year-in-further-education-->
+   <form method="post">
+
+      {{ govukRadios({
+        name: "academicYearInFurtherEducation",
+        fieldset: {
+          legend: {
+            text: "Which academic year did you start teaching in further education in England?",
+            classes: "govuk-fieldset__legend--m govuk-visually-hidden"
+          }
+        },
+        items: [
+          {
+            value: "September 2025 to August 2026",
+            text: "September 2025 to August 2026"
+          },
+          {
+            value: "September 2024 to August 2025",
+            text: "September 2024 to August 2025"
+          },
+          {
+            value: "September 2023 to August 2024",
+            text: "September 2023 to August 2024"
+          },
+          {
+            value: "September 2022 to August 2023",
+            text: "September 2022 to August 2023"
+          },
+          {
+            value: "September 2021 to August 2022",
+            text: "September 2021 to August 2022"
+          },
+          {
+            divider: "or"
+          },
+          {
+            value: "Before September 2021",
+            text: "Before September 2021"
+          }
+        ]
+      }) }}
+
+      {{ govukDetails({
+        summaryText: "What counts towards the first 5 years of an FE teaching career",
+        html: "This is the first academic year when you started your first role with teaching responsibilities at any post-16 only education (FE) provider in England.<br>It is when you formally took on teaching responsibilities, including teaching timetabled guided learning hours and for planning, delivering and assessing learning."
+      }) }}
+
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+
+    </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}

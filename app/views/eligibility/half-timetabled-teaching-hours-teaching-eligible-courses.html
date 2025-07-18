@@ -1,0 +1,84 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+
+      <h1 class="govuk-heading-l">
+        Do you spend at least half of your timetabled teaching hours teaching these eligible courses?
+      </h1>
+
+        <form method="post">
+
+          <p>
+            At least 50% of your timetabled teaching hours must be spent teaching students of all ages in the following courses:
+          </p>
+
+          <ul class="govuk-list govuk-list--bullet">
+            <li>
+              qualifications approved for funding at level 3 and below in the
+              <a href="https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=28&PageSize=10&Sort=Status">
+                mathematics and statistics (opens in a new tab)
+              </a>
+              sector subject area
+            </li>
+            <li>
+              qualifications approved for funding at level 3 and below in the
+              <a href="https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=26&PageSize=10&Sort=Status">
+                manufacturing technologies (opens in a new tab)
+              </a>
+              sector subject area
+            </li>
+            <li>
+              level 2 or level 3 apprenticeships in the
+              <a href="https://occupational-maps.instituteforapprenticeships.org/maps/route/engineering-manufacturing">
+                engineering and manufacturing occupational route (opens in a new tab)
+              </a>
+            </li>
+          </ul>
+
+          {{ govukRadios({
+            name: "halfTimetabledTeachingHoursEligibleCourses",
+            fieldset: {
+              legend: {
+                text: " Do you spend at least half of your timetabled teaching hours teaching these eligible courses?",
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--m govuk-visually-hidden"
+              }
+            },
+            items: [
+              {
+                value: "Yes",
+                text: "Yes"
+              },
+              {
+                value: "No",
+                text: "No"
+              }
+            ]
+          }) }}
+
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+
+        </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}

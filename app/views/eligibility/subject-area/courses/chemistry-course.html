@@ -1,0 +1,80 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form method="post" action="/eligibility/subject-area/next-subject-page">
+
+        <input type="hidden" name="previousCoursePage" value="chemistry">
+
+
+        {{ govukCheckboxes({
+          name: "chemistry",
+          fieldset: {
+            legend: {
+              text: "Which chemistry courses do you teach?",
+              classes: "govuk-fieldset__legend--l",
+              isPageHeading: true
+            }
+          },
+          hint: {
+            html: '
+              <p class="govuk-hint govuk-!-margin-bottom-2">
+                If you are unsure whether the course(s) you teach is eligible, please email:
+                <a class="govuk-link" href="mailto:FE-Targeted.Retention-Incentive@education.gov.uk">FE-Targeted.Retention-Incentive@education.gov.uk</a>
+              </p>
+              <p class="govuk-hint govuk-!-margin-bottom-2">Select all that apply</p>
+            '
+          },
+          items: [
+            {
+              value: "A or AS level in chemistry",
+              text: "A or AS level in chemistry"
+            },
+            {
+              value: "GCSE in chemistry",
+              text: "GCSE in chemistry"
+            },
+            {
+              value: "IBO level 3 SL and HL chemistry, taught as part of a diploma or career related programme or as a standalone certificate",
+              text: "IBO level 3 SL and HL chemistry, taught as part of a diploma or career related programme or as a standalone certificate"
+            },
+            {
+              value: "IBO level 1 / level 2 MYP chemistry",
+              text: "IBO level 1 / level 2 MYP chemistry"
+            },
+            {
+              divider: "or"
+            },
+            {
+              value: "none",
+              text: "I do not teach any of these courses",
+              behaviour: "exclusive"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,295 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Check your answers template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+
+      <h1 class="govuk-heading-xl">
+        Check your answers
+      </h1>
+
+        {{ govukSummaryList({
+          rows: [
+            {
+              key: { text: "Which academic year did you start teaching in further education in England?" },
+              value: { text: data.academicYearInFurtherEducation },
+              actions: {
+                items: [{
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "academic year you started teaching"
+                }]
+              }
+            },
+            {
+              key: { text: "Do you have a teaching qualification?" },
+              value: { text: data.claimantTeachingQualification },
+              actions: {
+                items: [{
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "teaching qualification"
+                }]
+              }
+            },
+            {
+              key: { text: "Are you a member of staff with teaching responsibilities?" },
+              value: { text: data.claimantTeachingResponsibilities },
+              actions: {
+                items: [{
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "teaching responsibilities"
+                }]
+              }
+            },
+            {
+              key: { text: "Which FE provider directly employs you?" },
+              value: { text: data.worksAtFeProvider },
+              actions: {
+                items: [{
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "FE provider"
+                }]
+              }
+            },
+            {
+              key: { text: "What type of contract do you have directly with " + data.worksAtFeProvider + "?" },
+              value: { text: data.claimantContractType },
+              actions: {
+                items: [{
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "contract type"
+                }]
+              }
+            },
+            {
+              key: { text: "Does your fixed-term contract cover the full 2025 to 2026 academic year?" },
+              value: { text: data.claimantFixedTermContract },
+              actions: {
+                items: [{
+                  href: "/change/fixed-term-full-year",
+                  text: "Change",
+                  visuallyHiddenText: "fixed-term contract coverage"
+                }]
+              }
+            } if data.claimantContractType === 'Fixed-term',
+            {
+              key: { text: "Have you taught at " + data.worksAtFeProvider + " for at least one academic term?" },
+              value: { text: data.claimantTaughtOneFullTerm },
+              actions: {
+                items: [{
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "academic term at provider"
+                }]
+              }
+            } if data.claimantContractType === 'Variable',
+            {
+              key: { text: "Are you timetabled to teach at least 2.5 hours per week at " + data.worksAtFeProvider + " next term?" },
+              value: { text: data.claimantVariableTimetabledToTeach },
+              actions: {
+                items: [{
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "next term teaching hours"
+                }]
+              }
+            } if data.claimantContractType === 'Variable',
+            {
+              key: { text: "On average, how many hours a week are you timetabled to teach at " + data.worksAtFeProvider + " during the current term?" },
+              value: { text: data.claimantTeachingHoursPerWeek },
+              actions: {
+                items: [{
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "current term teaching hours"
+                }]
+              }
+            },
+            {
+              key: { text: "Do you spend at least half your timetabled teaching hours working with students aged 16 to 19?" },
+              value: { text: data.sixteenToNineteenTeachingHours },
+              actions: {
+                items: [{
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "teaching 16 to 19 year olds"
+                }]
+              }
+            },
+
+
+
+
+            {
+              key: { text: "Which subject areas do you teach?" },
+              value: { html: data.subjects + "<br>" },
+              actions: {
+                items: [{
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "subject areas"
+                }]
+              }
+            },
+            
+
+
+
+            {
+              key: { text: "Building and construction courses" },
+              value: { text: data.building },
+              actions: {
+                items: [{
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "courses for " + subject
+                }]
+              }
+            } if data.building,
+
+            {
+              key: { text: "Chemistry courses" },
+              value: { text: data.chemistry },
+              actions: {
+                items: [{
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "courses for " + subject
+                }]
+              }
+            } if data.chemistry,
+
+            {
+              key: { text: "Computing courses" },
+              value: { text: data.computing },
+              actions: {
+                items: [{
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "courses for " + subject
+                }]
+              }
+            } if data.computing,
+
+            {
+              key: { text: "Early years courses" },
+              value: { text: data.earlyYears },
+              actions: {
+                items: [{
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "courses for " + subject
+                }]
+              }
+            } if data.earlyYears,
+
+            {
+              key: { text: "Engineering courses" },
+              value: { text: data.engineering },
+              actions: {
+                items: [{
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "courses for " + subject
+                }]
+              }
+            } if data.engineering,
+
+            {
+                key: { text: "Maths courses" },
+                value: { text: data.maths },
+                actions: {
+                  items: [{
+                    href: "#",
+                    text: "Change",
+                    visuallyHiddenText: "courses for " + subject
+                  }]
+                }
+              } if data.maths,
+
+              {
+                key: { text: "Physics courses" },
+                value: { text: data.physics },
+                actions: {
+                  items: [{
+                    href: "#",
+                    text: "Change",
+                    visuallyHiddenText: "courses for " + subject
+                  }]
+                }
+              } if data.physics,
+
+
+
+            {
+              key: { text: "Do you spend at least half of your timetabled teaching hours teaching these eligible courses?" },
+              value: { text: data.halfTimetabledTeachingHoursEligibleCourses },
+              actions: {
+                items: [{
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "eligible course teaching hours"
+                }]
+              }
+            },
+            {
+              key: { text: "Are you subject to performance measures?" },
+              value: { text: data.claimantPerformanceMeasures },
+              actions: {
+                items: [{
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "performance measures"
+                }]
+              }
+            },
+            {
+              key: { text: "Are you subject to disciplinary action?" },
+              value: { text: data.claimantDisciplinaryAction },
+              actions: {
+                items: [{
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "disciplinary action"
+                }]
+              }
+            }
+          ]
+        }) }}
+
+
+      <br>
+
+      <p>
+        By selecting continue you are confirming that, to the best of your knowledge, the details you are providing are correct.
+      </p>
+
+      
+
+      <form action="/eligibility/you-are-eligible" method="post" novalidate>
+
+        {{ govukButton({
+          text: "Confirm and send"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

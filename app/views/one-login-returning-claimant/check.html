@@ -35,6 +35,16 @@
       }) }}
     {% endif %}
 
+    {# {% if data.bankDetailsError %}
+      {{ govukErrorSummary({
+        titleText: "There is a problem",
+        errorList: [{
+          html: "Enter your bank details.<br>They must match what we have on record.",
+          href: "#bank-details"
+        }]
+      }) }}
+    {% endif %} #}
+
     <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
     {# ✅ Full name card #}
@@ -140,6 +150,23 @@
     }) }}
 
 
+
+    {##################### Bank details error inset text #######################}
+    {# If there is a bank details error, show an inset text message #}
+    {% if data.bankDetailsError %}
+      
+        {{ mojAlert({
+          variant: "warning",
+          title: "We couldn't verify these bank details",
+          showTitleAsHeading: true,
+          dismissible: false,
+          text: 'They must match what we have on record',
+          id: "bank-details"
+        }) }}
+      
+    {% endif %}
+
+
     {# ✅ Bank details card #}
     {{ govukSummaryList({
       card: {
@@ -173,8 +200,28 @@
       ]
     }) }}
 
+  
     <form method="post" action="/one-login-returning-claimant/check">
-      {{ govukButton({ text: "Confirm and send" }) }}
+      <h2 class="govuk-heading-m">Declaration</h2>
+
+      {{ govukCheckboxes({
+        name: "Declaration",
+        items: [
+          {
+            value: "I have checked the information I have provided and I'm confident it is correct. I understandthat submitting false information may cause a delay to my payment",
+            text: "I have checked the information I have provided and I'm confident it is correct. I understandthat submitting false information may cause a delay to my payment"
+          }
+        ]
+      }) }}
+
+      <div class="govuk-button-group">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Continue
+        </button>
+        <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+          Cancel
+        </button>
+      </div>
     </form>
   </div>
 </div>

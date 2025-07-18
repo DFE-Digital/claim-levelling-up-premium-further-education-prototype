@@ -1,0 +1,72 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+
+        <form method="post" action="/eligibility/subject-area/next-subject-page">
+          
+            <input type="hidden" name="previousCoursePage" value="maths"> 
+
+            {{ govukCheckboxes({
+              name: "maths",
+              fieldset: {
+                legend: {
+                  text: "Which maths courses do you teach?",
+                  isPageHeading: true,
+                  classes: "govuk-fieldset__legend--l"
+                }
+              },
+              hint: {
+                html: '
+                  <p class="govuk-hint govuk-!-margin-bottom-2">
+                    If you are unsure whether the course(s) you teach is eligible, please email:
+                    <a class="govuk-link" href="mailto:FE-Targeted.Retention-Incentive@education.gov.uk">FE-Targeted.Retention-Incentive@education.gov.uk</a>
+                  </p>
+                  <p class="govuk-hint">Select all that apply</p>
+                '
+              },
+              items: [
+                {
+                  value: "Qualifications approved for funding at level 3 and below in the mathematics and statistics sector subject area",
+                  html: 'Qualifications approved for funding at level 3 and below in the <a class="govuk-link" href="https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=28&PageSize=10&Sort=Status">mathematics and statistics (opens in a new tab)</a> sector subject area'
+                },
+                {
+                  value: "GCSE in maths, functional skills qualifications and other maths qualifications approved for teaching to 16- to 19-year-olds who meet the condition of funding",
+                  html: 'GCSE in maths, functional skills qualifications and <a class="govuk-link" href="https://submit-learner-data.service.gov.uk/find-a-learning-aim/LearningAimSearchResult?TeachingYear=2324&HasFilters=False&EFAFundingConditions=EFACONFUNDMATHS">other maths qualifications (opens in a new tab)</a> approved for teaching to 16- to 19-year-olds who meet the condition of funding'
+                },
+                {
+                  divider: "or"
+                },
+                {
+                  value: "none",
+                  text: "I do not teach any of these courses",
+                  behaviour: "exclusive"
+                }
+              ]
+            }) }}
+
+            {{ govukButton({
+              text: "Continue"
+            }) }}
+
+          </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}

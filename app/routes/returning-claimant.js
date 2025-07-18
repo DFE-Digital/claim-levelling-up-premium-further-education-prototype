@@ -103,13 +103,60 @@ router.post('/one-login-returning-claimant/do-you-have-a-one-login-account', (re
 
 
 
-
+  /////////// ONE LOGIN SIGNED IN AND ID TRIAGE FLOW ////////////
   router.post('/one-login-returning-claimant/one-login-signed-in', (req, res) => {
     let data = req.session.data
-    
-    res.redirect('/one-login-returning-claimant/confirm-college')
-    
+
+    res.redirect('/one-login-returning-claimant/triage/do-you-live-in-the-uk')
+
   })
+
+
+  router.post('/one-login-returning-claimant/triage/do-you-live-in-the-uk', (req, res) => {
+    let liveInTheUK = req.session.data.liveInTheUK
+    if (liveInTheUK === 'Yes') {
+      // User lives in the UK
+       res.redirect('/one-login-returning-claimant/triage/do-you-live-in-the-uk')
+    } else {
+      // User does not live in the UK
+       res.redirect('/one-login-returning-claimant/triage/types-of-identification')
+    }
+  })
+
+
+  router.post('/one-login-returning-claimant/triage/types-of-identification', (req, res) => {
+    let typesOfIdentification = req.session.data.typesOfIdentification
+    if (typesOfIdentification === 'Yes') {
+      res.redirect('/one-login-returning-claimant/triage/types-of-identification')
+    } else {
+      res.redirect('/one-login-returning-claimant/triage/prove-id-at-post-office')
+    }
+  })
+
+
+  router.post('/one-login-returning-claimant/triage/prove-id-at-post-office', (req, res) => {
+    let proveAtPostOffice = req.session.data.proveAtPostOffice
+    if (proveAtPostOffice === 'Yes') {
+      res.redirect('/one-login-returning-claimant/triage/prove-id-at-post-office')
+    } else {
+      res.redirect('/one-login-returning-claimant/triage/prove-id-at-bank')
+
+    }
+  })
+
+
+  router.post('/one-login-returning-claimant/triage/prove-id-at-bank', (req, res) => {
+    let proveAtPostOffice = req.session.data.proveAtPostOffice
+    if (proveAtPostOffice === 'Yes') {
+      res.redirect('/one-login-returning-claimant/triage/prove-id-at-bank')
+    } else {
+      res.redirect('/one-login-returning-claimant/find-another-way')
+
+    }
+  })
+
+
+  
 
   /////////// FIND ANOTHER WAY ////////////
   router.post('/one-login-returning-claimant/find-another-way', (req, res) => {
@@ -123,8 +170,8 @@ router.post('/one-login-returning-claimant/do-you-have-a-one-login-account', (re
         data: req.session.data
       })
     }
-    if (choice === 'continue') {
-      res.redirect('/one-login-returning-claimant/confirm-college');
+    if (choice === 'goToService') {
+      res.redirect('/one-login-returning-claimant/confirm-college-email');
     } else {
       res.redirect('https://govuk-one-login-prototype-6d2545e2d700.herokuapp.com/page-index/authentication/create-account');
     }
@@ -133,11 +180,11 @@ router.post('/one-login-returning-claimant/do-you-have-a-one-login-account', (re
 
 
   /////////// CONFIRM COLLEGE WORK EMAIL ACCOUNT ////////////
-  router.post('/one-login-returning-claimant/confirm-college', (req, res) => {
+  router.post('/one-login-returning-claimant/confirm-college-email', (req, res) => {
     const hasWorkEmail = req.session.data.hasWorkEmail
     
     if (!hasWorkEmail) {
-      return res.render('one-login-returning-claimant/confirm-college', {
+      return res.render('one-login-returning-claimant/confirm-college-email', {
         error: {
           text: 'Select if you have access to your college email account',
           href: '#hasWorkEmail'
@@ -275,11 +322,16 @@ router.post('/one-login-returning-claimant/do-you-have-a-one-login-account', (re
 
 
   /////////// PERSONAL BANK DETAILS ////////////
-  router.post('/one-login-returning-claimant/personal-bank-details', (req, res) => {
+router.post('/one-login-returning-claimant/personal-bank-details', (req, res) => {
   const data = req.session.data
   const errors = []
   const fieldErrors = {}
 
+  const correctName = 'Nathan Harper'
+  const correctSortCode = '112233'
+  const correctAccountNumber = '12345678'
+
+  // Step 1: Required field validation
   if (!data.returnClaimantBankAccountName) {
     const message = 'Enter the name on the account'
     errors.push({ text: message, href: '#return-claimant-bank-account-name' })
@@ -298,17 +350,76 @@ router.post('/one-login-returning-claimant/do-you-have-a-one-login-account', (re
     fieldErrors.returnClaimantAccountNumber = { text: message }
   }
 
-  if (errors.length) {
+  // If any required fields are missing, return immediately
+  if (errors.length > 0) {
     return res.render('one-login-returning-claimant/personal-bank-details', {
       errors,
       fieldErrors,
       data
     })
   }
-    
-    res.redirect('/one-login-returning-claimant/check') // or whatever next step
-    
-  })
+
+  // Step 2: Field-level correctness check
+  const incorrectFields = []
+
+  if (data.returnClaimantBankAccountName !== correctName) {
+    incorrectFields.push({
+      field: 'returnClaimantBankAccountName',
+      message: 'Name on the account doesn’t match what we expect',
+      href: '#return-claimant-bank-account-name'
+    })
+  }
+
+  if (data.returnClaimantSortCode !== correctSortCode) {
+    incorrectFields.push({
+      field: 'returnClaimantSortCode',
+      message: 'Sort code doesn’t match what we expect',
+      href: '#return-claimant-sort-code'
+    })
+  }
+
+  if (data.returnClaimantAccountNumber !== correctAccountNumber) {
+    incorrectFields.push({
+      field: 'returnClaimantAccountNumber',
+      message: 'Account number doesn’t match what we expect',
+      href: '#return-claimant-account-number'
+    })
+  }
+
+  const isCorrect = incorrectFields.length === 0
+
+  // Step 3: Attempt logic
+  if (!data.bankAttemptCount) {
+    data.bankAttemptCount = 0
+  }
+
+  if (isCorrect) {
+    data.bankAttemptCount = 0
+    data.bankDetailsError = false
+    return res.redirect('/one-login-returning-claimant/check')
+  } else {
+    data.bankAttemptCount += 1
+    data.bankDetailsError = true
+
+    if (data.bankAttemptCount >= 3) {
+      return res.redirect('/one-login-returning-claimant/check')
+    } else {
+      // Populate fieldErrors and errors based on incorrect fields
+      incorrectFields.forEach(({ field, message, href }) => {
+        fieldErrors[field] = { text: message }
+        errors.push({ text: message, href })
+      })
+
+      return res.render('one-login-returning-claimant/personal-bank-details', {
+        errors,
+        fieldErrors,
+        data
+      })
+    }
+  }
+})
+
+
 
 
   // GET: Show the CYA page

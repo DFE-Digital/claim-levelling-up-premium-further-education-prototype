@@ -1,0 +1,76 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% set legendText = "What type of contract do you have with " + claimantWhereAreYouEmployed + "?" %}
+{% set pageName = "What type of contract do you have directly with " + claimantWhereAreYouEmployed + "?" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+       {{ pageName }}
+      </h1>
+
+
+      <form method="post">
+
+         {{ govukRadios({
+          name: "claimantContractType",
+          value: claimantContractType,
+            fieldset: {
+                legend: {
+                  text: legendText,
+                  classes: "govuk-fieldset__legend--s govuk-visually-hidden"
+                }
+              },
+              items: [
+                {
+                  value: "Permanent",
+                  text: "Permanent",
+                  hint: {
+                    text: "This includes full-time and part-time permanent contracts"
+                  }
+                },
+                {
+                  value: "Fixed-term",
+                  text: "Fixed-term"
+                },
+                {
+                  value: "Variable hours",
+                  text: "Variable hours",
+                  hint: {
+                    text: "This includes zero hours contracts"
+                  }
+                },
+                {
+                  value: "Employed by another organisation (for example, an agency or contractor)",
+                  text: "Employed by another organisation (for example, an agency or contractor)",
+                  hint: {
+                    text: "For example, through an agency, as a contractor or a subsidiary of the FE provider"
+                  }
+                }
+              ]
+            }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

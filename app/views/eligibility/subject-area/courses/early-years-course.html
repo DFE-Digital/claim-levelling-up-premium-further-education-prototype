@@ -1,0 +1,80 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+
+      <form method="post" action="/eligibility/subject-area/next-subject-page">
+
+        <input type="hidden" name="previousCoursePage" value="earlyYears">
+
+        {{ govukCheckboxes({
+          name: "earlyYears",
+          fieldset: {
+            legend: {
+              text: "Which early years courses do you teach?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          hint: {
+            html: '
+              <p class="govuk-hint govuk-!-margin-bottom-2">
+                If you are unsure whether the course(s) you teach is eligible, please email:
+                <a class="govuk-link" href="mailto:FE-Targeted.Retention-Incentive@education.gov.uk">FE-Targeted.Retention-Incentive@education.gov.uk</a>
+              </p>
+              <p class="govuk-hint">Select all that apply</p>
+            '
+          },
+          items: [
+            {
+              value: "Early years practioner (level 2) apprenticeships",
+              text: "Early years practioner (level 2) apprenticeships"
+            },
+            {
+              value: "Early years educator (level 3) apprenticeships",
+              text: "Early years educator (level 3) apprenticeships"
+            },
+            {
+              value: "T Level in education and early years (early years educator)",
+              text: "T Level in education and early years (early years educator)"
+            },
+            {
+              value: "A course at level 3 and below that leads to an early years qualification which enables providers to count the recipient in staff:child ratios",
+              html: 'A course that leads to an <a class="govuk-link" href="https://www.gov.uk/government/publications/early-years-qualifications-achieved-in-england" target="_blank" rel="noopener noreferrer">early years qualification (opens in a new tab)</a> which enables providers to count the recipient in staff:child ratios'
+            },
+            {
+              divider: "or"
+            },
+            {
+              value: "none",
+              text: "I do not teach any of these courses",
+              behaviour: "exclusive"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}

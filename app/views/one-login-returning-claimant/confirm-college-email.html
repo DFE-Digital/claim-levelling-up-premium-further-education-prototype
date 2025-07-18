@@ -1,9 +1,9 @@
 {% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
 
-{% set pageName = 'Do you have access to your work email for [College_name]' %}
+{% set pageName = 'We need to do an employment check' %}
 
 {% block pageTitle %}
-  {{ serviceName }} – GOV.UK Prototype Kit
+  {{ serviceName }} - GOV.UK Prototype Kit
 {% endblock %}
 
 {% block beforeContent %}
@@ -36,13 +36,20 @@
 
     <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-    <p class="govuk-body">If you can't access your work email right now, we'll sign you out and you can return to this page later.</p>
-
-
       <form method="post" novalidate>
         {{ govukRadios({
           name: "hasWorkEmail",
           value: data.hasWorkEmail,
+           fieldset: {
+              legend: {
+                text: "Can you access your work email account for " + claim.feProvider + " ?",
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--m"
+              }
+          },
+            hint: {
+              text: "If you can't access your work email right now, we'll save all your answers, sign you out and you'll return to this page when you sign in again later."
+            },
           errorMessage: error if error and error.href == "#hasWorkEmail",
           items: [
             { value: "Yes", text: "Yes" },

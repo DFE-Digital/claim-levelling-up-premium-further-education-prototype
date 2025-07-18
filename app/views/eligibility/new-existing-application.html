@@ -1,0 +1,67 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Confirmation page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <!--had to add CSS code into app / sass / application.scss for the blue panel-->
+
+        <form class="form" action="/teaching-responsibilities" method="post"> 
+
+
+     
+      
+        <div class="govuk-panel govuk-panel--informational modified">
+        <h1 class="govuk-panel__title">You have already started an eligibility check</h1>
+
+        <p> 
+        </p>
+
+        <p class="govuk-body" id="paragraph-white">
+          You can only have one eligibility check in progress at any time. If you want to start another check, we will delete the data on the check you have already started.
+
+          <br>
+          <br>
+
+          Choose what you want to do: 
+        </p>
+
+        
+  
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset">
+            <div class="govuk-radios" id="radio-white" data-module="govuk-radios">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="newexistingapplication" name="newexistingapplication" type="radio" value="Continue with the eligibility check that you have already started">
+                <label class="govuk-label govuk-radios__label" for="week-more">
+                  Continue with the eligibility check that you have already started
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="radio-white-2" name="newexistingapplication" type="radio" value="Start a new eligibility check">
+                <label class="govuk-label govuk-radios__label" for="newexistingapplication-2">
+                  Start a new eligibility check
+                </label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <button type="submit" class="govuk-button govuk-button--inverse" data-module="govuk-button">
+          Continue
+        </button>
+      
+        </div>
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}

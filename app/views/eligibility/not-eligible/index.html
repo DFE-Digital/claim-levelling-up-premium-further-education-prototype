@@ -1,0 +1,44 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Start page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block header %}
+  <!-- Blank header with no service name for the start page -->
+  {{ govukHeader() }}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+      You are not eligible for a retention payment yet
+    </h1>
+
+    <p class="govuk-body">
+      You can apply for a targeted retention incentive payment after you have taught for one academic term at your current employer.
+    </p>
+
+    <p class="govuk-body">
+      For more information, check the eligibility criteria for 
+      <a class="govuk-link" href="#">targeted retention incentive payments for further education teachers (opens in a new tab)</a>.
+    </p>
+
+    <p class="govuk-body">
+      If you are unsure your information is correct, you can 
+      <a class="govuk-link" href="#">go back</a> and review your answers. 
+      You can also <a class="govuk-link" href="#">start the application again</a>.
+    </p>
+
+  </div>
+</div>
+{% endblock %}

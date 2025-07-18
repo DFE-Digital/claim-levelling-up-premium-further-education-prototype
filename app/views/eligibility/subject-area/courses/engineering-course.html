@@ -1,0 +1,89 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+    <form method="post" action="/eligibility/subject-area/next-subject-page">
+
+    <input type="hidden" name="previousCoursePage" value="engineering"> 
+
+    {{ govukCheckboxes({
+      name: "engineering",
+      fieldset: {
+        legend: {
+          text: "Which engineering and manufacturing courses do you teach?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: {
+        html: '
+          <p class="govuk-hint govuk-!-margin-bottom-2">
+            If you are unsure whether the course(s) you teach is eligible, please email:
+            <a class="govuk-link" href="mailto:FE-Targeted.Retention-Incentive@education.gov.uk">FE-Targeted.Retention-Incentive@education.gov.uk</a>
+          </p>
+          <p class="govuk-hint">Select all that apply</p>
+        '
+      },
+      items: [
+        {
+          value: "Qualifications approved for funding at level 3 and below in the engineering sector subject area",
+          html: 'Qualifications approved for funding at level 3 and below in the <a class="govuk-link" href="https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=13">engineering (opens in a new tab)</a> sector subject area'
+        },
+        {
+          value: "Qualifications approved for funding at level 3 and below in the manufacturing technologies sector subject area",
+          html: 'Qualifications approved for funding at level 3 and below in the <a class="govuk-link" href="https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=26">manufacturing technologies (opens in a new tab)</a> sector subject area'
+        },
+        {
+          value: "Qualifications approved for funding at level 3 and below in the transportation operations and maintenance sector subject area",
+          html: 'Qualifications approved for funding at level 3 and below in the <a class="govuk-link" href="https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=47">transportation operations and maintenance (opens in a new tab)</a> sector subject area'
+        },
+        {
+          value: "T Level in design and development for engineering and manufacturing",
+          text: "T Level in design and development for engineering and manufacturing"
+        },
+        {
+          value: "T Level in maintenance, installation and repair for engineering and manufacturing",
+          text: "T Level in maintenance, installation and repair for engineering and manufacturing"
+        },
+        {
+          value: "T Level in engineering, manufacturing, processing and control",
+          text: "T Level in engineering, manufacturing, processing and control"
+        },
+        {
+          value: "Level 2 or level 3 apprenticeships in the engineering and manufacturing occupational route",
+          html: 'Level 2 or level 3 apprenticeships in the <a class="govuk-link" href="https://occupational-maps.instituteforapprenticeships.org/maps/route/engineering-manufacturing">engineering and manufacturing occupational route (opens in a new tab)</a>'
+        },
+        {
+          divider: "or"
+        },
+        {
+          value: "none",
+          text: "I do not teach any of these courses",
+          behaviour: "exclusive"
+        }
+      ]
+    }) }}
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+
+  </form>
+
+    </div>
+
+{% endblock %}

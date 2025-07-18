@@ -1,0 +1,58 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    
+    <form method="post">
+
+      {{ xGovukAutocomplete({
+        label: {
+          text: "Which FE provider directly employs you?",
+          classes: "govuk-label--l",
+          isPageHeading: true
+        },
+        hint: {
+          html: "If you work at an FE provider with multiple campuses, enter the name of the FE provider group. <br><br>Enter at least 3 characters."
+        },
+        id: "worksAtFeProvider",
+        name: "worksAtFeProvider",
+        allowEmpty: false,
+        items: [
+          { text: "Austria" },
+          { text: "Belgium" },
+          { text: "Bulgaria" },
+          { text: "Croatia" },
+          { text: "Republic of Cyprus" },
+          { text: "Czech Republic" },
+          { text: "Denmark" }
+        ]
+      }) }}
+      
+
+      {{ govukDetails({
+        summaryText: "What FE providers are eligible?",
+        html: "A <a href='https://assets.publishing.service.gov.uk/media/682ddb93c054883884bff39e/list-of-eligible-further-education-providers-and-payment-values-for-targeted-retention-incentive-2025-2026.xlsx' class='govuk-link'>list of eligible further education providers and payment values</a> (MS Excel Spreadsheet, 33.3 KB) is available."
+      }) }}
+
+
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+
+    </form>
+  </div>
+</div>
+{% endblock %}

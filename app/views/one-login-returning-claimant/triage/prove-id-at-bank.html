@@ -1,0 +1,82 @@
+{% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
+
+{% set pageName = "Prove your identity at a Post Office with one of the following types of photo ID" %}
+
+{% block pageTitle %}
+  {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{# {% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %} #}
+
+{% block header %}
+  {{ govukOneLoginServiceHeader({
+    signOutLink: "/one-login-signout",
+    oneLoginLink: "/#",
+    serviceNavigationParams: { 
+      serviceName: "Claim a targeted retention incentive payment for further education teachers",
+      navigationLabel: "Test label" 
+    }
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+      Prove your identity with bank or building society details and security questions
+    </h1>
+
+    <p class="govuk-body">
+      You can use any current account with a UK bank or building society to prove your identity. Your name must be on the account.
+    </p>
+
+    <h2 class="govuk-heading-m">Provide some personal details</h2>
+    <p class="govuk-body">We'll ask you for your:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>name</li>
+      <li>date of birth</li>
+      <li>sort code and account number</li>
+      <li>National Insurance number</li>
+      <li>current address (you might also need your previous address if you've recently moved)</li>
+    </ul>
+
+    <h2 class="govuk-heading-m">Answer some security questions</h2>
+    <p class="govuk-body">
+      We'll then ask you some security questions. This helps us check if the details you've given are being used by you.
+    </p>
+
+    <form method="post">
+      {{ govukRadios({
+        name: "proveAtBank",
+        fieldset: {
+          legend: {
+            text: "Do you have a UK bank or building society current account in your name?",
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        items: [
+          {
+            value: "Yes",
+            text: "Yes"
+          },
+          {
+            value: "No",
+            text: "No - prove my identity another way"
+          }
+        ]
+      }) }}
+
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}

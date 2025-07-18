@@ -1,0 +1,46 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        Select where you are employed
+      </h1>
+
+        <form method="post">
+
+          {{ govukRadios({
+            name: "claimantWhereAreYouEmployed",
+            fieldset: {
+              legend: {
+                text: "Select where you are employed",
+                classes: "govuk-fieldset__legend--l govuk-visually-hidden"
+              }
+            },
+            items: radios
+          }) }}
+
+          {{ govukButton({
+            text: "Continue"
+          }) }}
+
+        </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}

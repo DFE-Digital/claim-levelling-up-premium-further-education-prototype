@@ -1,0 +1,65 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template - {{ serviceName }} - GOV.UK Prototype Kit
+{% endblock %}
+
+{% set pageName = "On average, how many hours per week are you timetabled to teach at " + data.worksAtFeProvider + " during the current term?" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+      {{ govukHint({
+        id: "teaching-hours-hint",
+        text: "'Timetabled teaching hours' refer to the time you spend teaching lessons to students of all ages."
+      }) }}
+
+      <form class="form" method="post">
+
+        {{ govukRadios({
+          name: "claimantTeachingHoursPerWeek",
+          fieldset: {
+            legend: {
+              text: pageName,
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m govuk-visually-hidden"
+            }
+          },
+          items: [
+            {
+              value: "More than 12 hours per week",
+              text: "More than 12 hours per week"
+            },
+            {
+              value: "Between 2.5 and 12 hours per week",
+              text: "Between 2.5 and 12 hours per week"
+            },
+            {
+              value: "Less than 2.5 hours per week",
+              text: "Less than 2.5 hours per week"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+
