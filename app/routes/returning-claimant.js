@@ -258,6 +258,11 @@ router.get('/eligibility', function (req, res) {
 
 
 
+  ///////////////////////////////////////////
+  //// START OF THE NEW IDV PART
+  //////////////////////////////////////////
+
+
   //////// WHAT IS YOUR NAME ////////////
   router.post('/one-login-returning-claimant/what-is-your-name', (req, res) => {
     // Store names individually in session
@@ -274,47 +279,17 @@ router.get('/eligibility', function (req, res) {
 
     req.session.data.claimantName = fullName
 
-    res.redirect('/one-login-returning-claimant/does-employer-use-any-other-name')
+    res.redirect('/one-login-returning-claimant/date-of-birth')
   })
 
 
 
-  //////// DOES EMPLOYER USE ANY OTHER NAME ////////////
-
-  router.post('/one-login-returning-claimant/does-employer-use-any-other-name', (req, res) => {
-    const doesEmployerUseAnyOtherName = req.body.doesEmployerUseAnyOtherName
-    req.session.data.doesEmployerUseAnyOtherName = doesEmployerUseAnyOtherName
-
-    if (doesEmployerUseAnyOtherName === 'Yes') {
-      res.redirect('/one-login-returning-claimant/enter-any-other-name')
-    } else {
-      res.redirect('/one-login-returning-claimant/personal-details')
-    }
-  })
-
-  //////// ENTER ANY OTHER NAME ////////////
-  router.post('/one-login-returning-claimant/enter-any-other-name', (req, res) => {
-  req.session.data.enterAliasFirstName = req.body.enterAliasFirstName
-  req.session.data.enterAliasMiddleName = req.body.enterAliasMiddleName
-  req.session.data.enterAliasLastName = req.body.enterAliasLastName
-
-  // Optional: store alias full name if you want to reuse it
-  const aliasFullName = [
-    req.body.enterAliasFirstName,
-    req.body.enterAliasMiddleName,
-    req.body.enterAliasLastName
-  ].filter(Boolean).join(' ')
-
-    req.session.data.aliasFullName = aliasFullName
-
-    res.redirect('/one-login-returning-claimant/personal-details')
-  })
 
 
 
 
   /////////// PERSONAL DETAILS //////////// 
-  router.post('/one-login-returning-claimant/personal-details', (req, res) => {
+  router.post('/one-login-returning-claimant/date-of-birth', (req, res) => {
   // Store DOB components individually
   req.session.data['returnClaimantDob-day'] = req.body['returnClaimantDob-day']
   req.session.data['returnClaimantDob-month'] = req.body['returnClaimantDob-month']
@@ -330,7 +305,7 @@ router.get('/eligibility', function (req, res) {
     // Store NI number
     req.session.data.returnClaimantNationalInsuranceNumber = req.body.returnClaimantNationalInsuranceNumber
 
-    res.redirect('/one-login-returning-claimant/personal-bank-details')
+    res.redirect('/one-login-returning-claimant/national-insurance-number')
   })
 
 

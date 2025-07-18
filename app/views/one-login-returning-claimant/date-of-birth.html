@@ -36,7 +36,7 @@
     {% endif %}
 
     <span class="govuk-caption-xl">{{ pageName }}</span>
-      <h1 class="govuk-heading-l">Enter your date of birth and national Insurance Number</h1>
+      <h1 class="govuk-heading-l">Enter your date of birth</h1>
 
     <form method="post" novalidate>
 
@@ -49,7 +49,7 @@
           legend: {
             text: "Enter your date of birth",
             isPageHeading: false,
-            classes: "govuk-fieldset__legend--m"
+            classes: "govuk-fieldset__legend--m govuk-visually-hidden"
           }
         },
         hint: {
@@ -75,23 +75,7 @@
         errorMessage: fieldErrors.returnClaimantDob
       }) }}
 
-
-      {{ govukInput({
-        label: {
-          text: "Enter your national insurance number",
-          classes: "govuk-label--m"
-        },
-        hint: {
-          text: "It's on your National Insurance card, benefit letter, payslip or P60. For example 'QQ123456C'."
-        },
-        id: "return-claimant-national-insurance-number",
-        name: "returnClaimantNationalInsuranceNumber",
-        value: data.returnClaimantNationalInsuranceNumber,
-        classes: "govuk-!-width-two-thirds",
-        errorMessage: fieldErrors.returnClaimantNationalInsuranceNumber
-      }) }}
-
-      {{ govukButton({ text: "Continue" }) }}
+        {{ govukButton({ text: "Continue" }) }}
 
     </form>
   </div>
