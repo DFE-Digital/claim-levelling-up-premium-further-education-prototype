@@ -288,126 +288,173 @@ router.get('/eligibility', function (req, res) {
 
 
 
-  /////////// PERSONAL DETAILS //////////// 
+  /////////// DATE OF BIRTH//////////// 
   router.post('/one-login-returning-claimant/date-of-birth', (req, res) => {
-  // Store DOB components individually
-  req.session.data['returnClaimantDob-day'] = req.body['returnClaimantDob-day']
-  req.session.data['returnClaimantDob-month'] = req.body['returnClaimantDob-month']
-  req.session.data['returnClaimantDob-year'] = req.body['returnClaimantDob-year']
+    const data = req.session.data
+    const errors = []
+    const fieldErrors = {}
 
-  // Optionally store a full DOB string (ISO-style for sorting, etc.)
-  req.session.data.returnClaimantDobFormatted = [
-    req.body['returnClaimantDob-year'],
-    req.body['returnClaimantDob-month'],
-    req.body['returnClaimantDob-day']
-  ].join('-')
+    const day = req.body['returnClaimantDob-day']
+    const month = req.body['returnClaimantDob-month']
+    const year = req.body['returnClaimantDob-year']
 
-    // Store NI number
-    req.session.data.returnClaimantNationalInsuranceNumber = req.body.returnClaimantNationalInsuranceNumber
+    // Required field validation
+    if (!day || !month || !year) {
+      const message = 'Enter your full date of birth'
+      errors.push({ text: message, href: '#return-claimant-dob' })
+      fieldErrors.returnClaimantDob = { text: message }
+
+      return res.render('one-login-returning-claimant/date-of-birth', {
+        errors,
+        fieldErrors,
+        data
+      })
+    }
+
+    // Store DOB parts and formatted value
+    data['returnClaimantDob-day'] = day
+    data['returnClaimantDob-month'] = month
+    data['returnClaimantDob-year'] = year
+
+    data.returnClaimantDobFormatted = [year, month, day].join('-')
 
     res.redirect('/one-login-returning-claimant/national-insurance-number')
   })
 
 
-  /////////// PERSONAL BANK DETAILS ////////////
-router.post('/one-login-returning-claimant/personal-bank-details', (req, res) => {
-  const data = req.session.data
-  const errors = []
-  const fieldErrors = {}
+  /////////// NATIONAL INSURANCE NUMBER
+  router.post('/one-login-returning-claimant/national-insurance-number', (req, res) => {
+    const data = req.session.data
+    const errors = []
+    const fieldErrors = {}
 
-  const correctName = 'Nathan Harper'
-  const correctSortCode = '112233'
-  const correctAccountNumber = '12345678'
+    const ni = req.body.returnClaimantNationalInsuranceNumber
 
-  // Step 1: Required field validation
-  if (!data.returnClaimantBankAccountName) {
-    const message = 'Enter the name on the account'
-    errors.push({ text: message, href: '#return-claimant-bank-account-name' })
-    fieldErrors.returnClaimantBankAccountName = { text: message }
-  }
+    if (!ni) {
+      const message = 'Enter your National Insurance number'
+      errors.push({ text: message, href: '#return-claimant-national-insurance-number' })
+      fieldErrors.returnClaimantNationalInsuranceNumber = { text: message }
 
-  if (!data.returnClaimantSortCode) {
-    const message = 'Enter a sort code'
-    errors.push({ text: message, href: '#return-claimant-sort-code' })
-    fieldErrors.returnClaimantSortCode = { text: message }
-  }
-
-  if (!data.returnClaimantAccountNumber) {
-    const message = 'Enter an account number'
-    errors.push({ text: message, href: '#return-claimant-account-number' })
-    fieldErrors.returnClaimantAccountNumber = { text: message }
-  }
-
-  // If any required fields are missing, return immediately
-  if (errors.length > 0) {
-    return res.render('one-login-returning-claimant/personal-bank-details', {
-      errors,
-      fieldErrors,
-      data
-    })
-  }
-
-  // Step 2: Field-level correctness check
-  const incorrectFields = []
-
-  if (data.returnClaimantBankAccountName !== correctName) {
-    incorrectFields.push({
-      field: 'returnClaimantBankAccountName',
-      message: 'Name on the account doesn’t match what we expect',
-      href: '#return-claimant-bank-account-name'
-    })
-  }
-
-  if (data.returnClaimantSortCode !== correctSortCode) {
-    incorrectFields.push({
-      field: 'returnClaimantSortCode',
-      message: 'Sort code doesn’t match what we expect',
-      href: '#return-claimant-sort-code'
-    })
-  }
-
-  if (data.returnClaimantAccountNumber !== correctAccountNumber) {
-    incorrectFields.push({
-      field: 'returnClaimantAccountNumber',
-      message: 'Account number doesn’t match what we expect',
-      href: '#return-claimant-account-number'
-    })
-  }
-
-  const isCorrect = incorrectFields.length === 0
-
-  // Step 3: Attempt logic
-  if (!data.bankAttemptCount) {
-    data.bankAttemptCount = 0
-  }
-
-  if (isCorrect) {
-    data.bankAttemptCount = 0
-    data.bankDetailsError = false
-    return res.redirect('/one-login-returning-claimant/check')
-  } else {
-    data.bankAttemptCount += 1
-    data.bankDetailsError = true
-
-    if (data.bankAttemptCount >= 3) {
-      return res.redirect('/one-login-returning-claimant/check')
-    } else {
-      // Populate fieldErrors and errors based on incorrect fields
-      incorrectFields.forEach(({ field, message, href }) => {
-        fieldErrors[field] = { text: message }
-        errors.push({ text: message, href })
+      return res.render('one-login-returning-claimant/national-insurance-number', {
+        errors,
+        fieldErrors,
+        data
       })
+    }
 
+    data.returnClaimantNationalInsuranceNumber = ni
+
+    res.redirect('/one-login-returning-claimant/personal-bank-details')
+  })
+
+
+
+
+  /////////// PERSONAL BANK DETAILS ////////////////////////////////////////////////////////
+  
+  router.post('/one-login-returning-claimant/personal-bank-details', (req, res) => {
+    const data = req.session.data
+    const errors = []
+    const fieldErrors = {}
+
+    const correctName = 'Nathan Harper'
+    const correctSortCode = '112233'
+    const correctAccountNumber = '12345678'
+
+    // Step 1: Required field validation
+    if (!data.returnClaimantBankAccountName) {
+      const message = 'Enter the name on the account'
+      errors.push({ text: message, href: '#return-claimant-bank-account-name' })
+      fieldErrors.returnClaimantBankAccountName = { text: message }
+    }
+
+    if (!data.returnClaimantSortCode) {
+      const message = 'Enter a sort code'
+      errors.push({ text: message, href: '#return-claimant-sort-code' })
+      fieldErrors.returnClaimantSortCode = { text: message }
+    }
+
+    if (!data.returnClaimantAccountNumber) {
+      const message = 'Enter an account number'
+      errors.push({ text: message, href: '#return-claimant-account-number' })
+      fieldErrors.returnClaimantAccountNumber = { text: message }
+    }
+
+    // If any required fields are missing, return immediately
+    if (errors.length > 0) {
       return res.render('one-login-returning-claimant/personal-bank-details', {
         errors,
         fieldErrors,
         data
       })
     }
-  }
-})
+
+    // ✅ Declare incorrectFields once — here
+    const incorrectFields = []
+
+    // Step 2: Field-level correctness check
+    if (data.returnClaimantBankAccountName !== correctName) {
+      incorrectFields.push({
+        field: 'returnClaimantBankAccountName',
+        message: 'Name on the account entered is not recognised',
+        href: '#return-claimant-bank-account-name'
+      })
+    }
+
+    if (
+      data.returnClaimantSortCode !== correctSortCode ||
+      data.returnClaimantAccountNumber !== correctAccountNumber
+    ) {
+      const message = 'Account number and sort code entered do not match'
+
+      incorrectFields.push(
+        {
+          field: 'returnClaimantSortCode',
+          message,
+          href: '#return-claimant-sort-code'
+        },
+        {
+          field: 'returnClaimantAccountNumber',
+          message,
+          href: '#return-claimant-account-number'
+        }
+      )
+    }
+
+    const isCorrect = incorrectFields.length === 0
+
+    // Step 3: Attempt logic
+    if (!data.bankAttemptCount) {
+      data.bankAttemptCount = 0
+    }
+
+    if (isCorrect) {
+      data.bankAttemptCount = 0
+      data.bankDetailsError = false
+      return res.redirect('/one-login-returning-claimant/check')
+    } else {
+      data.bankAttemptCount += 1
+      data.bankDetailsError = true
+
+      if (data.bankAttemptCount >= 3) {
+        return res.redirect('/one-login-returning-claimant/check')
+      } else {
+        incorrectFields.forEach(({ field, message, href }) => {
+          fieldErrors[field] = { text: message }
+          errors.push({ text: message, href })
+        })
+
+        return res.render('one-login-returning-claimant/personal-bank-details', {
+          errors,
+          fieldErrors,
+          data
+        })
+      }
+    }
+  })
 
 
+//////////////////////////////////////////////////////////////////////////////
 
 
   // GET: Show the CYA page
