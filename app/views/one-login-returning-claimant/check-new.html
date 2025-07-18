@@ -1,0 +1,145 @@
+{% extends "di-govuk-one-login-service-header/layouts/service-header.html" %}
+{% extends "layouts/main.html" %}
+{% set pageName = 'Check your answers' %}
+
+{% block pageTitle %}
+  {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block header %}
+  {{ govukOneLoginServiceHeader({
+    signOutLink: "/one-login-signout",
+    oneLoginLink: "/#",
+    serviceNavigationParams: { 
+      serviceName: "Claim a targeted retention incentive payment for further education teachers",
+      navigationLabel: "Test label" 
+    }
+  }) }}
+{% endblock %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">  
+<h1 class="govuk-heading-l">Check your answers before sending employment check details</h1>
+
+  <h2 class="govuk-heading-m">Identity details</h2>
+
+  {{ govukSummaryList({
+    rows: [
+      {
+        key: { text: "What is your full name?" },
+        value: { text: data.fullName },
+        actions: { items: [{ href: "/change/full-name", text: "Change", visuallyHiddenText: "full name" }] }
+      },
+      {
+        key: { text: "What is your address?" },
+        value: { text: data.address },
+        actions: { items: [{ href: "/change/address", text: "Change", visuallyHiddenText: "address" }] }
+      },
+      {
+        key: { text: "What is your date of birth?" },
+        value: { text: data.dateOfBirth },
+        actions: { items: [{ href: "/change/date-of-birth", text: "Change", visuallyHiddenText: "date of birth" }] }
+      },
+      {
+        key: { text: "How is your gender recorded on your employer’s payroll system?" },
+        value: { text: data.gender },
+        actions: { items: [{ href: "/change/gender", text: "Change", visuallyHiddenText: "gender" }] }
+      },
+      {
+        key: { text: "What is your TRN? (optional)" },
+        value: { text: data.trn },
+        actions: { items: [{ href: "/change/trn", text: "Change", visuallyHiddenText: "TRN" }] }
+      },
+      {
+        key: { text: "What is your National Insurance number?" },
+        value: { text: data.nino },
+        actions: { items: [{ href: "/change/nino", text: "Change", visuallyHiddenText: "National Insurance number" }] }
+      },
+      {
+        key: { text: "Email address" },
+        value: { text: data.email },
+        actions: { items: [{ href: "/change/email", text: "Change", visuallyHiddenText: "email address" }] }
+      },
+      {
+        key: { text: "Would you like to provide your mobile number?" },
+        value: { text: data.provideMobile },
+        actions: { items: [{ href: "/change/provide-mobile", text: "Change", visuallyHiddenText: "mobile number preference" }] }
+      },
+      {
+        key: { text: "Mobile number" },
+        value: { text: data.mobile },
+        actions: { items: [{ href: "/change/mobile", text: "Change", visuallyHiddenText: "mobile number" }] }
+      }
+    ]
+  }) }}
+
+  <h2 class="govuk-heading-m govuk-!-margin-top-8">Payment details</h2>
+
+   {##################### Bank details error inset text #######################}
+    {# If there is a bank details error, show an inset text message #}
+    {% if data.bankDetailsError %}
+      
+        {{ mojAlert({
+          variant: "warning",
+          title: "We couldn't verify these bank details",
+          showTitleAsHeading: true,
+          dismissible: false,
+          text: 'Please check before continuing',
+          id: "bank-details"
+        }) }}
+      
+    {% endif %}
+
+  {{ govukSummaryList({
+    rows: [
+      {
+        key: { text: "Name on bank account" },
+        value: { text: data.bankAccountName },
+        actions: { items: [{ href: "/change/bank-account-name", text: "Change", visuallyHiddenText: "bank account name" }] }
+      },
+      {
+        key: { text: "Bank sort code" },
+        value: { text: data.bankSortCode },
+        actions: { items: [{ href: "/change/sort-code", text: "Change", visuallyHiddenText: "bank sort code" }] }
+      },
+      {
+        key: { text: "Bank account number" },
+        value: { text: data.bankAccountNumber },
+        actions: { items: [{ href: "/change/account-number", text: "Change", visuallyHiddenText: "bank account number" }] }
+      }
+    ]
+  }) }}
+
+  <form method="post" action="/one-login-returning-claimant/check">
+      <h2 class="govuk-heading-m">Declaration</h2>
+
+      {{ govukCheckboxes({
+        name: "Declaration",
+        items: [
+          {
+            value: "I have checked the details I've provided and I'm confident they are correct and the bank details match those held by my FE employer for the account my wages are paid into. I understand that submitting incorrect information may caluse a delay to any payment.",
+            text: "I have checked the details I've provided and I'm confident they are correct and the bank details match those held by my FE employer for the account my wages are paid into. I understand that submitting incorrect information may caluse a delay to any payment."
+          }
+        ]
+      }) }}
+
+      <div class="govuk-button-group">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Continue
+        </button>
+        <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+          Cancel
+        </button>
+      </div>
+    </form>
+
+{% endblock %}
