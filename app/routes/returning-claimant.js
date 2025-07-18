@@ -41,8 +41,8 @@ router.post('/one-login-returning-claimant/received-retention-incentive-before',
     return res.redirect('/one-login-returning-claimant/one-login-sign-in-only')
   }
 
-  // If No or anything else
-  res.redirect('/one-login-returning-claimant/do-you-have-a-one-login-account')
+  // No → go to eligibility
+  res.redirect('/eligibility')
 })
 
 
