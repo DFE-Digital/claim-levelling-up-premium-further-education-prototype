@@ -57,7 +57,7 @@
           {# Make check req first block so logic works #}
           <td class="govuk-table__cell">
             {% if claim.status == "Overdue" %}
-              <a href="/provider/member-of-staff/{{ claim.id }}" class="govuk-link"> {{ claim.claimantFirstName }} {{ claim.claimantLastName }}</a>
+              <a href="/provider/check-identity/{{ claim.id }}" class="govuk-link"> {{ claim.claimantFirstName }} {{ claim.claimantLastName }}</a>
 
             {% elseif claim.status == "In progress" %}
               <a href="/provider/finish-verifying/{{ claim.id }}" class="govuk-link"> {{ claim.claimantFirstName }} {{ claim.claimantLastName }}</a>
