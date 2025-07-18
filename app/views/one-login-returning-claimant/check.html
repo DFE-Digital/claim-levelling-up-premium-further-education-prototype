@@ -24,134 +24,84 @@
   }) }}
 {% endblock %}
 
+
 {% block content %}
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">  
+  <div class="govuk-grid-column-three-quarters">  
+<h1 class="govuk-heading-l">Check your answers before sending employment check details</h1>
 
-    {% if errors %}
-      {{ govukErrorSummary({
-        titleText: "There is a problem",
-        errorList: errors
-      }) }}
-    {% endif %}
+  <h2 class="govuk-heading-m">Identity details</h2>
 
-    {# {% if data.bankDetailsError %}
-      {{ govukErrorSummary({
-        titleText: "There is a problem",
-        errorList: [{
-          html: "Enter your bank details.<br>They must match what we have on record.",
-          href: "#bank-details"
-        }]
-      }) }}
-    {% endif %} #}
-
-    <h1 class="govuk-heading-l">{{ pageName }}</h1>
-
-    {# ✅ Full name card #}
-    {{ govukSummaryList({
-      card: {
-        title: {
-          text: "Full name",
-          classes: "govuk-heading-m"
+  {{ govukSummaryList({
+    rows: [
+      {
+        key: { text: "What is your full name?" },
+        value: { text: data.returnClaimantFirstName + " " + data.returnClaimantLastName },
+        actions: { items: [{ href: "/change/full-name", text: "Change", visuallyHiddenText: "full name" }] }
+      },
+      {
+        key: { text: "What is your address?" },
+        value: {
+          html: '<ul class="govuk-list">
+                  <li>3 King St</li>
+                  <li>Parkville</li>
+                  <li>North Parkshire</li>
+                  <li>PR1 9SP</li>
+                </ul>'
         },
         actions: {
-          items: [
-            {
-              href: "/one-login-returning-claimant/what-is-your-name",
-              text: "Change",
-              visuallyHiddenText: "name"
-            }
-          ]
+          items: [{
+            href: "#",
+            text: "Change",
+            visuallyHiddenText: "address"
+          }]
         }
       },
-      rows: [
-        {
-          key: { text: "First name(s)" },
-          value: { text: data.returnClaimantFirstName or "Not provided" }
-        },
-        {
-          key: { text: "Middle name(s)" },
-          value: { text: data.returnClaimantMiddleName or "Not provided" }
-        },
-        {
-          key: { text: "Last name" },
-          value: { text: data.returnClaimantLastName or "Not provided" }
-        }
-      ]
-    }) }}
-
-
-    {# ✅ Alias card if provided #}
-    {% if data.doesEmployerUseAnyOtherName === "Yes" %}
-      {{ govukSummaryList({
-        card: {
-          title: {
-            text: "Name your employer may know you by",
-            classes: "govuk-heading-m"
-          },
-          actions: {
-            items: [
-              {
-                href: "/one-login-returning-claimant/enter-any-other-name",
-                text: "Change",
-                visuallyHiddenText: "other name your employer may know you by"
-              }
-            ]
-          }
-        },
-        rows: [
-          {
-            key: { text: "First name(s)" },
-            value: { text: data.enterAliasFirstName or "Not provided" }
-          },
-          {
-            key: { text: "Middle name(s)" },
-            value: { text: data.enterAliasMiddleName or "Not provided" }
-          },
-          {
-            key: { text: "Last name" },
-            value: { text: data.enterAliasLastName or "Not provided" }
-          }
-        ]
-      }) }}
-    {% endif %}
-
-    {# ✅ DOB and NI number card #}
-    {{ govukSummaryList({
-      card: {
-        title: {
-          text: "Date of birth and National Insurance number",
-          classes: "govuk-heading-m"
-        },
-        actions: {
-          items: [
-            {
-              href: "/one-login-returning-claimant/personal-details",
-              text: "Change",
-              visuallyHiddenText: "date of birth and National Insurance number"
-            }
-          ]
-        }
-      },
-      rows: [
-        {
-          key: { text: "Date of birth" },
+      {
+        key: { text: "Date of birth" },
           value: {
             text: (data["returnClaimantDob-day"] or "") + " " +
                   (data["returnClaimantDob-month"] or "") + " " +
                   (data["returnClaimantDob-year"] or "")
-          }
-        },
-        {
-          key: { text: "National Insurance number" },
-          value: { text: data.returnClaimantNationalInsuranceNumber or "Not provided" }
-        }
-      ]
-    }) }}
+          },
+        actions: { items: [{ href: "#", text: "Change", visuallyHiddenText: "date of birth" }] }
+      },
+      {
+        key: { text: "How is your gender recorded on your employer’s payroll system?" },
+        value: { text: "Male" },
+        actions: { items: [{ href: "#", text: "Change", visuallyHiddenText: "gender" }] }
+      },
+      {
+        key: { text: "What is your TRN? (optional)" },
+        value: { text: "92345567" },
+        actions: { items: [{ href: "#", text: "Change", visuallyHiddenText: "TRN" }] }
+      },
+      {
+        key: { text: "What is your National Insurance number?" },
+        value: { text: data.returnClaimantNationalInsuranceNumber or "Not provided" },
+        actions: { items: [{ href: "#", text: "Change", visuallyHiddenText: "National Insurance number" }] }
+      },
+      {
+        key: { text: "Email address" },
+        value: { text: data.workEmail },
+        actions: { items: [{ href: "/change/email", text: "Change", visuallyHiddenText: "email address" }] }
+      },
+      {
+        key: { text: "Would you like to provide your mobile number?" },
+        value: { text: "Yes" },
+        actions: { items: [{ href: "/change/provide-mobile", text: "Change", visuallyHiddenText: "mobile number preference" }] }
+      },
+      {
+        key: { text: "Mobile number" },
+        value: { text: "07900 000 000" },
+        actions: { items: [{ href: "/change/mobile", text: "Change", visuallyHiddenText: "mobile number" }] }
+      }
+    ]
+  }) }}
 
+  <h2 class="govuk-heading-m govuk-!-margin-top-8">Payment details</h2>
 
-
-    {##################### Bank details error inset text #######################}
+   {##################### Bank details error inset text #######################}
     {# If there is a bank details error, show an inset text message #}
     {% if data.bankDetailsError %}
       
@@ -160,56 +110,41 @@
           title: "We couldn't verify these bank details",
           showTitleAsHeading: true,
           dismissible: false,
-          text: 'They must match what we have on record',
+          text: 'Please check before continuing',
           id: "bank-details"
         }) }}
       
     {% endif %}
 
-
-    {# ✅ Bank details card #}
-    {{ govukSummaryList({
-      card: {
-        title: {
-          text: "Bank details",
-          classes: "govuk-heading-m"
-        },
-        actions: {
-          items: [
-            {
-              href: "/one-login-returning-claimant/personal-bank-details",
-              text: "Change",
-              visuallyHiddenText: "bank details"
-            }
-          ]
-        }
+  {{ govukSummaryList({
+    rows: [
+      {
+        key: { text: "Name on bank account" },
+        value: { text: data.returnClaimantBankAccountName or "Not provided" },
+        actions: { items: [{ href: "/change/bank-account-name", text: "Change", visuallyHiddenText: "bank account name" }] }
       },
-      rows: [
-        {
-          key: { text: "Name on the account" },
-          value: { text: data.returnClaimantBankAccountName or "Not provided" }
-        },
-        {
-          key: { text: "Sort code" },
-          value: { text: data.returnClaimantSortCode or "Not provided" }
-        },
-        {
-          key: { text: "Account number" },
-          value: { text: data.returnClaimantAccountNumber or "Not provided" }
-        }
-      ]
-    }) }}
+      {
+        key: { text: "Bank sort code" },
+        value: { text: data.returnClaimantSortCode or "Not provided" },
+        actions: { items: [{ href: "/change/sort-code", text: "Change", visuallyHiddenText: "bank sort code" }] }
+      },
+      {
+        key: { text: "Bank account number" },
+        value: { text: data.returnClaimantAccountNumber or "Not provided" },
+        actions: { items: [{ href: "/change/account-number", text: "Change", visuallyHiddenText: "bank account number" }] }
+      }
+    ]
+  }) }}
 
-  
-    <form method="post" action="/one-login-returning-claimant/check">
+  <form method="post" action="/one-login-returning-claimant/check">
       <h2 class="govuk-heading-m">Declaration</h2>
 
       {{ govukCheckboxes({
         name: "Declaration",
         items: [
           {
-            value: "I have checked the information I have provided and I'm confident it is correct. I understandthat submitting false information may cause a delay to my payment",
-            text: "I have checked the information I have provided and I'm confident it is correct. I understandthat submitting false information may cause a delay to my payment"
+            value: "I have checked the details I've provided and I'm confident they are correct and the bank details match those held by my FE employer for the account my wages are paid into. I understand that submitting incorrect information may caluse a delay to any payment.",
+            text: "I have checked the details I've provided and I'm confident they are correct and the bank details match those held by my FE employer for the account my wages are paid into. I understand that submitting incorrect information may caluse a delay to any payment."
           }
         ]
       }) }}
@@ -223,6 +158,5 @@
         </button>
       </div>
     </form>
-  </div>
-</div>
+
 {% endblock %}

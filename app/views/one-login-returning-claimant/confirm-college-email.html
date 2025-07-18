@@ -2,6 +2,9 @@
 
 {% set pageName = 'We need to do an employment check' %}
 
+{% set checkFeProvider = 'North Parkside College' %}
+
+
 {% block pageTitle %}
   {{ serviceName }} - GOV.UK Prototype Kit
 {% endblock %}
@@ -42,7 +45,7 @@
           value: data.hasWorkEmail,
            fieldset: {
               legend: {
-                text: "Can you access your work email account for " + claim.feProvider + " ?",
+                text: "Can you access your work email account for " + checkFeProvider + " ?",
                 isPageHeading: false,
                 classes: "govuk-fieldset__legend--m"
               }
