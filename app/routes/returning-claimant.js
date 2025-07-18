@@ -1,5 +1,29 @@
 module.exports = router => {
 
+
+router.post('/one-login-returning-claimant/do-you-have-a-one-login-account', (req, res) => {
+  const hasOneLoginAccount = req.session.data.hasOneLoginAccount
+
+  if (!hasOneLoginAccount) {
+    return res.render('one-login-returning-claimant/do-you-have-a-one-login-account', {
+      error: {
+        text: 'Select if you have a GOV.UK One Login account',
+        href: '#hasOneLoginAccount'
+      },
+      data: req.session.data
+    })
+  }
+
+  const nextStep = (hasOneLoginAccount === 'Yes')
+    ? '/one-login-returning-claimant/one-login-sign-in-only'
+    : '/one-login-returning-claimant/received-retention-incentive-before'
+
+  res.redirect(nextStep)
+})
+
+
+
+
 router.post('/one-login-returning-claimant/received-retention-incentive-before', (req, res) => {
   const received = req.session.data.receivedRetentionIncentive
 
@@ -23,25 +47,7 @@ router.post('/one-login-returning-claimant/received-retention-incentive-before',
 
 
 
-router.post('/one-login-returning-claimant/do-you-have-a-one-login-account', (req, res) => {
-  const hasOneLoginAccount = req.session.data.hasOneLoginAccount
 
-  if (!hasOneLoginAccount) {
-    return res.render('one-login-returning-claimant/do-you-have-a-one-login-account', {
-      error: {
-        text: 'Select if you have a GOV.UK One Login account',
-        href: '#hasOneLoginAccount'
-      },
-      data: req.session.data
-    })
-  }
-
-  const nextStep = (hasOneLoginAccount === 'Yes' || hasOneLoginAccount === "I don't know")
-    ? '/one-login-returning-claimant/one-login-sign-in-only'
-    : '/start'
-
-  res.redirect(nextStep)
-})
 
 
   router.post('/one-login-returning-claimant/one-login-sign-in-only', (req, res) => {
