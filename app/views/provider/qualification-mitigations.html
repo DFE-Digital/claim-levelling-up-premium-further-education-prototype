@@ -20,6 +20,24 @@
 {# {% endif %} #}
 
 {% block content %}
+
+
+{% set reasonHtml %}
+{{ govukTextarea({
+  id: "give-another-reason",
+  name: "giveAnotherReason",
+  rows: "8",
+  label: {
+    text: "Can you provide more detail?",
+    classes: "govuk-label--l govuk-visually-hidden",
+    isPageHeading: false
+  }
+}) }}
+{% endset -%}
+
+
+
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
@@ -64,12 +82,18 @@
                   text: "Can't access suitable course"
                 },
                 {
-                  value: "newToSchool",
-                  text: "They're new to the school"
+                  value: "newMemberOfStaff",
+                  text: "They're a new member of staff"
                 },
                 {
-                  value: "other",
-                  text: "Other reason"
+                  divider: "or"
+                },
+                {
+                  value: "anotherReason",
+                  text: "Another reason",
+                  conditional: {
+                    html: reasonHtml
+                  }
                 }
               ]
             }) }}

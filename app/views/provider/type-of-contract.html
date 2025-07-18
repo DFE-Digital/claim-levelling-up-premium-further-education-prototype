@@ -3,6 +3,7 @@
 
 {% set pageName = 'Review a targeted retention incentive payment claim' %}
 
+
 {% set serviceNavId = "allClaims" %}
 
 {% set actionUrl = "/provider/type-of-contract/" + claim.id %}
@@ -59,12 +60,12 @@
         value: contractType,
           fieldset: {
             legend: {
-              text: "What type of contract does " + claim.claimantName + " have with [FE_Provider]?",
+              text: "What type of contract does " + claim.claimantName + " have directly with " + claim.feProvider + " ?",
               classes: "govuk-fieldset__legend--s"
             }
             },
             hint: {
-              text: "This includes full-time and part-time contracts"
+              text: "For example, through an agency, as a contractor or a subsidiary of the FE provider"
             },
             items: [
               {
