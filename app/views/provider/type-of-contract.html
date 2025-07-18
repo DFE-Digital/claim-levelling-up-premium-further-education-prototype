@@ -55,37 +55,38 @@
 
       {# ////////////////////////////////////////////////#}
       
-      {{ govukRadios({
-        name: "contractType",
-        value: contractType,
-          fieldset: {
-            legend: {
-              text: "What type of contract does " + claim.claimantName + " have directly with " + claim.feProvider + " ?",
-              classes: "govuk-fieldset__legend--s"
-            }
-            },
-            hint: {
-              text: "For example, through an agency, as a contractor or a subsidiary of the FE provider"
-            },
-            items: [
-              {
-                value: "Permanent",
-                text: "Permanent"
-              },
-              {
-                value: "Fixed-term",
-                text: "Fixed-term"
-              },
-              {
-                value: "Variable hours",
-                text: "Variable hours"
-              },
-              {
-                value: "Employed by another organisation (for example, an agency or contractor)",
-                text: "Employed by another organisation (for example, an agency or contractor)"
-              }
-            ]
-          }) }}
+  {{ govukRadios({
+      name: "contractType",
+      value: contractType,
+      fieldset: {
+        legend: {
+          text: "What type of contract does " + claim.claimantName + " have directly with " + claim.feProvider + " ?",
+          classes: "govuk-fieldset__legend--s"
+        }
+      },
+      items: [
+        {
+          value: "Permanent",
+          text: "Permanent"
+        },
+        {
+          value: "Fixed-term",
+          text: "Fixed-term"
+        },
+        {
+          value: "Variable hours",
+          text: "Variable hours"
+        },
+        {
+          value: "Employed by another organisation",
+          text: "Employed by another organisation",
+          hint: {
+            text: "For example, through an agency, as a contractor or a subsidiary of the FE provider"
+          }
+        }
+      ]
+    }) }}
+
       
         {# ////////////////////////////////////////////////#}
 
