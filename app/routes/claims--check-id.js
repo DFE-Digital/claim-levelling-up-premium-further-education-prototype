@@ -44,7 +44,7 @@ router.post('/provider/check-identity/do-you-employ/:claimId', function (req, re
   if (doYouEmploy === 'Yes') {
     res.redirect(`/provider/check-identity/personal-details/${claimId}`)
   } else {
-    res.redirect(`/provider/check-identity/you-might-know-as/${claimId}`)
+    res.redirect(`/provider/check-identity/end-of-verification/${claimId}`)
   }
 })
 

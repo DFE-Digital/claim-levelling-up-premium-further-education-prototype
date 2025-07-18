@@ -2,7 +2,7 @@
 
 {% set serviceNavId = "allClaims" %}
 
-{% set pageName = "End of verification" %}
+{% set pageName = "You've told us this applicant doesn't work at " + claim.feProvider %}
 
 {# {% block beforeContent %}
   {{ govukBackLink({
@@ -20,7 +20,7 @@
     <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
     <h3 class="govuk-heading-m">What happens next</h3>
-    <p class="govuk-body">Some stuff...</p>
+    <p class="govuk-body">We'll let the applicant know this claim has been unsuccessful.</p>
     
     <p class="govuk-body"><a href="/provider" class="govuk-link">Back to dashobard</a></p>
 
