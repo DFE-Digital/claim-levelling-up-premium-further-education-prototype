@@ -69,8 +69,14 @@
 
           {{ govukDetails({
             summaryText: "What counts towards the first 5 years of an FE teaching career",
-            html: "Only teaching at post-16 providers in England counts. It includes independent training providers. Teaching in schools, outside England or overseas does not count.<br><br>
-            Teachers who taught in FE before August 2020 are not eligible, even if they've since returned."
+            html:"
+              <p class='govuk-body'>
+                This is the first academic year when they started their first role with teaching responsibilities at any post-16 only education (FE) provider in England. 
+              </p>
+              <p class='govuk-body'>
+                It is when they formally took on teaching responsibilities, including teaching timetabled guided learning hours and for planning, delivering and assessing learning.
+              </p>
+            "
           }) }}
 
           {# ////////////////////////////////////////////////#}
