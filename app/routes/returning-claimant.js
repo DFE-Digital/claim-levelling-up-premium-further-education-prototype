@@ -129,7 +129,7 @@ router.get('/eligibility', function (req, res) {
     let liveInTheUK = req.session.data.liveInTheUK
     if (liveInTheUK === 'Yes') {
       // User lives in the UK
-       res.redirect('/one-login-returning-claimant/triage/do-you-live-in-the-uk')
+       res.redirect('/one-login-returning-claimant/triage/types-of-identification')
     } else {
       // User does not live in the UK
        res.redirect('/one-login-returning-claimant/triage/types-of-identification')
