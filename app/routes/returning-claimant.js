@@ -120,7 +120,8 @@ router.get('/eligibility', function (req, res) {
   router.post('/one-login-returning-claimant/one-login-signed-in', (req, res) => {
     let data = req.session.data
 
-    res.redirect('/one-login-returning-claimant/triage/do-you-live-in-the-uk')
+    //// USers should do Eligibility flow from here
+    res.redirect('/eligibility/start')
 
   })
 
