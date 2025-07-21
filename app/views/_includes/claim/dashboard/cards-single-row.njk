@@ -1,9 +1,10 @@
 {% set notStartedCount = 0 %}
 {% for claim in data.claims %}
-  {% if claim.status == "Not started" %}
+  {% if claim.status == "Not started" or claim.status == "Overdue" %}
     {% set notStartedCount = notStartedCount + 1 %}
   {% endif %}
 {% endfor %}
+
 
 {% set inProgressCount = 0 %}
 {% for claim in data.claims %}

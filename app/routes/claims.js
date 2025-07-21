@@ -23,10 +23,26 @@ const { govukDate } = require('@x-govuk/govuk-prototype-filters')
 
 
 module.exports = (router) => {
-  const getClaim = (req, res) => {
-    const claims = req.session.data.claims || []
-    return claims.find(claim => String(claim.id) === req.params.claimId)
-  }
+
+  const claimsData = require('../data/claims.json')
+  console.log('📁 Claims loaded from JSON:', claimsData.length)
+
+  router.use((req, res, next) => {
+  if (!req.session.data.claims) {
+    req.session.data.claims = JSON.parse(JSON.stringify(claimsData))
+    console.log('✅ Claims seeded:', req.session.data.claims.length)
+    }
+    next()
+  })
+
+
+
+const getClaim = (req, res) => {
+  const claims = req.session.data.claims || []
+  return claims.find(claim => String(claim.id) === req.params.claimId)
+}
+
+
 
    // ================================
   // PROVIDER DASHBOARD
@@ -34,30 +50,23 @@ module.exports = (router) => {
 
 
 // GET: Active claims (Not started / In progress / Check required)
+// GET: Active claims (Not started / In progress / Overdue / Check required)
 router.get('/provider', (req, res) => {
-  let allClaims = req.session.data.claims || []
+  const allClaims = req.session.data.claims || []
 
-  let activeClaims = allClaims.filter(claim =>
-    ['Not started', 'In progress', 'Overdue'].includes(claim.status)
+  const excludedStatuses = ['Approved', 'Pending', 'Rejected']
+  const activeClaims = allClaims.filter(claim =>
+    !excludedStatuses.includes(claim.status?.trim())
   )
 
-  // ✅ Sort by first name, then last name (A–Z)
-  // activeClaims.sort((a, b) => {
-  //   const firstNameA = (a.claimantFirstName || '').toLowerCase()
-  //   const firstNameB = (b.claimantFirstName || '').toLowerCase()
-  //   const lastNameA = (a.claimantLastName || '').toLowerCase()
-  //   const lastNameB = (b.claimantLastName || '').toLowerCase()
-
-  //   if (firstNameA !== firstNameB) {
-  //     return firstNameA.localeCompare(firstNameB)
-  //   }
-  //   return lastNameA.localeCompare(lastNameB)
-  // })
+  console.log('✅ Filtered active claims:', activeClaims.map(c => `${c.claimantName} (${c.status})`))
 
   res.render('provider/index', {
     claims: activeClaims
   })
 })
+
+
 
 
 

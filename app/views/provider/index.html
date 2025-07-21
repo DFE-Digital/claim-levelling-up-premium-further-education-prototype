@@ -50,40 +50,49 @@
       <th scope="col" class="govuk-table__header">Status</th>
     </tr>
   </thead>
-  <tbody class="govuk-table__body govuk-!-font-size-16">
-    {% for claim in claims %}
-        <tr class="govuk-table__row">
-
-          {# Make check req first block so logic works #}
-          <td class="govuk-table__cell">
-            {% if claim.status == "Overdue" %}
-              <a href="/provider/member-of-staff/{{ claim.id }}" class="govuk-link"> {{ claim.claimantFirstName }} {{ claim.claimantLastName }}</a>
-
-            {% elseif claim.status == "In progress" %}
-              <a href="/provider/finish-verifying/{{ claim.id }}" class="govuk-link"> {{ claim.claimantFirstName }} {{ claim.claimantLastName }}</a>
-
-            {% elseif claim.status == "Not started" and claim.idCheckRequired === "Yes" %}
-              <a href="/provider/check-identity/{{ claim.id }}" class="govuk-link"> {{ claim.claimantFirstName }} {{ claim.claimantLastName }}</a>
-
-            {% elseif claim.status == "Not started" %}
-              <a href="/provider/member-of-staff/{{ claim.id }}" class="govuk-link"> {{ claim.claimantFirstName }} {{ claim.claimantLastName }}</a>
-            {% endif %}
-          </td>
-
+ {% for claim in claims %}
   
-          <td class="govuk-table__cell" data-sort-value="{{ claim.dateSubmittedIso }}">{{ claim.dateSubmitted }}</td>
-          <td class="govuk-table__cell" data-sort-value="{{ claim.dueDateIso }}">{{ claim.dueDate }}</td>
-          <td class="govuk-table__cell" data-sort-value="{{ claim.assignedTo }}">{{ claim.assignedTo }}</td>
-          <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">
-            {{ govukTag({
-              text: claim.status,
-              classes: claim.status | statusColour
-            }) }}
-          </td>
-        </tr>
-    {% endfor %}
-  </tbody>
+    <tr class="govuk-table__row">
+      <td class="govuk-table__cell">
+        {% if claim.status == "In progress" %}
+          <a href="/provider/finish-verifying/{{ claim.id }}" class="govuk-link">
+            {{ claim.claimantFirstName }} {{ claim.claimantLastName }}
+          </a>
+        {% elseif claim.status == "Not started" and claim.idCheckRequired == "Yes" %}
+          <a href="/provider/check-identity/{{ claim.id }}" class="govuk-link">
+            {{ claim.claimantFirstName }} {{ claim.claimantLastName }}
+          </a>
+        {% else %}
+          <a href="/provider/member-of-staff/{{ claim.id }}" class="govuk-link">
+            {{ claim.claimantFirstName }} {{ claim.claimantLastName }}
+          </a>
+        {% endif %}
+      </td>
+      <td class="govuk-table__cell" data-sort-value="{{ claim.dateSubmittedIso }}">{{ claim.dateSubmitted }}</td>
+      <td class="govuk-table__cell" data-sort-value="{{ claim.dueDateIso }}">{{ claim.dueDate }}</td>
+      <td class="govuk-table__cell" data-sort-value="{{ claim.assignedTo }}">{{ claim.assignedTo }}</td>
+      <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">
+        {{ govukTag({
+          text: claim.status,
+          classes: claim.status | statusColour
+        }) }}
+      </td>
+    </tr>
+
+{% endfor %}
+
 </table>
+
+
+
+{# {% for claim in claims %}
+  <p>{{ claim.claimantName }} – {{ claim.status }}</p>
+{% endfor %} #}
+
+{# {% for claim in claims %}
+  <p>Status: "{{ claim.status }}"</p>
+{% endfor %} #}
+
 
 {# {% include "_includes/pagination.njk" %} #}
 {# {{ data.claims | dump | safe }} #}

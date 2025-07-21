@@ -8,6 +8,9 @@ const addFilter = govukPrototypeKit.views.addFilter
 
 // Status tag colour
 addFilter('statusColour', status => {
+
+  console.log('Status tag:', status)
+
   switch(status) {
     case 'In progress':
       return 'govuk-tag--yellow'
@@ -23,6 +26,7 @@ addFilter('statusColour', status => {
       return 'govuk-tag--blue'
   }
 })
+
 
 // Find a specific error object by field name (used in templates)
 addFilter('findError', function(errors, fieldName) {
