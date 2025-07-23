@@ -27,7 +27,9 @@
             At least 50% of your timetabled teaching hours must be spent teaching students of all ages in the following courses:
           </p>
 
-          <ul class="govuk-list govuk-list--bullet">
+          {# <p>DEBUG – Total courses: {{ subjectCourses.length }}</p> #}
+
+          {# <ul class="govuk-list govuk-list--bullet">
             <li>
               qualifications approved for funding at level 3 and below in the
               <a href="https://www.qualifications.education.gov.uk/Search?Status=Approved&Level=0,1,2,3,4&Sub=28&PageSize=10&Sort=Status">
@@ -48,6 +50,13 @@
                 engineering and manufacturing occupational route (opens in a new tab)
               </a>
             </li>
+          </ul> #}
+
+
+          <ul class="govuk-list govuk-list--bullet">
+            {% for course in subjectCourses %}
+              <li>{{ course | safe }}</li>
+            {% endfor %}
           </ul>
 
           {{ govukRadios({

@@ -155,45 +155,6 @@ module.exports = router => {
   })
 
 
-// SUBJECT AREAS POST
-router.post('/eligibility/subject-area/subject-areas', function (req, res) {
-  const selectedSubjects = req.session.data['subjects'] || []
-
-  if (selectedSubjects.includes('I do not teach any of these subjects')) {
-    return res.redirect('/eligibility/not-eligible')
-  }
-
-  req.session.data.subjectCourses = {} // Reset
-  req.session.data.remainingSubjects = [...selectedSubjects]
-
-  const firstSubject = req.session.data.remainingSubjects.shift()
-  routeToSubjectCourse(res, firstSubject)
-})
-
-// NEXT SUBJECT PAGE POST
-router.post('/eligibility/subject-area/next-subject-page', function (req, res) {
-  const subject = req.body.previousCoursePage // e.g. "maths", "chemistry"
-  const selected = req.body[subject]
-
-  // Ensure data key is clean (e.g., remove any '_unchecked' noise)
-  if (selected) {
-    const filtered = Array.isArray(selected)
-      ? selected.filter(item => item !== 'none')
-      : selected !== 'none' ? [selected] : []
-
-    req.session.data[subject] = filtered
-  }
-
-  const nextSubject = req.session.data.remainingSubjects.shift()
-  if (nextSubject) {
-    routeToSubjectCourse(res, nextSubject)
-  } else {
-    res.redirect('/eligibility/half-timetabled-teaching-hours-teaching-eligible-courses')
-  }
-})
-
-
-
 function routeToSubjectCourse(res, subject) {
   const map = {
     'Building and construction': '/eligibility/subject-area/courses/building-course',
@@ -206,6 +167,77 @@ function routeToSubjectCourse(res, subject) {
   }
   res.redirect(map[subject] || '/eligibility/half-timetabled-teaching-hours-teaching-eligible-courses')
 }
+
+
+
+// SUBJECT AREAS POST
+router.post('/eligibility/subject-area/subject-areas', function (req, res) {
+  let selectedSubjects = req.body.subjects || []
+
+  // Remove _unchecked if it’s accidentally submitted
+  selectedSubjects = Array.isArray(selectedSubjects)
+    ? selectedSubjects.filter(subject => subject !== '_unchecked')
+    : selectedSubjects !== '_unchecked' ? [selectedSubjects] : []
+
+  if (selectedSubjects.includes('I do not teach any of these subjects')) {
+    return res.redirect('/eligibility/not-eligible')
+  }
+
+  req.session.data.subjects = selectedSubjects
+  req.session.data.remainingSubjects = [...selectedSubjects]
+
+  const firstSubject = req.session.data.remainingSubjects.shift()
+  routeToSubjectCourse(res, firstSubject)
+})
+
+
+
+
+// NEXT SUBJECT PAGE POST
+router.post('/eligibility/subject-area/next-subject-page', function (req, res) {
+  const subject = req.body.previousCoursePage // e.g. "maths", "chemistry"
+  const selected = req.body[subject]
+
+  // Ensure data key is clean (e.g., remove any '_unchecked' noise)
+  if (selected) {
+    const filtered = Array.isArray(selected)
+      ? selected.filter(item => item !== '_unchecked')
+      : selected !== '_unchecked' ? [selected] : []
+
+    req.session.data[subject] = filtered
+  }
+
+  console.log('Saving to session:', subject, '=', req.session.data[subject])
+
+  const nextSubject = req.session.data.remainingSubjects.shift()
+  if (nextSubject) {
+    routeToSubjectCourse(res, nextSubject)
+  } else {
+    res.redirect('/eligibility/half-timetabled-teaching-hours-teaching-eligible-courses')
+  }
+})
+
+
+
+  //// Create a GET route that prepares all selected course values for rendering fro subject area courses checkboxes:
+  router.get('/eligibility/half-timetabled-teaching-hours-teaching-eligible-courses', function (req, res) {
+    const subjects = req.session.data.subjects || []
+    const subjectCourses = []
+
+    console.log('SUBJECTS:', subjects)
+
+    subjects.forEach(subject => {
+      const selectedCourses = req.session.data[subject] || []
+      console.log(`Courses for ${subject}:`, selectedCourses)
+      selectedCourses.forEach(course => {
+        subjectCourses.push(course)
+      })
+    })
+
+    res.render('eligibility/half-timetabled-teaching-hours-teaching-eligible-courses', {
+      subjectCourses
+    })
+  })
 
 
 
