@@ -23,7 +23,8 @@
           {{ govukTag({ text: "Not started", classes: "govuk-tag--red" }) }}
         {% endif %}
       </h1>
-
+    
+    {################## ROLE AND EXPERIENCE ###############}  
     {{ govukSummaryList({
       card: {
         title: {
@@ -48,6 +49,8 @@
       ]
     }) }}
 
+
+    {################## TYPE OF CONTRACT ###############}
     {{ govukSummaryList({
       card: {
         title: {
@@ -72,6 +75,7 @@
       ]
     }) }}
 
+    {################## PERFORMANCE AND DISCIPLINE ###############}
     {{ govukSummaryList({
       card: {
         title: {
@@ -94,6 +98,8 @@
       ]
     }) }}
 
+
+    {################## CONTRACTED HOURS ###############}
     {{ govukSummaryList({
       card: {
         title: {
@@ -116,6 +122,8 @@
       ]
     }) }}
 
+
+    {################## SUBJECT AREA ###############}
     {{ govukSummaryList({
       card: {
         title: {
