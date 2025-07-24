@@ -114,8 +114,12 @@ module.exports = router => {
     const claimantTaughtOneFullTerm = req.body.claimantTaughtOneFullTerm
     req.session.data.claimantTaughtOneFullTerm = claimantTaughtOneFullTerm
 
-      res.redirect('/eligibility/variable-timetabled-to-teach')
-
+      if (claimantTaughtOneFullTerm === 'No') {
+        res.redirect('/eligibility/not-eligible')
+      } else {
+         res.redirect('/eligibility/variable-timetabled-to-teach')
+      }
+      
   })
 
   ////////////////////// POST: VARIABLE TIMETABLED TO TEACH //////////////////////
@@ -123,7 +127,11 @@ module.exports = router => {
     const claimantVariableTimetabledToTeach = req.body.claimantVariableTimetabledToTeach
     req.session.data.claimantVariableTimetabledToTeach = claimantVariableTimetabledToTeach
 
-      res.redirect('/eligibility/teaching-hours-per-week')
+      if (claimantVariableTimetabledToTeach === 'No') {
+        res.redirect('/eligibility/not-eligible')
+      } else {
+        res.redirect('/eligibility/teaching-hours-per-week')  
+      }
 
   })
 
@@ -150,8 +158,12 @@ module.exports = router => {
     const sixteenToNineteenTeachingHours = req.body.sixteenToNineteenTeachingHours
     req.session.data.sixteenToNineteenTeachingHours = sixteenToNineteenTeachingHours
 
-      res.redirect('/eligibility/subject-area/subject-areas')
-
+      if (sixteenToNineteenTeachingHours === 'No') {
+        res.redirect('/eligibility/not-eligible')
+      } else {
+        res.redirect('/eligibility/subject-area/subject-areas')  
+      }
+      
   })
 
 
@@ -244,7 +256,7 @@ router.post('/eligibility/subject-area/next-subject-page', function (req, res) {
     router.post('/eligibility/half-timetabled-teaching-hours-teaching-eligible-courses', function (req, res) {
       var halfTimetabledTeachingHoursEligibleCourses = req.session.data['halfTimetabledTeachingHoursEligibleCourses']
       if (halfTimetabledTeachingHoursEligibleCourses == 'No') {
-        res.redirect('/eligibility/performance')
+        res.redirect('/eligibility/not-eligible')
       } else {
         res.redirect('/eligibility/performance')
       }
@@ -255,24 +267,21 @@ router.post('/eligibility/subject-area/next-subject-page', function (req, res) {
       const performance = req.session.data['claimantPerformanceMeasures']
       const disciplinary = req.session.data['claimantDisciplinaryAction']
 
-      const bothAreNo = (performance === 'No' && disciplinary === 'No')
+      const oneIsYes = (performance === 'Yes' || disciplinary === 'Yes')
 
-      // In production you can block or redirect based on eligibility
-      // For now, always allow continuation for user testing
-
-      if (!bothAreNo) {
+      if (oneIsYes) {
         console.warn('⚠️ User has answered Yes to one or both performance/disciplinary questions')
-        // You can also log to session for analytics:
         req.session.data['ineligibleByPerformanceCheck'] = true
+        return res.redirect('/eligibility/not-eligible') // ✅ return here
       }
 
-      res.redirect('/eligibility/check')
+      return res.redirect('/eligibility/check') // ✅ also good practice to return here
     })
+
 
     ///////////// YOU ARE ELIGIBLE PAGE ///////////////
     router.post('/eligibility/check', (req, res) => {
-      // Here you would typically handle the form submission, e.g. save to database
-      // For now, just redirect to a confirmation page
+      // Redirect to a confirmation page
       res.redirect('/eligibility/you-are-eligible')
     })
 }
