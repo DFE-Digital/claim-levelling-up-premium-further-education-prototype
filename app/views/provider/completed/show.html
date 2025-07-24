@@ -93,7 +93,7 @@
       },
       rows: [
         { key: { text: "Subject to performance measures" }, value: { text: claim.performanceMeasures | default("Not answered") } },
-        { key: { text: "Subject to disciplinary action" }, value: { text: claim.subjectToDisciplinaryAction | default("Not answered") } }
+        { key: { text: "Subject to disciplinary action" }, value: { text: claim.disciplinaryAction | default("Not answered") } }
       ]
     }) }}
 
@@ -106,8 +106,8 @@
         }
       },
       rows: [
-        { key: { text: "Timetabled hours per week" }, value: { text: claim.contractedHours | default("Not answered") } },
-        { key: { text: "Teaches 16-19-year-olds or those with EHCP" }, value: { text: claim.sixteenToNineteen | default("Not answered") } }
+        { key: { text: "Timetabled hours per week" }, value: { text: claim.timetabledHoursDuringTerm | default("Not answered") } },
+        { key: { text: "Teaches 16-19-year-olds or those with EHCP" }, value: { text: claim.teachesSixteenToNineteen | default("Not answered") } }
       ]
     }) }}
 
@@ -122,12 +122,12 @@
       rows: [
         {
           key: { text: "Teaches Level 3 courses" },
-          value: { text: claim.fundingAtLevelThreeAndBelow | default("Not answered") }
+          value: { text: claim.teachesLevelThree | default("Not answered") }
         },
         
         {
           key: { text: "Subject area" },
-          value: { text: claim.subjectAreas | default("Not answered") }
+          value: { text: claim.levelThreeSubjectArea | default("Not answered") }
         },
         
         {

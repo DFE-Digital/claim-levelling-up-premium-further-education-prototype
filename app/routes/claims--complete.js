@@ -48,7 +48,6 @@ router.post('/provider/completed/:claimId', (req, res) => {
 
 
   ///// GET: Show all verified claims /////////////////////////
-
   router.get('/provider/completed', (req, res) => {
     const claims = req.session.data.claims || []
 
@@ -58,16 +57,33 @@ router.post('/provider/completed/:claimId', (req, res) => {
     // Add verified flag for DfE pending
     filteredClaims.forEach(claim => {
       if (claim.status === 'Pending') {
-        claim.verified = (
-          claim.contractType?.toLowerCase() === 'permanent' &&
+        const contractType = claim.contractType?.toLowerCase()
+
+        const contractValid =
+          contractType === 'permanent' ||
+          (contractType === 'fixed-term' && claim.fixedTermAcademicYear === 'Yes') ||
+          (contractType === 'variable hours' &&
+            claim.variableContractTimetabledHours &&
+            claim.variableContractAcademicTerm)
+
+        const subjectAreaValid =
+          (claim.teachesLevelThree === 'Yes' && claim.levelThreeHalfTimetableTeachingCourses === 'Yes') ||
+          (claim.teachesLevelThree === 'No' &&
+            claim.levelThreeSubjectArea &&
+            Array.isArray(claim.levelThreeSubjectAreaCourses) &&
+            claim.levelThreeSubjectAreaCourses.length > 0)
+
+        claim.verified =
+          contractValid &&
           claim.teachingResponsibilities === 'Yes' &&
           claim.first5Years === 'Yes' &&
           claim.hoursAcademicYear === 'Yes' &&
           claim.sixteenToNineteen === 'Yes' &&
-          claim.fundingAtLevelThreeAndBelow === 'Yes' &&
           claim.performanceMeasures === 'No' &&
-          claim.subjectToDisciplinaryAction === 'No'
-        )
+          claim.subjectToDisciplinaryAction === 'No' &&
+          claim.timetabledHoursDuringTerm &&
+          claim.teachesSixteenToNineteen &&
+          subjectAreaValid
       }
     })
 
