@@ -1,0 +1,177 @@
+{% extends "layouts/main.html" %}
+
+{% set serviceNavId = "completedClaims" %}
+
+{% set pageName =  'Claim reference: ' + claim.claimReference %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "/provider/completed"
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-three-quarters">
+
+      <span class="govuk-caption-l">{{claim.claimantName}}</span>
+      <h1 class="govuk-heading-l">{{pageName}}
+        {% if claim.status in ["Pending", "Approved", "Rejected"] %}
+        {{ govukTag({
+          text: claim.status,
+          classes: claim.status | statusColour
+        }) }}
+      {% elseif claim.verified === true %}
+        {{ govukTag({
+          text: "Verified",
+          classes: "govuk-tag--turquoise"
+        }) }}
+      {% elseif claim.verified === false %}
+        {{ govukTag({
+          text: "Not verified",
+          classes: "govuk-tag--grey"
+        }) }}
+      {% endif %}
+      
+      </h1>
+      
+
+      {% if claim.status == 'Rejected' %}
+        <div class="govuk-inset-text">
+          Claimant has been notified on the reasons for rejection.
+        </div>
+      {% endif %}
+
+
+      {{ data.user | log }}
+      {{ data.claims | log }}
+
+      {# {% include "_includes/claim/verified-read-only-details.njk" %} #}
+
+      {{ govukDetails({
+        summaryText: "Claim details",
+        html: '
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">TRN</dt>
+              <dd class="govuk-summary-list__value">{{ claim.trn }}</dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">Date submitted</dt>
+              <dd class="govuk-summary-list__value">{{ claim.dateSubmitted }}</dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">Verified by provider</dt>
+              <dd class="govuk-summary-list__value">{{ claim.dateVerified }}</dd>
+            </div>
+          </dl>'
+      }) }}
+
+
+    {################# ROLE AND EXPERIENCE   #################}
+
+    {{ govukSummaryList({
+      card: {
+        title: {
+          text: "Role and experience",
+          classes: "govuk-heading-m"
+        }
+      },
+      rows: [
+        { key: { text: "Teaching responsibilities" }, value: { text: claim.teachingResponsibilities | default("Not answered") } },
+        { key: { text: "In first 5 years of FE teaching" }, value: { text: claim.first5Years | default("Not answered") } },
+        { key: { text: "Teaching qualification" }, value: { text: claim.hasTeachingQualification | default("Not answered") } },
+        { key: { text: "Mitigating circumstances for qualification" }, value: { text: claim.qualificationMitigations | default("Not answered") } } if claim.qualificationMitigations
+      ]
+    }) }}
+
+
+    {################# TYPE OF CONTRACT #################}
+    {{ govukSummaryList({
+      card: {
+        title: {
+          text: "Type of contract",
+          classes: "govuk-heading-m"
+        }
+      },
+      rows: [
+        { key: { text: "Contract type" }, value: { text: claim.contractType | default("Not answered") } },
+        { key: { text: "Fixed-term covers full academic year" }, value: { text: claim.fixedTermAcademicYear | default("Not answered") } } if claim.contractType == "Fixed-term",
+        { key: { text: "Timetabled hours in term" }, value: { text: claim.variableContractTimetabledHours | default("Not answered") } } if claim.contractType == "Variable hours",
+        { key: { text: "Variable contract academic term" }, value: { text: claim.variableContractAcademicTerm | default("Not answered") } } if claim.contractType == "Variable hours"
+      ]
+    }) }}
+
+    {################# PERFORMANCE AND DISCIPLINE #################}
+    {{ govukSummaryList({
+      card: {
+        title: {
+          text: "Performance and discipline",
+          classes: "govuk-heading-m"
+        }
+      },
+      rows: [
+        { key: { text: "Subject to performance measures" }, value: { text: claim.performanceMeasures | default("Not answered") } },
+        { key: { text: "Subject to disciplinary action" }, value: { text: claim.disciplinaryAction | default("Not answered") } }
+      ]
+    }) }}
+
+    {################# CONTRACTED HOURS #################}
+    {{ govukSummaryList({
+      card: {
+        title: {
+          text: "Contracted hours",
+          classes: "govuk-heading-m"
+        }
+      },
+      rows: [
+        { key: { text: "Timetabled hours per week" }, value: { text: claim.timetabledHoursDuringTerm | default("Not answered") } },
+        { key: { text: "Teaches 16-19-year-olds or those with EHCP" }, value: { text: claim.teachesSixteenToNineteen | default("Not answered") } }
+      ]
+    }) }}
+
+    {################# SUBJECT AREA #################}
+    {{ govukSummaryList({
+      card: {
+        title: {
+          text: "Subject area",
+          classes: "govuk-heading-m"
+        }
+      },
+      rows: [
+        {
+          key: { text: "Teaches Level 3 courses" },
+          value: { text: claim.teachesLevelThree | default("Not answered") }
+        },
+        
+        {
+          key: { text: "Subject area" },
+          value: { text: claim.levelThreeSubjectArea | default("Not answered") }
+        },
+        
+        {
+          key: { text: "Subject area courses" },
+          value: { text: claim.levelThreeSubjectAreaCourses | join(', ') | default("Not answered") }
+        } if claim.teachesLevelThree === 'No' and claim.levelThreeSubjectAreaCourses,
+
+        {
+          key: { text: "Spend at least half timetabled teaching time teaching relevant courses" },
+          value: { text: claim.levelThreeHalfTimetableTeachingCourses | default("Not answered") }
+        } if claim.levelThreeHalfTimetableTeachingCourses === 'Yes'
+      ]
+    }) }}
+
+  
+
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Close claim",
+          href: "/provider/completed"
+        }) }}
+      </div>
+
+  
+  </div>
+</div>
+{% endblock %}
