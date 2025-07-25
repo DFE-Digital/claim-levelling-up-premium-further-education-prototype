@@ -446,10 +446,10 @@
     "contractAcademicYear": "Yes",
     "hoursAcademicYear": "Yes",
     "performanceMeasures": "No",
-    "subjectToDisciplinaryAction": "No",
-    "contractedHours": " 12 hours or more per week",
-    "sixteenToNineteen": "Yes",
-    "fundingAtLevelThreeAndBelow": "Yes",
+    "disciplinaryAction": "No",
+    "timetabledHoursDuringTerm": " 12 hours or more per week",
+    "teachesSixteenToNineteen": "Yes",
+    "teachesLevelThree": "Yes",
     "claimantFirstName": "Alejandro",
     "claimantLastName": "Roberts",
     "idCheckRequired": "No",
@@ -459,7 +459,7 @@
     "claimantAccountNumber": "****7918",
     "claimantWorkEmail": "alejandro.roberts@college.ac.uk",
     "feProvider": "West Herts College",
-    "subjectAreas": "Chemistry"
+    "levelThreeSubjectArea": "Chemistry"
   },
   {
     "id": "GS564G",
@@ -483,10 +483,10 @@
     "contractAcademicYear": "Yes",
     "hoursAcademicYear": "Yes",
     "performanceMeasures": "Yes",
-    "subjectToDisciplinaryAction": "Yes",
-    "contractedHours": " 12 hours or more per week",
-    "sixteenToNineteen": "Yes",
-    "fundingAtLevelThreeAndBelow": "Yes",
+    "disciplinaryAction": "Yes",
+    "timetabledHoursDuringTerm": " 12 hours or more per week",
+    "teachesSixteenToNineteen": "Yes",
+    "teachesLevelThree": "Yes",
     "claimantFirstName": "Angela",
     "claimantLastName": "Forbes",
     "idCheckRequired": "No",
@@ -496,7 +496,7 @@
     "claimantAccountNumber": "****1440",
     "claimantWorkEmail": "angela.forbes@college.ac.uk",
     "feProvider": "Lincoln College",
-    "subjectAreas": "Early years"
+    "levelThreeSubjectArea": "Early years"
   },
   {
     "id": "4IL2BX",
@@ -520,10 +520,10 @@
     "contractAcademicYear": "Yes",
     "hoursAcademicYear": "Yes",
     "performanceMeasures": "No",
-    "subjectToDisciplinaryAction": "No",
-    "contractedHours": " 12 hours or more per week",
-    "sixteenToNineteen": "Yes",
-    "fundingAtLevelThreeAndBelow": "Yes",
+    "disciplinaryAction": "No",
+    "timetabledHoursDuringTerm": " 12 hours or more per week",
+    "teachesSixteenToNineteen": "Yes",
+    "teachesLevelThree": "Yes",
     "claimantFirstName": "Angela",
     "claimantLastName": "Thomas",
     "idCheckRequired": "No",
@@ -533,7 +533,7 @@
     "claimantAccountNumber": "****1832",
     "claimantWorkEmail": "angela.thomas@college.ac.uk",
     "feProvider": "Itchen College",
-    "subjectAreas": "Physics"
+    "levelThreeSubjectArea": "Physics"
   },
   {
     "id": "FL0T26",
@@ -557,10 +557,10 @@
     "contractAcademicYear": "Yes",
     "hoursAcademicYear": "Yes",
     "performanceMeasures": "No",
-    "subjectToDisciplinaryAction": "No",
-    "contractedHours": " 12 hours or more per week",
-    "sixteenToNineteen": "Yes",
-    "fundingAtLevelThreeAndBelow": "Yes",
+    "disciplinaryAction": "No",
+    "timetabledHoursDuringTerm": " 12 hours or more per week",
+    "teachesSixteenToNineteen": "Yes",
+    "teachesLevelThree": "Yes",
     "claimantFirstName": "Barbara",
     "claimantLastName": "Griffin",
     "idCheckRequired": "No",
@@ -570,7 +570,7 @@
     "claimantAccountNumber": "****5381",
     "claimantWorkEmail": "barbara.griffin@college.ac.uk",
     "feProvider": "Kingston College",
-    "subjectAreas": "Physics"
+    "levelThreeSubjectArea": "Physics"
   },
   {
     "id": "CKWON7",
@@ -594,10 +594,10 @@
     "contractAcademicYear": "Yes",
     "hoursAcademicYear": "Yes",
     "performanceMeasures": "No",
-    "subjectToDisciplinaryAction": "No",
-    "contractedHours": " 12 hours or more per week",
-    "sixteenToNineteen": "Yes",
-    "fundingAtLevelThreeAndBelow": "Yes",
+    "disciplinaryAction": "No",
+    "timetabledHoursDuringTerm": " 12 hours or more per week",
+    "teachesSixteenToNineteen": "Yes",
+    "teachesLevelThree": "Yes",
     "claimantFirstName": "Bradley",
     "claimantLastName": "Stevenson",
     "idCheckRequired": "No",
@@ -607,7 +607,7 @@
     "claimantAccountNumber": "****7225",
     "claimantWorkEmail": "bradley.stevenson@college.ac.uk",
     "feProvider": "Uxbridge College",
-    "subjectAreas": "Chemistry"
+    "levelThreeSubjectArea": "Chemistry"
   },
   {
     "id": "XZMPOK",
@@ -631,10 +631,10 @@
     "contractAcademicYear": "Yes",
     "hoursAcademicYear": "Yes",
     "performanceMeasures": "No",
-    "subjectToDisciplinaryAction": "No",
-    "contractedHours": " 12 hours or more per week",
-    "sixteenToNineteen": "Yes",
-    "fundingAtLevelThreeAndBelow": "Yes",
+    "disciplinaryAction": "No",
+    "timetabledHoursDuringTerm": " 12 hours or more per week",
+    "teachesSixteenToNineteen": "Yes",
+    "teachesLevelThree": "Yes",
     "claimantFirstName": "Brandon",
     "claimantLastName": "Campos",
     "idCheckRequired": "No",
@@ -644,7 +644,7 @@
     "claimantAccountNumber": "****7025",
     "claimantWorkEmail": "brandon.campos@college.ac.uk",
     "feProvider": "Zig Zag College",
-    "subjectAreas": "Building and construction"
+    "levelThreeSubjectArea": "Building and construction"
   },
   {
     "id": "XQE5VA",
@@ -668,10 +668,10 @@
     "contractAcademicYear": "Yes",
     "hoursAcademicYear": "Yes",
     "performanceMeasures": "No",
-    "subjectToDisciplinaryAction": "No",
-    "contractedHours": " 12 hours or more per week",
-    "sixteenToNineteen": "Yes",
-    "fundingAtLevelThreeAndBelow": "Yes",
+    "disciplinaryAction": "No",
+    "timetabledHoursDuringTerm": " 12 hours or more per week",
+    "teachesSixteenToNineteen": "Yes",
+    "teachesLevelThree": "Yes",
     "claimantFirstName": "Briana",
     "claimantLastName": "Turner",
     "idCheckRequired": "No",
@@ -681,7 +681,7 @@
     "claimantAccountNumber": "****8720",
     "claimantWorkEmail": "briana.turner@college.ac.uk",
     "feProvider": "Yeovil College",
-    "subjectAreas": "Computing, including digital and ICT"
+    "levelThreeSubjectArea": "Computing, including digital and ICT"
   },
   {
     "id": "1PV6SO",
@@ -705,10 +705,10 @@
     "contractAcademicYear": "Yes",
     "hoursAcademicYear": "Yes",
     "performanceMeasures": "No",
-    "subjectToDisciplinaryAction": "No",
-    "contractedHours": " 12 hours or more per week",
-    "sixteenToNineteen": "Yes",
-    "fundingAtLevelThreeAndBelow": "Yes",
+    "disciplinaryAction": "No",
+    "timetabledHoursDuringTerm": " 12 hours or more per week",
+    "teachesSixteenToNineteen": "Yes",
+    "teachesLevelThree": "Yes",
     "claimantFirstName": "David",
     "claimantLastName": "Romero",
     "idCheckRequired": "No",
@@ -718,7 +718,7 @@
     "claimantAccountNumber": "****6070",
     "claimantWorkEmail": "david.romero@college.ac.uk",
     "feProvider": "Queen Alexandra College",
-    "subjectAreas": "Engineering and manufacturing, including transport engineering and electronics"
+    "levelThreeSubjectArea": "Engineering and manufacturing, including transport engineering and electronics"
   },
   {
     "id": "30BKKA",
@@ -742,10 +742,10 @@
     "contractAcademicYear": "Yes",
     "hoursAcademicYear": "Yes",
     "performanceMeasures": "No",
-    "subjectToDisciplinaryAction": "No",
-    "contractedHours": " 12 hours or more per week",
-    "sixteenToNineteen": "Yes",
-    "fundingAtLevelThreeAndBelow": "Yes",
+    "disciplinaryAction": "No",
+    "timetabledHoursDuringTerm": " 12 hours or more per week",
+    "teachesSixteenToNineteen": "Yes",
+    "teachesLevelThree": "Yes",
     "claimantFirstName": "Elizabeth",
     "claimantLastName": "Trujillo",
     "idCheckRequired": "No",
@@ -755,7 +755,7 @@
     "claimantAccountNumber": "****6145",
     "claimantWorkEmail": "elizabeth.trujillo@college.ac.uk",
     "feProvider": "Exeter College",
-    "subjectAreas": "Chemistry"
+    "levelThreeSubjectArea": "Chemistry"
   },
   {
     "id": "GCKFT4",
@@ -779,10 +779,10 @@
     "contractAcademicYear": "Yes",
     "hoursAcademicYear": "Yes",
     "performanceMeasures": "No",
-    "subjectToDisciplinaryAction": "No",
-    "contractedHours": " 12 hours or more per week",
-    "sixteenToNineteen": "Yes",
-    "fundingAtLevelThreeAndBelow": "Yes",
+    "disciplinaryAction": "No",
+    "timetabledHoursDuringTerm": " 12 hours or more per week",
+    "teachesSixteenToNineteen": "Yes",
+    "teachesLevelThree": "Yes",
     "claimantFirstName": "Gina",
     "claimantLastName": "Fuller",
     "idCheckRequired": "No",
@@ -792,7 +792,7 @@
     "claimantAccountNumber": "****9944",
     "claimantWorkEmail": "gina.fuller@college.ac.uk",
     "feProvider": "Vision West Nottinghamshire College",
-    "subjectAreas": "Physics"
+    "levelThreeSubjectArea": "Physics"
   },
   {
     "id": "D4K3UR",
@@ -816,10 +816,10 @@
     "contractAcademicYear": "Yes",
     "hoursAcademicYear": "Yes",
     "performanceMeasures": "Yes",
-    "subjectToDisciplinaryAction": "Yes",
-    "contractedHours": " 12 hours or more per week",
-    "sixteenToNineteen": "Yes",
-    "fundingAtLevelThreeAndBelow": "Yes",
+    "disciplinaryAction": "Yes",
+    "timetabledHoursDuringTerm": " 12 hours or more per week",
+    "teachesSixteenToNineteen": "Yes",
+    "teachesLevelThree": "Yes",
     "claimantFirstName": "Jeremy",
     "claimantLastName": "Todd",
     "idCheckRequired": "No",
@@ -829,7 +829,7 @@
     "claimantAccountNumber": "****9336",
     "claimantWorkEmail": "jeremy.todd@college.ac.uk",
     "feProvider": "Joseph Chamberlain College",
-    "subjectAreas": "Computing, including digital and ICT"
+    "levelThreeSubjectArea": "Computing, including digital and ICT"
   },
   {
     "id": "TJRUXH",
@@ -853,10 +853,10 @@
     "contractAcademicYear": "Yes",
     "hoursAcademicYear": "Yes",
     "performanceMeasures": "No",
-    "subjectToDisciplinaryAction": "No",
-    "contractedHours": " 12 hours or more per week",
-    "sixteenToNineteen": "Yes",
-    "fundingAtLevelThreeAndBelow": "Yes",
+    "disciplinaryAction": "No",
+    "timetabledHoursDuringTerm": " 12 hours or more per week",
+    "teachesSixteenToNineteen": "Yes",
+    "teachesLevelThree": "Yes",
     "claimantFirstName": "Jonathan",
     "claimantLastName": "Tanner",
     "idCheckRequired": "No",
@@ -866,7 +866,7 @@
     "claimantAccountNumber": "****8617",
     "claimantWorkEmail": "jonathan.tanner@college.ac.uk",
     "feProvider": "Alton College",
-    "subjectAreas": "Chemistry"
+    "levelThreeSubjectArea": "Chemistry"
   },
   {
     "id": "36H4E0",
@@ -890,10 +890,10 @@
     "contractAcademicYear": "Yes",
     "hoursAcademicYear": "Yes",
     "performanceMeasures": "No",
-    "subjectToDisciplinaryAction": "No",
-    "contractedHours": " 12 hours or more per week",
-    "sixteenToNineteen": "Yes",
-    "fundingAtLevelThreeAndBelow": "Yes",
+    "disciplinaryAction": "No",
+    "timetabledHoursDuringTerm": " 12 hours or more per week",
+    "teachesSixteenToNineteen": "Yes",
+    "teachesLevelThree": "Yes",
     "claimantFirstName": "Joyce",
     "claimantLastName": "Johnson",
     "idCheckRequired": "No",
@@ -903,7 +903,7 @@
     "claimantAccountNumber": "****3923",
     "claimantWorkEmail": "joyce.johnson@college.ac.uk",
     "feProvider": "Hartlepool College",
-    "subjectAreas": "Engineering and manufacturing, including transport engineering and electronics"
+    "levelThreeSubjectArea": "Engineering and manufacturing, including transport engineering and electronics"
   },
   {
     "id": "6VEOJM",
@@ -927,10 +927,10 @@
     "contractAcademicYear": "Yes",
     "hoursAcademicYear": "Yes",
     "performanceMeasures": "No",
-    "subjectToDisciplinaryAction": "No",
-    "contractedHours": " 12 hours or more per week",
-    "sixteenToNineteen": "Yes",
-    "fundingAtLevelThreeAndBelow": "Yes",
+    "disciplinaryAction": "No",
+    "timetabledHoursDuringTerm": " 12 hours or more per week",
+    "teachesSixteenToNineteen": "Yes",
+    "teachesLevelThree": "Yes",
     "claimantFirstName": "Katherine",
     "claimantLastName": "Hickman",
     "idCheckRequired": "No",
@@ -940,7 +940,7 @@
     "claimantAccountNumber": "****1605",
     "claimantWorkEmail": "katherine.hickman@college.ac.uk",
     "feProvider": "South Devon College",
-    "subjectAreas": "Computing, including digital and ICT"
+    "levelThreeSubjectArea": "Computing, including digital and ICT"
   },
   {
     "id": "7FLE0P",
@@ -964,10 +964,10 @@
     "contractAcademicYear": "Yes",
     "hoursAcademicYear": "Yes",
     "performanceMeasures": "No",
-    "subjectToDisciplinaryAction": "No",
-    "contractedHours": " 12 hours or more per week",
-    "sixteenToNineteen": "Yes",
-    "fundingAtLevelThreeAndBelow": "Yes",
+    "disciplinaryAction": "No",
+    "timetabledHoursDuringTerm": " 12 hours or more per week",
+    "teachesSixteenToNineteen": "Yes",
+    "teachesLevelThree": "Yes",
     "claimantFirstName": "Lawrence",
     "claimantLastName": "Matthews",
     "idCheckRequired": "No",
@@ -977,7 +977,7 @@
     "claimantAccountNumber": "****7866",
     "claimantWorkEmail": "lawrence.matthews@college.ac.uk",
     "feProvider": "Croydon College",
-    "subjectAreas": "Computing, including digital and ICT"
+    "levelThreeSubjectArea": "Computing, including digital and ICT"
   },
   {
     "id": "XTE7KR",
@@ -1001,10 +1001,10 @@
     "contractAcademicYear": "Yes",
     "hoursAcademicYear": "Yes",
     "performanceMeasures": "Yes",
-    "subjectToDisciplinaryAction": "Yes",
-    "contractedHours": " 12 hours or more per week",
-    "sixteenToNineteen": "Yes",
-    "fundingAtLevelThreeAndBelow": "Yes",
+    "disciplinaryAction": "Yes",
+    "timetabledHoursDuringTerm": " 12 hours or more per week",
+    "teachesSixteenToNineteen": "Yes",
+    "teachesLevelThree": "Yes",
     "claimantFirstName": "Natalie",
     "claimantLastName": "Wright",
     "idCheckRequired": "No",
@@ -1014,7 +1014,7 @@
     "claimantAccountNumber": "****1990",
     "claimantWorkEmail": "natalie.wright@college.ac.uk",
     "feProvider": "Dudley College",
-    "subjectAreas": "Chemistry"
+    "levelThreeSubjectArea": "Chemistry"
   },
   {
     "id": "2F4OUQ",
@@ -1038,10 +1038,10 @@
     "contractAcademicYear": "Yes",
     "hoursAcademicYear": "Yes",
     "performanceMeasures": "No",
-    "subjectToDisciplinaryAction": "No",
-    "contractedHours": " 12 hours or more per week",
-    "sixteenToNineteen": "Yes",
-    "fundingAtLevelThreeAndBelow": "Yes",
+    "disciplinaryAction": "No",
+    "timetabledHoursDuringTerm": " 12 hours or more per week",
+    "teachesSixteenToNineteen": "Yes",
+    "teachesLevelThree": "Yes",
     "claimantFirstName": "Nathan",
     "claimantLastName": "Bauer",
     "idCheckRequired": "No",
@@ -1051,7 +1051,7 @@
     "claimantAccountNumber": "****2657",
     "claimantWorkEmail": "nathan.bauer@college.ac.uk",
     "feProvider": "Richmond upon Thames College",
-    "subjectAreas": "Building and construction"
+    "levelThreeSubjectArea": "Building and construction"
   },
   {
     "id": "N00P1G",
@@ -1075,10 +1075,10 @@
     "contractAcademicYear": "Yes",
     "hoursAcademicYear": "Yes",
     "performanceMeasures": "No",
-    "subjectToDisciplinaryAction": "No",
-    "contractedHours": " 12 hours or more per week",
-    "sixteenToNineteen": "Yes",
-    "fundingAtLevelThreeAndBelow": "Yes",
+    "disciplinaryAction": "No",
+    "timetabledHoursDuringTerm": " 12 hours or more per week",
+    "teachesSixteenToNineteen": "Yes",
+    "teachesLevelThree": "Yes",
     "claimantFirstName": "Noah",
     "claimantLastName": "Smith",
     "idCheckRequired": "No",
@@ -1088,7 +1088,7 @@
     "claimantAccountNumber": "****9354",
     "claimantWorkEmail": "noah.smith@college.ac.uk",
     "feProvider": "Grimsby Institute",
-    "subjectAreas": "Physics"
+    "levelThreeSubjectArea": "Physics"
   },
   {
     "id": "XBVR4A",
@@ -1112,10 +1112,10 @@
     "contractAcademicYear": "Yes",
     "hoursAcademicYear": "Yes",
     "performanceMeasures": "Yes",
-    "subjectToDisciplinaryAction": "Yes",
-    "contractedHours": " 12 hours or more per week",
-    "sixteenToNineteen": "Yes",
-    "fundingAtLevelThreeAndBelow": "Yes",
+    "disciplinaryAction": "Yes",
+    "timetabledHoursDuringTerm": " 12 hours or more per week",
+    "teachesSixteenToNineteen": "Yes",
+    "teachesLevelThree": "Yes",
     "claimantFirstName": "Paul",
     "claimantLastName": "Simon",
     "idCheckRequired": "No",
@@ -1125,6 +1125,6 @@
     "claimantAccountNumber": "****6184",
     "claimantWorkEmail": "paul.simon@college.ac.uk",
     "feProvider": "Macclesfield College",
-    "subjectAreas": "Physics"
+    "levelThreeSubjectArea": "Physics"
   }
 ]
