@@ -98,7 +98,7 @@
                   visuallyHiddenText: "academic term at provider"
                 }]
               }
-            } if data.claimantContractType === 'Variable',
+            } if data.claimantTaughtOneFullTerm,
             {
               key: { text: "Are you timetabled to teach at least 2.5 hours per week at " + data.worksAtFeProvider + " next term?" },
               value: { text: data.claimantVariableTimetabledToTeach },
@@ -109,7 +109,7 @@
                   visuallyHiddenText: "next term teaching hours"
                 }]
               }
-            } if data.claimantContractType === 'Variable',
+            } if data.claimantVariableTimetabledToTeach,
             {
               key: { text: "On average, how many hours a week are you timetabled to teach at " + data.worksAtFeProvider + " during the current term?" },
               value: { text: data.claimantTeachingHoursPerWeek },
