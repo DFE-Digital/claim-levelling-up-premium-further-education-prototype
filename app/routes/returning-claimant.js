@@ -402,25 +402,22 @@ router.get('/eligibility', function (req, res) {
       })
     }
 
-    if (
-      data.returnClaimantSortCode !== correctSortCode ||
-      data.returnClaimantAccountNumber !== correctAccountNumber
-    ) {
-      const message = 'Account number and sort code entered do not match'
-
-      incorrectFields.push(
-        {
-          field: 'returnClaimantSortCode',
-          message,
-          href: '#return-claimant-sort-code'
-        },
-        {
-          field: 'returnClaimantAccountNumber',
-          message,
-          href: '#return-claimant-account-number'
-        }
-      )
+   if (data.returnClaimantSortCode !== correctSortCode) {
+      incorrectFields.push({
+        field: 'returnClaimantSortCode',
+        message: 'Sort code entered does not match',
+        href: '#return-claimant-sort-code'
+      })
     }
+
+    if (data.returnClaimantAccountNumber !== correctAccountNumber) {
+      incorrectFields.push({
+        field: 'returnClaimantAccountNumber',
+        message: 'Account number entered does not match',
+        href: '#return-claimant-account-number'
+      })
+    }
+
 
     const isCorrect = incorrectFields.length === 0
 
