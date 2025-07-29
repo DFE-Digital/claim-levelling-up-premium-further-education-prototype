@@ -35,7 +35,7 @@
   {{ govukSummaryList({
     rows: [
       {
-        key: { text: "What is your full name?" },
+        key: { text: "Full name" },
         value: { text: data.returnClaimantFirstName + " " + data.returnClaimantLastName },
         actions: { items: [{ href: "/change/full-name", text: "Change", visuallyHiddenText: "full name" }] }
       },
@@ -50,7 +50,7 @@
         actions: { items: [{ href: "#", text: "Change", visuallyHiddenText: "date of birth" }] }
       },
       {
-        key: { text: "What is your National Insurance number?" },
+        key: { text: "National Insurance number" },
         value: { text: data.returnClaimantNationalInsuranceNumber or "Not provided" },
         actions: { items: [{ href: "#", text: "Change", visuallyHiddenText: "National Insurance number" }] }
       },
@@ -98,7 +98,7 @@
         actions: { items: [{ href: "#", text: "Change", visuallyHiddenText: "gender" }] }
       },
       {
-        key: { text: "What is your TRN? (optional)" },
+        key: { text: "TRN (optional)" },
         value: { text: "92345567" },
         actions: { items: [{ href: "#", text: "Change", visuallyHiddenText: "TRN" }] }
       }
