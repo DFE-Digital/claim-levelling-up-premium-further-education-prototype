@@ -39,6 +39,22 @@
         value: { text: data.returnClaimantFirstName + " " + data.returnClaimantLastName },
         actions: { items: [{ href: "/change/full-name", text: "Change", visuallyHiddenText: "full name" }] }
       },
+
+      {
+        key: { text: "Date of birth" },
+          value: {
+            text: (data["returnClaimantDob-day"] or "") + " " +
+                  (data["returnClaimantDob-month"] or "") + " " +
+                  (data["returnClaimantDob-year"] or "")
+          },
+        actions: { items: [{ href: "#", text: "Change", visuallyHiddenText: "date of birth" }] }
+      },
+      {
+        key: { text: "What is your National Insurance number?" },
+        value: { text: data.returnClaimantNationalInsuranceNumber or "Not provided" },
+        actions: { items: [{ href: "#", text: "Change", visuallyHiddenText: "National Insurance number" }] }
+      },
+
       {
         key: { text: "What is your address?" },
         value: {
@@ -57,15 +73,25 @@
           }]
         }
       },
-      {
-        key: { text: "Date of birth" },
-          value: {
-            text: (data["returnClaimantDob-day"] or "") + " " +
-                  (data["returnClaimantDob-month"] or "") + " " +
-                  (data["returnClaimantDob-year"] or "")
-          },
-        actions: { items: [{ href: "#", text: "Change", visuallyHiddenText: "date of birth" }] }
+
+        {
+        key: { text: "Email address" },
+        value: { text: data.workEmail },
+        actions: { items: [{ href: "/change/email", text: "Change", visuallyHiddenText: "email address" }] }
       },
+      
+      {
+        key: { text: "Would you like to provide your mobile number?" },
+        value: { text: "Yes" },
+        actions: { items: [{ href: "/change/provide-mobile", text: "Change", visuallyHiddenText: "mobile number preference" }] }
+      },
+
+      {
+        key: { text: "Mobile number" },
+        value: { text: "07900 000 000" },
+        actions: { items: [{ href: "/change/mobile", text: "Change", visuallyHiddenText: "mobile number" }] }
+      },
+      
       {
         key: { text: "How is your gender recorded on your employer’s payroll system?" },
         value: { text: "Male" },
@@ -75,26 +101,6 @@
         key: { text: "What is your TRN? (optional)" },
         value: { text: "92345567" },
         actions: { items: [{ href: "#", text: "Change", visuallyHiddenText: "TRN" }] }
-      },
-      {
-        key: { text: "What is your National Insurance number?" },
-        value: { text: data.returnClaimantNationalInsuranceNumber or "Not provided" },
-        actions: { items: [{ href: "#", text: "Change", visuallyHiddenText: "National Insurance number" }] }
-      },
-      {
-        key: { text: "Email address" },
-        value: { text: data.workEmail },
-        actions: { items: [{ href: "/change/email", text: "Change", visuallyHiddenText: "email address" }] }
-      },
-      {
-        key: { text: "Would you like to provide your mobile number?" },
-        value: { text: "Yes" },
-        actions: { items: [{ href: "/change/provide-mobile", text: "Change", visuallyHiddenText: "mobile number preference" }] }
-      },
-      {
-        key: { text: "Mobile number" },
-        value: { text: "07900 000 000" },
-        actions: { items: [{ href: "/change/mobile", text: "Change", visuallyHiddenText: "mobile number" }] }
       }
     ]
   }) }}
