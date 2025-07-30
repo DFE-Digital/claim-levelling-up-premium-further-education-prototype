@@ -220,7 +220,7 @@ module.exports = router => {
   router.post('/eligibility/half-timetabled-teaching-hours-teaching-eligible-courses', function (req, res) {
     var halfTimetabledTeachingHoursEligibleCourses = req.session.data['halfTimetabledTeachingHoursEligibleCourses']
     if (halfTimetabledTeachingHoursEligibleCourses == 'No') {
-      return res.redirect('/eligibility/not-eligible')
+      return res.redirect('/eligibility/not-eligible/half-timetabled-teaching-hours-teaching-eligible-courses')
     } else {
       return res.redirect('/eligibility/performance')
     }
@@ -235,7 +235,7 @@ module.exports = router => {
     if (oneIsYes) {
       console.warn('⚠️ User has answered Yes to one or both performance/disciplinary questions')
       req.session.data['ineligibleByPerformanceCheck'] = true
-      return res.redirect('/eligibility/not-eligible')
+      return res.redirect('/eligibility/not-eligible/performance')
     }
 
     return res.redirect('/eligibility/check')
