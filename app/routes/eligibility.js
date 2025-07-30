@@ -16,7 +16,7 @@ module.exports = router => {
     const claimantTeachingQualification = req.body.claimantTeachingQualification
 
     if (claimantTeachingQualification === 'No, and I do not plan to enrol on one in the next 12 months') {
-      return res.redirect('/eligibility/not-eligible')
+      return res.redirect('/eligibility/not-eligible/teaching-qualification')
     }
 
     return res.redirect('/eligibility/teaching-responsibilities')
