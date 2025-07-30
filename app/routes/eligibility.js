@@ -27,7 +27,7 @@ module.exports = router => {
     const claimantTeachingResponsibilities = req.body.claimantTeachingResponsibilities
 
     if (claimantTeachingResponsibilities === 'No') {
-      return res.redirect('/eligibility/not-eligible')
+      return res.redirect('/eligibility/not-eligible/teaching-responsibilities')
     }
 
     return res.redirect('/eligibility/fe-provider')
@@ -86,9 +86,9 @@ module.exports = router => {
     } else if (claimantContractType === 'Variable hours') {
       return res.redirect('/eligibility/variable-one-full-term')
     } else if (claimantContractType === 'Employed by another organisation (for example, an agency or contractor)') {
-      return res.redirect('/eligibility/not-eligible')
+      return res.redirect('/eligibility/not-eligible/type-of-contract')
     } else {
-      return res.redirect('/eligibility/type-of-contract')
+      return res.redirect('/eligibility/not-eligible/type-of-contract')
     }
   })
 
