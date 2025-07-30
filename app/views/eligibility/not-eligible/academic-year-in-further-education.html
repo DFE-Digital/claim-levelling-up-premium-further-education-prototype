@@ -1,0 +1,45 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Start page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{# {% block header %}
+  <!-- Blank header with no service name for the start page -->
+  {{ govukHeader() }}
+{% endblock %} #}
+
+{# {% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %} #}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">You are not eligible</h1>
+
+    <p class="govuk-body">
+      In order to claim a targeted retention incentive payment, you must be in the first 5 years of your further education teaching career in England.
+    </p>
+
+    <p class="govuk-body">
+      For more information, check the eligibility criteria for 
+      <a class="govuk-link" href="https://www.gov.uk/government/publications/targeted-retention-incentive-payments-for-further-education-teachers/eligibility-criteria" target="_blank" rel="noopener noreferrer">
+        targeted retention incentive payments for further education teachers (opens in new tab)
+      </a>.
+    </p>
+
+    <p class="govuk-body">
+      If you are unsure your information is correct, you can 
+      <a class="govuk-link" href="javascript:window.history.back()">go back</a> 
+      and review your answers. You can also 
+      <a class="govuk-link" href="/start">start the application again</a>.
+    </p>
+
+  </div>
+</div>
+{% endblock %}

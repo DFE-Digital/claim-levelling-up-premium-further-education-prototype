@@ -5,7 +5,7 @@ module.exports = router => {
     const academicYearInFurtherEducation = req.body.academicYearInFurtherEducation
 
     if (academicYearInFurtherEducation === 'Before September 2021') {
-      return res.redirect('/eligibility/not-eligible')
+      return res.redirect('/eligibility/not-eligible/academic-year-in-further-education')
     }
 
     return res.redirect('/eligibility/teaching-qualification')
