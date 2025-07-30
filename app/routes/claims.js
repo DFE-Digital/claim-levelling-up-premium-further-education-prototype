@@ -49,8 +49,8 @@ const getClaim = (req, res) => {
   // ================================
 
 
-// GET: Active claims (Not started / In progress / Check required)
-// GET: Active claims (Not started / In progress / Overdue / Check required)
+
+// GET: Active claims (Not started / In progress / Overdue )
 router.get('/provider', (req, res) => {
   const allClaims = req.session.data.claims || []
 
