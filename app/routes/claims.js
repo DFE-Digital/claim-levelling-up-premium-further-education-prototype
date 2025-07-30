@@ -5,7 +5,10 @@ const { govukDate } = require('@x-govuk/govuk-prototype-filters')
   const completed = req.body.completedSection
   const returnUrl = req.query.returnUrl
 
-  claim.status = 'In progress'
+ // ✅ Preserve 'Overdue' status if already set
+  if (claim.status !== 'Overdue') {
+    claim.status = 'In progress'
+  }
 
   // ✅ Ensure route name only is stored
   claim.lastVisitedStep = nextRoute
@@ -161,7 +164,7 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
 
 
 
-  // GET: Claim review screen
+  // GET: Check your ansqers
   router.get('/provider/check/:claimId', (req, res) => {
     const claims = req.session.data.claims || []
     const claim = claims.find(c => String(c.id) === req.params.claimId)
@@ -173,6 +176,9 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     res.render('provider/check', { claim })
   })
 
+
+
+  // POST: Check your answers
  router.post('/provider/check/:claimId', (req, res) => {
   const claims = req.session.data.claims || []
   const claim = claims.find(c => String(c.id) === req.params.claimId)
@@ -189,7 +195,9 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
 
   // If "Save and come back later"
   if (req.body.action === 'save') {
-    claim.status = 'In progress'
+    if (claim.status !== 'Overdue') {
+      claim.status = 'In progress'
+    }
     claim.assignedTo = 'You (current user)'
     req.flash('success', 'Your answers have been saved. You can come back and complete them later.')
     return res.redirect(`/provider/save/${claim.id}`)
@@ -266,7 +274,9 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     }
   
     // Optionally set to In progress if you want
-    claim.status = 'Not started'
+    if (claim.status !== 'Overdue') {
+      claim.status = 'In progress'
+    }
     claim.assignedTo = 'Me - [current_user]'
     claim.assignedDate = new Date().toISOString()
   
@@ -285,7 +295,12 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     if (userChoice === 'Yes') {
       // Assign to current user
       claim.assignedTo = 'You - [current_user]'
-      claim.status = 'In progress'
+      if (claim.status === 'Overdue') {
+        // leave it as-is
+      } else {
+        claim.status = 'In progress'
+      }
+
       claim.assignedDate = new Date().toISOString()
   
       // Return to the screen they left
@@ -359,7 +374,11 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     if (!claim) return res.status(404).send('Claim not found')
 
     claim.teachingResponsibilities = req.body.teachingResponsibilities
-    claim.status = 'In progress'
+
+    if (claim.status !== 'Overdue') {
+      claim.status = 'In progress'
+    }
+
     claim.lastVisitedStep = 'member-of-staff'
 
     if (req.body.action === 'save') {
@@ -398,7 +417,11 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     claim.first5Years = req.body.first5Years
     claim.hasTeachingQualification = req.body.hasTeachingQualification
     claim.qualificationMitigations = req.body.qualificationMitigations
-    claim.status = 'In progress'
+
+    if (claim.status !== 'Overdue') {
+      claim.status = 'In progress'
+    }
+
     claim.lastVisitedStep = 'role-and-experience'
 
     // Save and come back later
@@ -449,7 +472,9 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     if (!claim) return res.status(404).send('Claim not found')
 
     claim.qualificationMitigations = req.body.qualificationMitigations
-    claim.status = 'In progress'
+    if (claim.status !== 'Overdue') {
+      claim.status = 'In progress'
+    }
     claim.lastVisitedStep = 'qualification-mitigations'
 
     if (req.body.action === 'save') {
@@ -490,7 +515,9 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
 
     const contractType = req.body.contractType
     claim.contractType = contractType
-    claim.status = 'In progress'
+    if (claim.status !== 'Overdue') {
+      claim.status = 'In progress'
+    }
     claim.lastVisitedStep = 'type-of-contract'
 
     if (req.body.action === 'save') {
@@ -547,7 +574,9 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     claim.fixedTermAcademicYear = req.body.fixedTermAcademicYear
 
     if (req.body.action === 'save') {
-      claim.status = 'In progress'
+      if (claim.status !== 'Overdue') {
+        claim.status = 'In progress'
+      }
       claim.assignedTo = 'You (current user)'
       claim.lastVisitedStep = 'fixed-term-contract-academic-year'
       return res.redirect(`/provider/save/${claim.id}`)
@@ -588,7 +617,9 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     claim.variableContractAcademicTerm = req.body.variableContractAcademicTerm
 
     if (req.body.action === 'save') {
-      claim.status = 'In progress'
+      if (claim.status !== 'Overdue') {
+            claim.status = 'In progress'
+      }
       claim.assignedTo = 'You (current user)'
       claim.lastVisitedStep = 'variable-contract-academic-term'
       return res.redirect(`/provider/save/${claim.id}`)
@@ -624,7 +655,9 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     claim.variableContractTimetabledHours = req.body.variableContractTimetabledHours
 
     if (req.body.action === 'save') {
-      claim.status = 'In progress'
+      if (claim.status !== 'Overdue') {
+        claim.status = 'In progress'
+      }
       claim.assignedTo = 'You (current user)'
       claim.lastVisitedStep = 'variable-contract-timetabled-hours-in-term'
       return res.redirect(`/provider/save/${claim.id}`)
@@ -665,7 +698,9 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     // Save submitted values
     claim.performanceMeasures = req.body.performanceMeasures
     claim.disciplinaryAction = req.body.disciplinaryAction
-    claim.status = 'In progress'
+      if (claim.status !== 'Overdue') {
+        claim.status = 'In progress'
+      }
     claim.lastVisitedStep = 'performance-and-discipline'
 
     // Handle Save and come back later
@@ -710,7 +745,9 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     claim.timetabledHoursDuringTerm = req.body.timetabledHoursDuringTerm
 
     if (req.body.action === 'save') {
-      claim.status = 'In progress'
+      if (claim.status !== 'Overdue') {
+        claim.status = 'In progress'
+      }
       claim.assignedTo = 'You (current user)'
       claim.lastVisitedStep = 'timetabled-hours-during-term'
       return res.redirect(`/provider/save/${claim.id}`)
@@ -744,7 +781,9 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     claim.teachesSixteenToNineteen = req.body.teachesSixteenToNineteen
 
     if (req.body.action === 'save') {
-      claim.status = 'In progress'
+      if (claim.status !== 'Overdue') {
+        claim.status = 'In progress'
+      }
       claim.assignedTo = 'You (current user)'
       claim.lastVisitedStep = 'teaches-sixteen-to-nineteen'
       return res.redirect(`/provider/save/${claim.id}`)
@@ -784,7 +823,9 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     claim.teachesLevelThree = teachesLevelThree
 
     if (req.body.action === 'save') {
-      claim.status = 'In progress'
+      if (claim.status !== 'Overdue') {
+        claim.status = 'In progress'
+      }
       claim.assignedTo = 'You (current user)'
       claim.lastVisitedStep = 'level-three-confirm'
       return res.redirect(`/provider/save/${claim.id}`)
@@ -826,7 +867,9 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     claim.levelThreeHalfTimetableTeachingCourses = req.body.levelThreeHalfTimetableTeachingCourses
 
     if (req.body.action === 'save') {
-      claim.status = 'In progress'
+      if (claim.status !== 'Overdue') {
+        claim.status = 'In progress'
+      }
       claim.assignedTo = 'You (current user)'
       claim.lastVisitedStep = 'level-three-half-timetable-teaching-courses'
       return res.redirect(`/provider/save/${claim.id}`)
@@ -882,7 +925,9 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
 
     // Handle save and come back later
     if (req.body.action === 'save') {
-      claim.status = 'In progress'
+      if (claim.status !== 'Overdue') {
+        claim.status = 'In progress'
+      }
       claim.assignedTo = 'You (current user)'
       claim.lastVisitedStep = 'level-three-subject-area'
       return res.redirect(`/provider/save/${claim.id}`)
@@ -936,7 +981,9 @@ router.post('/provider/level-three-subject-area-courses/:claimId', (req, res) =>
 
   // Handle save and come back later
   if (req.body.action === 'save') {
-    claim.status = 'In progress'
+      if (claim.status !== 'Overdue') {
+        claim.status = 'In progress'
+      }
     claim.assignedTo = 'You (current user)'
     claim.lastVisitedStep = 'level-three-subject-area-courses'
     return res.redirect(`/provider/save/${claim.id}`)

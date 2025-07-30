@@ -55,7 +55,7 @@
   
     <tr class="govuk-table__row">
       <td class="govuk-table__cell">
-        {% if claim.status == "In progress" %}
+        {% if claim.status == "In progress" or (claim.status == "Overdue" and claim.lastVisitedStep) %}
           <a href="/provider/finish-verifying/{{ claim.id }}" class="govuk-link">
             {{ claim.claimantFirstName }} {{ claim.claimantLastName }}
           </a>

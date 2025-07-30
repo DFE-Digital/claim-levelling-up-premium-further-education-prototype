@@ -15,8 +15,8 @@
   <div class="govuk-grid-column-three-quarters">
     <span class="govuk-caption-xl">{{claim.claimantName}}</span>
       <h1 class="govuk-heading-l">{{ pageName }}
-        {% if claim.verified %}
-          {{ govukTag({ text: "Verified", classes: "govuk-tag--blue" }) }}
+        {% if claim.status == "Overdue" %}
+          {{ govukTag({ text: "Overdue", classes: "govuk-tag--blue" }) }}
         {% elseif claim.status == "In progress" %}
           {{ govukTag({ text: "In progress", classes: "govuk-tag--yellow" }) }}
         {% elseif claim.status == "Not started" %}
