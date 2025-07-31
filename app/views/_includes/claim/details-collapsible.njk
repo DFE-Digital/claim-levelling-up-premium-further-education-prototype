@@ -1,0 +1,29 @@
+{# <h3 class="govuk-heading-m">
+  Claim reference: {{claim.claimReference}}
+  
+    {{ govukTag({
+      text: claim.status,
+      classes: claim.status | statusColour
+    }) }}
+  
+</h3> #}
+
+{{ govukDetails({
+  summaryHtml: 'Claim reference: ' + claim.claimReference + ' <strong class="govuk-tag govuk-!-font-size-24 ' + (claim.status | statusColour) + ' ">' + claim.status + '</strong>',
+  classes: "govuk-!-font-size-24 govuk-!-padding-top-4 govuk-!-padding-bottom-4",
+  html: '
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Claimant name</dt>
+        <dd class="govuk-summary-list__value">' + claim.claimantName + '</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">TRN</dt>
+        <dd class="govuk-summary-list__value">' + claim.trn + '</dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Date submitted</dt>
+        <dd class="govuk-summary-list__value">' + claim.dateSubmitted + '</dd>
+      </div>
+    </dl>'
+}) }}

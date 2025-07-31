@@ -42,7 +42,9 @@
     {{ data.user | log }}
     {{ data.claims | log }}
 
-    {% include "_includes/claim/details.njk" %}
+    {# {% include "_includes/claim/details.njk" %} #}
+    {% include "_includes/claim/details-collapsible.njk" %}
+
 
       <form method="post" action="{{ actionUrl }}">
         <input type="hidden" name="returnUrl" value="{{ returnUrl }}">
