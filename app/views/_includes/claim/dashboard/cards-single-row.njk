@@ -45,19 +45,19 @@
     <div class="app-home-statuses app-home-statuses--3-up govuk-!-margin-bottom-4">
 
       {# NOT STARTED #}
-      <div class="status-card status-card--problem">
+      <div class="status-card status-card--deferred">
         <span class="status-card__count">{{ notStartedCount }}</span>
         <span class="status-card__status">
           Not started
           {% if overdueNotStartedCount > 0 %}
-            ({{ overdueNotStartedCount }} Overdue)
+            ({{ overdueInProgressCount }} Overdue)
           {% endif %}
         </span>
       </div>
 
 
       {# IN PROGRESS #}   
-      <div class="status-card status-card--deferred">
+      <div class="status-card status-card--trn-received">
         <span class="status-card__count">{{ inProgressCount }}</span>
         <span class="status-card__status">
           In progress

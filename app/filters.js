@@ -13,9 +13,9 @@ addFilter('statusColour', status => {
 
   switch(status) {
     case 'In progress':
-      return 'govuk-tag--yellow'
+      return 'govuk-tag--blue'
     case 'Not started':
-      return 'govuk-tag--red'
+      return 'govuk-tag--yellow'
     case 'Approved':
       return 'govuk-tag--green'
     case 'Rejected':
@@ -23,7 +23,7 @@ addFilter('statusColour', status => {
     case 'Pending':
       return 'govuk-tag--yellow'
     case 'Overdue':
-      return 'govuk-tag--blue'
+      return 'govuk-tag--red'
   }
 })
 
