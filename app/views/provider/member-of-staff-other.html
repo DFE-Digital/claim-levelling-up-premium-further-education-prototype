@@ -1,7 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = 'Review a targeted retention incentive payment claim' %}
-
+{% set pageName =  'Reference: ' + claim.claimReference %}
 {% set serviceNavId = "allClaims" %}
 
 {% set actionUrl = "/provider/member-of-staff/" + claim.id %}
@@ -36,16 +35,26 @@
         html: '<h2 class="govuk-heading-m"> '+flash+' </h2>' | safe
       }) if flash.length }}
       
-    <h1 class="govuk-heading-l">{{pageName}}</h1>
+    <span class="govuk-caption-xl">{{claim.claimantName}}</span>
+      <h1 class="govuk-heading-l">{{ pageName }}
+        {% if claim.status == "Overdue" %}
+          {{ govukTag({ text: "Overdue", classes: "govuk-tag--red" }) }}
+        {% elseif claim.status == "In progress" %}
+          {{ govukTag({ text: "In progress", classes: "govuk-tag--blue" }) }}
+        {% elseif claim.status == "Not started" %}
+          {{ govukTag({ text: "Not started", classes: "govuk-tag--yellow" }) }}
+        {% endif %}
+      </h1>
 
 
     {{ data.user | log }}
     {{ data.claims | log }}
 
     {# {% include "_includes/claim/details.njk" %} #}
-    {% include "_includes/claim/details-collapsible.njk" %}
+    {# {% include "_includes/claim/details-collapsible.njk" %} #}
+    {% include "_includes/claim/details-collapsible-alt.njk" %}
 
-      {# <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible"> #}
+      
 
       <form method="post" action="{{ actionUrl }}">
         <input type="hidden" name="returnUrl" value="{{ returnUrl }}">
