@@ -139,7 +139,8 @@ router.post('/provider/check-identity/check/:claimId', (req, res) => {
   claim.identityDeclarationConfirmed = true
 
   // Set flash message
-  req.flash('success', `Employment check for ${claim.claimantName} submitted`)
+  req.flash('success', 'Yaldi')
+  // req.flash('success', `Employer check for ${claim.claimantName} complete`)
 
   // Redirect to the first step in the verification flow
   res.redirect(`/provider/member-of-staff/${claim.id}`)
