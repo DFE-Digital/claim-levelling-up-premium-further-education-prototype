@@ -1,24 +1,20 @@
 {% set notStartedCount = 0 %}
 {% for claim in data.claims %}
-  {% if claim.status == "Not started" or claim.status == "Overdue" %}
+  {% if claim.status == "Not started" or (claim.status == "Overdue" and not claim.lastVisitedStep) %}
     {% set notStartedCount = notStartedCount + 1 %}
   {% endif %}
 {% endfor %}
 
 
+
 {% set inProgressCount = 0 %}
 {% for claim in data.claims %}
-  {% if claim.status == "In progress" %}
+  {% if claim.status == "In progress" or (claim.status == "Overdue" and claim.lastVisitedStep) %}
     {% set inProgressCount = inProgressCount + 1 %}
   {% endif %}
 {% endfor %}
 
-{% set verifiedCount = 0 %}
-{% for claim in data.claims %}
-  {% if claim.status == "Verified" %}
-    {% set verifiedCount = verifiedCount + 1 %}
-  {% endif %}
-{% endfor %}
+
 
 {% set employerCheckCount = 0 %}
 {% for claim in data.claims %}

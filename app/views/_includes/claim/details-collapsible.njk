@@ -9,10 +9,14 @@
 </h3> #}
 
 {{ govukDetails({
-  summaryHtml: 'Claim reference: ' + claim.claimReference + ' <strong class="govuk-tag govuk-!-font-size-24 ' + (claim.status | statusColour) + ' ">' + claim.status + '</strong>',
+  summaryHtml: 'Claim details <strong class="govuk-tag govuk-!-font-size-19 ' + (claim.status | statusColour) + ' ">' + claim.status + '</strong>',
   classes: "govuk-!-font-size-24 govuk-!-padding-top-4",
   html: '
     <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Claimant name</dt>
+        <dd class="govuk-summary-list__value">' + claim.claimReference + '</dd>
+      </div>
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">Claimant name</dt>
         <dd class="govuk-summary-list__value">' + claim.claimantName + '</dd>
