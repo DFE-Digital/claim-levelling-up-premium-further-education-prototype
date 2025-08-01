@@ -26,7 +26,7 @@
 
     <h1 class="govuk-heading-l">{{ pageName }}</h1>
 
-    {{ govukDetails({
+    {# {{ govukDetails({
       summaryText: "Why we need this information",
       html:"
         <p class='govuk-body'>
@@ -39,6 +39,10 @@
           Providing this information does not break General Data Protection Regulation (GDPR) rules. 
         </p>
       "
+    }) }} #}
+
+    {{ govukInsetText({
+      text: " The applicant has already provided this information and understands it may be verified by their employer."
     }) }}
 
 
@@ -173,7 +177,7 @@
 
       {{ govukInput({
         label: {
-          text: "Email address"
+          text: "Work email address"
         },
        classes: "govuk-!-width-one-half",
         id: "claimant-work-email",
