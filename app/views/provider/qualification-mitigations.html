@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = claim.claimantName + " said last year that they planned to start a teaching qualification within 12 months." %}
+{% set pageName = claim.claimantName %}
 
 {% set serviceNavId = "allClaims" %}
 
@@ -41,17 +41,23 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+      <span class="govuk-caption-l">
+        Review claim - {{ claim.claimReference }}
+        <strong class="govuk-tag govuk-!-font-size-19 {{ claim.status | statusColour }}">
+          {{ claim.status }}
+        </strong>
+      </span>  
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
 
       {{ govukInsetText({
-        text: "They've confirmed the same intention in their application this year. Tell us why they have not yet started or finished a teaching qualification."
+        html: claim.claimantName + " said last year that they planned to start a teaching qualification within 12 months. They've confirmed the same intention in their application this year. Tell us why they have not yet started or finished a teaching qualification."
       }) }}
 
+      {{ data.user | log }}
+      {{ data.claims | log }}
 
-       {{ data.user | log }}
-        {{ data.claims | log }}
-
-        {% include "_includes/claim/details.njk" %}
+      {% include "_includes/claim/details-collapsible.njk" %}
 
       <form method="post" action="{{ actionUrl }}">
          <input type="hidden" name="returnUrl" value="{{ returnUrl }}">

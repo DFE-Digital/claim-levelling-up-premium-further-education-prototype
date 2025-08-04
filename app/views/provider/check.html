@@ -73,8 +73,8 @@
       rows: [
         { key: { text: "Contract type" }, value: { text: claim.contractType | default("Not answered") } },
         { key: { text: "Fixed-term covers full academic year" }, value: { text: claim.fixedTermAcademicYear | default("Not answered") } } if claim.contractType == "Fixed-term",
-        { key: { text: "Timetabled hours in term" }, value: { text: claim.variableContractTimetabledHours | default("Not answered") } } if claim.contractType == "Variable hours",
-        { key: { text: "Variable contract academic term" }, value: { text: claim.variableContractAcademicTerm | default("Not answered") } } if claim.contractType == "Variable hours"
+        { key: { text: "Timetabled to teach at least 2.5 hours per week in the spring term" }, value: { text: claim.variableContractTimetabledHours | default("Not answered") } } if claim.contractType == "Variable hours",
+        { key: { text: "Taught for at least one full academic term" }, value: { text: claim.variableContractAcademicTerm | default("Not answered") } } if claim.contractType == "Variable hours"
       ]
     }) }}
 

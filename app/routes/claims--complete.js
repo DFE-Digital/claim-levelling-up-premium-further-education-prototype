@@ -39,17 +39,17 @@ router.post('/provider/completed/:claimId', (req, res) => {
   claim.dateVerifiedIso = new Date().toISOString()
 
   // ✅ Flash message
-  req.flash('success', `Claim Verified for ${claim.claimantName}`)
+  req.flash('success', 'Yaldi')
 
-  //req.flash('success', `Claim Verified for ${claim.claimantName} <a class="govuk-link" href="/provider/completed/show/${claim.id}"><br>View verified claim</a>`)
-
-  res.redirect('/provider/completed')
+  res.redirect(`/provider/completed?claimId=${claim.id}`)
 })
 
 
   ///// GET: Show all verified claims /////////////////////////
   router.get('/provider/completed', (req, res) => {
     const claims = req.session.data.claims || []
+    const claimId = req.query.claimId
+    const claim = claims.find(c => String(c.id) === claimId)
 
     const dfeStatuses = ['Pending', 'Approved', 'Rejected']
     let filteredClaims = claims.filter(claim => dfeStatuses.includes(claim.status))
@@ -103,7 +103,8 @@ router.post('/provider/completed/:claimId', (req, res) => {
 
 
     res.render('provider/completed/index', {
-      claims: filteredClaims
+      claims: filteredClaims,
+      claim
     })
   })
 
