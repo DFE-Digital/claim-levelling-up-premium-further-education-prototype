@@ -1,6 +1,6 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = 'Review a targeted retention incentive payment claim' %}
+{% set pageName = claim.claimantName %}
 
 {% set serviceNavId = "allClaims" %}
 
@@ -32,14 +32,18 @@
       }) }}
     {% endif %}
 
-    <h1 class="govuk-heading-l">{{pageName}}</h1>
+      <span class="govuk-caption-l">
+        Review claim - {{ claim.claimReference }}
+        <strong class="govuk-tag govuk-!-font-size-19 {{ claim.status | statusColour }}">
+          {{ claim.status }}
+        </strong>
+      </span>  
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
 
+      {{ data.user | log }}
+      {{ data.claims | log }}
 
-
-    {{ data.user | log }}
-    {{ data.claims | log }}
-
-    {% include "_includes/claim/details.njk" %}
+      {% include "_includes/claim/details-collapsible.njk" %}
 
     <form method="post" action="{{ actionUrl }}">  
       <input type="hidden" name="returnUrl" value="{{ returnUrl }}">

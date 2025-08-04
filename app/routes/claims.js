@@ -388,7 +388,13 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
 
     const returnUrl = req.body.returnUrl
     const nextStep = `/provider/role-and-experience/${claim.id}`
-    return res.redirect(`${nextStep}?returnUrl=${encodeURIComponent(returnUrl)}`)
+
+    if (returnUrl) {
+      return res.redirect(`${nextStep}?returnUrl=${encodeURIComponent(returnUrl)}`)
+    }
+
+    return res.redirect(nextStep)
+
   })
 
 
