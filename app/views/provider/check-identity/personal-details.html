@@ -3,7 +3,7 @@
 
 {% set serviceNavId = "allClaims" %}
 
-{% set pageName = 'About ' + claim.claimantName %}
+{% set pageName =  claim.claimantName %}
 
 {% block beforeContent %}
   {{ govukBackLink({
@@ -24,7 +24,13 @@
         }) }}
       {% endif %}
 
-    <h1 class="govuk-heading-l">{{ pageName }}</h1>
+        <span class="govuk-caption-l">
+          Employer check - {{ claim.claimReference }}
+          {# <strong class="govuk-tag govuk-!-font-size-19 {{ claim.status | statusColour }}">
+            {{ claim.status }}
+          </strong> #}
+        </span>  
+        <h1 class="govuk-heading-l">{{pageName}}</h1>
 
     {# {{ govukDetails({
       summaryText: "Why we need this information",
