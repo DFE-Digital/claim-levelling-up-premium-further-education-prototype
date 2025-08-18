@@ -132,7 +132,7 @@ router.post('/provider/check-identity/check/:claimId', (req, res) => {
   if (!claim) return res.status(404).send('Claim not found')
 
   // Update claim status and clear assignment
-  claim.status = 'In progress'
+  claim.status = 'Not started'
   claim.assignedTo = 'You - (current user)'
 
   // Optional: Store declaration confirmation if needed
