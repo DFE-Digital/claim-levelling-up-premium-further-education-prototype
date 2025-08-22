@@ -13,6 +13,19 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-three-quarters">
+
+      {% set courseList %}
+        {% if claim.teachesLevelThree == 'No' and claim.levelThreeSubjectAreaCourses %}
+          <ul class="govuk-list">
+            {% for course in claim.levelThreeSubjectAreaCourses %}
+              <li>{{ course }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          Not answered
+        {% endif %}
+      {% endset %}
+
     
 
       <span class="govuk-caption-l">
@@ -156,7 +169,7 @@
         
         {
           key: { text: "Courses" },
-          value: { text: claim.levelThreeSubjectAreaCourses | join(', ') | default("Not answered") }
+          value: { html: courseList }
         } if claim.teachesLevelThree === 'No' and claim.levelThreeSubjectAreaCourses,
 
         {
