@@ -822,6 +822,7 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
 
   // POST: Level 3 confirm
   router.post('/provider/level-three-confirm/:claimId', (req, res) => {
+    const claimId = req.params.claimId
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
@@ -838,13 +839,19 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     }
 
     const returnUrl = req.body.returnUrl
+
     if (teachesLevelThree === 'Yes') {
       return res.redirect(`/provider/level-three-half-timetable-teaching-courses/${claim.id}?returnUrl=${encodeURIComponent(returnUrl)}`)
     }
 
-    // If "No" – go to subject area
-    return res.redirect(`/provider/level-three-subject-area/${claim.id}?returnUrl=${encodeURIComponent(returnUrl)}`)
+    // If "No" – go to subject area courses
+    let redirectUrl = `/provider/level-three-subject-area-courses/${claimId}`
+    if (returnUrl) {
+      redirectUrl += `?returnUrl=${encodeURIComponent(returnUrl)}`
+    }
+    res.redirect(redirectUrl)
   })
+
 
 
 
