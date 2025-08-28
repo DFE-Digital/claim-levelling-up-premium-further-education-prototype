@@ -516,11 +516,13 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
   
   // POST: Type of contract
   router.post('/provider/type-of-contract/:claimId', (req, res) => {
+    const claimId = req.params.claimId
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
     const contractType = req.body.contractType
     claim.contractType = contractType
+
     if (claim.status !== 'Overdue') {
       claim.status = 'In progress'
     }
@@ -532,29 +534,38 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     }
 
     const returnUrl = req.body.returnUrl
+    const withReturn = (base) => (returnUrl ? `${base}?returnUrl=${encodeURIComponent(returnUrl)}` : base)
 
     // 🔀 Branch: Fixed-term
     if (contractType === 'Fixed-term') {
-      return res.redirect(`/provider/fixed-term-contract-academic-year/${claim.id}?returnUrl=${encodeURIComponent(returnUrl)}`)
+      return res.redirect(withReturn(`/provider/fixed-term-contract-academic-year/${claimId}`))
     }
 
-    // 🔀 Branch: Variable hours
+    // 🔀 Branch: Variable hours  (updated)
     if (contractType === 'Variable hours') {
-      return res.redirect(`/provider/variable-contract-academic-term/${claim.id}?returnUrl=${encodeURIComponent(returnUrl)}`)
+      return res.redirect(withReturn(`/provider/variable-contract-timetabled-hours-in-term/${claimId}`))
     }
 
     // 🔀 Branch: Employed by another organisation
-    if (contractType === 'Employed by another organisation (for example, an agency or contractor)') {
-      return saveAndRedirect(claim, req, res, 'performance-and-discipline')
+    const employedValues = [
+      'Employed by another organisation',
+      'Employed by another organisation (for example, an agency or contractor)' // legacy value, just in case
+    ]
+    if (employedValues.includes(contractType)) {
+      // Continue to next step in your flow (unchanged)
+      return res.redirect(withReturn(`/provider/performance-and-discipline/${claimId}`))
+      // If you prefer your helper:
+      // return saveAndRedirect(claim, req, res, 'performance-and-discipline')
     }
 
-    // 🔁 Permanent (and default): go to returnUrl or next step
+    // 🔁 Permanent (and any other fall-through)
     if (returnUrl) {
       return res.redirect(returnUrl)
     }
-
-    return saveAndRedirect(claim, req, res, 'performance-and-discipline')
+    return res.redirect(`/provider/performance-and-discipline/${claimId}`)
+    // Or: return saveAndRedirect(claim, req, res, 'performance-and-discipline')
   })
+
 
 
 
@@ -574,29 +585,36 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
 
   // POST: Fixed-term contract academic year
   router.post('/provider/fixed-term-contract-academic-year/:claimId', (req, res) => {
+    const claimId = req.params.claimId
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    claim.fixedTermAcademicYear = req.body.fixedTermAcademicYear
+    const answer = req.body.fixedTermAcademicYear   // ✅ matches form name
+    claim.fixedTermAcademicYear = answer
 
     if (req.body.action === 'save') {
-      if (claim.status !== 'Overdue') {
-        claim.status = 'In progress'
-      }
+      if (claim.status !== 'Overdue') claim.status = 'In progress'
       claim.assignedTo = 'You (current user)'
       claim.lastVisitedStep = 'fixed-term-contract-academic-year'
       return res.redirect(`/provider/save/${claim.id}`)
     }
 
     const returnUrl = req.body.returnUrl
+    // If this was a Change from check, go back there
     if (returnUrl) {
-      return res.redirect(returnUrl) // ✅ go back to check
+      return res.redirect(returnUrl)
     }
 
+    // New branching:
+    if (answer === 'No') {
+      // Fixed-term (No) → skip academic-term screen → variable hours in-term
+      return res.redirect(`/provider/variable-contract-timetabled-hours-in-term/${claimId}`)
+    }
 
-    return saveAndRedirect(claim, req, res, 'performance-and-discipline')
-
+    // Fixed-term (Yes) → continue as before
+    return res.redirect(`/provider/performance-and-discipline/${claimId}`)
   })
+
 
 
   
