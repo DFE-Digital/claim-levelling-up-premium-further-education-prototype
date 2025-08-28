@@ -56,22 +56,22 @@
           classes: "govuk-radios",
           fieldset: {
             legend: {
-              text: "On average, how many hours per week was " + claim.claimantName + " timetabled to teach during the autumn term?",
+              text: "On average, how many hours per week was " + claim.claimantName + " timetabled to teach  " +claim.feProvider + " during the spring term?",
               classes: "govuk-fieldset__legend--s"
             }
           },
           items: [
             {
-              value: "20 hours or more each week",
-              text: "20 hours or more each week"
+              value: "20 hours or more per week",
+              text: "20 hours or more per week"
             },
             {
-              value: "12 hours to 20 hours each week",
-              text: "12 hours to 20 hours each week"
+              value: "12 or more hours per week, but fewer than 20",
+              text: "12 or more hours per week, but fewer than 20"
             },
             {
-              value: "2.5 to 12 hours each week",
-              text: "2.5 to 12 hours each week"
+              value: "2.5 or more hours per week, but fewer than 12",
+              text: "2.5 or more hours per week, but fewer than 12"
             },
             {
               value: "Fewer than 2.5 hours each week",
