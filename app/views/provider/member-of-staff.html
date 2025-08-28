@@ -109,14 +109,23 @@
     {{ govukDetails({
       summaryText: "Who counts as a teacher for this payment",
       html:"
-        <p class='govuk-body'>
-          They must be currently employed with teaching responsibilities. Teaching responsibilities include teaching timetabled guided learning hours and planning, delivering and assessing learning.
-        </p>
-        <p class='govuk-body'>
-          This payment is not for non-teaching assessors, non-teaching leaders or support staff like assistants or technicians.
-        </p>
+        <p class='govuk-body'>This means that they must be doing all these:</p>
+        <ul class='govuk-list govuk-list--bullet'>
+          <li>independently teaching timetabled guided learning hours to classes of students</li>
+          <li>planning and preparing lessons for classes of students</li>
+          <li>assessing learning and reporting on progress for classes of students</li>
+        </ul>
+
+        <p class='govuk-body'>This payment is not for non-teaching staff. This includes:</p>
+        <ul class='govuk-list govuk-list--bullet'>
+          <li>non-teaching assessors</li>
+          <li>non-teaching leaders</li>
+          <li>support staff like assistants or technicians</li>
+        </ul>
       "
     }) }}
+
+   
 
   </div>
 </div>
