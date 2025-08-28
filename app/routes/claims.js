@@ -477,7 +477,24 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    claim.qualificationMitigations = req.body.qualificationMitigations
+    let mitigations = req.body.qualificationMitigations || []
+
+    // Normalise into array
+    mitigations = Array.isArray(mitigations) ? mitigations : [mitigations]
+
+    // Remove any GOV.UK "_unchecked" artefacts
+    mitigations = mitigations.filter(m => m !== '_unchecked')
+
+    // If "anotherReason" chosen, replace it with the free-text (if provided)
+    if (mitigations.includes('anotherReason')) {
+      const text = (req.body.giveAnotherReason || '').trim()
+      if (text) {
+        mitigations = mitigations.map(m => (m === 'anotherReason' ? text : m))
+      }
+    }
+
+    claim.qualificationMitigations = mitigations
+
     if (claim.status !== 'Overdue') {
       claim.status = 'In progress'
     }
@@ -488,13 +505,11 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
       return res.redirect(`/provider/save/${claim.id}`)
     }
 
-    // 👇 return to check page if it came from there
     const returnUrl = req.body.returnUrl
     if (returnUrl) {
       return res.redirect(returnUrl)
     }
 
-    // 👉 otherwise continue journey
     return saveAndRedirect(claim, req, res, 'type-of-contract')
   })
 
@@ -891,22 +906,19 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     claim.levelThreeHalfTimetableTeachingCourses = req.body.levelThreeHalfTimetableTeachingCourses
 
     if (req.body.action === 'save') {
-      if (claim.status !== 'Overdue') {
-        claim.status = 'In progress'
-      }
+      if (claim.status !== 'Overdue') claim.status = 'In progress'
       claim.assignedTo = 'You (current user)'
       claim.lastVisitedStep = 'level-three-half-timetable-teaching-courses'
       return res.redirect(`/provider/save/${claim.id}`)
     }
 
     const returnUrl = req.body.returnUrl
-    if (returnUrl) {
-      return res.redirect(returnUrl)
-    }
-
-    // 👉 New step instead of /check
-    return res.redirect(`/provider/employed-until-end-of-academic-year/${claim.id}`)
+    // Always go to the new step, appending returnUrl so that page can send users back to /check after it’s answered
+    let nextUrl = `/provider/employed-until-end-of-academic-year/${claim.id}`
+    if (returnUrl) nextUrl += `?returnUrl=${encodeURIComponent(returnUrl)}`
+    return res.redirect(nextUrl)
   })
+
 
 
 
@@ -946,11 +958,12 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
     const claim = getClaim(req, res)
     if (!claim) return res.status(404).send('Claim not found')
 
-    res.render('provider/employed-until-end-of-academic-year', {
+    return res.render('provider/employed-until-end-of-academic-year', {
       claim,
       returnUrl: req.query.returnUrl
     })
   })
+
 
 
 

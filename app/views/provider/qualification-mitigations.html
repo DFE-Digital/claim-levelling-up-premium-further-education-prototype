@@ -26,14 +26,26 @@
 {{ govukTextarea({
   id: "give-another-reason",
   name: "giveAnotherReason",
-  rows: "8",
+  rows: "4",
   label: {
     text: "Can you provide more detail?",
     classes: "govuk-label--l govuk-visually-hidden",
     isPageHeading: false
   }
 }) }}
-{% endset -%}
+{% endset %}
+
+{% set mitigationsHtml %}
+  {% if claim.qualificationMitigations %}
+    <ul class="govuk-list govuk-list--bullet">
+      {% for item in claim.qualificationMitigations %}
+        <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    Not answered
+  {% endif %}
+{% endset %}
 
 
 
@@ -90,6 +102,10 @@
                 {
                   value: "newMemberOfStaff",
                   text: "They're a new member of staff"
+                },
+                 {
+                  value: "noValidReason",
+                  text: "No valid reason"
                 },
                 {
                   divider: "or"

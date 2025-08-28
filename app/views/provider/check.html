@@ -48,7 +48,7 @@
         { key: { text: "Teaching responsibilities" }, value: { text: claim.teachingResponsibilities | default("Not answered") } },
         { key: { text: "In first 5 years of FE teaching" }, value: { text: claim.first5Years | default("Not answered") } },
         { key: { text: "Teaching qualification" }, value: { text: claim.hasTeachingQualification | default("Not answered") } },
-        { key: { text: "Mitigating circumstances for qualification" }, value: { text: claim.qualificationMitigations | default("Not answered") } } if claim.qualificationMitigations
+        { key: { text: "Mitigating circumstances for qualification" },value: { html: claim.qualificationMitigations | default("Not answered") } } if claim.qualificationMitigations
       ]
     }) }}
 
@@ -73,7 +73,7 @@
       rows: [
         { key: { text: "Contract type" }, value: { text: claim.contractType | default("Not answered") } },
         { key: { text: "Fixed-term covers full academic year" }, value: { text: claim.fixedTermAcademicYear | default("Not answered") } } if claim.contractType == "Fixed-term",
-        { key: { text: "Timetabled to teach at least 2.5 hours per week in the spring term" }, value: { text: claim.variableContractTimetabledHours | default("Not answered") } } if claim.contractType == "Variable hours"
+        { key: { text: "Worked at " + claim.feProvider + " for the whole of the spring term" }, value: { text: claim.variableContractTimetabledHours | default("Not answered") } } if claim.contractType == "Variable hours"
       ]
     }) }}
 
@@ -184,8 +184,8 @@
         name: "Declaration",
         items: [
           {
-            value: "I have read the provider guidance I was sent by email and to the best of my knowledge confirm the information I have provided in this form is correct.",
-            text: "I have read the provider guidance I was sent by email and to the best of my knowledge confirm the information I have provided in this form is correct."
+            value: "Please ensure your answers are accurate to the best of your knowledge. While the DfE runs its own checks, this claim is approved or rejected based on your answers. DfE will audit approved claims. If any of your teachers receive payments that are later found to be ineligible, we will take steps to recover the payment.",
+            text: "Please ensure your answers are accurate to the best of your knowledge. While the DfE runs its own checks, this claim is approved or rejected based on your answers. DfE will audit approved claims. If any of your teachers receive payments that are later found to be ineligible, we will take steps to recover the payment."
           }
         ]
       }) }}
