@@ -79,9 +79,9 @@
         },
         {
           value: "Employed by another organisation",
-          text: "Employed by another organisation",
+          text: "Does not currently have a direct contract of employment with " + claim.feProvider,
           hint: {
-            text: "For example, through an agency, as a contractor or a subsidiary of the FE provider"
+            text: "For example, they have left " + claim.feProvider + " or they are employed through an agency, as a contractor, or through a subsidiary of " + claim.feProvider + "."
           }
         }
       ]
