@@ -55,7 +55,7 @@
             value: first5Years or undefined,
             fieldset: {
               legend: {
-                text: "Is " + claim.claimantName + " in the first 5 years of their further education (FE) teaching career in England?",
+                text: "Did " + claim.claimantName + " start their FE teaching career in England during [academic year]?",
                 classes: "govuk-fieldset__legend--s"
               }
             },
@@ -76,12 +76,12 @@
           {{ govukDetails({
             summaryText: "What counts towards the first 5 years of an FE teaching career",
             html:"
-              <p class='govuk-body'>
-                This is the first academic year when they started their first role with teaching responsibilities at any post-16 only education (FE) provider in England. 
-              </p>
-              <p class='govuk-body'>
-                It is when they formally took on teaching responsibilities, including teaching timetabled guided learning hours and for planning, delivering and assessing learning.
-              </p>
+              <p class='govuk-body'>This is the first academic year the teacher took on FE teaching responsibilities in England. We define this as the academic year when the teacher took on the following teaching responsibilities at a post-16 education provider in England:</p>
+              <ul class='govuk-list govuk-list--bullet'>
+                <li>independently teaching timetabled guided learning hours to classes of students</li>
+                <li>planning and preparing lessons for classes of students</li>
+                <li>assessing learning and reporting on progress for classes of students</li>
+              </ul>
             "
           }) }}
 
