@@ -904,7 +904,52 @@ router.post('/provider/who-will-verify/:claimId', (req, res) => {
       return res.redirect(returnUrl)
     }
 
+    // 👉 New step instead of /check
+    return res.redirect(`/provider/employed-until-end-of-academic-year/${claim.id}`)
+  })
+
+
+
+  //////////////////////////////////////////////////////////////////////////////////////////////
+
+
+  
+  /////// New step - POST: Employed until end of academic year
+  router.post('/provider/employed-until-end-of-academic-year/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    // Store the answer from the form radio/checkbox
+    claim.employedUntilEndOfAcademicYear = req.body.employedUntilEndOfAcademicYear
+
+    if (req.body.action === 'save') {
+      if (claim.status !== 'Overdue') {
+        claim.status = 'In progress'
+      }
+      claim.assignedTo = 'You (current user)'
+      claim.lastVisitedStep = 'employed-until-end-of-academic-year'
+      return res.redirect(`/provider/save/${claim.id}`)
+    }
+
+    const returnUrl = req.body.returnUrl
+    if (returnUrl) {
+      return res.redirect(returnUrl)
+    }
+
+    // Continue the flow → check answers
     return saveAndRedirect(claim, req, res, 'check')
+  })
+
+
+  // GET: Employed until end of academic year
+  router.get('/provider/employed-until-end-of-academic-year/:claimId', (req, res) => {
+    const claim = getClaim(req, res)
+    if (!claim) return res.status(404).send('Claim not found')
+
+    res.render('provider/employed-until-end-of-academic-year', {
+      claim,
+      returnUrl: req.query.returnUrl
+    })
   })
 
 

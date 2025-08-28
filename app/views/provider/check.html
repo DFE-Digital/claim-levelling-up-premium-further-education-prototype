@@ -73,8 +73,7 @@
       rows: [
         { key: { text: "Contract type" }, value: { text: claim.contractType | default("Not answered") } },
         { key: { text: "Fixed-term covers full academic year" }, value: { text: claim.fixedTermAcademicYear | default("Not answered") } } if claim.contractType == "Fixed-term",
-        { key: { text: "Timetabled to teach at least 2.5 hours per week in the spring term" }, value: { text: claim.variableContractTimetabledHours | default("Not answered") } } if claim.contractType == "Variable hours",
-        { key: { text: "Taught for at least one full academic term" }, value: { text: claim.variableContractAcademicTerm | default("Not answered") } } if claim.contractType == "Variable hours"
+        { key: { text: "Timetabled to teach at least 2.5 hours per week in the spring term" }, value: { text: claim.variableContractTimetabledHours | default("Not answered") } } if claim.contractType == "Variable hours"
       ]
     }) }}
 
@@ -127,6 +126,20 @@
 
 
     {################## SUBJECT AREA ###############}
+
+    {# Build a bullet list for courses when present #}
+    {% set courseList %}
+      {% if claim.teachesLevelThree == 'No' and claim.levelThreeSubjectAreaCourses %}
+        <ul class="govuk-list govuk-list--bullet">
+          {% for course in claim.levelThreeSubjectAreaCourses %}
+            <li>{{ course }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        Not answered
+      {% endif %}
+    {% endset %}
+
     {{ govukSummaryList({
       card: {
         title: {
@@ -148,23 +161,21 @@
           key: { text: "Teaches Level 3 courses" },
           value: { text: claim.teachesLevelThree | default("Not answered") }
         },
-        
-        {
-          key: { text: "Subject area" },
-          value: { text: claim.levelThreeSubjectArea | default("Not answered") }
-        } if claim.teachesLevelThree === 'No' and claim.levelThreeSubjectArea,
-        
         {
           key: { text: "Subject area courses" },
-          value: { text: claim.levelThreeSubjectAreaCourses | join(', ') | default("Not answered") }
-        } if claim.teachesLevelThree === 'No' and claim.levelThreeSubjectAreaCourses,
-
+          value: { html: courseList }
+        } if claim.teachesLevelThree == 'No',
         {
           key: { text: "Spend at least half timetabled teaching time teaching relevant courses" },
           value: { text: claim.levelThreeHalfTimetableTeachingCourses | default("Not answered") }
-        } if claim.teachesLevelThree === 'Yes'
+        } if claim.teachesLevelThree == 'Yes',
+        {
+          key: { text: "Employed until end of academic year" },
+          value: { text: claim.employedUntilEndOfAcademicYear | default("Not answered") }
+        }
       ]
     }) }}
+
 
     <form method="post" action="/provider/completed/{{ claim.id }}">
       <h2 class="govuk-heading-m">Declaration</h2>

@@ -1,0 +1,84 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = claim.claimantName %}
+
+{% set serviceNavId = "allClaims" %}
+
+{% set actionUrl = "/provider/employed-until-end-of-academic-year/" + claim.id %}
+{% if returnUrl %}
+  {% set actionUrl = actionUrl + "?returnUrl=" + returnUrl %}
+{% endif %}
+
+{# {% if claim.status == 'Not started' %} #}
+  {% block beforeContent %}
+    {{ govukBackLink({
+      text: "Back",
+      href: "javascript:window.history.back()"
+    }) }}
+  {% endblock %}
+{# {% endif %} #}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-three-quarters">
+
+    {% if errors %}
+      {{ govukErrorSummary({
+        titleText: "There is a problem", 
+        errorList: errors
+      }) }}
+    {% endif %}
+
+      <span class="govuk-caption-l">
+        Review claim - {{ claim.claimReference }}
+        <strong class="govuk-tag govuk-!-font-size-19 {{ claim.status | statusColour }}">
+          {{ claim.status }}
+        </strong>
+      </span>  
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      {{ data.user | log }}
+      {{ data.claims | log }}
+
+      {% include "_includes/claim/details-collapsible.njk" %}
+
+   <form method="post" action="{{ actionUrl }}">  
+    <input type="hidden" name="returnUrl" value="{{ returnUrl }}">
+      <h3 class="govuk-heading-m">Subject areas</h3>
+
+        {{ govukRadios({
+          name: "employedUntilEndOfAcademicYear",
+          value: employedUntilEndOfAcademicYear,
+          fieldset: {
+            legend: {
+              text: "Is " + claim.claimantName + " expected to continue to be employed at " + claim.feProvider + " until the end of the academic year?",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          items: [
+            {
+              value: "Yes",
+              text: "Yes"
+            },
+            {
+              value: "No",
+              text: "No"
+            }
+          ]
+        }) }}
+        
+        <div class="govuk-button-group">
+          <button type="submit" class="govuk-button" name="action" value="continue">
+            Continue
+          </button>  
+          <button type="submit" class="govuk-button govuk-button--secondary" name="action" value="save">
+            Save and come back later
+          </button>      
+        </div>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
