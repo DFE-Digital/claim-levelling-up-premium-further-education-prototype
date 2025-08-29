@@ -19,7 +19,7 @@ module.exports = router => {
       return res.redirect('/eligibility/not-eligible/teaching-qualification')
     }
 
-    return res.redirect('/eligibility/teaching-responsibilities')
+    return res.redirect('/eligibility/type-of-contract')
   })
 
   ////////////////////// TEACHING RESPONSIBILITIES //////////////////////
@@ -64,7 +64,7 @@ module.exports = router => {
     const claimantWhereAreYouEmployed = req.body.claimantWhereAreYouEmployed
     req.session.data.claimantWhereAreYouEmployed = claimantWhereAreYouEmployed
 
-    return res.redirect('/eligibility/type-of-contract')
+    return res.redirect('/eligibility/academic-year-in-further-education')
   })
 
   ////////////////////// GET: TYPE OF CONTRACT //////////////////////

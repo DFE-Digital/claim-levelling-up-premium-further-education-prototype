@@ -5,7 +5,7 @@
 {% endblock %}
 
 
-{% set pageName = "Have you taught at " + data.worksAtFeProvider + " for at least one academic term?" %}
+{% set pageName = "Have you taught at " + data.worksAtFeProvider + " for the whole of the spring academic term?" %}
 
 {% block beforeContent %}
   {{ govukBackLink({
@@ -29,7 +29,7 @@
           name: "claimantTaughtOneFullTerm",
           fieldset: {
             legend: {
-              text: "Have you taught at " + data.worksAtFeProvider + " for at least one academic term?",
+              text: "Have you taught at " + data.worksAtFeProvider + " for the whole of the spring academic term?",
               classes: "govuk-fieldset__legend--m govuk-visually-hidden"
             }
           },
