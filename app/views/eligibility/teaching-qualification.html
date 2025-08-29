@@ -50,6 +50,17 @@
               ]
             }) }}
 
+            {{ govukDetails({
+              summaryText: "If you do not have a teaching qualification ",
+              html:"
+                    <p class='govuk-body'>To remain eligible for a retention payment next year, make sure you either:</p>
+                    <ul class='govuk-list govuk-list--bullet'>
+                      <li>complete a teaching qualification in the next 12 months</li>
+                      <li>enrol on a teaching qualification in the next 12 months</li>
+                    </ul>
+                  "
+            }) }}
+
             {{ govukButton({
               text: "Continue"
             }) }}
