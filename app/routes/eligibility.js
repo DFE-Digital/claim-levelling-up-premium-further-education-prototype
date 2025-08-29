@@ -112,7 +112,7 @@ module.exports = router => {
     if (claimantTaughtOneFullTerm === 'No') {
       return res.redirect('/eligibility/not-eligible')
     } else {
-      return res.redirect('/eligibility/variable-timetabled-to-teach')
+      return res.redirect('/eligibility/teaching-hours-per-week')
     }
   })
 
@@ -133,9 +133,9 @@ module.exports = router => {
     const claimantTeachingHoursPerWeek = req.body.claimantTeachingHoursPerWeek
     req.session.data.claimantTeachingHoursPerWeek = claimantTeachingHoursPerWeek
 
-    if (claimantTeachingHoursPerWeek === 'More than 12 hours per week' || claimantTeachingHoursPerWeek === 'Between 2.5 and 12 hours per week') {
+    if (claimantTeachingHoursPerWeek === '20 hours or more per week' || claimantTeachingHoursPerWeek === '12 or more hours per week, but fewer than 20') {
       return res.redirect('/eligibility/hours-teaching-sixteen-to-nineteen')
-    } else if (claimantTeachingHoursPerWeek === 'Less than 2.5 hours per week') {
+    } else if (claimantTeachingHoursPerWeek === 'Fewer than 2.5 hours each week') {
       return res.redirect('/eligibility/not-eligible')
     } else {
       return res.redirect('/eligibility/teaching-hours-per-week')

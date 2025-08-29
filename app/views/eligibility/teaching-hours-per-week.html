@@ -22,7 +22,7 @@
 
       {{ govukHint({
         id: "teaching-hours-hint",
-        text: "'Timetabled teaching hours' refer to the time you spend teaching lessons to students of all ages."
+        text: "'Timetabled teaching hours' refer to the time you independently spend teaching lessons to students of all ages."
       }) }}
 
       <form class="form" method="post">
@@ -38,16 +38,20 @@
           },
           items: [
             {
-              value: "More than 12 hours per week",
-              text: "More than 12 hours per week"
+              value: "20 hours or more per week",
+              text: "20 hours or more per week"
             },
             {
-              value: "Between 2.5 and 12 hours per week",
-              text: "Between 2.5 and 12 hours per week"
+              value: "12 or more hours per week, but fewer than 20",
+              text: "12 or more hours per week, but fewer than 20"
             },
             {
-              value: "Less than 2.5 hours per week",
-              text: "Less than 2.5 hours per week"
+              value: "2.5 or more hours per week, but fewer than 12",
+              text: "2.5 or more hours per week, but fewer than 12"
+            },
+            {
+              value: "Fewer than 2.5 hours each week",
+              text: "Fewer than 2.5 hours each week"
             }
           ]
         }) }}
