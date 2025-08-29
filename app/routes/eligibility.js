@@ -98,7 +98,7 @@ module.exports = router => {
     req.session.data.claimantFixedTermContract = claimantFixedTermContract
 
     if (claimantFixedTermContract === 'No') {
-      return res.redirect('/eligibility/not-eligible')
+      return res.redirect('/eligibility/variable-one-full-term')
     } else {
       return res.redirect('/eligibility/teaching-hours-per-week')
     }
